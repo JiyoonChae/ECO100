@@ -6,8 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
@@ -28,14 +32,56 @@ class CommunityViewFragment : Fragment() {
         _binding = FragmentCommunityBinding.inflate(inflater,container,false)
         parentContext = container!!.context
 
-
         binding.button.setOnClickListener {
             var keyHash = Utility.getKeyHash(container!!.context)
             Log.d("kakaoKeyHash", keyHash)
         }
 
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("참여 게시판"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("챌린지"))
+
+        val pagerAdapter = PagerAdapter(childFragmentManager)
+        binding.viewPager.adapter = pagerAdapter
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                binding.viewPager.currentItem = tab!!.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+        binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
+
         val view = binding.root
         return view
+    }
+
+    class PagerAdapter(
+        fragmentManager: FragmentManager
+    ) : FragmentStatePagerAdapter(fragmentManager) {
+        override fun getItem(position: Int): Fragment {
+            when(position) {
+                0 -> {
+                    return BoardFragment()
+                }
+                1 -> {
+                    return ChallengeFragment()
+                }
+                else -> {
+                    return BoardFragment()
+                }
+            }
+        }
+
+        override fun getCount(): Int {
+            return 2
+        }
     }
 
     override fun onDestroyView() {
