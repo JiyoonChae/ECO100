@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base APP theme. -->
+    <style name="Theme.ECO100" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color_variant</item>
+        <item name="colorOnPrimary">@color/primary_on_color</item>
+        <item name="colorPrimaryDark">@color/primary_color</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorSecondaryVariant">@color/secondary_color</item>
+        <item name="colorOnSecondary">@color/secondary_on_color</item>
+
+        <!-- Background color -->
+        <item name="colorOnBackground">#ffffff</item>
+
+        <!-- StatusBar -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Main Title Style-->
+    <style name="Main.TitleStyle" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/main_title</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="fontFamily">@font/main_title_font</item>
+        <item name="android:includeFontPadding">true</item>
+    </style>
+
+    <!-- TabItem Text Style -->
+    <style name="Tab.TextStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+    </style>
+
+    <!-- Tab Style -->
+    <style name="TabLayout.ItemStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorGravity">top</item>
+        <item name="tabIndicatorHeight">@dimen/size_4dp</item>
+        <item name="tabIndicatorColor">@color/primary_color</item>
+        <item name="tabIconTint">@color/tab_icon_color_selector</item>
+        <item name="tabTextAppearance">@style/Tab.TextStyle</item>
+    </style>
+
+</resources>

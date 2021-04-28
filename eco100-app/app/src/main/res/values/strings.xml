@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ECO100</string>
+    <string name="app_home">Home</string>
+    <string name="app_map">Map</string>
+    <string name="app_ecobox">EcoBox</string>
+    <string name="app_community">Community</string>
+    <string name="app_myeco">MyEco</string>
+    <string name="app_search">Search</string>
+
+    <!-- kr -->
+    <string name="app_name_kr">에코100</string>
+    <string name="home_kr">홈</string>
+    <string name="map_kr">맵</string>
+    <string name="ecobox_kr">에코박스</string>
+    <string name="community_kr">커뮤니티</string>
+    <string name="myeco_kr">마이에코</string>
+    <string name="search_kr">검색</string>
+</resources>

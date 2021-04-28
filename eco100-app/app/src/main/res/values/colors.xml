@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--app color -->
+    <color name="primary_color">#39bdc8</color>
+    <color name="primary_color_variant">#2e5ec1</color>
+    <color name="primary_on_color">#feeadb</color>
+
+    <color name="secondary_color">#0ad6a1</color>
+    <color name="secondary_color_variant">#0aa67d</color>
+    <color name="secondary_on_color">#ffc74a</color>
+
+    <color name="point_color">#ff4273</color>
+
+    <color name="main_line_color">#c3c3c3</color>
+
+    <!-- string color -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- tab icon color -->
+    <color name="tab_icon_color">#a3a3a3</color>
+</resources>
