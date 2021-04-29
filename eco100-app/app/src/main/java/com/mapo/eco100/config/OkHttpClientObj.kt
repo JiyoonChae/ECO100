@@ -6,7 +6,7 @@ import okhttp3.Response
 
 object OkHttpClientObj {
     var client: OkHttpClient
-    var retrofit = RetrofitConfig.retrofit
+    var retrofit = RetrofitObj.retrofit
         private set
 
     init {
