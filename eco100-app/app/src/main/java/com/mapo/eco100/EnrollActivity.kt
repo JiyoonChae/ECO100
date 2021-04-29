@@ -1,4 +1,4 @@
-package com.sg.eco100.activity
+package com.mapo.eco100
 
 import android.app.Activity
 import android.content.ContentUris
@@ -24,8 +24,8 @@ import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION
 import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
-import com.sg.eco100.entity.board.Board
-import com.sg.eco100.entity.board.BoardWriteForm
+import com.mapo.eco100.entity.board.Board
+import com.mapo.eco100.entity.board.BoardWriteForm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

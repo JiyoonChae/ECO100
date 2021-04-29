@@ -1,4 +1,4 @@
-package com.sg.eco100.entity.board
+package com.mapo.eco100.entity.board
 
 data class BoardWriteForm(
     private val userId:Long,

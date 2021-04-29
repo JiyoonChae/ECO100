@@ -1,11 +1,11 @@
-package com.sg.eco100.activity
+package com.mapo.eco100
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.mapo.eco100.databinding.ActivityShowBoardBinding
-import com.sg.eco100.entity.board.Board
+import com.mapo.eco100.entity.board.Board
 
 class ShowBoardActivity : AppCompatActivity() {
 
