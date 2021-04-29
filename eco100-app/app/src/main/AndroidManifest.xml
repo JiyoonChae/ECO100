@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
+        <activity android:name=".EnrollActivity"/>
+        <activity android:name=".ShowBoardActivity"/>
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
