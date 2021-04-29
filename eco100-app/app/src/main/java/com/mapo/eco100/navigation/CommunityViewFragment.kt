@@ -58,23 +58,22 @@ class CommunityViewFragment : Fragment() {
         })
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
 
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     class PagerAdapter(
         fragmentManager: FragmentManager
     ) : FragmentStatePagerAdapter(fragmentManager) {
         override fun getItem(position: Int): Fragment {
-            when(position) {
+            return when(position) {
                 0 -> {
-                    return BoardFragment()
+                    BoardFragment()
                 }
                 1 -> {
-                    return ChallengeFragment()
+                    ChallengeFragment()
                 }
                 else -> {
-                    return BoardFragment()
+                    BoardFragment()
                 }
             }
         }
