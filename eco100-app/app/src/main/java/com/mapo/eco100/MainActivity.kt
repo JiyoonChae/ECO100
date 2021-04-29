@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.contents, newInstance()).commit()
+                .replace(R.id.contents, newInstance()).commit()
 
         binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
-                        ft.replace(R.id.contents, InfoViewFragment.newInstance())
+                        ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
@@ -51,17 +51,14 @@ class MainActivity : AppCompatActivity() {
                     else -> throw IllegalStateException("Unexpected value: " + tab.position)
                 }
                 ft.commit()
+                binding.appBar.setExpanded(true)
+                binding.scrollView.scrollTo(0, 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
-        binding.mainEco100Title.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.contents, newInstance()).commit()
-            binding.tab.selectTab(binding.tab.getTabAt(0))
-        }
     }
 
     /** title menu bar **/
