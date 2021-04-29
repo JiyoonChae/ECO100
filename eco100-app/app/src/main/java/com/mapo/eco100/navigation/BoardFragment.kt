@@ -10,59 +10,82 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mapo.eco100.EnrollActivity
+import com.mapo.eco100.MainActivity
 import com.mapo.eco100.config.BOARD_CLICK
 import com.mapo.eco100.config.BOARD_ENROLL
 import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.databinding.FragmentBoardBinding
 import com.mapo.eco100.service.BoardService
-import com.sg.eco100.activity.ShowBoardActivity
-import com.sg.eco100.adapter.BoardAdapter
-import com.sg.eco100.entity.board.Board
-import com.sg.eco100.viewmodel.BoardViewModel
+import com.mapo.eco100.ShowBoardActivity
+import com.mapo.eco100.adapter.BoardAdapter
+import com.mapo.eco100.entity.board.Board
+import com.mapo.eco100.viewmodel.BoardViewModel
 
 class BoardFragment : Fragment() {
-    private lateinit var boards : ArrayList<Board>
-    private val viewModel : BoardViewModel by lazy {
-        BoardViewModel(boards)
-    }
-    private var _binding : FragmentBoardBinding? = null
+
+    private val viewModel: BoardViewModel by viewModels()
+
+    private var _binding: FragmentBoardBinding? = null
     private val binding get() = _binding!!
     private lateinit var parentContext: Context
+    private lateinit var boardAdapter : BoardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBoardBinding.inflate(inflater,container,false)
+        _binding = FragmentBoardBinding.inflate(inflater, container, false)
         parentContext = container!!.context
 
-        boards = ArrayList()
-        load_boards()
+        boardAdapter = BoardAdapter(
+            onClickItem = { board ->
+                val intent = Intent(parentContext, ShowBoardActivity::class.java)
+                intent.putExtra("board_data", board)
+                startActivityForResult(intent, BOARD_CLICK)
+            }
+        )
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(parentContext,
-                LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(
+                parentContext,
+                LinearLayoutManager.VERTICAL, false
+            )
             addItemDecoration(
-                DividerItemDecoration(context,
-                    LinearLayoutManager.VERTICAL)
+                DividerItemDecoration(
+                    context,
+                    LinearLayoutManager.VERTICAL
+                )
             )
-            adapter = BoardAdapter(
-                boards,
-                onClickItem = { board ->
-                    val intent = Intent(parentContext, ShowBoardActivity::class.java)
-                    intent.putExtra("board_data",board)
-                    startActivityForResult(intent, BOARD_CLICK)
-                }
-            )
+            adapter = boardAdapter
+        }
+
+        binding.enrollBtn.setOnClickListener {
+            startActivityForResult(Intent(parentContext,EnrollActivity::class.java), BOARD_ENROLL)
         }
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.apply {
+            boardsLiveData.observe(viewLifecycleOwner, Observer {
+                boardAdapter.updateBoards(it)
+            })
+
+            loadingLiveData.observe(viewLifecycleOwner, Observer { isLoading ->
+                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            })
+        }
+    }
+
+    /*
     private fun load_boards() {
         Thread {
             val boardService = OkHttpClientObj.retrofit.build().create(BoardService::class.java)
@@ -70,16 +93,14 @@ class BoardFragment : Fragment() {
             if(response.isSuccessful) {
                 Log.d("BoardFragment","데이터 로딩 성공"+response.body()!!)
                 boards = response.body()!!
-                viewModel.refreshBoards(boards)
-                viewModel.recentBoards.observe(this, Observer {recentBoards->
-                    (binding.recyclerView.adapter as BoardAdapter).setData(recentBoards)
-                })
             } else {
                 Log.e("BoardFragment","데이터 로딩 실패")
                 //Toast.makeText(parentContext,"로딩 실패",Toast.LENGTH_SHORT).show()
             }
         }.start()
     }
+
+ */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -88,14 +109,11 @@ class BoardFragment : Fragment() {
             return
         }
 
-        when(requestCode) {
+        when (requestCode) {
             BOARD_ENROLL -> {
-                Toast.makeText(parentContext,"글 등록 성공", Toast.LENGTH_SHORT).show()
-                val responseBoard : Board = data!!.getSerializableExtra("created_board") as Board
-                viewModel.refreshBoards(responseBoard)
-                viewModel.recentBoards.observe(this, Observer {recentBoards->
-                    (binding.recyclerView.adapter as BoardAdapter).setData(recentBoards)
-                })
+                Toast.makeText(parentContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
+                val responseBoard: Board = data!!.getSerializableExtra("created_board") as Board
+                boardAdapter.addBoard(responseBoard)
             }
         }
     }
