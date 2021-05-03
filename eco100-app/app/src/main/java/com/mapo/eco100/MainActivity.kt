@@ -9,7 +9,12 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.mapo.eco100.databinding.ActivityMainBinding
 import com.mapo.eco100.navigation.*
-import com.mapo.eco100.navigation.HomeViewFragment.Companion.newInstance
+import com.mapo.eco100.views.community.CommunityViewFragment
+import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
+import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
+import com.mapo.eco100.views.map.MapViewFragment
+import com.mapo.eco100.views.myeco.MyEcoViewFragment
+import com.mapo.eco100.views.search.SearchActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
-                        ft.replace(R.id.contents, InfoViewFragment.newInstance())
+                        ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())

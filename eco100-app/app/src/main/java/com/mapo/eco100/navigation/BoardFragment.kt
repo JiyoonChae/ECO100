@@ -16,7 +16,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mapo.eco100.EnrollActivity
-import com.mapo.eco100.MainActivity
 import com.mapo.eco100.config.BOARD_CLICK
 import com.mapo.eco100.config.BOARD_ENROLL
 import com.mapo.eco100.config.OkHttpClientObj

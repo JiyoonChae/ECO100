@@ -1,4 +1,4 @@
-package com.mapo.eco100.navigation
+package com.mapo.eco100.views.community
 
 import android.content.Context
 import android.os.Bundle
@@ -17,6 +17,8 @@ import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentCommunityBinding
+import com.mapo.eco100.navigation.BoardFragment
+import com.mapo.eco100.navigation.ChallengeFragment
 
 class CommunityViewFragment : Fragment() {
 
@@ -25,9 +27,9 @@ class CommunityViewFragment : Fragment() {
     private lateinit var parentContext: Context
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCommunityBinding.inflate(inflater,container,false)
         parentContext = container!!.context
