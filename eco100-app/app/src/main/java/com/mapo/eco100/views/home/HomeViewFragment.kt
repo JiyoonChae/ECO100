@@ -1,11 +1,13 @@
 package com.mapo.eco100.views.home
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
@@ -17,6 +19,7 @@ class HomeViewFragment : Fragment() {
     private lateinit var recycleGuideView : LinearLayout
     private val pageNum = 4
     private lateinit var pageIndicator: CircleIndicator3
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,13 +68,27 @@ class HomeViewFragment : Fragment() {
             }
         })
 
+        // dialog
+        dialog = Dialog(view.context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.home_dialog)
+
         // recycleGuideView
         recycleGuideView = view.findViewById(R.id.recycleGuideView)
         recycleGuideView.setOnClickListener {
-            Toast.makeText(context, "눌려따!", Toast.LENGTH_SHORT).show()
+            showDialog()
         }
 
         return view
+    }
+
+    private fun showDialog() {
+        dialog.show()
+
+        val closeBtn : Button = dialog.findViewById(R.id.closeBtn)
+        closeBtn.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     companion object {
