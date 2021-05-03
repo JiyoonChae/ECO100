@@ -15,4 +15,11 @@
     <string name="community_kr">커뮤니티</string>
     <string name="myeco_kr">마이에코</string>
     <string name="search_kr">검색</string>
+
+    <!-- home -->
+    <string name="recycle_guide01">비운다</string>
+    <string name="recycle_guide02">헹군다</string>
+    <string name="recycle_guide03">분리한다</string>
+    <string name="recycle_guide04">섞지 않는다</string>
+    <string name="map_zero_text">제로웨이스트샵을 찾아서 :D</string>
 </resources>
