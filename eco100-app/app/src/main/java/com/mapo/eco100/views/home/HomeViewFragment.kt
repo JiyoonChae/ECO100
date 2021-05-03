@@ -14,7 +14,7 @@ import me.relex.circleindicator.CircleIndicator3
 class HomeViewFragment : Fragment() {
 
     private lateinit var pager: ViewPager2
-    private lateinit var recycleGuideView: LinearLayout
+    private lateinit var recycleGuideView : LinearLayout
     private val pageNum = 4
     private lateinit var pageIndicator: CircleIndicator3
 
@@ -46,7 +46,6 @@ class HomeViewFragment : Fragment() {
         pageIndicator = view.findViewById(R.id.indicator)
         pageIndicator.createIndicators(pageNum, 0)
         pageIndicator.setViewPager(pager)
-
 
         pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
