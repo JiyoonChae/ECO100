@@ -1,12 +1,14 @@
 package com.mapo.eco100.views.home
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -84,8 +86,9 @@ class HomeViewFragment : Fragment() {
 
     private fun showDialog() {
         dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val closeBtn : Button = dialog.findViewById(R.id.closeBtn)
+        val closeBtn : ImageButton = dialog.findViewById(R.id.closeBtn)
         closeBtn.setOnClickListener {
             dialog.dismiss()
         }

@@ -1,19 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="330dp"
+    android:layout_height="514dp"
+    android:background="@drawable/home_dialog_background"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/closeBtn"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_close_btn"
+        android:text="닫기" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recycle_guide01"
-        android:textSize="@dimen/size_72dp"
-        android:gravity="center"/>
+        android:layout_gravity="center"
+        android:fontFamily="@font/bm_jua"
+        android:text="@string/home_dialog_text01"
+        android:textColor="@color/primary_color"
+        android:textSize="12dp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/closeBtn"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="닫기"
-        />
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/bm_jua"
+        android:text="@string/home_dialog_text02"
+        android:textColor="@color/primary_color"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_2dp"
+        android:layout_marginHorizontal="@dimen/margin_4dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/secondary_on_color" />
+
+    <!-- 비운다 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:background="@color/primary_color"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text="@string/recycle_guide01"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:src="@drawable/home_eco_duck" />
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="45dp"
+                android:background="@drawable/home_bubble_left"
+                android:fontFamily="@font/mapo_peacefull"
+                android:gravity="center"
+                android:text="@string/home_dialog_text03"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 헹군다 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text="@string/recycle_guide02"
+            android:textColor="@color/primary_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="45dp"
+                android:background="@drawable/home_bubble_right"
+                android:fontFamily="@font/mapo_peacefull"
+                android:gravity="center"
+                android:text="@string/home_dialog_text04"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:src="@drawable/home_eco_duck" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 분리한다 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:background="@color/primary_color"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text="@string/recycle_guide03"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:src="@drawable/home_eco_duck" />
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="45dp"
+                android:background="@drawable/home_bubble_left"
+                android:fontFamily="@font/mapo_peacefull"
+                android:gravity="center"
+                android:text="@string/home_dialog_text05"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 섞지 않는다-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text="@string/recycle_guide04"
+            android:textColor="@color/primary_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="45dp"
+                android:background="@drawable/home_bubble_right"
+                android:fontFamily="@font/mapo_peacefull"
+                android:gravity="center"
+                android:text="@string/home_dialog_text06"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:src="@drawable/home_eco_duck" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
