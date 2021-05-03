@@ -47,6 +47,7 @@ class HomeViewFragment : Fragment() {
         pageIndicator.createIndicators(pageNum, 0)
         pageIndicator.setViewPager(pager)
 
+
         pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
