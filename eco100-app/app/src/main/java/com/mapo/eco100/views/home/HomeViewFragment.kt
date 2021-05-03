@@ -1,4 +1,4 @@
-package com.mapo.eco100.navigation
+package com.mapo.eco100.views.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mapo.eco100.R
 
-class MyEcoViewFragment : Fragment() {
+class HomeViewFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_myeco, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     companion object {
-        fun newInstance(): MyEcoViewFragment {
-            return MyEcoViewFragment()
+        fun newInstance(): HomeViewFragment {
+            return HomeViewFragment()
         }
     }
 }

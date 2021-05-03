@@ -1,4 +1,4 @@
-package com.mapo.eco100.navigation
+package com.mapo.eco100.views.community
 
 import android.os.Bundle
 import android.view.LayoutInflater
