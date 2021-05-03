@@ -2,6 +2,7 @@
 <resources>
     <!-- size -->
     <dimen name="size_0dp">0dp</dimen>
+    <dimen name="size_1dp">1dp</dimen>
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_4dp">4dp</dimen>
     <dimen name="size_8dp">8dp</dimen>
@@ -10,6 +11,7 @@
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_72dp">72dp</dimen>
+    <dimen name="size_360dp">360dp</dimen>
 
     <!-- text size -->
     <dimen name="main_title">20sp</dimen>
