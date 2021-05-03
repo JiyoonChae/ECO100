@@ -1,4 +1,4 @@
-package com.mapo.eco100
+package com.mapo.eco100.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
+import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ActivityMainBinding
-import com.mapo.eco100.navigation.*
-import com.mapo.eco100.navigation.HomeViewFragment.Companion.newInstance
+import com.mapo.eco100.views.community.CommunityViewFragment
+import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
+import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
+import com.mapo.eco100.views.map.MapViewFragment
+import com.mapo.eco100.views.myeco.MyEcoViewFragment
+import com.mapo.eco100.views.search.SearchActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.contents, newInstance()).commit()
+            .replace(R.id.contents, newInstance()).commit()
 
         binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -34,18 +39,23 @@ class MainActivity : AppCompatActivity() {
                 val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
                 when (tab.position) {
                     0 -> {
+                        supportActionBar?.show()
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
+                        supportActionBar?.show()
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
+                        supportActionBar?.hide()
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
+                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MapViewFragment.newInstance())
                     }
                     4 -> {
+                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MyEcoViewFragment.newInstance())
                     }
                     else -> throw IllegalStateException("Unexpected value: " + tab.position)

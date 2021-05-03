@@ -16,14 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".views.search.SearchActivity" />
         <activity android:name=".EnrollActivity"/>
         <activity android:name=".ShowBoardActivity"/>
 

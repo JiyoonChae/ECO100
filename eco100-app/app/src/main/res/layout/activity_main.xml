@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
 
     <!-- top -->
     <com.google.android.material.appbar.AppBarLayout
@@ -22,7 +22,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/main_eco100_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,9 +30,9 @@
 
                 <ImageView
                     android:id="@+id/main_logo"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="@dimen/margin_2dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="@dimen/margin_4dp"
                     android:src="@drawable/ic_main_logo_36dp" />
 
                 <TextView
@@ -40,11 +40,10 @@
                     style="@style/Main.TitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/main_logo"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/app_name" />
 
-            </RelativeLayout>
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,7 +51,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <FrameLayout
@@ -69,7 +68,7 @@
         android:layout_height="@dimen/size_72dp"
         android:elevation="@dimen/size_8dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:tabRippleColor="#D9F4FF">
+        app:tabRippleColor="@color/primary_color_dark">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"

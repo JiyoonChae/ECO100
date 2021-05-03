@@ -1,4 +1,4 @@
-package com.mapo.eco100.navigation
+package com.mapo.eco100.views.community
 
 import android.content.Context
 import android.os.Bundle
