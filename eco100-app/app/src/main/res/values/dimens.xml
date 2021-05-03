@@ -11,6 +11,7 @@
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_72dp">72dp</dimen>
+    <dimen name="size_330dp">330dp</dimen>
     <dimen name="size_360dp">360dp</dimen>
 
     <!-- text size -->
