@@ -20,7 +20,7 @@
     <string name="recycle_guide01">비운다</string>
     <string name="recycle_guide02">헹군다</string>
     <string name="recycle_guide03">분리한다</string>
-    <string name="recycle_guide04">섞지 않는다</string>
+    <string name="recycle_guide04">섞지않는다</string>
     <string name="map_zero_text">제로웨이스트샵을 찾아서 :D</string>
 
     <!-- home dialog -->
@@ -31,4 +31,6 @@
     <string name="home_dialog_text05">라벨 등의 다른 재질 부분은\n제거하여 배출합니다.</string>
     <string name="home_dialog_text06">종류별, 재질별로 구분하여\n분리수거함으로 배출합니다.</string>
 
+    <!-- img description -->
+    <string name="string_value">이미지 불러오기 실패</string>
 </resources>

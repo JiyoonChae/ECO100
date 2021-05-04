@@ -8,11 +8,13 @@
     <ImageButton
         android:id="@+id/closeBtn"
         style="?android:borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:src="@drawable/ic_close_btn"
-        android:text="닫기" />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:contentDescription="@string/string_value"
+        android:src="@drawable/ic_close_btn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +23,7 @@
         android:fontFamily="@font/bm_jua"
         android:text="@string/home_dialog_text01"
         android:textColor="@color/primary_color"
-        android:textSize="12dp"
+        android:textSize="16dp"
         android:textStyle="bold" />
 
     <TextView
@@ -32,13 +34,13 @@
         android:fontFamily="@font/bm_jua"
         android:text="@string/home_dialog_text02"
         android:textColor="@color/primary_color"
-        android:textSize="20dp"
+        android:textSize="22dp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_2dp"
-        android:layout_marginHorizontal="@dimen/margin_4dp"
+        android:layout_marginHorizontal="@dimen/margin_8dp"
         android:layout_marginBottom="10dp"
         android:background="@color/secondary_on_color" />
 
@@ -50,16 +52,10 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/HomeDialog.TitleStyleRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginRight="@dimen/size_16dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/recycle_guide01"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="@string/recycle_guide01" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,18 +65,15 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
             <TextView
+                style="@style/HomeDialog.TextStyleRight"
                 android:layout_width="254dp"
                 android:layout_height="45dp"
-                android:background="@drawable/home_bubble_left"
-                android:fontFamily="@font/mapo_peacefull"
-                android:gravity="center"
-                android:text="@string/home_dialog_text03"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:text="@string/home_dialog_text03" />
 
         </LinearLayout>
     </LinearLayout>
@@ -89,41 +82,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
+            style="@style/HomeDialog.TitleStyleLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/recycle_guide02"
-            android:textColor="@color/primary_color"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="@string/recycle_guide02" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginStart="@dimen/margin_16dp"
             android:orientation="horizontal">
 
             <TextView
+                style="@style/HomeDialog.TextStyleLeft"
                 android:layout_width="254dp"
                 android:layout_height="45dp"
-                android:background="@drawable/home_bubble_right"
-                android:fontFamily="@font/mapo_peacefull"
-                android:gravity="center"
-                android:text="@string/home_dialog_text04"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:text="@string/home_dialog_text04" />
 
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
         </LinearLayout>
@@ -137,16 +120,10 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/HomeDialog.TitleStyleRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginRight="@dimen/size_16dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/recycle_guide03"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="@string/recycle_guide03" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,17 +133,15 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:layout_marginLeft="@dimen/margin_16dp"
+                android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
             <TextView
+                style="@style/HomeDialog.TextStyleRight"
                 android:layout_width="254dp"
                 android:layout_height="45dp"
-                android:background="@drawable/home_bubble_left"
-                android:fontFamily="@font/mapo_peacefull"
-                android:gravity="center"
-                android:text="@string/home_dialog_text05"
-                android:textColor="@color/black" />
+                android:text="@string/home_dialog_text05" />
 
         </LinearLayout>
     </LinearLayout>
@@ -175,40 +150,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
+            style="@style/HomeDialog.TitleStyleLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/recycle_guide04"
-            android:textColor="@color/primary_color"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="@string/recycle_guide04" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginStart="@dimen/margin_16dp"
             android:orientation="horizontal">
 
             <TextView
+                style="@style/HomeDialog.TextStyleLeft"
                 android:layout_width="254dp"
                 android:layout_height="45dp"
-                android:background="@drawable/home_bubble_right"
-                android:fontFamily="@font/mapo_peacefull"
-                android:gravity="center"
-                android:text="@string/home_dialog_text06"
-                android:textColor="@color/black" />
+                android:text="@string/home_dialog_text06" />
 
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginHorizontal="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
         </LinearLayout>

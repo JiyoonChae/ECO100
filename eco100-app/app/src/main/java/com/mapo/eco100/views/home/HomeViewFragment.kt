@@ -13,15 +13,18 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
+import com.mapo.eco100.databinding.FragmentHomeBinding
 import me.relex.circleindicator.CircleIndicator3
 
 class HomeViewFragment : Fragment() {
 
     private lateinit var pager: ViewPager2
-    private lateinit var recycleGuideView : LinearLayout
-    private val pageNum = 4
+    private lateinit var recycleGuideView: LinearLayout
+    private val pageNum = 5
     private lateinit var pageIndicator: CircleIndicator3
     private lateinit var dialog: Dialog
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,19 +32,21 @@ class HomeViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         // viewpager
         pager = view.findViewById(R.id.pager)
         pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        pager.offscreenPageLimit = 4
+        pager.offscreenPageLimit = 5
 
         // adapter
         val pagerAdapter = HomeFragmentStateAdapter(this)
         pagerAdapter.run {
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_ecointro))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_volunteer))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_dacu))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news2))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_challenge))
 
             pager.adapter = pagerAdapter
@@ -84,11 +89,16 @@ class HomeViewFragment : Fragment() {
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun showDialog() {
         dialog.show()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val closeBtn : ImageButton = dialog.findViewById(R.id.closeBtn)
+        val closeBtn: ImageButton = dialog.findViewById(R.id.closeBtn)
         closeBtn.setOnClickListener {
             dialog.dismiss()
         }
