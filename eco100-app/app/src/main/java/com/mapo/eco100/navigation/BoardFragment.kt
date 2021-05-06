@@ -98,7 +98,6 @@ class BoardFragment : Fragment() {
             }
         }.start()
     }
-
  */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
