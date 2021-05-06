@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
-                        supportActionBar?.show()
+                        supportActionBar?.hide()
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 ft.commit()
                 binding.appBar.setExpanded(true)
-                binding.scrollView.scrollTo(0, 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
