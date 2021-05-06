@@ -9,4 +9,12 @@
         android:layout_height="wrap_content"
         android:text="분리요령"
         android:textSize="@dimen/size_45dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_ecobox_paper"
+        android:background="@android:color/transparent"
+        android:contentDescription=""/>
+
 </LinearLayout>
