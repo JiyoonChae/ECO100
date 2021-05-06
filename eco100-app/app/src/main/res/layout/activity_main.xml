@@ -1,51 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
-
-    <!-- top -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main_line_color"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-            <LinearLayout
-                android:id="@+id/main_eco100_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/main_logo"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginRight="@dimen/margin_4dp"
-                    android:src="@drawable/ic_main_logo_36dp" />
-
-                <TextView
-                    android:id="@+id/main_title"
-                    style="@style/Main.TitleStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/app_name" />
-
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- contents -->
     <FrameLayout
@@ -59,8 +18,8 @@
         style="@style/TabLayout.ItemStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_72dp"
+        android:layout_alignParentBottom="true"
         android:elevation="@dimen/size_8dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:tabRippleColor="@color/primary_color_dark">
 
         <com.google.android.material.tabs.TabItem
@@ -93,4 +52,4 @@
             android:icon="@drawable/ic_myeco_40dp"
             android:text="@string/myeco_kr" />
     </com.google.android.material.tabs.TabLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
