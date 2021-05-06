@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.contents, newInstance()).commit()
 
@@ -39,29 +36,23 @@ class MainActivity : AppCompatActivity() {
                 val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
                 when (tab.position) {
                     0 -> {
-                        supportActionBar?.show()
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MapViewFragment.newInstance())
                     }
                     4 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MyEcoViewFragment.newInstance())
                     }
                     else -> throw IllegalStateException("Unexpected value: " + tab.position)
                 }
                 ft.commit()
-                binding.appBar.setExpanded(true)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
