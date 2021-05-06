@@ -1,10 +1,7 @@
 package com.mapo.eco100
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.mapo.eco100.databinding.ActivityMainBinding
@@ -14,7 +11,6 @@ import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
 import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.myeco.MyEcoViewFragment
-import com.mapo.eco100.views.search.SearchActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.contents, newInstance()).commit()
@@ -67,21 +60,5 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.contents, newInstance()).commit()
             binding.tab.selectTab(binding.tab.getTabAt(0))
         }
-    }
-
-    /** title menu bar **/
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_bar_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
