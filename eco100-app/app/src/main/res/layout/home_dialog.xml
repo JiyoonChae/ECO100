@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="330dp"
+    android:layout_width="@dimen/size_330dp"
     android:layout_height="514dp"
     android:background="@drawable/home_dialog_background"
     android:orientation="vertical">
@@ -8,34 +8,40 @@
     <ImageButton
         android:id="@+id/closeBtn"
         style="?android:borderlessButtonStyle"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="@dimen/size_36dp"
+        android:layout_height="@dimen/size_36dp"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
         android:contentDescription="@string/string_value"
         android:src="@drawable/ic_close_btn" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/bm_jua"
-        android:text="@string/home_dialog_text01"
-        android:textColor="@color/primary_color"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/bm_jua"
-        android:text="@string/home_dialog_text02"
-        android:textColor="@color/primary_color"
-        android:textSize="22dp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bm_jua"
+            android:text="@string/home_dialog_text01"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_24dp"
+            android:fontFamily="@font/bm_jua"
+            android:text="@string/home_dialog_text02"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/home_dialog_title"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +53,7 @@
     <!-- 비운다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="@dimen/size_94dp"
         android:background="@color/primary_color"
         android:orientation="vertical">
 
@@ -63,16 +69,16 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
             <TextView
                 style="@style/HomeDialog.TextStyleRight"
-                android:layout_width="254dp"
-                android:layout_height="45dp"
+                android:layout_width="@dimen/size_254dp"
+                android:layout_height="@dimen/size_45dp"
                 android:text="@string/home_dialog_text03" />
 
         </LinearLayout>
@@ -81,7 +87,7 @@
     <!-- 헹군다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="@dimen/size_94dp"
         android:orientation="vertical">
 
         <TextView
@@ -98,13 +104,13 @@
 
             <TextView
                 style="@style/HomeDialog.TextStyleLeft"
-                android:layout_width="254dp"
-                android:layout_height="45dp"
+                android:layout_width="@dimen/size_254dp"
+                android:layout_height="@dimen/size_45dp"
                 android:text="@string/home_dialog_text04" />
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:layout_marginRight="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
@@ -115,7 +121,7 @@
     <!-- 분리한다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="@dimen/size_94dp"
         android:background="@color/primary_color"
         android:orientation="vertical">
 
@@ -131,16 +137,16 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:layout_marginLeft="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
             <TextView
                 style="@style/HomeDialog.TextStyleRight"
-                android:layout_width="254dp"
-                android:layout_height="45dp"
+                android:layout_width="@dimen/size_254dp"
+                android:layout_height="@dimen/size_45dp"
                 android:text="@string/home_dialog_text05" />
 
         </LinearLayout>
@@ -149,7 +155,7 @@
     <!-- 섞지 않는다-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="@dimen/size_94dp"
         android:orientation="vertical">
 
         <TextView
@@ -166,13 +172,13 @@
 
             <TextView
                 style="@style/HomeDialog.TextStyleLeft"
-                android:layout_width="254dp"
-                android:layout_height="45dp"
+                android:layout_width="@dimen/size_254dp"
+                android:layout_height="@dimen/size_45dp"
                 android:text="@string/home_dialog_text06" />
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:layout_marginRight="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />

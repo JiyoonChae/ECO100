@@ -21,16 +21,16 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/size_48dp"
             android:background="@drawable/bookmark"
             android:contentDescription="@string/string_value" />
 
         <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/size_48dp"
             android:layout_gravity="bottom|center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             app:ci_drawable="@drawable/home_indicator_selected"
             app:ci_drawable_unselected="@drawable/home_indicator_unselected"
             app:ci_height="@dimen/size_8dp"
@@ -41,7 +41,7 @@
     <LinearLayout
         android:id="@+id/recycleGuideView"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="@dimen/size_64dp"
         android:layout_marginHorizontal="@dimen/margin_16dp"
         android:layout_marginVertical="@dimen/margin_16dp"
         android:background="@drawable/rectangle_shape"
@@ -60,8 +60,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:src="@drawable/ic_home_recycle_guide01_36dp" />
 
             <TextView
@@ -79,8 +79,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:src="@drawable/ic_home_recycle_guide02_36dp" />
 
             <TextView
@@ -98,8 +98,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:src="@drawable/ic_home_recycle_guide03_36dp" />
 
             <TextView
@@ -117,8 +117,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/size_36dp"
+                android:layout_height="@dimen/size_36dp"
                 android:src="@drawable/ic_home_recycle_guide04_36dp" />
 
             <TextView
@@ -136,7 +136,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_1dp"
         android:layout_marginHorizontal="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/size_16dp"
         android:background="@color/primary_color" />
 
     <TextView
@@ -156,7 +155,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="@dimen/size_320dp"
         android:layout_marginHorizontal="@dimen/margin_16dp"
-        android:background="@color/secondary_color" />
+        android:background="@color/primary_color" />
 </LinearLayout>
