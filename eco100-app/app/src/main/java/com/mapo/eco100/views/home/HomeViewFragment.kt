@@ -4,12 +4,10 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
@@ -19,6 +17,7 @@ import me.relex.circleindicator.CircleIndicator3
 class HomeViewFragment : Fragment() {
 
     private lateinit var pager: ViewPager2
+    private lateinit var toolbar : Toolbar
     private lateinit var recycleGuideView: LinearLayout
     private val pageNum = 5
     private lateinit var pageIndicator: CircleIndicator3
@@ -34,6 +33,8 @@ class HomeViewFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        toolbar = view.findViewById(R.id.toolbar)
 
         // viewpager
         pager = view.findViewById(R.id.pager)
@@ -109,5 +110,6 @@ class HomeViewFragment : Fragment() {
             return HomeViewFragment()
         }
     }
+
 }
 
