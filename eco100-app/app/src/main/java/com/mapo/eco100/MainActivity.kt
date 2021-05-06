@@ -1,4 +1,4 @@
-package com.mapo.eco100.views
+package com.mapo.eco100
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
-import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ActivityMainBinding
+import com.mapo.eco100.navigation.*
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
@@ -39,36 +39,34 @@ class MainActivity : AppCompatActivity() {
                 val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
                 when (tab.position) {
                     0 -> {
-                        supportActionBar?.show()
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
-                        supportActionBar?.show()
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MapViewFragment.newInstance())
                     }
                     4 -> {
-                        supportActionBar?.hide()
                         ft.replace(R.id.contents, MyEcoViewFragment.newInstance())
                     }
                     else -> throw IllegalStateException("Unexpected value: " + tab.position)
                 }
                 ft.commit()
-                binding.appBar.setExpanded(true)
-                binding.scrollView.scrollTo(0, 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
+        binding.mainEco100Title.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contents, newInstance()).commit()
+            binding.tab.selectTab(binding.tab.getTabAt(0))
+        }
     }
 
     /** title menu bar **/

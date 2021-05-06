@@ -4,9 +4,10 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 
-object OkHttpClientConfig {
-    private val client:OkHttpClient
-    private val retrofit = RetrofitConfig.retrofit
+object OkHttpClientObj {
+    var client: OkHttpClient
+    var retrofit = RetrofitObj.retrofit
+        private set
 
     init {
         client = OkHttpClient.Builder()
