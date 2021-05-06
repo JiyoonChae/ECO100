@@ -7,20 +7,15 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentHomeBinding
-import me.relex.circleindicator.CircleIndicator3
 
 class HomeViewFragment : Fragment() {
 
-    private lateinit var pager: ViewPager2
-    private lateinit var toolbar : Toolbar
     private lateinit var recycleGuideView: LinearLayout
     private val pageNum = 5
-    private lateinit var pageIndicator: CircleIndicator3
     private lateinit var dialog: Dialog
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -34,12 +29,9 @@ class HomeViewFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        toolbar = view.findViewById(R.id.toolbar)
-
         // viewpager
-        pager = view.findViewById(R.id.pager)
-        pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        pager.offscreenPageLimit = 5
+        binding.pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.pager.offscreenPageLimit = 5
 
         // adapter
         val pagerAdapter = HomeFragmentStateAdapter(this)
@@ -50,15 +42,14 @@ class HomeViewFragment : Fragment() {
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news2))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_challenge))
 
-            pager.adapter = pagerAdapter
+            binding.pager.adapter = pagerAdapter
         }
 
         // indicator
-        pageIndicator = view.findViewById(R.id.indicator)
-        pageIndicator.createIndicators(pageNum, 0)
-        pageIndicator.setViewPager(pager)
+        binding.indicator.createIndicators(pageNum, 0)
+        binding.indicator.setViewPager(binding.pager)
 
-        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -66,13 +57,13 @@ class HomeViewFragment : Fragment() {
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 if (positionOffsetPixels == 0) {
-                    pager.currentItem = position
+                    binding.pager.currentItem = position
                 }
             }
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                pageIndicator.animatePageSelected(position % pageNum)
+                binding.indicator.animatePageSelected(position % pageNum)
             }
         })
 
