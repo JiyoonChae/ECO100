@@ -1,166 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Appbar-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_line_color"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <LinearLayout
+                android:id="@+id/main_eco100_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/main_logo"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/margin_4dp"
+                    android:contentDescription="@string/string_value"
+                    android:src="@drawable/ic_main_logo_36dp" />
+
+                <TextView
+                    android:id="@+id/main_title"
+                    style="@style/Main.TitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/app_name" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- contents -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <!-- top view -->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager"
+            <!-- rolling view -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:clipToPadding="false" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_2dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_48dp"
-                android:background="@drawable/bookmark"
-                android:contentDescription="@string/string_value" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipChildren="false"
+                    android:clipToPadding="false" />
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48dp"
+                    android:background="@drawable/bookmark"
+                    android:contentDescription="@string/string_value" />
+            </FrameLayout>
+
+            <!-- indicator -->
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_48dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_32dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@color/primary_color_dark"
                 app:ci_drawable="@drawable/home_indicator_selected"
                 app:ci_drawable_unselected="@drawable/home_indicator_unselected"
                 app:ci_height="@dimen/size_8dp"
                 app:ci_width="@dimen/size_8dp" />
-        </FrameLayout>
-
-        <!-- recycle guide -->
-        <LinearLayout
-            android:id="@+id/recycleGuideView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_64dp"
-            android:layout_marginHorizontal="@dimen/margin_16dp"
-            android:layout_marginVertical="@dimen/margin_16dp"
-            android:background="@drawable/rectangle_shape"
-            android:clickable="true"
-            android:elevation="@dimen/size_2dp"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="horizontal">
 
 
+            <!-- recycle guide -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:id="@+id/recycleGuideView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_64dp"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
+                android:layout_marginVertical="@dimen/margin_16dp"
+                android:background="@drawable/rectangle_shape"
+                android:clickable="true"
+                android:elevation="@dimen/size_2dp"
+                android:focusable="true"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="@dimen/size_36dp"
-                    android:layout_height="@dimen/size_36dp"
-                    android:src="@drawable/ic_home_recycle_guide01_36dp" />
 
-                <TextView
-                    style="@style/HomeRecycleGuide.TextStyle"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/recycle_guide01" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/size_36dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:contentDescription="@string/string_value"
+                        android:src="@drawable/ic_home_recycle_guide01_36dp" />
 
-                <ImageView
-                    android:layout_width="@dimen/size_36dp"
-                    android:layout_height="@dimen/size_36dp"
-                    android:src="@drawable/ic_home_recycle_guide02_36dp" />
+                    <TextView
+                        style="@style/HomeRecycleGuide.TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recycle_guide01" />
+                </LinearLayout>
 
-                <TextView
-                    style="@style/HomeRecycleGuide.TextStyle"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/recycle_guide02" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/size_36dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:contentDescription="@string/string_value"
+                        android:src="@drawable/ic_home_recycle_guide02_36dp" />
 
-                <ImageView
-                    android:layout_width="@dimen/size_36dp"
-                    android:layout_height="@dimen/size_36dp"
-                    android:src="@drawable/ic_home_recycle_guide03_36dp" />
+                    <TextView
+                        style="@style/HomeRecycleGuide.TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recycle_guide02" />
+                </LinearLayout>
 
-                <TextView
-                    style="@style/HomeRecycleGuide.TextStyle"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/recycle_guide03" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/size_36dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:contentDescription="@string/string_value"
+                        android:src="@drawable/ic_home_recycle_guide03_36dp" />
 
-                <ImageView
-                    android:layout_width="@dimen/size_36dp"
-                    android:layout_height="@dimen/size_36dp"
-                    android:src="@drawable/ic_home_recycle_guide04_36dp" />
+                    <TextView
+                        style="@style/HomeRecycleGuide.TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recycle_guide03" />
+                </LinearLayout>
 
-                <TextView
-                    style="@style/HomeRecycleGuide.TextStyle"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/recycle_guide04" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_36dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:contentDescription="@string/string_value"
+                        android:src="@drawable/ic_home_recycle_guide04_36dp" />
+
+                    <TextView
+                        style="@style/HomeRecycleGuide.TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recycle_guide04" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
+            <!-- map -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
+                android:background="@color/primary_color" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_16dp"
+                android:layout_marginVertical="@dimen/margin_4dp"
+                android:fontFamily="@font/mapo_peacefull"
+                android:text="@string/map_zero_text"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/size_4dp"
+                android:background="@color/primary_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_320dp"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
+                android:background="@drawable/home_eco_duck" />
         </LinearLayout>
-
-        <!-- map -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1dp"
-            android:layout_marginHorizontal="@dimen/margin_16dp"
-            android:background="@color/primary_color" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_16dp"
-            android:layout_marginVertical="@dimen/margin_4dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/map_zero_text"
-            android:textAlignment="center" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1dp"
-            android:layout_marginHorizontal="@dimen/margin_16dp"
-            android:layout_marginBottom="@dimen/size_4dp"
-            android:background="@color/primary_color" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_320dp"
-            android:layout_marginHorizontal="@dimen/margin_16dp"
-            android:background="@color/primary_color" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
