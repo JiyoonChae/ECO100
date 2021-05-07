@@ -21,4 +21,6 @@
     <!-- tab icon color -->
     <color name="tab_icon_color">#a3a3a3</color>
 
+    <!-- popup color -->
+    <color name="popup_btn_left_color">#c4c4c4</color>
 </resources>
