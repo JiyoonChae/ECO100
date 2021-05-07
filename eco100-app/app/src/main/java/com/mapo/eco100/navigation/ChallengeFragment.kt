@@ -57,7 +57,10 @@ class ChallengeFragment : Fragment() {
 
             holder.rowStamp1.setOnClickListener {
                 Log.d("click", "clicked!!")
+                //글쓰기 화면 띄우기
                 val intent = Intent(activity, WriteChallenge::class.java)
+                //선택한 주제 전달
+                intent.putExtra("item", holder.rowTextView.text)
                 startActivity(intent)
             }
 
