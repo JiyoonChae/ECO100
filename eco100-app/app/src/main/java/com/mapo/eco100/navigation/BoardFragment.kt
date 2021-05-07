@@ -61,8 +61,8 @@ class BoardFragment : Fragment() {
             adapter = boardAdapter
         }
 
-        binding.enrollBtn.setOnClickListener {
-            startActivityForResult(Intent(mainActivityContext,EnrollActivity::class.java), BOARD_ENROLL)
+        binding.buttonEnroll.setOnClickListener {
+            startActivityForResult(Intent(mainActivityContext, EnrollActivity::class.java), BOARD_ENROLL)
         }
 
         return binding.root

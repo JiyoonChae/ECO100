@@ -1,6 +1,8 @@
 package com.mapo.eco100.views.community
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,8 +18,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.mapo.eco100.EnrollActivity
 import com.mapo.eco100.R
+import com.mapo.eco100.config.BOARD_ENROLL
 import com.mapo.eco100.databinding.FragmentCommunityBinding
+import com.mapo.eco100.entity.board.Board
 import com.mapo.eco100.navigation.BoardFragment
 import com.mapo.eco100.navigation.ChallengeFragment
 
@@ -38,6 +43,34 @@ class CommunityViewFragment : Fragment() {
         binding.button.setOnClickListener {
             var keyHash = Utility.getKeyHash(container!!.context)
             Log.d("kakaoKeyHash", keyHash)
+
+            val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+                if (error != null) {
+                    //login fail
+                }
+                else if (token != null) {
+                    Log.d("accessToken",token.accessToken)
+                    Toast.makeText(parentContext,"로그인 성공", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            UserApiClient.instance.run {
+                if (isKakaoTalkLoginAvailable(parentContext)) {
+                    loginWithKakaoTalk(parentContext,callback = callback)
+                } else {
+                    loginWithKakaoAccount(parentContext,callback = callback)
+                }
+            }
+        }
+
+        binding.button2.setOnClickListener {
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    Toast.makeText(parentContext,"회원 탈퇴 실패", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(parentContext,"회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         val pagerAdapter = PagerAdapter(requireActivity())
