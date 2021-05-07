@@ -27,7 +27,7 @@
         android:gravity="bottom|center"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
@@ -48,7 +48,7 @@
                 android:layout_marginEnd="@dimen/size_32dp"
                 android:src="@drawable/img_popup_btn_ecoduck" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
