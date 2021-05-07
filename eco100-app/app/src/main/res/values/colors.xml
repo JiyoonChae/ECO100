@@ -4,6 +4,7 @@
     <color name="primary_color">#39bdc8</color>
     <color name="primary_color_variant">#2e5ec1</color>
     <color name="primary_on_color">#feeadb</color>
+    <color name="primary_color_dark">#B1E9EE</color>
 
     <color name="secondary_color">#0ad6a1</color>
     <color name="secondary_color_variant">#0aa67d</color>
@@ -19,4 +20,5 @@
 
     <!-- tab icon color -->
     <color name="tab_icon_color">#a3a3a3</color>
+
 </resources>

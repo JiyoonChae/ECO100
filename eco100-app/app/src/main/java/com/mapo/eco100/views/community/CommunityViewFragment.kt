@@ -1,4 +1,4 @@
-package com.mapo.eco100.navigation
+package com.mapo.eco100.views.community
 
 import android.content.Context
 import android.os.Bundle
@@ -25,9 +25,9 @@ class CommunityViewFragment : Fragment() {
     private lateinit var parentContext: Context
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCommunityBinding.inflate(inflater,container,false)
         parentContext = container!!.context

@@ -7,7 +7,7 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryVariant">@color/primary_color_variant</item>
         <item name="colorOnPrimary">@color/primary_on_color</item>
-        <item name="colorPrimaryDark">#B1E9EE</item>
+        <item name="colorPrimaryDark">@color/primary_color_dark</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_color</item>

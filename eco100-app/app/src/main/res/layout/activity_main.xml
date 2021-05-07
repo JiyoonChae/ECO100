@@ -4,59 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <!-- top -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main_line_color">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_scrollFlags="enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-            <RelativeLayout
-                android:id="@+id/main_eco100_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/main_logo"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="@dimen/margin_2dp"
-                    android:src="@drawable/ic_main_49dp" />
-
-                <TextView
-                    android:id="@+id/main_title"
-                    style="@style/Main.TitleStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/main_logo"
-                    android:text="@string/app_name" />
-
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    tools:context=".views.MainActivity">
 
     <!-- contents -->
     <FrameLayout
         android:id="@+id/contents"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_0dp"
-        android:layout_above="@+id/tab"
-        android:layout_below="@+id/app_bar" />
+        android:layout_height="match_parent" />
 
     <!-- bottom -->
     <com.google.android.material.tabs.TabLayout
@@ -66,7 +20,7 @@
         android:layout_height="@dimen/size_72dp"
         android:layout_alignParentBottom="true"
         android:elevation="@dimen/size_8dp"
-        app:tabRippleColor="#D9F4FF">
+        app:tabRippleColor="@color/primary_color_dark">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"

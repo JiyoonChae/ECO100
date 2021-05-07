@@ -16,4 +16,22 @@
     <string name="community_kr">커뮤니티</string>
     <string name="myeco_kr">마이에코</string>
     <string name="search_kr">검색</string>
+
+    <!-- home -->
+    <string name="recycle_guide01">비운다</string>
+    <string name="recycle_guide02">헹군다</string>
+    <string name="recycle_guide03">분리한다</string>
+    <string name="recycle_guide04">섞지 않는다</string>
+    <string name="map_zero_text">제로웨이스트샵을 찾아서 :D</string>
+
+    <!-- home dialog -->
+    <string name="home_dialog_text01">지구를 살리는</string>
+    <string name="home_dialog_text02">분리배출 핵심 4가지</string>
+    <string name="home_dialog_text03">용기 안에 담겨있는 내용물은\n깨끗이 비우고 배출합니다.</string>
+    <string name="home_dialog_text04">재활용품에 묻은 이물질, 음식물은\n닦거나 한 번 헹궈서 배출합니다.</string>
+    <string name="home_dialog_text05">라벨 등의 다른 재질 부분은\n제거하여 배출합니다.</string>
+    <string name="home_dialog_text06">종류별, 재질별로 구분하여\n분리수거함으로 배출합니다.</string>
+
+    <!-- ecobox -->
+    <string name="ecobox_faq">FAQ</string>
 </resources>
