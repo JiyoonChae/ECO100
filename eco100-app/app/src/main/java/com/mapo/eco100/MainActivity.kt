@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
+import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ActivityMainBinding
-import com.mapo.eco100.navigation.*
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
@@ -55,10 +55,5 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
-        binding.mainEco100Title.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.contents, newInstance()).commit()
-            binding.tab.selectTab(binding.tab.getTabAt(0))
-        }
     }
 }

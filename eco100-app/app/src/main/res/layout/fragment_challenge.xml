@@ -3,19 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FE9C9C">
+    android:background="#FE9C9C"
+    android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="134dp"
+        android:layout_height="100dp"
         app:srcCompat="@drawable/earth" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerChallenge"
+        android:id="@+id/challenge_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
 </LinearLayout>
