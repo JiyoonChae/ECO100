@@ -33,4 +33,12 @@
 
     <!-- ecobox -->
     <string name="ecobox_faq">FAQ</string>
+    <string name="btn_paper_ic_description">종이류,종이팩 버튼 아이콘</string>
+    <string name="btn_glass_ic_description">유리병류 버튼 아이콘</string>
+    <string name="btn_plastic_ic_description">플라스틱 버튼 아이콘</string>
+    <string name="btn_can_ic_description">금속캔,고철 버튼 아이콘</string>
+    <string name="btn_vinyl_ic_description">비닐류 버튼 아이콘</string>
+    <string name="btn_styrofoam_ic_description">스티로폼 버튼 아이콘</string>
+
+
 </resources>

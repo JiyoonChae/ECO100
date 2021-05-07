@@ -1,20 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="분리요령"
-        android:textSize="@dimen/size_45dp" />
+        android:layout_margin="@dimen/margin_32dp"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/btn_paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_paper_ic_description"
+            android:paddingRight="40dp"
+            app:srcCompat="@drawable/ic_ecobox_paper" />
+
+        <ImageButton
+            android:id="@+id/btn_glass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_glass_ic_description"
+            android:paddingRight="60dp"
+            app:srcCompat="@drawable/ic_ecobox_glass" />
+
+        <ImageButton
+            android:id="@+id/btn_plastic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_plastic_ic_description"
+            app:srcCompat="@drawable/ic_ecobox_plastic" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_ecobox_paper"
-        android:background="@android:color/transparent"
-        android:contentDescription=""/>
+        android:layout_margin="@dimen/margin_32dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_can"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_can_ic_description"
+            android:paddingRight="63dp"
+            app:srcCompat="@drawable/ic_ecobox_can" />
+
+        <ImageButton
+            android:id="@+id/btn_vinyl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_vinyl_ic_description"
+            android:paddingRight="40dp"
+            app:srcCompat="@drawable/ic_ecobox_vinyl" />
+
+        <ImageButton
+            android:id="@+id/btn_styrofoam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/btn_styrofoam_ic_description"
+            app:srcCompat="@drawable/ic_ecobox_styrofoam" />
+    </LinearLayout>
 
 </LinearLayout>
