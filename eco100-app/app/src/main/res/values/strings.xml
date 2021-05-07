@@ -33,4 +33,47 @@
 
     <!-- ecobox -->
     <string name="ecobox_faq">FAQ</string>
+    <string name="ecobox_paper">종이류,종이팩</string>
+    <string name="ecobox_glass">유리병류</string>
+    <string name="ecobox_plastic">플라스틱</string>
+    <string name="ecobox_metal">금속캔,고철</string>
+    <string name="ecobox_vinyl">비닐류</string>
+    <string name="ecobox_styrofoam">스티로폼</string>
+
+    <!-- popup -->
+    <string name="popup_confirm">확인</string>
+    <string name="popup_cancel">취소</string>
+    <string name="popup_delete">삭제</string>
+
+    <!-- signup -->
+    <string name="popup_join_welcome_title">환영합니다. 가입되셨습니다 :)</string>
+    <string name="popup_join_welcome_text">에코백에 가입되셨으므로,\n참여게시판과 챌린지 활동이 가능합니다:)</string>
+    <string name="popup_join_ask_title">회원가입이 필요한 서비스입니다:)</string>
+    <string name="popup_join_ask_text">커뮤니티, 챌린지 이용은 가입이 필요합니다.\n가입하시겠습니까?</string>
+
+    <!-- login -->
+    <string name="popup_login_ask_title">로그인이 필요합니다 :D</string>
+    <string name="popup_login_ask_text">로그인이 필요한 서비스입니다~\n계속해서 이용하시겠습니까?</string>
+
+    <!-- logout -->
+    <string name="popup_logout_title">로그아웃하시겠습니까?</string>
+    <string name="popup_logout_text">로그아웃 하시겠습니까?\n커뮤니티 활동은 재로그인이 필요합니다:)</string>
+
+    <!-- board -->
+    <string name="popup_board_register_title">등록하시겠습니까?</string>
+    <string name="popup_board_register_text">작성하신 글을 등록하시겠습니까?\n등록 후 수정 및 삭제가 가능합니다:)</string>
+
+    <!-- challenge -->
+    <string name="popup_challenge_register_title">챌린지를 등록하시겠습니까?</string>
+    <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는삭제 또는 재등록만 가능합니다.</string>
+
+    <!-- mypage -->
+    <string name="popup_mypage_del_ask_title">글을 삭제하시겠습니까?</string>
+    <string name="popup_mypage_del_ask_text">작성한 글을 삭제할까요?\n삭제 후에는 복구불가하니 신중히 선택해주세요.</string>
+    <string name="popup_mypage_del_comment_ask_title">댓글을 삭제하시겠습니까?</string>
+    <string name="popup_mypage_del_comment_ask_text">작성한 댓글을 삭제할까요?\n삭제 후에는 복구불가하니 신중히 선택해주세요.</string>
+
+    <!-- popup loading -->
+    <string name="popup_loading_title">조금만 기다려 주세요:)</string>
+    <string name="popup_loading_text">환경을 지키는 에코덕이 포다닥 날아\n정보를 물어오는중~ 조금만 기다려주세요:D</string>
 </resources>

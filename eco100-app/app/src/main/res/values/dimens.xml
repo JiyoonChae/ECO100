@@ -26,7 +26,9 @@
     <!-- text size -->
     <dimen name="main_title">20sp</dimen>
     <dimen name="main_intro">12sp</dimen>
+    <dimen name="popup_text">14sp</dimen>
     <dimen name="text_normal">16sp</dimen>
+    <dimen name="popup_title">19sp</dimen>
     <dimen name="home_dialog_text">20sp</dimen>
     <dimen name="home_dialog_title">22sp</dimen>
 
