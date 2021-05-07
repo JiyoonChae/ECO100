@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base APP theme. -->
-    <style name="Theme.ECO100" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.ECO100" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_color</item>
