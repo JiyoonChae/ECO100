@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.home
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,11 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentHomeBinding
+import com.mapo.eco100.views.search.SearchActivity
 
 class HomeViewFragment : Fragment() {
 
-    private lateinit var recycleGuideView: LinearLayout
     private val pageNum = 5
+    private lateinit var recycleGuideView: LinearLayout
     private lateinit var dialog: Dialog
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -41,7 +43,6 @@ class HomeViewFragment : Fragment() {
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_dacu))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news2))
             appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_challenge))
-
             binding.pager.adapter = pagerAdapter
         }
 
@@ -66,6 +67,19 @@ class HomeViewFragment : Fragment() {
                 binding.indicator.animatePageSelected(position % pageNum)
             }
         })
+
+        // toolbar
+        binding.toolbar.inflateMenu(R.menu.app_bar_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_search -> {
+                    val intent = Intent(view.context, SearchActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
 
         // dialog
         dialog = Dialog(view.context)
@@ -101,6 +115,5 @@ class HomeViewFragment : Fragment() {
             return HomeViewFragment()
         }
     }
-
 }
 
