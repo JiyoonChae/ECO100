@@ -29,12 +29,9 @@
         android:paddingBottom="@dimen/padding_12dp">
 
         <androidx.appcompat.widget.AppCompatButton
-            style="?android:borderlessButtonStyle"
+            style="@style/CommonPopup.BtnLeftTextStyle"
             android:layout_width="@dimen/size_138dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_24dp"
-            android:layout_marginEnd="@dimen/margin_8dp"
-            android:background="@drawable/popup_btn_left"
             android:text="@string/popup_cancel" />
 
         <FrameLayout
@@ -51,12 +48,9 @@
                 android:src="@drawable/img_popup_btn_ecoduck" />
 
             <androidx.appcompat.widget.AppCompatButton
-                style="?android:borderlessButtonStyle"
-                android:layout_width="138dp"
+                style="@style/CommonPopup.BtnRightTextStyle"
+                android:layout_width="@dimen/size_138dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="@dimen/margin_24dp"
-                android:background="@drawable/popup_btn_right"
                 android:text="@string/popup_confirm" />
 
         </FrameLayout>
