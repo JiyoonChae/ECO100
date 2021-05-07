@@ -18,6 +18,7 @@
     <dimen name="size_72dp">72dp</dimen>
     <dimen name="size_82dp">82dp</dimen>
     <dimen name="size_94dp">94dp</dimen>
+    <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="size_280dp">280dp</dimen>
     <dimen name="size_320dp">320dp</dimen>
