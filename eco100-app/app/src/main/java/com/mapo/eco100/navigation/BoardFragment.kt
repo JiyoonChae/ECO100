@@ -4,24 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mapo.eco100.EnrollActivity
-import com.mapo.eco100.MainActivity
 import com.mapo.eco100.config.BOARD_CLICK
 import com.mapo.eco100.config.BOARD_ENROLL
-import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.databinding.FragmentBoardBinding
-import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.ShowBoardActivity
 import com.mapo.eco100.adapter.BoardAdapter
 import com.mapo.eco100.entity.board.Board
@@ -33,7 +28,7 @@ class BoardFragment : Fragment() {
 
     private var _binding: FragmentBoardBinding? = null
     private val binding get() = _binding!!
-    private lateinit var parentContext: Context
+    private lateinit var mainActivityContext: Context
     private lateinit var boardAdapter : BoardAdapter
 
     override fun onCreateView(
@@ -42,11 +37,11 @@ class BoardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBoardBinding.inflate(inflater, container, false)
-        parentContext = container!!.context
+        mainActivityContext = requireContext()
 
         boardAdapter = BoardAdapter(
             onClickItem = { board ->
-                val intent = Intent(parentContext, ShowBoardActivity::class.java)
+                val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
                 intent.putExtra("board_data", board)
                 startActivityForResult(intent, BOARD_CLICK)
             }
@@ -54,7 +49,7 @@ class BoardFragment : Fragment() {
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(
-                parentContext,
+                requireParentFragment().context,
                 LinearLayoutManager.VERTICAL, false
             )
             addItemDecoration(
@@ -67,7 +62,7 @@ class BoardFragment : Fragment() {
         }
 
         binding.enrollBtn.setOnClickListener {
-            startActivityForResult(Intent(parentContext,EnrollActivity::class.java), BOARD_ENROLL)
+            startActivityForResult(Intent(mainActivityContext,EnrollActivity::class.java), BOARD_ENROLL)
         }
 
         return binding.root
@@ -85,23 +80,6 @@ class BoardFragment : Fragment() {
         }
     }
 
-    /*
-    private fun load_boards() {
-        Thread {
-            val boardService = OkHttpClientObj.retrofit.build().create(BoardService::class.java)
-            val response = boardService.boards(0).execute()
-            if(response.isSuccessful) {
-                Log.d("BoardFragment","데이터 로딩 성공"+response.body()!!)
-                boards = response.body()!!
-            } else {
-                Log.e("BoardFragment","데이터 로딩 실패")
-                //Toast.makeText(parentContext,"로딩 실패",Toast.LENGTH_SHORT).show()
-            }
-        }.start()
-    }
-
- */
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -111,10 +89,16 @@ class BoardFragment : Fragment() {
 
         when (requestCode) {
             BOARD_ENROLL -> {
-                Toast.makeText(parentContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mainActivityContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
                 val responseBoard: Board = data!!.getSerializableExtra("created_board") as Board
                 boardAdapter.addBoard(responseBoard)
             }
+        }
+    }
+
+    companion object {
+        fun newInstance(): BoardFragment {
+            return BoardFragment()
         }
     }
 }
