@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#@drawable/common_popup_background"
+    android:background="@drawable/common_popup_background"
     android:orientation="vertical">
 
     <TextView
@@ -52,9 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:background="@drawable/popup_btn_left"
                 android:text="@string/popup_confirm" />
 
         </FrameLayout>
-
     </LinearLayout>
+
 </LinearLayout>
