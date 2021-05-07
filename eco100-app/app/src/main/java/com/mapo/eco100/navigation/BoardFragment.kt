@@ -49,7 +49,7 @@ class BoardFragment : Fragment() {
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(
-                requireParentFragment().context,
+                mainActivityContext,
                 LinearLayoutManager.VERTICAL, false
             )
             addItemDecoration(
