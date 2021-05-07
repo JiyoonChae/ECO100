@@ -74,7 +74,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_48dp"
-                    android:background="@drawable/bookmark"
+                    android:background="@drawable/img_home_bookmark"
                     android:contentDescription="@string/string_value" />
             </FrameLayout>
 
@@ -214,8 +214,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_320dp"
-                android:layout_marginHorizontal="@dimen/margin_16dp"
-                android:background="@drawable/home_eco_duck" />
+                android:layout_marginHorizontal="@dimen/margin_16dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
