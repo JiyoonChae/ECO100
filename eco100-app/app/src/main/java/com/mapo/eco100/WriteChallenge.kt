@@ -13,6 +13,9 @@ class WriteChallenge : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val item = intent.extras?.get("item") as String
+        binding.textView.setText(item)
+
         binding.challengeFinish.setOnClickListener {
             //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기
             //돌아가서 스티커 이미지 변경시키기.
