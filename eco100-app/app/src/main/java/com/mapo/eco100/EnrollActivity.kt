@@ -18,14 +18,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
-import com.mapo.eco100.R
 import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION
 import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
-import com.mapo.eco100.entity.board.Board
 import com.mapo.eco100.entity.board.BoardWriteForm
+import com.mapo.eco100.entity.board.Boards
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -175,10 +174,10 @@ class EnrollActivity : AppCompatActivity() {
         )
 
 
-        boardService.write(board).enqueue(object : Callback<Board> {
+        boardService.write(board).enqueue(object : Callback<Boards> {
             override fun onResponse(
-                    call: Call<Board>,
-                    response: Response<Board>
+                call: Call<Boards>,
+                response: Response<Boards>
             ) {
                 if (response.isSuccessful) {
                     val intent = Intent()
@@ -188,7 +187,7 @@ class EnrollActivity : AppCompatActivity() {
                 finish()
             }
 
-            override fun onFailure(call: Call<Board>, t: Throwable) {
+            override fun onFailure(call: Call<Boards>, t: Throwable) {
                 Toast.makeText(this@EnrollActivity, "연결 실패", Toast.LENGTH_SHORT).show()
                 Log.d("EnrollActivity", "실패 : $t")
 //                        call.let {
@@ -277,7 +276,7 @@ class EnrollActivity : AppCompatActivity() {
 
                 response = imageClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val board = Gson().fromJson(response.body!!.string(),Board::class.java)
+                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
                     val intent = Intent()
                     intent.putExtra("created_board", board)
                     setResult(RESULT_OK, intent)
