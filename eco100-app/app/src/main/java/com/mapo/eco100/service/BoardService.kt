@@ -1,8 +1,9 @@
 package com.mapo.eco100.service
 
-import com.mapo.eco100.entity.board.Board
+import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardWriteForm
+import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.likes.LikesRequestDto
 import retrofit2.Call
 import retrofit2.http.*
@@ -11,17 +12,17 @@ interface BoardService {
     @POST("board/create")
     fun write(
         @Body boardWriteForm: BoardWriteForm
-    ) : Call<Board>
+    ) : Call<Boards>
 
     @GET("board/read/{id}")
     fun read(
         @Path("id") id: Long
-    ) : Call<Board>
+    ) : Call<BoardReadForm>
 
     @GET("board/{current}")
     suspend fun boards(
         @Path("current") currentPage: Int
-    ) : ArrayList<Board>
+    ) : ArrayList<Boards>
 
     @PUT("board/update")
     fun modify(
