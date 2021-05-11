@@ -1,4 +1,4 @@
-package com.mapo.eco100
+package com.mapo.eco100.views.community
 
 import android.app.Activity
 import android.content.ContentUris
@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import com.mapo.eco100.R
 import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION

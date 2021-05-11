@@ -12,15 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mapo.eco100.EnrollActivity
+import com.mapo.eco100.views.community.EnrollActivity
 import com.mapo.eco100.R
 import com.mapo.eco100.config.BOARD_CLICK
 import com.mapo.eco100.config.BOARD_ENROLL
 import com.mapo.eco100.databinding.FragmentBoardBinding
-import com.mapo.eco100.ShowBoardActivity
+import com.mapo.eco100.views.community.ShowBoardActivity
 import com.mapo.eco100.adapter.BoardAdapter
 import com.mapo.eco100.config.OkHttpClientObj
-import com.mapo.eco100.config.RetrofitObj
 import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService

@@ -1,4 +1,4 @@
-package com.mapo.eco100
+package com.mapo.eco100.views.community
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

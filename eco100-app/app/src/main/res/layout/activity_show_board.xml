@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShowBoardActivity">
+    tools:context=".views.community.ShowBoardActivity">
 
     <ImageView
         android:id="@+id/back_btn"
