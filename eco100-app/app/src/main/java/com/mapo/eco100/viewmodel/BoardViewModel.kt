@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mapo.eco100.config.RetrofitObj
-import com.mapo.eco100.entity.board.Board
+import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
 import kotlinx.coroutines.launch
 
 class BoardViewModel : ViewModel() {
 
-    val boardsLiveData = MutableLiveData<ArrayList<Board>>()
+    val boardsLiveData = MutableLiveData<ArrayList<Boards>>()
     val loadingLiveData = MutableLiveData<Boolean>()
 
     private val service : BoardService
@@ -21,7 +21,7 @@ class BoardViewModel : ViewModel() {
         fetchBoards()
     }
 
-    fun refresh(board:Board) {
+    fun refresh(board:Boards) {
         boardsLiveData.value?.let{
             it.add(0,board)
             //it.removeAt(it.size-1)

@@ -3,7 +3,7 @@ package com.mapo.eco100.entity.board
 import java.io.Serializable
 
 
-data class Board (
+data class BoardReadForm (
     val board_id : Long,
     val user_nickname : String,
     var title : String,
