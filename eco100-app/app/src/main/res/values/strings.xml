@@ -77,4 +77,10 @@
     <!-- popup loading -->
     <string name="popup_loading_title">조금만 기다려 주세요:)</string>
     <string name="popup_loading_text">환경을 지키는 에코덕이 포다닥 날아\n정보를 물어오는중~ 조금만 기다려주세요:D</string>
+
+    <!-- img description -->
+    <string name="string_value">이미지 불러오기 실패</string>
+
+    <!-- google map key -->
+    <string name="google_map_key">AIzaSyAD0lEYAwSOvfdlZ5Mioz_SvFAq_mz0vmo</string>
 </resources>
