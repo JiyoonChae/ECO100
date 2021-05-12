@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".config.KaKaoInit"
@@ -16,8 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.community.WriteChallenge" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.network.NoConnectedDialog"></activity>
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +29,7 @@
         <activity android:name=".views.search.SearchActivity" />
         <activity android:name=".views.community.EnrollActivity" />
         <activity android:name=".views.community.ShowBoardActivity" />
+        <activity android:name=".views.community.WriteChallenge" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -38,7 +41,9 @@
                     android:host="oauth"
                     android:scheme="kakao27c8e2d5025be3e8979d18947a200d88" />
             </intent-filter>
-        </activity>
+        </activity> <!-- google map key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_key" />
     </application>
-
 </manifest>
