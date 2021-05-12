@@ -26,7 +26,7 @@ import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.views.MainActivity
-import com.mapo.eco100.views.network.NetworkSettings
+import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,7 +77,7 @@ class EnrollActivity : AppCompatActivity() {
         }
         binding.send.setOnClickListener {
             if (!NetworkSettings.isNetworkAvailable(this)) {
-                val dialog = NoConnectedDialog()
+                val dialog = NoConnectedDialog(this)
                 dialog.show()
             } else {
                 if (fileLocation == "") {

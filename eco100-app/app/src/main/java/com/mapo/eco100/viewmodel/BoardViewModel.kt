@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
-import com.mapo.eco100.views.network.NetworkSettings
+import com.mapo.eco100.config.NetworkSettings
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

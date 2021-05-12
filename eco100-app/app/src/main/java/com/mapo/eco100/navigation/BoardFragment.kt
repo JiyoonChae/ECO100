@@ -24,7 +24,7 @@ import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.viewmodel.BoardViewModel
 import com.mapo.eco100.views.MainActivity
-import com.mapo.eco100.views.network.NetworkSettings
+import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +55,7 @@ class BoardFragment : Fragment() {
         boardAdapter = BoardAdapter(
             onClickItem = { board_data ->
                 if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
-                    val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+                    val dialog = NoConnectedDialog(mainActivityContext)
                     dialog.show()
                 } else {
                     val service: BoardService =
@@ -95,7 +95,7 @@ class BoardFragment : Fragment() {
 
         binding.boardWriteButton.setOnClickListener {
             if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
-                val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+                val dialog = NoConnectedDialog(mainActivityContext)
                 dialog.show()
             } else {
                 startActivityForResult(
@@ -116,7 +116,7 @@ class BoardFragment : Fragment() {
         )
 
         if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
-            val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+            val dialog = NoConnectedDialog(mainActivityContext)
             dialog.show()
             return
         }
