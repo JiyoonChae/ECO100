@@ -3,9 +3,9 @@ package com.mapo.eco100.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mapo.eco100.config.RetrofitObj
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
+import com.mapo.eco100.views.network.NetworkSettings
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -17,7 +17,7 @@ class BoardViewModel : ViewModel() {
     private val service : BoardService
 
     init {
-        service = RetrofitObj.retrofit.build().create(BoardService::class.java)
+        service = NetworkSettings.retrofit.build().create(BoardService::class.java)
 
         fetchBoards()
     }

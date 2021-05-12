@@ -1,10 +1,7 @@
 package com.mapo.eco100.views.community
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
 import androidx.lifecycle.Observer
@@ -60,7 +57,7 @@ class ShowBoardActivity : AppCompatActivity() {
 
         viewModel.apply {
             commentsLiveData.observe(this@ShowBoardActivity, Observer {
-                commentAdapter.updateBoards(it)
+                //commentAdapter.updateBoards(it)
             })
         }
     }

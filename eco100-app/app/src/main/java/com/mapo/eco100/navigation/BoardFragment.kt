@@ -19,11 +19,11 @@ import com.mapo.eco100.config.BOARD_ENROLL
 import com.mapo.eco100.databinding.FragmentBoardBinding
 import com.mapo.eco100.views.community.ShowBoardActivity
 import com.mapo.eco100.adapter.BoardAdapter
-import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.viewmodel.BoardViewModel
+import com.mapo.eco100.views.network.NetworkSettings
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +53,7 @@ class BoardFragment : Fragment() {
         boardAdapter = BoardAdapter(
             onClickItem = { board_data ->
                 val service: BoardService =
-                    OkHttpClientObj.retrofit.build().create(BoardService::class.java)
+                    NetworkSettings.retrofit.build().create(BoardService::class.java)
                 service.read(board_data.board_id).enqueue(object : Callback<BoardReadForm> {
                     override fun onResponse(
                         call: Call<BoardReadForm>,

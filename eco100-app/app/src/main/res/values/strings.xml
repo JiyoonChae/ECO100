@@ -80,4 +80,7 @@
 
     <!-- img description -->
     <string name="string_value">이미지 불러오기 실패</string>
+
+    <!-- google map key -->
+    <string name="google_map_key">AIzaSyAD0lEYAwSOvfdlZ5Mioz_SvFAq_mz0vmo</string>
 </resources>

@@ -19,13 +19,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.mapo.eco100.R
-import com.mapo.eco100.config.OkHttpClientObj
 import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION
 import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
+import com.mapo.eco100.views.network.NetworkSettings
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,7 +51,7 @@ class EnrollActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEnrollBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        boardService = OkHttpClientObj.retrofit.build().create(BoardService::class.java)
+        boardService = NetworkSettings.retrofit.build().create(BoardService::class.java)
 
         binding.enrollImage.setOnClickListener {
             when {
