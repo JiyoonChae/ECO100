@@ -2,7 +2,6 @@ package com.mapo.eco100.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.mapo.eco100.R
@@ -12,7 +11,6 @@ import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
 import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.myeco.MyEcoViewFragment
-import com.mapo.eco100.views.network.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
 
 
@@ -57,16 +55,5 @@ class MainActivity : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-
-    }
-
-    fun NoInternetConnectedCallback() {
-        if(!NetworkSettings.isNetworkAvailable(this)) {
-            Toast.makeText(this,"네트워크가 연결되지 않았습니다.\nWi-Fi또는 데이터를 활성화 해주세요.",Toast.LENGTH_SHORT).show()
-            val dialog = NoConnectedDialog(this)
-            dialog.show()
-        } else {
-            Toast.makeText(this,"네트워크가 연결되었습니다.\n다시 시도해 주세요.",Toast.LENGTH_SHORT).show()
-        }
     }
 }
