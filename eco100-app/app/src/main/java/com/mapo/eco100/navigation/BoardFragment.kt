@@ -23,7 +23,9 @@ import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.viewmodel.BoardViewModel
+import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.views.network.NetworkSettings
+import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,22 +54,28 @@ class BoardFragment : Fragment() {
 
         boardAdapter = BoardAdapter(
             onClickItem = { board_data ->
-                val service: BoardService =
-                    NetworkSettings.retrofit.build().create(BoardService::class.java)
-                service.read(board_data.board_id).enqueue(object : Callback<BoardReadForm> {
-                    override fun onResponse(
-                        call: Call<BoardReadForm>,
-                        response: Response<BoardReadForm>
-                    ) {
-                        val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
-                        intent.putExtra("board_data", response.body()!!)
-                        startActivityForResult(intent, BOARD_CLICK)
-                    }
+                if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                    val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+                    dialog.show()
+                } else {
+                    val service: BoardService =
+                        NetworkSettings.retrofit.build().create(BoardService::class.java)
+                    service.read(board_data.board_id).enqueue(object : Callback<BoardReadForm> {
+                        override fun onResponse(
+                            call: Call<BoardReadForm>,
+                            response: Response<BoardReadForm>
+                        ) {
+                            val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
+                            intent.putExtra("board_data", response.body()!!)
+                            startActivityForResult(intent, BOARD_CLICK)
+                        }
 
-                    override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
-                        Toast.makeText(mainActivityContext, "글에 문제가 있습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                        override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
+                            Toast.makeText(mainActivityContext, "글에 문제가 있습니다.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
+                }
             }
         )
 
@@ -86,10 +94,15 @@ class BoardFragment : Fragment() {
         }
 
         binding.boardWriteButton.setOnClickListener {
-            startActivityForResult(
-                Intent(mainActivityContext, EnrollActivity::class.java),
-                BOARD_ENROLL
-            )
+            if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+                dialog.show()
+            } else {
+                startActivityForResult(
+                    Intent(mainActivityContext, EnrollActivity::class.java),
+                    BOARD_ENROLL
+                )
+            }
         }
 
         return binding.root
@@ -97,10 +110,17 @@ class BoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.toolBar.inflateMenu(R.menu.sort_boards)
-        binding.toolBar.overflowIcon = ContextCompat.getDrawable(mainActivityContext,R.drawable.ic_baseline_keyboard_arrow_down_24)
-        if(viewModel.boardsLiveData == null) {
+        binding.toolBar.overflowIcon = ContextCompat.getDrawable(
+            mainActivityContext,
+            R.drawable.ic_baseline_keyboard_arrow_down_24
+        )
 
+        if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+            val dialog = NoConnectedDialog(requireActivity() as MainActivity)
+            dialog.show()
+            return
         }
+
         viewModel.apply {
             boardsLiveData.observe(viewLifecycleOwner, Observer {
                 boardAdapter.updateBoards(it)
@@ -112,7 +132,7 @@ class BoardFragment : Fragment() {
         }
 
         binding.toolBar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.action_recent -> {
                     boardAdapter.sortByRecent()
                     binding.sortMenuText.text = "최근 순"

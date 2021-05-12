@@ -25,7 +25,9 @@ import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
+import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.views.network.NetworkSettings
+import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,10 +76,15 @@ class EnrollActivity : AppCompatActivity() {
             }
         }
         binding.send.setOnClickListener {
-            if (fileLocation == "") {
-                sendWithoutImage()
+            if (!NetworkSettings.isNetworkAvailable(this)) {
+                val dialog = NoConnectedDialog()
+                dialog.show()
             } else {
-                fileUploadAsync()
+                if (fileLocation == "") {
+                    sendWithoutImage()
+                } else {
+                    fileUploadAsync()
+                }
             }
         }
         binding.imageDelete.setOnClickListener {

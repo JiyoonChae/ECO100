@@ -34,10 +34,10 @@ class BoardViewModel : ViewModel() {
 
         viewModelScope.launch {
             var boards:ArrayList<Boards>? = null
-            try {
-                boards = service.boards(0)
+            boards = try {
+                service.boards(0)
             } catch (e: Exception) {
-                boards = null
+                null
             }
             boardsLiveData.value = boards
 
