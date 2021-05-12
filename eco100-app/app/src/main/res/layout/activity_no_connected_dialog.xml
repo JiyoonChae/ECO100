@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="330dp"
+    android:layout_height="380dp"
+    app:cardCornerRadius="16dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="@dimen/size_330dp"
+        android:layout_height="380dp"
+        android:background="@drawable/popup_wifi_"
+        >
+
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="284dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="18.73dp"
+            android:background="#39BDC8"
+            android:text="확인"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
