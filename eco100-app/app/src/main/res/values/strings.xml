@@ -43,7 +43,7 @@
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>
     <string name="ecobox_plastic">플라스틱</string>
-    <string name="ecobox_metal">금속캔,고철</string>
+    <string name="ecobox_can">금속캔,고철</string>
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
 

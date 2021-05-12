@@ -8,34 +8,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginRight="@dimen/margin_32dp"
         android:orientation="horizontal">
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_paper"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_paper_ic_description"
-            android:paddingRight="40dp"
-            app:srcCompat="@drawable/ic_ecobox_paper" />
+            android:drawableTop="@drawable/ic_ecobox_paper"
+            android:text="@string/ecobox_paper"
+            android:textColor="@color/black"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_glass"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_32dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_glass_ic_description"
-            android:paddingRight="60dp"
-            app:srcCompat="@drawable/ic_ecobox_glass" />
+            android:drawableTop="@drawable/ic_ecobox_glass"
+            android:text="@string/ecobox_glass"
+            android:textColor="@color/black"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_plastic"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_plastic_ic_description"
-            app:srcCompat="@drawable/ic_ecobox_plastic" />
+            android:drawableTop="@drawable/ic_ecobox_plastic"
+            android:text="@string/ecobox_plastic"
+            android:textColor="@color/black"/>
 
 
     </LinearLayout>
@@ -43,34 +54,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginLeft="@dimen/margin_32dp"
+        android:layout_marginRight="@dimen/margin_32dp"
         android:orientation="horizontal">
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_can"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_can_ic_description"
-            android:paddingRight="63dp"
-            app:srcCompat="@drawable/ic_ecobox_can" />
+            android:drawableTop="@drawable/ic_ecobox_can"
+            android:text="@string/ecobox_can"
+            android:textColor="@color/black"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_vinyl"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_24dp"
+            android:paddingRight="@dimen/padding_10dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_vinyl_ic_description"
-            android:paddingRight="40dp"
-            app:srcCompat="@drawable/ic_ecobox_vinyl" />
+            android:drawableTop="@drawable/ic_ecobox_vinyl"
+            android:text="@string/ecobox_vinyl"
+            android:textColor="@color/black"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_styrofoam"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/btn_styrofoam_ic_description"
-            app:srcCompat="@drawable/ic_ecobox_styrofoam" />
+            android:drawableTop="@drawable/ic_ecobox_styrofoam"
+            android:text="@string/ecobox_styrofoam"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </LinearLayout>
