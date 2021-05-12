@@ -7,6 +7,7 @@ import com.mapo.eco100.config.RetrofitObj
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.BoardService
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class BoardViewModel : ViewModel() {
 
@@ -32,7 +33,12 @@ class BoardViewModel : ViewModel() {
         loadingLiveData.value = true
 
         viewModelScope.launch {
-            val boards = service.boards(0)
+            var boards:ArrayList<Boards>? = null
+            try {
+                boards = service.boards(0)
+            } catch (e: Exception) {
+                boards = null
+            }
             boardsLiveData.value = boards
 
             loadingLiveData.value = false

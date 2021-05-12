@@ -98,7 +98,9 @@ class BoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.toolBar.inflateMenu(R.menu.sort_boards)
         binding.toolBar.overflowIcon = ContextCompat.getDrawable(mainActivityContext,R.drawable.ic_baseline_keyboard_arrow_down_24)
+        if(viewModel.boardsLiveData == null) {
 
+        }
         viewModel.apply {
             boardsLiveData.observe(viewLifecycleOwner, Observer {
                 boardAdapter.updateBoards(it)
