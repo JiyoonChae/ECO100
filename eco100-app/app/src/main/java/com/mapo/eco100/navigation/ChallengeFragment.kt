@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
-import com.mapo.eco100.WriteChallenge
-import com.mapo.eco100.databinding.ActivityMainBinding
+import com.mapo.eco100.views.community.WriteChallenge
+
 
 class ChallengeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView

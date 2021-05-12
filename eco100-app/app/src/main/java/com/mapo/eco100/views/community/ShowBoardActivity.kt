@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide
 import com.mapo.eco100.adapter.CommentAdapter
 import com.mapo.eco100.databinding.ActivityShowBoardBinding
 import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.viewmodel.CommentViewModel
+
 
 
 class ShowBoardActivity : AppCompatActivity() {
 
-    private val viewModel: CommentViewModel by viewModels()
+
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var binding: ActivityShowBoardBinding
 
@@ -58,10 +58,6 @@ class ShowBoardActivity : AppCompatActivity() {
             adapter = commentAdapter
         }
 
-        viewModel.apply {
-            commentsLiveData.observe(this@ShowBoardActivity, Observer {
-                commentAdapter.updateBoards(it)
-            })
-        }
+
     }
 }

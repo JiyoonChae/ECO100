@@ -16,7 +16,7 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_main_logo_36dp" />
+            app:srcCompat="@drawable/ic_baseline_sentiment_very_satisfied_24" />
 
         <TextView
             android:id="@+id/nickname"
@@ -56,7 +56,7 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_grade_24" />
+            app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <TextView
             android:id="@+id/likes_cnt"
