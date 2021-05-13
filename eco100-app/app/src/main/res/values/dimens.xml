@@ -12,8 +12,12 @@
     <dimen name="size_35dp">35dp</dimen>
     <dimen name="size_36dp">36dp</dimen>
     <dimen name="size_38dp">38dp</dimen>
+    <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_42dp">42dp</dimen>
     <dimen name="size_45dp">45dp</dimen>
     <dimen name="size_48dp">48dp</dimen>
+    <dimen name="size_54dp">54dp</dimen>
+    <dimen name="size_60dp">60dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_72dp">72dp</dimen>
     <dimen name="size_82dp">82dp</dimen>
@@ -22,9 +26,11 @@
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="size_280dp">280dp</dimen>
+    <dimen name="size_284dp">284dp</dimen>
     <dimen name="size_320dp">320dp</dimen>
     <dimen name="size_330dp">330dp</dimen>
     <dimen name="size_360dp">360dp</dimen>
+    <dimen name="size_380dp">380dp</dimen>
     <dimen name="size_411dp">411dp</dimen>
 
     <!-- text size -->
@@ -54,8 +60,20 @@
     <dimen name="margin_10dp">10dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_36dp">36dp</dimen>
     <dimen name="margin_38dp">38dp</dimen>
+    <dimen name="margin_44dp">44dp</dimen>
+    <dimen name="margin_70dp">70dp</dimen>
+    <dimen name="margin_110dp">110dp</dimen>
+    <dimen name="margin_148dp">148dp</dimen>
+
+
+
+
+
+
 </resources>
