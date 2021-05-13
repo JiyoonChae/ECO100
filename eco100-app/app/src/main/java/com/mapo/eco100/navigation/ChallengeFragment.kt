@@ -66,6 +66,7 @@ class ChallengeFragment : Fragment() {
             holder.rowStamp2.setOnClickListener {
                 Log.d("click", "clicked!!")
                 val intent = Intent(activity, WriteChallenge::class.java)
+                intent.putExtra("item", holder.rowTextView.text)
                 startActivity(intent)
             }
 

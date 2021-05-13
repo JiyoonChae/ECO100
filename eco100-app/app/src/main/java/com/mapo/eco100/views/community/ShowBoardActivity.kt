@@ -1,10 +1,7 @@
 package com.mapo.eco100.views.community
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
 import androidx.lifecycle.Observer
@@ -14,12 +11,12 @@ import com.bumptech.glide.Glide
 import com.mapo.eco100.adapter.CommentAdapter
 import com.mapo.eco100.databinding.ActivityShowBoardBinding
 import com.mapo.eco100.entity.board.BoardReadForm
-
+import com.mapo.eco100.viewmodel.CommentViewModel
 
 
 class ShowBoardActivity : AppCompatActivity() {
 
-
+    private val viewModel: CommentViewModel by viewModels()
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var binding: ActivityShowBoardBinding
 
@@ -58,6 +55,10 @@ class ShowBoardActivity : AppCompatActivity() {
             adapter = commentAdapter
         }
 
-
+        viewModel.apply {
+            commentsLiveData.observe(this@ShowBoardActivity, Observer {
+                //commentAdapter.updateBoards(it)
+            })
+        }
     }
 }
