@@ -1,11 +1,44 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_map" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:paddingTop="@dimen/padding_10dp">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/mapBtn1"
+                style="@style/Map.RadioBtnStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:button="@drawable/ic_map_garbage_shop"
+                android:checked="true"
+                android:text="종량제판매처" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/mapBtn2"
+                style="@style/Map.RadioBtnStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:button="@drawable/ic_map_zero_shop"
+                android:text="제로웨잇샵" />
+        </RadioGroup>
+    </LinearLayout>
+</FrameLayout>
