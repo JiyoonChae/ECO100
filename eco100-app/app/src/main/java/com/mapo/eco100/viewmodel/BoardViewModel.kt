@@ -22,13 +22,6 @@ class BoardViewModel : ViewModel() {
         fetchBoards()
     }
 
-    fun refresh(board:Boards) {
-        boardsLiveData.value?.let{
-            it.add(0,board)
-            //it.removeAt(it.size-1)
-        }
-    }
-
     fun fetchBoards() {
         loadingLiveData.value = true
 

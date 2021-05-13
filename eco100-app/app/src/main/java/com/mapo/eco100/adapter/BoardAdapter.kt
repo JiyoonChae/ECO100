@@ -2,6 +2,7 @@ package com.mapo.eco100.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ItemBoardBinding
@@ -57,4 +58,17 @@ class BoardAdapter(
     }
 
     override fun getItemCount() = boards.size
+
+    fun refreshBoards(newBoards: ArrayList<Boards>) {
+        val diffCallback = object : DiffUtil.Callback() {
+            override fun getOldListSize() = boards.size
+            override fun getNewListSize() = 5
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = false
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = false
+        }
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.convertOldPositionToNew(0)
+        boards = newBoards
+        diffResult.dispatchUpdatesTo(this)
+    }
 }

@@ -26,9 +26,12 @@ import com.mapo.eco100.viewmodel.BoardViewModel
 import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 class BoardFragment : Fragment() {
 
@@ -51,6 +54,7 @@ class BoardFragment : Fragment() {
     ): View? {
         _binding = FragmentBoardBinding.inflate(inflater, container, false)
         mainActivityContext = requireContext()
+
 
         boardAdapter = BoardAdapter(
             onClickItem = { board_data ->
@@ -78,6 +82,33 @@ class BoardFragment : Fragment() {
                 }
             }
         )
+
+        binding.swipeRefresh.setOnRefreshListener {
+            if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                val dialog = NoConnectedDialog(mainActivityContext)
+                dialog.show()
+            } else {
+                binding.swipeRefresh.isRefreshing = true
+                NetworkSettings.retrofit.build().create(BoardService::class.java).refreshBoards(0)
+                    .enqueue(object : Callback<ArrayList<Boards>> {
+                        override fun onResponse(
+                            call: Call<ArrayList<Boards>>,
+                            response: Response<ArrayList<Boards>>
+                        ) {
+                            boardAdapter.refreshBoards(response.body()!!)
+                            (requireActivity() as MainActivity).runOnUiThread {
+                                binding.swipeRefresh.isRefreshing = false
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<Boards>>, t: Throwable) {
+
+                        }
+                    })
+
+
+            }
+        }
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(
@@ -107,6 +138,7 @@ class BoardFragment : Fragment() {
 
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.toolBar.inflateMenu(R.menu.sort_boards)

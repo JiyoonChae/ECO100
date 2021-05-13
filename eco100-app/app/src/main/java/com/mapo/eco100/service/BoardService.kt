@@ -24,6 +24,12 @@ interface BoardService {
         @Path("current") currentPage: Int
     ) : ArrayList<Boards>
 
+    @GET("board/{current}")
+    fun refreshBoards(
+        @Path("current") currentPage: Int
+    ) : Call<ArrayList<Boards>>
+
+
     @PUT("board/update")
     fun modify(
         @Body boardModifyForm: BoardModifyForm
