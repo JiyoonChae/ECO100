@@ -1,5 +1,6 @@
 package com.mapo.eco100.navigation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,8 @@ import com.mapo.eco100.views.community.WriteChallenge
 class ChallengeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
+    private lateinit var  mainActivityContext: Context
+
     val imgRes = intArrayOf(R.drawable.eco1, R.drawable.eco2, R.drawable.eco3, R.drawable.eco4,
         R.drawable.eco5, R.drawable.eco6)
 
@@ -27,6 +30,7 @@ class ChallengeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        mainActivityContext = requireContext()
 
         val view = inflater.inflate(R.layout.fragment_challenge, container, false)
         val adapter = RecyclerAdatper()

@@ -55,8 +55,8 @@ class BoardFragment : Fragment() {
         boardAdapter = BoardAdapter(
             onClickItem = { board_data ->
                 if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
-                    val dialog = NoConnectedDialog(mainActivityContext)
-                    dialog.show()
+                        val dialog = NoConnectedDialog(mainActivityContext)
+                        dialog.show()
                 } else {
                     val service: BoardService =
                         NetworkSettings.retrofit.build().create(BoardService::class.java)
