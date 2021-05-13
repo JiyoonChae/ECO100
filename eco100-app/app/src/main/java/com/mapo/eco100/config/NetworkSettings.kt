@@ -1,9 +1,11 @@
-package com.mapo.eco100.views.network
+package com.mapo.eco100.config
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.widget.Toast
+import com.mapo.eco100.views.network.NoConnectedDialog
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -67,6 +69,18 @@ object NetworkSettings {
         } else {
             @Suppress("DEPRECATION")
             return cm.activeNetworkInfo?.isConnected ?: false
+        }
+    }
+
+    fun NoInternetConnectedCallback(context: Context) {
+        if (!isNetworkAvailable(context)) {
+            Toast.makeText(
+                context, "네트워크가 연결되지 않았습니다.\nWi-Fi또는 데이터를 활성화 해주세요.", Toast.LENGTH_SHORT
+            ).show()
+            val dialog = NoConnectedDialog(context)
+            dialog.show()
+        } else {
+            Toast.makeText(context, "네트워크가 연결되었습니다.\n다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -1,17 +1,18 @@
 package com.mapo.eco100.views.network
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.view.Window
-import com.mapo.eco100.R
+import android.view.WindowManager
+import com.mapo.eco100.config.NetworkSettings.NoInternetConnectedCallback
 import com.mapo.eco100.databinding.ActivityNoConnectedDialogBinding
-import com.mapo.eco100.views.MainActivity
 
 class NoConnectedDialog(
-    private val owner: MainActivity
-) : Dialog(owner) {
-    private lateinit var binding :  ActivityNoConnectedDialogBinding
+    context: Context
+) : Dialog(context) {
+    private lateinit var binding: ActivityNoConnectedDialogBinding
+    private val _context = context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityNoConnectedDialogBinding.inflate(layoutInflater)
@@ -20,7 +21,7 @@ class NoConnectedDialog(
         setContentView(binding.root)
 
         binding.okBtn.setOnClickListener {
-            owner.NoInternetConnectedCallback()
+            NoInternetConnectedCallback(_context)
             dismiss()
         }
     }
