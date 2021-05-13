@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".views.community.WriteChallenge">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="@dimen/size_48dp"
+            android:layout_height="@dimen/size_48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/icon_challenge17" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -14,6 +24,15 @@
         android:text="챌린지 주제 : 장바구니 사용하기"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="*챌린지 인증방법\n
+           주제에 맞는 사진을 촬영하여 1장만 첨부합니다"
+        android:layout_marginBottom="10dp"
+        />
 
     <ImageView
         android:id="@+id/imagePreview"

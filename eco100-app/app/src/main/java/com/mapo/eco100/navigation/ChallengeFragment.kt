@@ -21,11 +21,11 @@ class ChallengeFragment : Fragment() {
 
     private lateinit var  mainActivityContext: Context
 
-    val imgRes = intArrayOf(R.drawable.eco1, R.drawable.eco2, R.drawable.eco3, R.drawable.eco4,
-        R.drawable.eco5, R.drawable.eco6)
+    val imgRes = intArrayOf(R.drawable.icon_challenge17, R.drawable.icon_challenge19, R.drawable.icon_challenge22,
+        R.drawable.icon_challenge23,R.drawable.icon_challenge8, R.drawable.icon_challenge30)
 
-    val data1 = arrayOf("텀블러 사용하기", "장바구니 사용하기", "양치컵 사용하기",
-        "안쓰는 방 전등끄기", "자전거 타기", "분리수거 잘하기")
+    val data1 = arrayOf("대중 교통 이용하기","플로깅 실천하기 (내가 직접 주운 쓰레기 사진 인증)", "비닐 포장, 상품 포장 하지 않기", "책 구매 대신 도서관에서 대출하기",
+        "다회 용기를 이용하여 음식 및 식자재 구매하기", "종이영수증 대신 전자영수증 사용하기")
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -64,6 +64,7 @@ class ChallengeFragment : Fragment() {
                 val intent = Intent(activity, WriteChallenge::class.java)
                 //선택한 주제 전달
                 intent.putExtra("item", holder.rowTextView.text)
+
                 startActivity(intent)
             }
 
@@ -80,8 +81,8 @@ class ChallengeFragment : Fragment() {
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             holder.rowImageView.setImageResource(imgRes[position])
             holder.rowTextView.text = data1[position]
-            holder.rowStamp1.setImageResource(R.drawable.eco7)
-            holder.rowStamp2.setImageResource(R.drawable.eco7)
+            holder.rowStamp1.setImageResource(R.drawable.icon_challenge_nonsucced)
+            holder.rowStamp2.setImageResource(R.drawable.icon_challenge_succed)
 
 
         }
