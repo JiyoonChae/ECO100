@@ -37,7 +37,7 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="kakao27c8e2d5025be3e8979d18947a200d88" />
+                    android:scheme="@string/kakao_app_key" />
             </intent-filter>
         </activity> <!-- google map key -->
         <meta-data

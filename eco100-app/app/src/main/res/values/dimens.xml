@@ -25,6 +25,7 @@
     <dimen name="size_320dp">320dp</dimen>
     <dimen name="size_330dp">330dp</dimen>
     <dimen name="size_360dp">360dp</dimen>
+    <dimen name="size_380dp">380dp</dimen>
     <dimen name="size_411dp">411dp</dimen>
 
     <!-- text size -->
@@ -58,4 +59,5 @@
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_38dp">38dp</dimen>
+    <dimen name="margin_70dp">70dp</dimen>
 </resources>

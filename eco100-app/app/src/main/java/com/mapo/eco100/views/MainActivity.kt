@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
                         ft.replace(R.id.contents, newInstance())
                     }
                     1 -> {
+                        val dialog = NoConnectedDialog(this@MainActivity)
+                        dialog.show()
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
