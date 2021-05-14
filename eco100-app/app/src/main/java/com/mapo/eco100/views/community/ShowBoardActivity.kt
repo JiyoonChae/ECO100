@@ -55,10 +55,10 @@ class ShowBoardActivity : AppCompatActivity() {
             adapter = commentAdapter
         }
 
-        viewModel.apply {
-            commentsLiveData.observe(this@ShowBoardActivity, Observer {
-                //commentAdapter.updateBoards(it)
-            })
-        }
+//        viewModel.apply {
+//            commentsLiveData.observe(this@ShowBoardActivity, Observer {
+//                //commentAdapter.updateBoards(it)
+//            })
+//        }
     }
 }

@@ -11,6 +11,12 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
 
     private var comments: ArrayList<Comment> = ArrayList()
 
+    init {
+        comments.add(Comment("홍길동","test 댓글","2021-05-11"))
+        comments.add(Comment("김아무개","test 댓글2","2021-05-12"))
+        comments.add(Comment("김삿갓","test 댓글3","2021-05-13"))
+    }
+
     class CommentViewHolder(val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun updateComments(items: ArrayList<Comment>) {
@@ -18,7 +24,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
         notifyDataSetChanged()
     }
 
-    fun addComent(item: Comment) {
+    fun addComment(item: Comment) {
         comments.add(0, item)
         notifyDataSetChanged()
     }

@@ -16,16 +16,10 @@ class CommentViewModel : ViewModel() {
 
     init {
         service = NetworkSettings.retrofit.build().create(BoardService::class.java)
-        fetchBoards()
+        fetchComments()
     }
 
-    fun refresh(comment:Comment) {
-        commentsLiveData.value?.let{
-            it.add(0,comment)
-        }
-    }
-
-    fun fetchBoards() {
+    fun fetchComments() {
 //        viewModelScope.launch {
 //            val boards = service.boards(0)
 //            boardsLiveData.value = boards
