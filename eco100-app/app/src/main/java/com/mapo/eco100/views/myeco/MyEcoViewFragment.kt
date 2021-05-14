@@ -33,6 +33,11 @@ class MyEcoViewFragment : Fragment() {
             startActivity(intent)
         }
 
+        badgeList.setOnClickListener {
+            val intent = Intent(activity, MyBadgeListActivity::class.java)
+            startActivity(intent)
+        }
+
         return view
     }
 
