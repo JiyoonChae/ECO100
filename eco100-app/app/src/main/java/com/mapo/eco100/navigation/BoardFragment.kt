@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.views.community.EnrollActivity
 import com.mapo.eco100.R
 import com.mapo.eco100.config.BOARD_CLICK
@@ -41,6 +42,7 @@ class BoardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var mainActivityContext: Context
     private lateinit var boardAdapter: BoardAdapter
+    private var loadPage: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,8 +107,6 @@ class BoardFragment : Fragment() {
 
                         }
                     })
-
-
             }
         }
 
@@ -178,6 +178,42 @@ class BoardFragment : Fragment() {
                 else -> false
             }
         }
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager)
+                        .findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = boardAdapter.itemCount - 1
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                        val dialog = NoConnectedDialog(mainActivityContext)
+                        dialog.show()
+                    } else {
+                        viewModel.loadingLiveData.value = true
+                        NetworkSettings.retrofit.build().create(BoardService::class.java)
+                            .refreshBoards(++loadPage)
+                            .enqueue(object : Callback<ArrayList<Boards>> {
+                                override fun onResponse(
+                                    call: Call<ArrayList<Boards>>,
+                                    response: Response<ArrayList<Boards>>
+                                ) {
+                                    boardAdapter.addBoards(response.body()!!)
+                                    viewModel.loadingLiveData.value = false
+                                }
+
+                                override fun onFailure(
+                                    call: Call<ArrayList<Boards>>,
+                                    t: Throwable
+                                ) {
+
+                                }
+                            })
+                    }
+                }
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -191,7 +227,7 @@ class BoardFragment : Fragment() {
             BOARD_ENROLL -> {
                 Toast.makeText(mainActivityContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
                 val responseBoard: Boards = data!!.getSerializableExtra("created_board") as Boards
-                boardAdapter.addBoard(responseBoard)
+                boardAdapter.addRecentBoard(responseBoard)
             }
         }
     }

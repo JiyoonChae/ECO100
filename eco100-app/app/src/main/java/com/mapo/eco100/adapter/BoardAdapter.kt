@@ -21,7 +21,7 @@ class BoardAdapter(
         notifyDataSetChanged()
     }
 
-    fun addBoard(item: Boards) {
+    fun addRecentBoard(item: Boards) {
         boards.add(0, item)
         notifyDataSetChanged()
     }
@@ -70,5 +70,10 @@ class BoardAdapter(
         diffResult.convertOldPositionToNew(0)
         boards = newBoards
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun addBoards(item: ArrayList<Boards>) {
+        boards.addAll(item)
+        notifyDataSetChanged()
     }
 }
