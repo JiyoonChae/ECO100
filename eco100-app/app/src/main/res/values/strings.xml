@@ -39,6 +39,7 @@
     <string name="btn_can_ic_description">금속캔,고철 버튼 아이콘</string>
     <string name="btn_vinyl_ic_description">비닐류 버튼 아이콘</string>
     <string name="btn_styrofoam_ic_description">스티로폼 버튼 아이콘</string>
+    <string name="faq_ic_description">FAQ 검색 아이콘</string>
 
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>

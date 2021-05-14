@@ -19,6 +19,7 @@
     <dimen name="size_82dp">82dp</dimen>
     <dimen name="size_94dp">94dp</dimen>
     <dimen name="size_138dp">138dp</dimen>
+    <dimen name="ecobox_size_153dp">153dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="size_280dp">280dp</dimen>
