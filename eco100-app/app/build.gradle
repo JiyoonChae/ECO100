@@ -61,6 +61,13 @@ dependencies {
     // indicator
     implementation 'me.relex:circleindicator:2.1.4'
 
+    // google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    // read .csv files
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
