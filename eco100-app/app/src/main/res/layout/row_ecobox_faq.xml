@@ -43,6 +43,13 @@
                 android:paddingBottom="@dimen/padding_4dp"
                 android:text="핸드타월 어떻게 배출하나요?"
                 android:textSize="@dimen/size_16dp" />
+
+            <View
+                android:layout_width="@dimen/size_280dp"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/faq_line_color"
+                />
+
         </LinearLayout>
     </LinearLayout>
 

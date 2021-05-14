@@ -23,4 +23,8 @@
 
     <!-- popup color -->
     <color name="popup_btn_left_color">#c4c4c4</color>
+
+    <!-- ecobox faq color -->
+    <color name="faq_line_color">#C4C4C4</color>
+
 </resources>
