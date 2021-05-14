@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.home
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
+import com.mapo.eco100.common.TabItemSelector
 import com.mapo.eco100.databinding.FragmentHomeBinding
 import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.search.SearchActivity
@@ -23,6 +25,15 @@ class HomeViewFragment : Fragment() {
     private lateinit var dialog: Dialog
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var callback: TabItemSelector
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is TabItemSelector) {
+            callback = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,6 +116,7 @@ class HomeViewFragment : Fragment() {
         val fm: FragmentManager? = fragmentManager
         val ft = fm?.beginTransaction()
         ft?.replace(R.id.contents, MapViewFragment.newInstance())?.commit()
+        callback.selectItem(3)
     }
 
     override fun onDestroyView() {
