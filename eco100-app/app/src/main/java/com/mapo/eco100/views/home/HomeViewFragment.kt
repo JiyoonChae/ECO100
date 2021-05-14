@@ -9,9 +9,11 @@ import android.view.*
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentHomeBinding
+import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.search.SearchActivity
 
 class HomeViewFragment : Fragment() {
@@ -92,7 +94,17 @@ class HomeViewFragment : Fragment() {
             showDialog()
         }
 
+        binding.goMap.setOnClickListener {
+            replaceMapFragment()
+        }
+
         return view
+    }
+
+    private fun replaceMapFragment() {
+        val fm: FragmentManager? = fragmentManager
+        val ft = fm?.beginTransaction()
+        ft?.replace(R.id.contents, MapViewFragment.newInstance())?.commit()
     }
 
     override fun onDestroyView() {
