@@ -14,11 +14,7 @@
             android:id="@+id/rowImageView"
             android:layout_width="@dimen/size_48dp"
             android:layout_height="@dimen/size_48dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginTop="25dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="18dp"
             app:srcCompat="@mipmap/ic_launcher" />
 
@@ -26,14 +22,11 @@
             android:id="@+id/rowTextView"
             android:layout_width="196dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
             android:layout_toStartOf="@+id/rowStamp1"
             android:layout_toEndOf="@+id/rowImageView"
-            android:layout_weight="2"
             android:text="TextView"
             android:textColor="#CC000000"
             android:textSize="@dimen/text_normal" />
@@ -42,9 +35,7 @@
             android:id="@+id/rowStamp1"
             android:layout_width="@dimen/size_48dp"
             android:layout_height="@dimen/size_48dp"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="25dp"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
             android:layout_toStartOf="@+id/rowStamp2"
             app:srcCompat="@mipmap/ic_launcher_round" />
@@ -53,11 +44,9 @@
             android:id="@+id/rowStamp2"
             android:layout_width="@dimen/size_48dp"
             android:layout_height="@dimen/size_48dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="11dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="18dp"
             app:srcCompat="@mipmap/ic_launcher" />
 
 
@@ -66,6 +55,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_1dp"
-        android:background="#1F000000"
-        android:layout_marginLeft="@dimen/size_64dp"/>
+        android:layout_marginLeft="@dimen/size_64dp"
+        android:background="#1F000000" />
 </LinearLayout>
