@@ -27,12 +27,9 @@ import com.mapo.eco100.viewmodel.BoardViewModel
 import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 class BoardFragment : Fragment() {
 
@@ -42,7 +39,7 @@ class BoardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var mainActivityContext: Context
     private lateinit var boardAdapter: BoardAdapter
-    private var loadPage: Int = 0
+    private var pageToLoad: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +97,9 @@ class BoardFragment : Fragment() {
                             boardAdapter.refreshBoards(response.body()!!)
                             (requireActivity() as MainActivity).runOnUiThread {
                                 binding.swipeRefresh.isRefreshing = false
+                                binding.sortMenuText.text = "최근 순"
                             }
+                            pageToLoad = 0
                         }
 
                         override fun onFailure(call: Call<ArrayList<Boards>>, t: Throwable) {
@@ -193,7 +192,7 @@ class BoardFragment : Fragment() {
                     } else {
                         viewModel.loadingLiveData.value = true
                         NetworkSettings.retrofit.build().create(BoardService::class.java)
-                            .refreshBoards(++loadPage)
+                            .refreshBoards(++pageToLoad)
                             .enqueue(object : Callback<ArrayList<Boards>> {
                                 override fun onResponse(
                                     call: Call<ArrayList<Boards>>,
