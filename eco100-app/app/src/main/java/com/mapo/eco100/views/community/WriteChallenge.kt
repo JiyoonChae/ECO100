@@ -22,6 +22,7 @@ class WriteChallenge : BaseActivity() {
     val PERM_STORAGE = 99 //외부 저장소 권한 처리
     val PERM_CAMERA = 100 //카메라 권한 처리
     val REQ_CAMERA =101 //카메라 촬영 요청
+    val REQ_STORAGE =102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
@@ -77,6 +78,17 @@ class WriteChallenge : BaseActivity() {
         binding.buttonCamera.setOnClickListener {
             requirePermissions(arrayOf(android.Manifest.permission.CAMERA),PERM_CAMERA)
         }
+
+        binding.buttonGallery.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    //갤러리 호출
+    fun openGallery(){
+        val intent = Intent(Intent.ACTION_PICK) //인텐트 파라미트로 action_pick사용
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE //여기서 설정한 데이터를 미디어 스토어에서 불러와 선택가능
+        startActivityForResult(intent, REQ_STORAGE)
     }
 
     //카메라 요청
@@ -107,23 +119,6 @@ class WriteChallenge : BaseActivity() {
         return "$filename.jpg"
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK)
-            when(requestCode) {
-                REQ_CAMERA -> {
-                    realUri?.let { uri ->
-                        val bitmap = loadBitmap(uri)
-                        binding.imagePreview.setImageBitmap(bitmap)
-
-                        realUri =null
-                    }
-
-                }
-            }
-    }
-
-
 
     //Uri를 사용해서 저장된 이미지 호출
     fun loadBitmap(photoUri: Uri):Bitmap? {
@@ -141,4 +136,30 @@ class WriteChallenge : BaseActivity() {
         }
         return image
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK)
+            when(requestCode) {
+                REQ_CAMERA -> {
+                    realUri?.let { uri ->
+                        val bitmap = loadBitmap(uri)
+                        binding.imagePreview.setImageBitmap(bitmap)
+
+                        realUri =null
+                    }
+
+                }
+                REQ_STORAGE -> {
+                    //갤러리에서 가져온 이미지데이터를 IMAGEPREVIEW에 할당
+                    //(data의 data속성으로 해당 이미지의 uri가 전달)
+                    data?.data?.let { uri ->
+                        binding.imagePreview.setImageURI(uri)
+                    }
+                }
+            }
+    }
+
+
 }
