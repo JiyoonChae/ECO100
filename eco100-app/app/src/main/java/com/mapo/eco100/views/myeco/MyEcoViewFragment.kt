@@ -22,6 +22,7 @@ class MyEcoViewFragment : Fragment() {
         val boardList = view.findViewById<TextView>(R.id.my_board_list)
         val challengeList = view.findViewById<TextView>(R.id.my_challenge_list)
         val badgeList = view.findViewById<TextView>(R.id.my_badge_list)
+        val commentList = view.findViewById<TextView>(R.id.my_comment_list)
 
         boardList.setOnClickListener {
             val intent = Intent(activity, MyBoardListActivity::class.java)
@@ -35,6 +36,11 @@ class MyEcoViewFragment : Fragment() {
 
         badgeList.setOnClickListener {
             val intent = Intent(activity, MyBadgeListActivity::class.java)
+            startActivity(intent)
+        }
+
+        commentList.setOnClickListener {
+            val intent = Intent(activity, MyCommentListActivity::class.java)
             startActivity(intent)
         }
 

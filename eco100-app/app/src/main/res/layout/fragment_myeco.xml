@@ -19,6 +19,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
+        android:id="@+id/my_comment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="나의 댓글 조회하기"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
         android:id="@+id/my_challenge_list"
         android:layout_width="match_parent"
         android:layout_height="80dp"
