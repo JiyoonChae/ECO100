@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/size_330dp"
-    android:layout_height="514dp"
+    android:layout_height="534dp"
     android:background="@drawable/home_dialog_background"
     android:orientation="vertical">
-
-    <ImageButton
-        android:id="@+id/closeBtn"
-        style="?android:borderlessButtonStyle"
-        android:layout_width="@dimen/size_36dp"
-        android:layout_height="@dimen/size_36dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:layout_marginEnd="@dimen/margin_16dp"
-        android:contentDescription="@string/string_value"
-        android:src="@drawable/ic_close_btn" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:orientation="vertical">
 
         <TextView
@@ -46,15 +36,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_2dp"
-        android:layout_marginHorizontal="@dimen/margin_8dp"
-        android:layout_marginBottom="10dp"
         android:background="@color/secondary_on_color" />
 
     <!-- 비운다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_94dp"
-        android:background="@color/primary_color"
+        android:layout_height="90dp"
+        android:background="@color/primary_color_dark"
         android:orientation="vertical">
 
         <TextView
@@ -87,7 +75,7 @@
     <!-- 헹군다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_94dp"
+        android:layout_height="90dp"
         android:orientation="vertical">
 
         <TextView
@@ -111,7 +99,7 @@
             <ImageView
                 android:layout_width="@dimen/size_36dp"
                 android:layout_height="@dimen/size_36dp"
-                android:layout_marginRight="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
@@ -121,8 +109,8 @@
     <!-- 분리한다 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_94dp"
-        android:background="@color/primary_color"
+        android:layout_height="90dp"
+        android:background="@color/primary_color_dark"
         android:orientation="vertical">
 
         <TextView
@@ -139,7 +127,7 @@
             <ImageView
                 android:layout_width="@dimen/size_36dp"
                 android:layout_height="@dimen/size_36dp"
-                android:layout_marginLeft="@dimen/margin_16dp"
+                android:layout_marginStart="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
 
@@ -155,7 +143,7 @@
     <!-- 섞지 않는다-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_94dp"
+        android:layout_height="90dp"
         android:orientation="vertical">
 
         <TextView
@@ -179,11 +167,34 @@
             <ImageView
                 android:layout_width="@dimen/size_36dp"
                 android:layout_height="@dimen/size_36dp"
-                android:layout_marginRight="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:contentDescription="@string/string_value"
                 android:src="@drawable/home_eco_duck" />
-
         </LinearLayout>
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_82dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp">
+
+        <ImageView
+            android:layout_width="@dimen/size_38dp"
+            android:layout_height="@dimen/size_38dp"
+            android:layout_gravity="top|right"
+            android:layout_marginEnd="@dimen/margin_36dp"
+            android:contentDescription="@string/string_value"
+            android:src="@drawable/img_popup_btn_ecoduck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/closeBtn"
+            style="@style/CommonPopup.BtnRightTextStyle"
+            android:layout_width="@dimen/size_280dp"
+            android:layout_height="@dimen/size_42dp"
+            android:layout_marginStart="@dimen/margin_24dp"
+            android:layout_marginBottom="@dimen/margin_18dp"
+            android:text="@string/popup_confirm" />
+
+    </FrameLayout>
 </LinearLayout>

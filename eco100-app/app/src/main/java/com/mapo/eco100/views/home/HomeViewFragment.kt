@@ -7,8 +7,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
@@ -128,7 +128,7 @@ class HomeViewFragment : Fragment() {
         dialog.show()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val closeBtn: ImageButton = dialog.findViewById(R.id.closeBtn)
+        val closeBtn: AppCompatButton = dialog.findViewById(R.id.closeBtn)
         closeBtn.setOnClickListener {
             dialog.dismiss()
         }
