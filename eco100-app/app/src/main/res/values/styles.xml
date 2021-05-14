@@ -101,7 +101,7 @@
     </style>
 
     <!--Internet Connect Dialog Button Style -->
-    <style name="AlertDialog.AppCompat.BtnRightTextStyle" parent="Widget.AppCompat.Button.Borderless">
+    <style name="AlertDialog.AppCompat.BtnConfirmTextStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:fontFamily">@font/mapo_peacefull</item>
         <item name="android:background">@drawable/popup_btn_right</item>
         <item name="android:textColor">@color/popup_btn_right_text_color</item>

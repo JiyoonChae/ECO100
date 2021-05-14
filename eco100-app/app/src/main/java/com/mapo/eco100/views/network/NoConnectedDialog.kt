@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
-import android.view.WindowManager
 import com.mapo.eco100.config.NetworkSettings.NoInternetConnectedCallback
 import com.mapo.eco100.databinding.ActivityNoConnectedDialogBinding
 
