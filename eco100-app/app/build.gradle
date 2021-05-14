@@ -65,8 +65,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    // read xml files
-    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    // read .csv files
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
 
     testImplementation 'junit:junit:4.13.2'
