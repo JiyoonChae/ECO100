@@ -8,6 +8,7 @@
         android:id="@+id/viewImage"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:src="@drawable/img_home_mid_dacu" />
+        android:src="@drawable/img_home_mid_eco"
+        android:contentDescription="@string/string_value"/>
 
 </LinearLayout>

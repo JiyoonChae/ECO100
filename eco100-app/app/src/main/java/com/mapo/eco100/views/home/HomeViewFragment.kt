@@ -38,11 +38,11 @@ class HomeViewFragment : Fragment() {
         // adapter
         val pagerAdapter = HomeFragmentStateAdapter(this)
         pagerAdapter.run {
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_eco100))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_volunteer))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_dacu))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news2))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_challenge))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_eco))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_chall))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_voluntee))
+            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_comm))
             binding.pager.adapter = pagerAdapter
         }
 
