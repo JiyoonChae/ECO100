@@ -84,7 +84,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_32dp"
                 android:layout_gravity="bottom|center"
-                android:background="@color/primary_color_dark"
                 app:ci_drawable="@drawable/home_indicator_selected"
                 app:ci_drawable_unselected="@drawable/home_indicator_unselected"
                 app:ci_height="@dimen/size_8dp"
