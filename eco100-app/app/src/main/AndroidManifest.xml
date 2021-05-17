@@ -49,9 +49,7 @@
                     android:scheme="kakao27c8e2d5025be3e8979d18947a200d88" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".common.CurrentLocationActivity"
-            android:theme="@style/LBSMapTheme" />
+
         <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -23,7 +23,7 @@ object NetworkSettings {
     init {
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Resources.getSystem().getString(R.string.base_url))
+            .baseUrl("http://rpinas.iptime.org:10122")
 
         client = OkHttpClient.Builder()
             .addInterceptor { chain ->

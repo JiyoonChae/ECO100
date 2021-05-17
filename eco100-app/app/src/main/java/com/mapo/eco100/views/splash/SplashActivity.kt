@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.mapo.eco100.views.MainActivity
+import com.mapo.eco100.MainActivity
+
+
 
 
 class SplashActivity : AppCompatActivity() {
