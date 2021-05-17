@@ -48,6 +48,7 @@ object NetworkSettings {
                 cnt++
                 response = chain.proceed(request)
             }
+
             return response
         }
     }

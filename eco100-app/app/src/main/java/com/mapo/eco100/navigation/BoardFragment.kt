@@ -74,9 +74,11 @@ class BoardFragment : Fragment() {
                             Toast.makeText(mainActivityContext, "글에 문제가 있습니다.", Toast.LENGTH_SHORT)
                                 .show()
                         }
+
                     })
                 }
             }
+
         )
 
         binding.recyclerView.apply {

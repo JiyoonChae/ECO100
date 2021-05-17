@@ -4,10 +4,10 @@ import java.io.Serializable
 
 
 data class Challenge (
-    val challenge_id : Long,
-    val contents : String,
-    var participant_cnt : Int,
-    var img_url: String,
-    var participation_cnt: Int
+    val challengeId : Long,
+    val subject : String,
+    var numOfParticipants : Int,
+    var imageUrl: String,
+    var myParticipationCnt: Int
 
 ) : Serializable
