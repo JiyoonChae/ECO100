@@ -185,12 +185,6 @@
                         android:text="@string/recycle_guide04" />
                 </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentMap"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="220dp" />
-
             </LinearLayout>
 
             <!-- map -->
@@ -215,12 +209,28 @@
                 android:layout_marginBottom="@dimen/size_4dp"
                 android:background="@color/primary_color" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentMap"
-                class="com.google.android.gms.maps.SupportMapFragment"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16dp">
 
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentMap"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/goMap"
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_gravity="bottom|right"
+                    android:elevation="@dimen/size_10dp"
+                    android:layout_marginEnd="@dimen/margin_24dp"
+                    android:layout_marginBottom="@dimen/margin_24dp"
+                    android:shadowRadius="@integer/google_play_services_version"
+                    android:background="@drawable/ic_home_map_btn" />
+            </FrameLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
