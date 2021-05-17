@@ -7,6 +7,8 @@
     <dimen name="size_4dp">4dp</dimen>
     <dimen name="size_8dp">8dp</dimen>
     <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_12dp">12dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
     <dimen name="size_16dp">16dp</dimen>
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_35dp">35dp</dimen>
@@ -46,6 +48,8 @@
     <dimen name="popup_title">19sp</dimen>
     <dimen name="home_dialog_text">20sp</dimen>
     <dimen name="home_dialog_title">22sp</dimen>
+    <dimen name="map_list_title">16sp</dimen>
+    <dimen name="map_list_text">16sp</dimen>
 
     <!-- padding -->
     <dimen name="padding_2dp">2dp</dimen>
@@ -67,6 +71,7 @@
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_22dp">22dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>
