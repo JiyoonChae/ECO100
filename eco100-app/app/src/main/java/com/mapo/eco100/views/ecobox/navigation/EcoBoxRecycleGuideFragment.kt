@@ -24,9 +24,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var faqRecyclerView: RecyclerView
 
-    var list_post = arrayListOf<FAQ>()
-    var boardSearchList = arrayListOf<FAQ>()
-
+    var faqSearchList = arrayOf<String>()
 
     var data_category = arrayOf(
             "종이류", "유리병", "페트병", "스티로폼류", "비닐류", "기타"
@@ -118,7 +116,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
         }
     }
 
-    inner class FaqRecyclerAdapter : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
+    inner class FaqRecyclerAdapter : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() , Filterable {
 
 
         // Item의 클릭 상태를 저장할 array 객체
@@ -162,6 +160,37 @@ class EcoBoxRecycleGuideFragment : Fragment() {
             return data_question.size
         }
 
+        override fun getFilter(): Filter? {
+            return object : Filter() {
+                override fun performFiltering(constraint: CharSequence): FilterResults {
+                    val charString = constraint.toString()
+                    if (charString.isEmpty()) {
+                        faqSearchList = data_question
+                    } else {
+                        val filteredList = ArrayList<String>()
+                        if (faqSearchList != null) {
+                            for (name in faqSearchList) {
+                                if (name.toLowerCase().contains(charString.toLowerCase())) {
+                                    filteredList.add(name);
+                                }
+                            }
+                        }
+                        filteredList
+                    }
+                    val filterResults = FilterResults()
+                    filterResults.values=faqSearchList
+                    System.out.println("여기다 이놈아"+filterResults.values.toString())
+                    return filterResults
+                }
+
+                override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
+                    faqSearchList= filterResults?.values as Array<String>
+                    notifyDataSetChanged()
+                    System.out.println("here")
+                }
+            }
+        }
+
         inner class FaqViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             val qmarkImageView = itemView.findViewById<ImageView>(R.id.qmarkImageView)
@@ -172,6 +201,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
             val faqAnswerTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
 
         }
+
 
     }
 
