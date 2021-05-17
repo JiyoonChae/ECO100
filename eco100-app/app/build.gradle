@@ -68,6 +68,10 @@ dependencies {
     // read .csv files
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
 
+    // tedpermission
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
