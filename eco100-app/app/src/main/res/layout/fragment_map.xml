@@ -18,8 +18,8 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:layout_width="160dp"
-            android:layout_height="140dp"
+            android:layout_width="@dimen/size_160dp"
+            android:layout_height="@dimen/size_140dp"
             android:layout_marginStart="@dimen/margin_16dp"
             android:paddingTop="@dimen/padding_10dp">
 
@@ -45,7 +45,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/openList"
         android:layout_width="108dp"
-        android:layout_height="24dp"
+        android:layout_height="@dimen/size_24dp"
         android:paddingHorizontal="@dimen/padding_10dp"
         android:paddingVertical="@dimen/padding_2dp"
         style="@style/Map.ListBtnStyle"

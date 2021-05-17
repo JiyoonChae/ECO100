@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/shopImg"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/size_50dp"
+        android:layout_height="@dimen/size_50dp"
         android:src="@drawable/img_map_list_item" />
 
     <LinearLayout
@@ -42,7 +42,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1dp"
-            android:background="#E8E8E8" />
+            android:background="@color/list_line_color" />
 
     </LinearLayout>
 
