@@ -117,7 +117,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
         override fun onBindViewHolder(holder: FaqViewHolderClass, position: Int) {
 
-            holder.qmarkImageView.setImageResource(R.drawable.ic_ecobox_qmark)
+            holder.qmarkImageView.setImageResource(R.drawable.ic_ecobox_q_mark)
             holder.faqCategoryTextView.text = data_category[position]
             holder.questionTextView.text = data_question[position]
 

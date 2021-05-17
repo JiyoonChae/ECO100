@@ -32,7 +32,8 @@
                         android:contentDescription="@string/btn_paper_ic_description"
                         android:drawableTop="@drawable/ic_ecobox_paper"
                         android:text="@string/ecobox_paper"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
 
                     <Button
                         android:id="@+id/btn_glass"
@@ -45,7 +46,8 @@
                         android:paddingLeft="@dimen/padding_10dp"
                         android:paddingRight="@dimen/padding_32dp"
                         android:text="@string/ecobox_glass"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
 
                     <Button
                         android:id="@+id/btn_plastic"
@@ -56,7 +58,8 @@
                         android:contentDescription="@string/btn_plastic_ic_description"
                         android:drawableTop="@drawable/ic_ecobox_plastic"
                         android:text="@string/ecobox_plastic"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
 
 
                 </LinearLayout>
@@ -76,7 +79,8 @@
                         android:contentDescription="@string/btn_can_ic_description"
                         android:drawableTop="@drawable/ic_ecobox_can"
                         android:text="@string/ecobox_can"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
 
                     <Button
                         android:id="@+id/btn_vinyl"
@@ -89,7 +93,8 @@
                         android:paddingLeft="@dimen/padding_24dp"
                         android:paddingRight="@dimen/padding_10dp"
                         android:text="@string/ecobox_vinyl"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
 
                     <Button
                         android:id="@+id/btn_styrofoam"
@@ -101,7 +106,8 @@
                         android:drawableTop="@drawable/ic_ecobox_styrofoam"
                         android:text="@string/ecobox_styrofoam"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/mapo_peacefull"/>
                 </LinearLayout>
 
 
@@ -110,7 +116,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_on_color"
+        android:background="@color/primary_color_dark"
         android:orientation="horizontal">
 
         <TextView
@@ -118,12 +124,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_4dp"
-            android:layout_marginLeft="@dimen/ecobox_margin_36dp"
-            android:layout_marginRight="100dp"
+            android:layout_marginLeft="@dimen/margin_36dp"
+            android:layout_marginRight="@dimen/ecobox_margin_112dp"
             android:layout_marginBottom="@dimen/margin_12dp"
             android:text="@string/ecobox_faq"
             android:textColor="@color/white"
-            android:textSize="@dimen/ecobox_size_18dp"
+            android:textSize="@dimen/home_dialog_title"
             android:textStyle="bold"
             android:fontFamily="@font/mapo_peacefull"/>
 
