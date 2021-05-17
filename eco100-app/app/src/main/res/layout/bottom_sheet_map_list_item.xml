@@ -19,35 +19,25 @@
 
         <TextView
             android:id="@+id/shopName"
+            style="@style/Map.BottomSheetListTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="알맹상점"
-            android:textColor="@color/point_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:text="@string/map_list_shop_name_ex" />
 
         <TextView
             android:id="@+id/shopDescription"
+            style="@style/Map.BottomSheetListText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="껍데기는 가라! 알맹이만 오라! 리필스테이션"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:text="@string/map_list_shop_description_ex" />
 
         <TextView
             android:id="@+id/shopAddress"
+            style="@style/Map.BottomSheetListText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
             android:layout_marginBottom="@dimen/margin_22dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="서울 마포구 월드컵로 49 2층, 알맹상점"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:text="@string/map_list_shop_address_ex" />
 
         <View
             android:layout_width="match_parent"

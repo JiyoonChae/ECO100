@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentMapBinding
 
@@ -46,6 +48,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         binding.openList.setOnClickListener {
             val bottomSheet = BottomSheet()
+            bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
 

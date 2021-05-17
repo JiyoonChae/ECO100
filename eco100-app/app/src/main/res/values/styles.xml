@@ -134,4 +134,29 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <!-- bottom sheet style -->
+    <style name="Map.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Map.BottomSheetStyle</item>
+    </style>
+
+    <style name="Map.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
+    </style>
+
+    <!-- bottom sheet list Text -->
+    <style name="Map.BottomSheetListTitle" parent="android:TextAppearance">
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:textColor">@color/point_color</item>
+        <item name="android:textSize">@dimen/map_list_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Map.BottomSheetListText" parent="android:TextAppearance">
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/map_list_text</item>
+    </style>
 </resources>
