@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="74dp"
+        android:layout_marginBottom="54dp"
         android:gravity="center"
         android:text="팡팡이"
         android:textColor="#39BDC8"
