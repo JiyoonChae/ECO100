@@ -68,6 +68,17 @@
     <string name="popup_challenge_register_title">챌린지를 등록하시겠습니까?</string>
     <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는삭제 또는 재등록만 가능합니다.</string>
 
+    <!-- map -->
+    <string name="map_shop">종량제판매처</string>
+    <string name="map_zero_shop">제로웨이잇샵</string>
+    <string name="map_open_list">목록열기</string>
+    <string name="map_close_list">지도보기</string>
+    <string name="map_user_location">나 여기!</string>
+    <string name="map_list_shop_name_ex">알맹상점</string>
+    <string name="map_list_shop_description_ex">껍데기는 가라! 알맹이만 오라! 리필스테이션</string>
+    <string name="map_list_shop_address_ex">서울특별시 마포구 월드컵로 49 2층 알맹상점</string>
+
+
     <!-- mypage -->
     <string name="popup_mypage_del_ask_title">글을 삭제하시겠습니까?</string>
     <string name="popup_mypage_del_ask_text">작성한 글을 삭제할까요?\n삭제 후에는 복구불가하니 신중히 선택해주세요.</string>
