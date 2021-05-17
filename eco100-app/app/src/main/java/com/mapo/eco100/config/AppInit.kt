@@ -13,6 +13,17 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem
 import java.io.*
 
 class AppInit : Application() {
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: AppInit? = null
+        fun applicationContext(): AppInit {
+            return instance as AppInit
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -27,39 +38,39 @@ class AppInit : Application() {
 
                 val FAQ_Jeju_sheet = workbook.getSheetAt(0)
                 var rows = FAQ_Jeju_sheet.physicalNumberOfRows
-                for(rowIndex in 1 until rows) {
+                for (rowIndex in 1 until rows) {
                     val row = FAQ_Jeju_sheet.getRow(rowIndex)
                     val id = rowIndex
-                    val type : String = row.getCell(0).toString()
-                    val name : String = row.getCell(1).toString()
-                    val details : String = row.getCell(2).toString()
-                    val precautions : String? = row.getCell(3)?.toString()
-                    LocalDataBase.FAQ_JEJU_list.add(FAQ_JEJU(id,type,name,details,precautions))
+                    val type: String = row.getCell(0).toString()
+                    val name: String = row.getCell(1).toString()
+                    val details: String = row.getCell(2).toString()
+                    val precautions: String? = row.getCell(3)?.toString()
+                    LocalDataBase.FAQ_JEJU_list.add(FAQ_JEJU(id, type, name, details, precautions))
                 }
 
                 val FAQ_sheet = workbook.getSheetAt(1)
                 rows = FAQ_sheet.physicalNumberOfRows
-                for(rowIndex in 1 until rows) {
+                for (rowIndex in 1 until rows) {
                     val row = FAQ_sheet.getRow(rowIndex)
                     val id = rowIndex
-                    val category : String = row.getCell(0).toString()
-                    val question : String = row.getCell(1).toString()
-                    val answer : String = row.getCell(2).toString()
-                    LocalDataBase.FAQ_list.add(FAQ(id,category,question, answer))
+                    val category: String = row.getCell(0).toString()
+                    val question: String = row.getCell(1).toString()
+                    val answer: String = row.getCell(2).toString()
+                    LocalDataBase.FAQ_list.add(FAQ(id, category, question, answer))
                 }
 
                 val ZeroShop_sheet = workbook.getSheetAt(2)
                 rows = ZeroShop_sheet.physicalNumberOfRows
-                for(rowIndex in 1 until rows) {
+                for (rowIndex in 1 until rows) {
                     val row = ZeroShop_sheet.getRow(rowIndex)
                     val id = rowIndex
-                    val name : String = row.getCell(0).toString()
-                    val address : String = row.getCell(1).toString()
-                    val phoneNum : String? = row.getCell(2)?.toString()
-                    val runningInfo : String? = row.getCell(3)?.toString()
-                    val webUrl : String? = row.getCell(4)?.toString()
-                    val location : String = row.getCell(5).toString()
-                    val latitude : Float = location.split(", ")[0].toFloat()
+                    val name: String = row.getCell(0).toString()
+                    val address: String = row.getCell(1).toString()
+                    val phoneNum: String? = row.getCell(2)?.toString()
+                    val runningInfo: String? = row.getCell(3)?.toString()
+                    val webUrl: String? = row.getCell(4)?.toString()
+                    val location: String = row.getCell(5).toString()
+                    val latitude: Float = location.split(", ")[0].toFloat()
                     val longitude: Float = location.split(", ")[1].toFloat()
 
                     val baseUrl = "http://rpinas.iptime.org:10122" + "/image/"
@@ -76,12 +87,25 @@ class AppInit : Application() {
                         logoUrl = null
                     }
 
-                    LocalDataBase.zeroShopList.add(ZeroShop(id,name,address,phoneNum,runningInfo,webUrl,latitude,longitude,imgUrl,logoUrl))
+                    LocalDataBase.zeroShopList.add(
+                        ZeroShop(
+                            id,
+                            name,
+                            address,
+                            phoneNum,
+                            runningInfo,
+                            webUrl,
+                            latitude,
+                            longitude,
+                            imgUrl,
+                            logoUrl
+                        )
+                    )
                 }
 
                 val trashBag_sheet = workbook.getSheetAt(3)
                 rows = trashBag_sheet.physicalNumberOfRows
-                for(rowIndex in 1 until rows) {
+                for (rowIndex in 1 until rows) {
                     val row = trashBag_sheet.getRow(rowIndex)
                     val id = rowIndex
                     val address1 = row.getCell(0)?.toString()
@@ -102,8 +126,8 @@ class AppInit : Application() {
                         )
                     }
                 }
-            } catch (e:FileNotFoundException) {
-                Log.e("AppInit","데이터를 불러올 파일이 존재하지 않습니다.")
+            } catch (e: FileNotFoundException) {
+                Log.e("AppInit", "데이터를 불러올 파일이 존재하지 않습니다.")
             }
             LocalDataBase.isLoading = false
         }.start()
