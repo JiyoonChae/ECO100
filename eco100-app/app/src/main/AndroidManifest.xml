@@ -44,9 +44,6 @@
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".common.CurrentLocationActivity"
-            android:theme="@style/LBSMapTheme" />
         <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
