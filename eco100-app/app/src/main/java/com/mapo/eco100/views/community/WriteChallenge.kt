@@ -41,7 +41,7 @@ class WriteChallenge : BaseActivity() {
         binding.textView.setText(item) 
 
         binding.challengeFinish.setOnClickListener {
-            //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기
+            //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기 > 데이터전송함수만들어서 호출
             //돌아가서 스티커 이미지 변경시키기.
             binding2.rowStamp1.setImageResource(R.drawable.emoji)
             var bundle = Bundle()
