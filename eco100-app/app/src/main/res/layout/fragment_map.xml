@@ -45,14 +45,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="108dp"
         android:layout_height="26dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="@dimen/margin_16dp"
-        android:background="@drawable/map_list_btn_background"
-        android:drawableStart="@drawable/ic_map_list"
-        android:fontFamily="@font/mapo_peacefull"
         android:paddingHorizontal="@dimen/padding_10dp"
-        android:text="목록열기"
-        android:textColor="@color/point_color"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        style="@style/Map.ListBtnStyle"
+        android:text="목록열기" />
 </FrameLayout>
