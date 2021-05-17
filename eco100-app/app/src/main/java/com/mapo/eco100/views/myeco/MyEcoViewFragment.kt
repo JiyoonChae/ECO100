@@ -19,10 +19,10 @@ class MyEcoViewFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_myeco, container, false)
 
-        val boardList = view.findViewById<TextView>(R.id.my_board_list)
-        val challengeList = view.findViewById<TextView>(R.id.my_challenge_list)
-        val badgeList = view.findViewById<TextView>(R.id.my_badge_list)
-        val commentList = view.findViewById<TextView>(R.id.my_comment_list)
+        val boardList = view.findViewById<View>(R.id.my_board_list_frame)
+        val challengeList = view.findViewById<View>(R.id.my_challenge_list_frame)
+        val badgeList = view.findViewById<View>(R.id.my_badge_list_frame)
+        val commentList = view.findViewById<View>(R.id.my_comment_list_frame)
 
         boardList.setOnClickListener {
             val intent = Intent(activity, MyBoardListActivity::class.java)
