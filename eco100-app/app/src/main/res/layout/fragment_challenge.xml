@@ -8,8 +8,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/earth" />
+        android:layout_height="@dimen/challenge_126dp"
+        app:srcCompat="@drawable/banner_top" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/challenge_recycler"
