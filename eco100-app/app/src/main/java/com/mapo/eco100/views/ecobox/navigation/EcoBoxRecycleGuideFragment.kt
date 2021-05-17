@@ -3,11 +3,12 @@ package com.mapo.eco100.views.ecobox.navigation
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,22 +24,22 @@ class EcoBoxRecycleGuideFragment : Fragment() {
     private lateinit var faqRecyclerView: RecyclerView
 
     var data_category = arrayOf(
-        "종이류", "유리병", "페트병", "스티로폼류", "비닐류", "기타"
+            "종이류", "유리병", "페트병", "스티로폼류", "비닐류", "기타"
     )
 
     var data_question = arrayOf(
-        "핸드 타월은 어떻게 배출하나요?",
-        "깨진 유리는 어떻게 배출하나요?",
-        "페트병의 라벨과 뚜껑은 어떻게 배출하나요?",
-        "이물질이 묻어 있는 스티로폼은 재활용이 가능한가요?",
-        "재활용 표시가 없는 1회용 봉투, 에어캡(뽁뽁이), 세탁소 비닐 등도 재활용이 가능한가요?",
-        "감기 시럽, 소화제, 병원 처방 받은 가루약 등 의약품은 어떻게 배출하나요?"
+            "핸드 타월은 어떻게 배출하나요?",
+            "깨진 유리는 어떻게 배출하나요?",
+            "페트병의 라벨과 뚜껑은 어떻게 배출하나요?",
+            "이물질이 묻어 있는 스티로폼은 재활용이 가능한가요?",
+            "재활용 표시가 없는 1회용 봉투, 에어캡(뽁뽁이), 세탁소 비닐 등도 재활용이 가능한가요?",
+            "감기 시럽, 소화제, 병원 처방 받은 가루약 등 의약품은 어떻게 배출하나요?"
     )
 
 
     override fun onCreateView(inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
     ): View? {
 
         _binding = EcoboxFragmentRecycleGuideBinding.inflate(inflater, container, false)
@@ -105,6 +106,16 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
     inner class FaqRecyclerAdapter : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
 
+
+        // Item의 클릭 상태를 저장할 array 객체
+        private val selectedItems: SparseBooleanArray = SparseBooleanArray()
+
+        // 직전에 클릭됐던 Item의 position
+        private var prePosition = -1
+        var isExpanded: Boolean = false
+        private val position = 0
+
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqViewHolderClass {
             //항목으로 사용할 view객체 생성.
             val itemView = layoutInflater.inflate(R.layout.row_ecobox_faq, null)
@@ -112,7 +123,21 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
 
             return holder
+        }
 
+        fun onClick(view: View) {
+            Toast.makeText(view.context, "테스트", Toast.LENGTH_LONG).show()
+        }
+
+        private fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
+            // 2
+            ToggleAnimation.toggleArrow(view, isExpanded)
+            if (isExpanded) {
+                ToggleAnimation.expand(layoutExpand)
+            } else {
+                ToggleAnimation.collapse(layoutExpand)
+            }
+            return isExpanded
         }
 
         override fun onBindViewHolder(holder: FaqViewHolderClass, position: Int) {
@@ -121,6 +146,21 @@ class EcoBoxRecycleGuideFragment : Fragment() {
             holder.faqCategoryTextView.text = data_category[position]
             holder.questionTextView.text = data_question[position]
 
+            holder.itemView.setOnClickListener {
+
+                Toast.makeText(context, "토스트",Toast.LENGTH_SHORT).show()
+
+//                if (selectedItems.get(position)) { // VISIBLE -> INVISIBLE selectedItems.delete(position)
+//                    selectedItems.delete(position)
+//
+//                    layout_expand.visibility = View.GONE
+//                } else {
+//                    // INVISIBLE -> VISIBLE
+//                    selectedItems.put(position, true)
+//                    layout_expand.visibility = View.VISIBLE
+//                }
+            }
+
         }
 
 
@@ -128,15 +168,19 @@ class EcoBoxRecycleGuideFragment : Fragment() {
             return data_question.size
         }
 
-
         inner class FaqViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             val qmarkImageView = itemView.findViewById<ImageView>(R.id.qmarkImageView)
             val faqCategoryTextView = itemView.findViewById<TextView>(R.id.faqCategoryTextView)
-            val questionTextView = itemView.findViewById<TextView>(R.id.questionTextView)
+            val questionTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
+            val faqArrowDownBtn = itemView.findViewById<ImageButton>(R.id.faqArrowDownBtn)
+            val layoutExpand = itemView.findViewById<LinearLayout>(R.id.layout_expand)
 
         }
 
     }
+
 }
+
+
 

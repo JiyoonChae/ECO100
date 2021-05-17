@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:id="@+id/qmarkImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_ecobox_q_mark"
-            android:contentDescription="@string/faq_ic_description" />
+            android:contentDescription="@string/faq_ic_description"
+            app:srcCompat="@drawable/ic_ecobox_q_mark" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,34 +30,61 @@
                 android:id="@+id/faqCategoryTextView"
                 android:layout_width="@dimen/ecobox_size_256dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/mapo_peacefull"
                 android:paddingLeft="@dimen/ecobox_padding_15dp"
                 android:paddingBottom="@dimen/padding_4dp"
                 android:text="기타"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_normal"
-                android:fontFamily="@font/mapo_peacefull"/>
+                android:textSize="@dimen/text_normal" />
 
             <TextView
-                android:id="@+id/questionTextView"
+                android:id="@+id/faqQuestionTextView"
                 android:layout_width="@dimen/ecobox_size_256dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/mapo_peacefull"
                 android:paddingLeft="@dimen/ecobox_padding_15dp"
                 android:paddingBottom="@dimen/padding_4dp"
                 android:text="핸드타월 어떻게 배출하나요?"
-                android:textSize="@dimen/popup_text"
-                android:fontFamily="@font/mapo_peacefull"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_text" />
+
+            <View
+                android:layout_width="@dimen/size_280dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:background="@color/main_line_color" />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/qmark_arrow_down"
+        <ImageButton
+            android:id="@+id/faqArrowDownBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ecobox_margin_1dp"
             android:layout_marginBottom="@dimen/ecobox_margin_46dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="faq_arrow_description"
             app:srcCompat="@drawable/ic_faq_arrow_down" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1F1F1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/faqAnswerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="물기를 닦고 난 종이로 만든 핸드 타월은 종이류 수거함으로 배출합니다.
+            ※ 음식물 등 이물질이 묻어 있는 경우에는 종량제봉투로 배출합니다." />
 
     </LinearLayout>
+
 
 </LinearLayout>
