@@ -270,19 +270,8 @@ class EnrollActivity : AppCompatActivity() {
                         .addFormDataPart("contents",binding.enrollContent.text.toString())
                         .build()
 
-                val request: Request = Request.Builder()
-                    .url(getString(R.string.baseUrl)+"/board/create/image")
-                    .post(fileUploadBody)
-                    .build()
-
-                //동기 방식 : execute()
-                val imageClient = OkHttpClient.Builder()
-                    .connectTimeout(20, TimeUnit.SECONDS)
-                    .readTimeout(20, TimeUnit.SECONDS)
-                    .writeTimeout(20, TimeUnit.SECONDS)
-                    .build()
-
-                response = imageClient.newCall(request).execute()
+                response = NetworkSettings.imageClient.newCall(
+                    NetworkSettings.imageRequest("/board/create/image",fileUploadBody)).execute()
                 if (response.isSuccessful) {
                     val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
                     val intent = Intent()
