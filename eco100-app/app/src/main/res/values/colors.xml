@@ -27,4 +27,7 @@
     <!-- ecobox faq color -->
     <color name="faq_line_color">#C4C4C4</color>
 
+
+    <!-- map list line color -->
+    <color name="list_line_color">#e8e8e8</color>
 </resources>
