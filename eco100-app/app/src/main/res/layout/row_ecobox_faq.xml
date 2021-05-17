@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_32dp"
         android:layout_marginTop="@dimen/margin_20dp"
         android:layout_marginRight="@dimen/margin_32dp"
@@ -58,11 +58,11 @@
 
         <ImageButton
             android:id="@+id/faqArrowDownBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ecobox_margin_1dp"
             android:layout_marginBottom="@dimen/ecobox_margin_46dp"
-            android:background="@android:color/transparent"
+
             android:contentDescription="faq_arrow_description"
             app:srcCompat="@drawable/ic_faq_arrow_down" />
 
@@ -73,8 +73,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F1F1F1"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/amarkImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_ecobox_a_mark" />
 
         <TextView
             android:id="@+id/faqAnswerTextView"

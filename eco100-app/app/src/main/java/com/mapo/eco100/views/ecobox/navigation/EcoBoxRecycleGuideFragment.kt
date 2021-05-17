@@ -113,7 +113,6 @@ class EcoBoxRecycleGuideFragment : Fragment() {
         // 직전에 클릭됐던 Item의 position
         private var prePosition = -1
         var isExpanded: Boolean = false
-        private val position = 0
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqViewHolderClass {
@@ -121,44 +120,29 @@ class EcoBoxRecycleGuideFragment : Fragment() {
             val itemView = layoutInflater.inflate(R.layout.row_ecobox_faq, null)
             val holder = FaqViewHolderClass(itemView)
 
-
             return holder
         }
 
-        fun onClick(view: View) {
-            Toast.makeText(view.context, "테스트", Toast.LENGTH_LONG).show()
-        }
-
-        private fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
-            // 2
-            ToggleAnimation.toggleArrow(view, isExpanded)
-            if (isExpanded) {
-                ToggleAnimation.expand(layoutExpand)
-            } else {
-                ToggleAnimation.collapse(layoutExpand)
-            }
-            return isExpanded
-        }
 
         override fun onBindViewHolder(holder: FaqViewHolderClass, position: Int) {
 
             holder.qmarkImageView.setImageResource(R.drawable.ic_ecobox_q_mark)
             holder.faqCategoryTextView.text = data_category[position]
-            holder.questionTextView.text = data_question[position]
+            holder.faqQuestionTextView.text = data_question[position]
+            holder.faqArrowDownBtn.setImageResource(R.drawable.ic_faq_arrow_down)
+
 
             holder.itemView.setOnClickListener {
 
-                Toast.makeText(context, "토스트",Toast.LENGTH_SHORT).show()
+                if (selectedItems.get(position)) { // VISIBLE -> INVISIBLE
+                    selectedItems.delete(position)
 
-//                if (selectedItems.get(position)) { // VISIBLE -> INVISIBLE selectedItems.delete(position)
-//                    selectedItems.delete(position)
-//
-//                    layout_expand.visibility = View.GONE
-//                } else {
-//                    // INVISIBLE -> VISIBLE
-//                    selectedItems.put(position, true)
-//                    layout_expand.visibility = View.VISIBLE
-//                }
+                    holder.layoutExpand.visibility = View.GONE
+                } else {
+                    // INVISIBLE -> VISIBLE
+                    selectedItems.put(position, true)
+                    holder.layoutExpand.visibility = View.VISIBLE
+                }
             }
 
         }
@@ -172,9 +156,10 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
             val qmarkImageView = itemView.findViewById<ImageView>(R.id.qmarkImageView)
             val faqCategoryTextView = itemView.findViewById<TextView>(R.id.faqCategoryTextView)
-            val questionTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
+            val faqQuestionTextView = itemView.findViewById<TextView>(R.id.faqQuestionTextView)
             val faqArrowDownBtn = itemView.findViewById<ImageButton>(R.id.faqArrowDownBtn)
             val layoutExpand = itemView.findViewById<LinearLayout>(R.id.layout_expand)
+            val faqAnswerTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
 
         }
 
