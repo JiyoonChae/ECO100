@@ -66,7 +66,7 @@
 
     <!-- challenge -->
     <string name="popup_challenge_register_title">챌린지를 등록하시겠습니까?</string>
-    <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는삭제 또는 재등록만 가능합니다.</string>
+    <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는 수정만 가능합니다.</string>
 
     <!-- mypage -->
     <string name="popup_mypage_del_ask_title">글을 삭제하시겠습니까?</string>
