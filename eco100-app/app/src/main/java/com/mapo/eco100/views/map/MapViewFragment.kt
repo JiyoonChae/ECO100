@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -45,13 +44,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         bitmapDraw = resources.getDrawable(R.drawable.ic_map_ecoduck) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 112, 188, false)
 
-        return binding.root
-    }
-
-    companion object {
-        fun newInstance(): MapViewFragment {
-            return MapViewFragment()
+        binding.openList.setOnClickListener {
+            val bottomSheet = BottomSheet()
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
+
+        return binding.root
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -97,6 +95,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             .show()
 
         return false
+    }
+
+    companion object {
+        fun newInstance(): MapViewFragment {
+            return MapViewFragment()
+        }
     }
 
 }

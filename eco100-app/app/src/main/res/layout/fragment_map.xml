@@ -27,25 +27,27 @@
                 android:id="@+id/mapBtn1"
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/size_40dp"
                 android:button="@drawable/ic_map_garbage_shop"
                 android:checked="true"
-                android:text="종량제판매처" />
+                android:text="@string/map_shop" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/mapBtn2"
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/size_40dp"
                 android:button="@drawable/ic_map_zero_shop"
-                android:text="제로웨잇샵" />
+                android:text="@string/map_zero_shop" />
         </RadioGroup>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/openList"
         android:layout_width="108dp"
-        android:layout_height="26dp"
+        android:layout_height="24dp"
         android:paddingHorizontal="@dimen/padding_10dp"
+        android:paddingVertical="@dimen/padding_2dp"
         style="@style/Map.ListBtnStyle"
-        android:text="목록열기" />
+        android:text="@string/map_open_list" />
 </FrameLayout>

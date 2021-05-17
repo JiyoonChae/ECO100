@@ -103,8 +103,7 @@
                     android:top="2.5dp" />
                 <solid android:color="#1ACCCCCC" />
             </shape>
-        </item> <!-- Background -->
-
+        </item>
     </layer-list>
 </shape>
 
