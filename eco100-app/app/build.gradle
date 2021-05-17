@@ -61,11 +61,14 @@ dependencies {
     // indicator
     implementation 'me.relex:circleindicator:2.1.4'
 
+    //fileupload
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
     // google map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    // read .csv files
+    // read .xls files
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
 
     // tedpermission
