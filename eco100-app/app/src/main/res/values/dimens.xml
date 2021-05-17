@@ -42,6 +42,10 @@
     <dimen name="size_98dp">98dp</dimen>
     <dimen name="size_100dp">100dp</dimen>
     <dimen name="size_102dp">102dp</dimen>
+    <dimen name="size_104dp">104dp</dimen>
+    <dimen name="size_106dp">106dp</dimen>
+    <dimen name="size_108dp">108dp</dimen>
+    <dimen name="size_110dp">110dp</dimen>
     <dimen name="size_138dp">138dp</dimen>
     <dimen name="size_140dp">140dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
