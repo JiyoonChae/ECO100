@@ -23,7 +23,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mapo.eco100.R
+import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentMapBinding
+import com.mapo.eco100.entity.staticmodel.ZeroShop
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
     GoogleMap.OnMyLocationButtonClickListener {
@@ -51,7 +56,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
-
         return binding.root
     }
 

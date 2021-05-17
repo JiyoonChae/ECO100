@@ -44,7 +44,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/openList"
-        android:layout_width="108dp"
+        android:layout_width="@dimen/size_108dp"
         android:layout_height="@dimen/size_24dp"
         android:paddingHorizontal="@dimen/padding_10dp"
         android:paddingVertical="@dimen/padding_2dp"
