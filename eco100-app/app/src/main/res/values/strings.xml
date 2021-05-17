@@ -81,6 +81,16 @@
     <!-- img description -->
     <string name="string_value">이미지 불러오기 실패</string>
 
+    <!-- dialog description -->
+    <string name="dialog_title">Wi-Fi ERROR!!</string>
+    <string name="dialog_text">네트워크가 연결되지 않았습니다.\nWi-Fi 또는 데이터를 활성화 해주세요.</string>
+
     <!-- google map key -->
     <string name="google_map_key">AIzaSyAD0lEYAwSOvfdlZ5Mioz_SvFAq_mz0vmo</string>
+
+    <!-- kakao app key -->
+    <string name="kakao_app_key">kakao27c8e2d5025be3e8979d18947a200d88</string>
+
+    <!-- base url -->
+    <string name="base_url">http://rpinas.iptime.org:10122</string>
 </resources>

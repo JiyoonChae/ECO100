@@ -82,7 +82,7 @@
     </style>
 
     <!--Internet Connect Dialog Button Style -->
-    <style name="AlertDialog.AppCompat.BtnRightTextStyle" parent="Widget.AppCompat.Button.Borderless">
+    <style name="AlertDialog.AppCompat.BtnConfirmTextStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:fontFamily">@font/mapo_peacefull</item>
         <item name="android:background">@drawable/popup_btn_right</item>
         <item name="android:textColor">@color/popup_btn_right_text_color</item>
@@ -90,5 +90,22 @@
         <item name="android:layout_gravity">bottom</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/popup_text</item>
+    </style>
+
+    <!-- splash theme -->
+    <style name="SplashTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+        <item name="android:windowBackground">@drawable/img_test_splash_bg</item>
+    </style>
+
+    <style name="LBSMapTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>
