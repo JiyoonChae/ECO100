@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
+        android:largeHeap="true"
         android:usesCleartextTraffic="true">
         <activity android:name=".views.ecobox.RecycleGuideStyrofoamActivity"></activity>
         <activity android:name=".views.ecobox.RecycleGuideCanActivity" />
