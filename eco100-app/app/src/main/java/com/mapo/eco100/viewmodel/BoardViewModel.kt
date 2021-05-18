@@ -26,8 +26,7 @@ class BoardViewModel : ViewModel() {
         loadingLiveData.value = true
 
         viewModelScope.launch {
-            var boards:ArrayList<Boards>? = null
-            boards = try {
+            val boards: ArrayList<Boards>? = try {
                 service.boards(0)
             } catch (e: Exception) {
                 null
