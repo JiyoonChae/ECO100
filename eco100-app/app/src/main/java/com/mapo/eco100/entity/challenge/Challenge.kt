@@ -10,4 +10,4 @@ data class Challenge (
     var imageUrl: String,
     var myParticipationCnt: Int
 
-) : Serializable
+)

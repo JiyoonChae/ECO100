@@ -51,7 +51,7 @@ class ChallengeFragment : Fragment() {
 
         val service: ChallengeService =
             NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-        service.challengeList().enqueue(object : Callback<ChallengeList>{
+        service.challengeList(1).enqueue(object : Callback<ChallengeList>{
             override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
                 Log.d(tag, " 실패 --------------", null)
             }
@@ -105,11 +105,11 @@ class ChallengeFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             val challenge = challengeList?.get(position)
-            holder.rowImageView.setImageResource(imgRes[position])
-            holder.rowTextView.text = data1[position]
-            holder.rowStamp1.setImageResource(R.drawable.icon_challenge_nonsucced)
-            holder.rowStamp2.setImageResource(R.drawable.icon_challenge_succed)
-            //holder.setChallenge(challenge)
+//            holder.rowImageView.setImageResource(imgRes[position])
+//            holder.rowTextView.text = data1[position]
+//            holder.rowStamp1.setImageResource(R.drawable.icon_challenge_nonsucced)
+//            holder.rowStamp2.setImageResource(R.drawable.icon_challenge_succed)
+            holder.setChallenge(challenge)
         }
 
         override fun getItemCount(): Int {

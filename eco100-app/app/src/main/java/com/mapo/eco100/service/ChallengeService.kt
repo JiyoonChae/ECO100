@@ -8,6 +8,6 @@ import retrofit2.http.Path
 
 interface ChallengeService {
 
-    @GET("challenge/{1}")
-    fun challengeList() : Call<ChallengeList>
+    @GET("challenge/{userId}")
+    fun challengeList( @Path("userId") id: Long) : Call<ChallengeList>
 }

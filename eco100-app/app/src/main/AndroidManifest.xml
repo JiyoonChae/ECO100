@@ -23,7 +23,6 @@
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".MainActivity"/>
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -33,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".views.community.EnrollActivity"/>
         <activity android:name=".views.community.ShowBoardActivity"/>
         <activity android:name=".views.community.WriteChallenge"/>

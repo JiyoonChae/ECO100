@@ -11,10 +11,19 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.mapo.eco100.R
+import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityWriteChallengeBinding
 import com.mapo.eco100.databinding.RowChallengeBinding
+import com.mapo.eco100.entity.challenge.Challenge
+import com.mapo.eco100.entity.challenge.ChallengeList
+import com.mapo.eco100.service.ChallengeService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 import java.text.SimpleDateFormat
 
@@ -35,13 +44,30 @@ class WriteChallenge : BaseActivity() {
 
         //외부 저장소 권한 요청
         requirePermissions(arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),PERM_STORAGE)
-        
+
+        //해당 챌린지 아이콘 이미지 불러오기......
+        val service: ChallengeService =
+            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
+            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+                Log.d("tag", " 실패 --------------", null)
+            }
+
+            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
+                val result = response.body() as ChallengeList
+                val challenge = result?.get(0)
+                Glide.with(binding.iconChallenge).load(challenge.imageUrl).into(binding.iconChallenge)
+            }
+        })
+
         //클릭한 챌린지 리스트에있는 주제를 받아서 출력하기
         val item = intent.extras?.get("item") as String
-        binding.textView.setText(item) 
+        binding.textView.setText(item)
 
+        //완료 버튼 클릭 시 실행
         binding.challengeFinish.setOnClickListener {
             //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기 > 데이터전송함수만들어서 호출
+
             //돌아가서 스티커 이미지 변경시키기.
             binding2.rowStamp1.setImageResource(R.drawable.emoji)
             var bundle = Bundle()
