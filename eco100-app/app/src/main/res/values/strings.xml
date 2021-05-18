@@ -110,6 +110,4 @@
     <!-- kakao app key -->
     <string name="kakao_app_key">kakao27c8e2d5025be3e8979d18947a200d88</string>
 
-    <!-- base url -->
-    <string name="base_url">http://rpinas.iptime.org:10122</string>
 </resources>
