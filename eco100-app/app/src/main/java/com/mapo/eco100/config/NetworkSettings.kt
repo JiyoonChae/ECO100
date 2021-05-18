@@ -1,12 +1,10 @@
 package com.mapo.eco100.config
 
 import android.content.Context
-import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
-import com.mapo.eco100.R
 import com.mapo.eco100.views.network.NoConnectedDialog
 import okhttp3.*
 import retrofit2.Retrofit
@@ -24,7 +22,7 @@ object NetworkSettings {
     init {
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(this.baseUrl)
 
         client = OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -82,10 +80,10 @@ object NetworkSettings {
         }
     }
 
-    fun NoInternetConnectedCallback(context: Context) {
+    fun noInternetConnectedCallback(context: Context) {
         if (!isNetworkAvailable(context)) {
             Toast.makeText(
-                context, "네트워크가 연결되지 않았습니다.\nWi-Fi또는 데이터를 활성화 해주세요.", Toast.LENGTH_SHORT
+                context, "네트워크가 연결되지 않았습니다.\nWi-Fi 또는 데이터를 활성화 해주세요.", Toast.LENGTH_SHORT
             ).show()
             val dialog = NoConnectedDialog(context)
             dialog.show()
