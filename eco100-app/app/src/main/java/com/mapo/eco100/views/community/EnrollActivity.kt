@@ -188,9 +188,7 @@ class EnrollActivity : AppCompatActivity() {
                 response: Response<Boards>
             ) {
                 if (response.isSuccessful) {
-                    val intent = Intent()
-                    intent.putExtra("created_board", response.body()!!)
-                    setResult(RESULT_OK, intent)
+                    setResult(RESULT_OK)
                 }
                 finish()
             }
@@ -273,10 +271,10 @@ class EnrollActivity : AppCompatActivity() {
                 response = NetworkSettings.imageClient.newCall(
                     NetworkSettings.imageRequest("/board/create/image",fileUploadBody)).execute()
                 if (response.isSuccessful) {
-                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
-                    val intent = Intent()
-                    intent.putExtra("created_board", board)
-                    setResult(RESULT_OK, intent)
+//                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
+//                    val intent = Intent()
+//                    intent.putExtra("created_board", board)
+                    setResult(RESULT_OK)
                     finish()
                 } else {
                     Toast.makeText(this,"전송 실패",Toast.LENGTH_SHORT).show()

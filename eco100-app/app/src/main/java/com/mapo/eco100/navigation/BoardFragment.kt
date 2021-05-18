@@ -226,8 +226,8 @@ class BoardFragment : Fragment() {
         when (requestCode) {
             BOARD_ENROLL -> {
                 Toast.makeText(mainActivityContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
-                val responseBoard: Boards = data!!.getSerializableExtra("created_board") as Boards
-                boardAdapter.addRecentBoard(responseBoard)
+                viewModel.fetchBoards()
+                boardAdapter.refreshBoards(viewModel.boardsLiveData.value!!)
             }
         }
     }

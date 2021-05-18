@@ -21,11 +21,6 @@ class BoardAdapter(
         notifyDataSetChanged()
     }
 
-    fun addRecentBoard(item: Boards) {
-        boards.add(0, item)
-        notifyDataSetChanged()
-    }
-
     fun sortByRecent() {
         boards.sortByDescending { it.board_id }
         notifyDataSetChanged()

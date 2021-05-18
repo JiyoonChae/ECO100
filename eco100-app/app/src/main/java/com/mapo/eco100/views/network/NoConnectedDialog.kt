@@ -4,7 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
-import com.mapo.eco100.config.NetworkSettings.NoInternetConnectedCallback
+import com.mapo.eco100.config.NetworkSettings.noInternetConnectedCallback
 import com.mapo.eco100.databinding.ActivityNoConnectedDialogBinding
 
 class NoConnectedDialog(
@@ -20,7 +20,7 @@ class NoConnectedDialog(
         setContentView(binding.root)
 
         binding.okBtn.setOnClickListener {
-            NoInternetConnectedCallback(_context)
+            noInternetConnectedCallback(_context)
             dismiss()
         }
     }
