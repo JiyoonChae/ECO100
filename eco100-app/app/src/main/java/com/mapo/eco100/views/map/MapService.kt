@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface MapService {
 
-    @GET("shop")
-    fun getZeroShopList() : Call<ZeroShop>
+    @GET("shops")
+    fun getZeroShopList() : Call<ArrayList<ZeroShop>>
 }

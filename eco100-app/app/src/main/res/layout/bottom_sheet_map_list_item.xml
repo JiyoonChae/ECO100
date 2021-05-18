@@ -25,13 +25,6 @@
             android:text="@string/map_list_shop_name_ex" />
 
         <TextView
-            android:id="@+id/shopDescription"
-            style="@style/Map.BottomSheetListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/map_list_shop_description_ex" />
-
-        <TextView
             android:id="@+id/shopAddress"
             style="@style/Map.BottomSheetListText"
             android:layout_width="match_parent"

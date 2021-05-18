@@ -2,6 +2,7 @@ package com.mapo.eco100.views.map
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class BottomSheet : BottomSheetDialogFragment() {
     private var _binding: BottomSheetMapListBinding? = null
     private val binding get() = _binding!!
     private lateinit var shopListAdapter: MapListAdapter
-    private lateinit var listData: MutableList<ShopData>
+    private lateinit var listData: MutableList<ZeroShop>
     private lateinit var mainActivityContext: Context
 
     override fun onCreateView(
@@ -33,54 +34,53 @@ class BottomSheet : BottomSheetDialogFragment() {
 
         shopListAdapter = MapListAdapter(this)
         binding.shopList.adapter = shopListAdapter
-        getZeroShopList()
-        //getListTest()
+        //getZeroShopList()
+        getListTest()
         return binding.root
     }
 
 
-    private fun getListTest(){
-            println("response!! >> getListTest()")
-             val service : MapService = NetworkSettings.retrofit.build().create(MapService::class.java)
-             println("response!! >> $service")
-             service.getZeroShopList().enqueue(object : Callback<ZeroShop> {
-                 override fun onResponse(call: Call<ZeroShop>, response: Response<ZeroShop>) {
-                     if (response.isSuccessful) {
-                         println("response!! >> ${response.body()}")
-                     }
-                 }
-
-                 override fun onFailure(call: Call<ZeroShop>, t: Throwable) {
-                     println("response!! >> ${t.message}")
-                 }
-             })
-    }
-
-    private fun getZeroShopList() {
-
+    private fun getListTest() {
+        println("response!! >> getListTest()")
         listData = mutableListOf()
-        listData.apply {
-            add(ShopData("알맹상점", "서울특별시 마포구 월드컵로 49 2층 알맹상점", "껍데기는 가라! 알맹이만 오라! 리필스테이션"))
-            add(ShopData("디어얼스", "서울특별시 서대문구 수색로 43 104호", "Earth-friendly from beginning to end!"))
-            add(ShopData("타이거릴리", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            add(ShopData("더피커", "서울특별시 마포구 월드컵로 49 2층 알맹상점", "껍데기는 가라! 알맹이만 오라! 리필스테이션"))
-            add(ShopData("송포어스", "서울특별시 서대문구 수색로 43 104호", "Earth-friendly from beginning to end!"))
-            add(ShopData("동그라미리필러리", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            add(ShopData("유민얼랏", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            add(ShopData("알맹상점", "서울특별시 마포구 월드컵로 49 2층 알맹상점", "껍데기는 가라! 알맹이만 오라! 리필스테이션"))
-            add(ShopData("디어얼스", "서울특별시 서대문구 수색로 43 104호", "Earth-friendly from beginning to end!"))
-            add(ShopData("타이거릴리", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            add(ShopData("더피커", "서울특별시 마포구 월드컵로 49 2층 알맹상점", "껍데기는 가라! 알맹이만 오라! 리필스테이션"))
-            add(ShopData("송포어스", "서울특별시 서대문구 수색로 43 104호", "Earth-friendly from beginning to end!"))
-            add(ShopData("동그라미리필러리", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            add(ShopData("유민얼랏", "서울특별시마포구 포은로 119 1층", "낭비 없는 사회를 꿈꾸는 비건 제로 웨이스트샵"))
-            shopListAdapter.listData = listData
-            shopListAdapter.notifyDataSetChanged()
-        }
+        val service: MapService = NetworkSettings.retrofit.build().create(MapService::class.java)
+        service.getZeroShopList().enqueue(object : Callback<ArrayList<ZeroShop>> {
+            override fun onResponse(
+                call: Call<ArrayList<ZeroShop>>,
+                response: Response<ArrayList<ZeroShop>>
+            ) {
+                if (response.isSuccessful) {
+                    println("response >> Success!!")
+                    println("response.body >> ${response.body()}")
+                    val resultList: ArrayList<ZeroShop>? = response.body()
+                    println("result >> ")
+                    println("result >> ${resultList?.size}")
+                    resultList?.forEach { it ->
+                        listData.add(
+                            ZeroShop(
+                                it.id,
+                                it.name,
+                                it.address,
+                                it.phoneNum,
+                                it.runningInfo,
+                                it.webUrl,
+                                it.latitude,
+                                it.longitude,
+                                it.imgUrl,
+                                it.logoUrl
+                            )
+                        )
+                    }
+                    shopListAdapter.listData = listData
+                    shopListAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<ZeroShop>>, t: Throwable) {
+
+                println("response!! >> ${t.message}")
+            }
+        })
     }
 
-    /* override fun onActivityCreated(savedInstanceState: Bundle?) {
-         super.onActivityCreated(savedInstanceState)
-         view?.findViewById<AppCompatButton>(R.id.)
-     }*/
 }
