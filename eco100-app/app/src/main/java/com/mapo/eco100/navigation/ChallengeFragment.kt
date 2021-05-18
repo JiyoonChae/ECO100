@@ -1,5 +1,6 @@
 package com.mapo.eco100.navigation
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -86,12 +89,21 @@ class ChallengeFragment : Fragment() {
 
             holder.rowStamp1.setOnClickListener {
                 Log.d("click", "clicked!!")
-                //글쓰기 화면 띄우기
-                val intent = Intent(activity, WriteChallenge::class.java)
-                //선택한 주제 전달
-                intent.putExtra("item", holder.rowTextView.text)
+                val builder = AlertDialog.Builder(mainActivityContext)
+                val custom_view= layoutInflater.inflate(R.layout.popup_write_challenge, null)
+                builder.setView(custom_view)
+                val mAlertDialog  = builder.show()
+                val ok = custom_view.findViewById<Button>(R.id.challenge_popup_ok)
+                ok.setOnClickListener {
+                    //글쓰기 화면 띄우기
+                    val intent = Intent(activity, WriteChallenge::class.java)
+                    //선택한 주제 전달
+                    intent.putExtra("item", holder.rowTextView.text)
+                    startActivity(intent)
+                }
+                val cancel =custom_view.findViewById<Button>(R.id.challenge_popup_cancel)
+                cancel.setOnClickListener { mAlertDialog.dismiss() }
 
-                startActivity(intent)
             }
 
             holder.rowStamp2.setOnClickListener {
@@ -153,3 +165,4 @@ class ChallengeFragment : Fragment() {
     }
 
 }
+

@@ -47,8 +47,8 @@ class WriteChallenge : BaseActivity() {
     val REQ_CAMERA =101 //카메라 촬영 요청
     val REQ_STORAGE =102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
-    private var imageUri : String? = null
-    private var fileLocation = realUri.toString()
+
+
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
     val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
@@ -189,7 +189,12 @@ class WriteChallenge : BaseActivity() {
                         val bitmap = loadBitmap(uri)
                         binding.challengeWriteImage.setImageBitmap(bitmap)
 
-                        realUri = uri
+                        if(findImageFileNameFromUri(uri)) {
+                            Log.d("PICK_FROM_GALLERY","갤러리에서 절대주소 Pick 성공")
+                        } else {
+                        Log.d("PICK_FROM_GALLERY","갤러리에서 절대주소 Pick 실패")
+                    }
+                        realUri = null
                     }
 
 
@@ -253,7 +258,31 @@ class WriteChallenge : BaseActivity() {
         }.start()
     }
 
-
-
+    private var fileLocation = realUri.toString()
+    //이미지 주소를 절대경로로 바꾸기
+    private fun findImageFileNameFromUri(tempUri:Uri) : Boolean {
+        var flag = false
+        val IMAGE_DB_COLUMN = arrayOf(MediaStore.Images.ImageColumns.DATA)
+        var cursor : Cursor? = null
+        try {
+            val imagePK = ContentUris.parseId(tempUri).toString()
+            cursor = contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                IMAGE_DB_COLUMN,
+                MediaStore.Images.Media._ID + "=?", arrayOf(imagePK), null,null)
+            if(cursor!!.count > 0) {
+                cursor.moveToFirst()
+                fileLocation = cursor.getString(
+                    cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                )
+                flag = true
+            }
+        } catch (sqle: SQLiteException) {
+            Log.d("findImage...",sqle.toString(),sqle)
+        } finally {
+            cursor?.close()
+        }
+        return flag
+    }
 
 }
