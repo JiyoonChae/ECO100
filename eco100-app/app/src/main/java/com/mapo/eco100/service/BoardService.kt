@@ -1,9 +1,6 @@
 package com.mapo.eco100.service
 
-import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.entity.board.BoardModifyForm
-import com.mapo.eco100.entity.board.BoardWriteForm
-import com.mapo.eco100.entity.board.Boards
+import com.mapo.eco100.entity.board.*
 import com.mapo.eco100.entity.likes.LikesRequestDto
 import retrofit2.Call
 import retrofit2.http.*
@@ -14,9 +11,10 @@ interface BoardService {
         @Body boardWriteForm: BoardWriteForm
     ) : Call<Boards>
 
-    @GET("board/read/{id}")
+    @GET("board/read/{boardId}/{userId}")
     fun read(
-        @Path("id") id: Long
+        @Path("boardId") boardId: Long,
+        @Path("userId") userId: Long
     ) : Call<BoardReadForm>
 
     @GET("board/{current}")

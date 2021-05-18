@@ -63,11 +63,12 @@ class BoardFragment : Fragment() {
                 } else {
                     val service: BoardService =
                         NetworkSettings.retrofit.build().create(BoardService::class.java)
-                    service.read(board_data.board_id).enqueue(object : Callback<BoardReadForm> {
+                    service.read(board_data.board_id,1).enqueue(object : Callback<BoardReadForm> {
                         override fun onResponse(
                             call: Call<BoardReadForm>,
                             response: Response<BoardReadForm>
                         ) {
+
                             val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
                             intent.putExtra("board_data", response.body()!!)
                             startActivityForResult(intent, BOARD_CLICK)

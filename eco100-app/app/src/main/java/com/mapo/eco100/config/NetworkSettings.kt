@@ -53,6 +53,7 @@ object NetworkSettings {
             var limit = 2
             while (!response.isSuccessful && cnt < limit) {
                 cnt++
+                response.close()
                 response = chain.proceed(request)
             }
             return response
