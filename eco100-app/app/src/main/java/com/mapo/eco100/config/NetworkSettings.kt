@@ -16,14 +16,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkSettings {
 
-    var client: OkHttpClient
+    val baseUrl = "http://rpinas.iptime.org:10122"
+    var client: OkHttpClient.Builder
+    var imageClient: OkHttpClient
     var retrofit : Retrofit.Builder
         private set
 
     init {
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://rpinas.iptime.org:10122")
+            .baseUrl(this.baseUrl)
 
         client = OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -32,9 +34,15 @@ object NetworkSettings {
                     .addHeader("Authorization", "Bearer ")
                     .build()
                 chain.proceed(newRequest)
-            }.addInterceptor(RetryInterceptor()).build()
+            }.addInterceptor(RetryInterceptor())
 
-        retrofit.client(client)
+        imageClient = client
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+            .build()
+
+        retrofit.client(client.build())
     }
 
     private class RetryInterceptor : Interceptor {
@@ -49,7 +57,6 @@ object NetworkSettings {
                 response.close()
                 response = chain.proceed(request)
             }
-
             return response
         }
     }
@@ -76,10 +83,10 @@ object NetworkSettings {
         }
     }
 
-    fun NoInternetConnectedCallback(context: Context) {
+    fun noInternetConnectedCallback(context: Context) {
         if (!isNetworkAvailable(context)) {
             Toast.makeText(
-                context, "네트워크가 연결되지 않았습니다.\nWi-Fi또는 데이터를 활성화 해주세요.", Toast.LENGTH_SHORT
+                context, "네트워크가 연결되지 않았습니다.\nWi-Fi 또는 데이터를 활성화 해주세요.", Toast.LENGTH_SHORT
             ).show()
             val dialog = NoConnectedDialog(context)
             dialog.show()
@@ -87,4 +94,10 @@ object NetworkSettings {
             Toast.makeText(context, "네트워크가 연결되었습니다.\n다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun imageRequest(additionalUrl:String, requestBody: RequestBody) = Request.Builder()
+        .addHeader("Authorization", "Bearer ")
+        .url(baseUrl+additionalUrl)
+        .post(requestBody)
+        .build()
 }

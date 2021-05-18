@@ -7,7 +7,16 @@
     <dimen name="size_4dp">4dp</dimen>
     <dimen name="size_8dp">8dp</dimen>
     <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_12dp">12dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
     <dimen name="size_16dp">16dp</dimen>
+    <dimen name="size_18dp">18dp</dimen>
+    <dimen name="size_20dp">20dp</dimen>
+    <dimen name="size_22dp">22dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_26dp">26dp</dimen>
+    <dimen name="size_28dp">28dp</dimen>
+    <dimen name="size_30dp">30dp</dimen>
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_35dp">35dp</dimen>
     <dimen name="size_36dp">36dp</dimen>
@@ -16,6 +25,8 @@
     <dimen name="size_42dp">42dp</dimen>
     <dimen name="size_45dp">45dp</dimen>
     <dimen name="size_48dp">48dp</dimen>
+    <dimen name="size_50dp">50dp</dimen>
+    <dimen name="size_52dp">52dp</dimen>
     <dimen name="size_54dp">54dp</dimen>
     <dimen name="size_60dp">60dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
@@ -27,7 +38,17 @@
     <dimen name="size_90dp">90dp</dimen>
     <dimen name="size_92dp">92dp</dimen>
     <dimen name="size_94dp">94dp</dimen>
+    <dimen name="size_96dp">96dp</dimen>
+    <dimen name="size_98dp">98dp</dimen>
+    <dimen name="size_100dp">100dp</dimen>
+    <dimen name="size_102dp">102dp</dimen>
+    <dimen name="size_104dp">104dp</dimen>
+    <dimen name="size_106dp">106dp</dimen>
+    <dimen name="size_108dp">108dp</dimen>
+    <dimen name="size_110dp">110dp</dimen>
     <dimen name="size_138dp">138dp</dimen>
+    <dimen name="size_140dp">140dp</dimen>
+    <dimen name="size_160dp">160dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="size_280dp">280dp</dimen>
@@ -46,6 +67,8 @@
     <dimen name="popup_title">19sp</dimen>
     <dimen name="home_dialog_text">20sp</dimen>
     <dimen name="home_dialog_title">22sp</dimen>
+    <dimen name="map_list_title">16sp</dimen>
+    <dimen name="map_list_text">16sp</dimen>
 
     <!-- padding -->
     <dimen name="padding_2dp">2dp</dimen>
@@ -67,6 +90,7 @@
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_22dp">22dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>

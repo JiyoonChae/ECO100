@@ -23,6 +23,9 @@
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -46,10 +49,9 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="kakao27c8e2d5025be3e8979d18947a200d88" />
+                    android:scheme="@string/kakao_app_key" />
             </intent-filter>
         </activity>
-
         <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
