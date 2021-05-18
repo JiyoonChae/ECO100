@@ -2,45 +2,93 @@ package com.mapo.eco100.views.community
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mapo.eco100.adapter.CommentAdapter
+import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityShowBoardBinding
 import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.viewmodel.CommentViewModel
+import com.mapo.eco100.entity.comment.CommentRequest
+import com.mapo.eco100.service.CommentService
+import com.mapo.eco100.viewmodel.ShowBoardViewModel
+import com.mapo.eco100.views.network.NoConnectedDialog
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ShowBoardActivity : AppCompatActivity() {
 
-    private val viewModel: CommentViewModel by viewModels()
+    private val viewModel: ShowBoardViewModel by viewModels()
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var binding: ActivityShowBoardBinding
+    private lateinit var boardData: BoardReadForm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityShowBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val board : BoardReadForm = intent.getSerializableExtra("board_data") as BoardReadForm
-        board?.let {
-            binding.boardTitle.text = it.title
-            binding.boardContents.text = it.contents
-            it.image_url?.let { url_string ->
-                Glide.with(this)
+        boardData = intent.getSerializableExtra("board_data") as BoardReadForm
+        boardData.apply {
+            binding.boardTitle.text = title
+            binding.boardContents.text = contents
+            image_url?.let { url_string ->
+                Glide.with(this@ShowBoardActivity)
                     .load(url_string.toUri())
                     .override(1440,1440)
                     .into(binding.imageView2)
             }
-            binding.boardWriter.text = it.user_nickname
+            binding.boardWriter.text = user_nickname
+            binding.numofComments.text = "댓글 수 : $comments_cnt"
+            binding.numofLikes.text = "좋아요 수 : $likes_cnt"
+            commentAdapter = CommentAdapter(comments)
+
         }
         binding.backBtn.setOnClickListener {
             finish()
         }
+        binding.sendLikes.setOnClickListener {
+            if (!NetworkSettings.isNetworkAvailable(this)) {
+                val dialog = NoConnectedDialog(this)
+                dialog.show()
+            } else {
+                val service: CommentService = NetworkSettings.retrofit.build().create(CommentService::class.java)
+                service.write(CommentRequest(boardData.board_id,binding.commentEditText.text.toString(),1))
+            }
+        }
 
-        commentAdapter = CommentAdapter()
+        binding.sendComment.setOnClickListener {
+            if (!NetworkSettings.isNetworkAvailable(this)) {
+                val dialog = NoConnectedDialog(this)
+                dialog.show()
+            } else {
+                if(binding.commentEditText.text.toString() != "") {
+                    val service: CommentService = NetworkSettings.retrofit.build().create(CommentService::class.java)
+                    service.write(CommentRequest(boardData.board_id,binding.commentEditText.text.toString(),1))
+                        .enqueue(object : Callback<Void> {
+                            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                                if(response.isSuccessful) {
+                                    Toast.makeText(this@ShowBoardActivity,"댓글을 등록하였습니다.",Toast.LENGTH_SHORT).show()
+                                    binding.commentEditText.text.clear()
+
+                                    viewModel.fetchComments(boardData.board_id)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Void>, t: Throwable) {
+                                Toast.makeText(this@ShowBoardActivity,"댓글 전송에 실패하였습니다.",Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                } else {
+                    Toast.makeText(this@ShowBoardActivity,"댓글을 입력해 주세요.",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         binding.commentsRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 this@ShowBoardActivity,
@@ -55,10 +103,11 @@ class ShowBoardActivity : AppCompatActivity() {
             adapter = commentAdapter
         }
 
-//        viewModel.apply {
-//            commentsLiveData.observe(this@ShowBoardActivity, Observer {
-//                //commentAdapter.updateBoards(it)
-//            })
-//        }
+        viewModel.apply {
+            commentsLiveData.observe(this@ShowBoardActivity, {
+                commentAdapter.updateComments(it)
+//                binding.numofComments.text = "댓글 수 : ${++boardData.comments_cnt}"
+            })
+        }
     }
 }
