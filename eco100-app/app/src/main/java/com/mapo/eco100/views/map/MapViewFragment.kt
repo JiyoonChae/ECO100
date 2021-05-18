@@ -1,7 +1,6 @@
 package com.mapo.eco100.views.map
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.Location
@@ -10,18 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentMapBinding
@@ -31,65 +26,112 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
-    GoogleMap.OnMyLocationButtonClickListener {
+    GoogleMap.OnMyLocationButtonClickListener{
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
     private lateinit var bitmapDraw: BitmapDrawable
     private lateinit var bitmap: Bitmap
+    private lateinit var listData: ArrayList<ZeroShop>
+    private lateinit var gMap: GoogleMap
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
 
+        _binding = FragmentMapBinding.inflate(inflater, container, false)
+        listData = ArrayList()
+        // radioBtn
+        binding.mapShopBtn.isChecked = true
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+
+            println("mapCheckedId >> $checkedId")
+            when (checkedId) {
+                R.id.mapShopBtn -> {
+                    println("mapCheckedId >> 종량제")
+
+                }
+                R.id.mapZeroBtn -> {
+                    println("mapCheckedId >> 제로웨잇")
+                    getZeroWasteShopList()
+                }
+                else -> {
+                    println("mapCheckedId >> $checkedId")
+                }
+            }
+        }
+
+        // map
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         bitmapDraw = resources.getDrawable(R.drawable.ic_map_ecoduck) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 112, 188, false)
 
+
+        // list
         binding.openList.setOnClickListener {
             val bottomSheet = BottomSheet()
             bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
+
         return binding.root
     }
 
+    // getZeroWasteShopList
+    private fun getZeroWasteShopList() {
+        println("response!! >> getListTest()")
+        val service: MapService = NetworkSettings.retrofit.build().create(MapService::class.java)
+        service.getZeroShopList().enqueue(object : Callback<ArrayList<ZeroShop>> {
+            override fun onResponse(
+                call: Call<ArrayList<ZeroShop>>,
+                response: Response<ArrayList<ZeroShop>>
+            ) {
+                if (response.isSuccessful) {
+                    val resultList: ArrayList<ZeroShop>? = response.body()
+                    println("result >> ${resultList?.size}")
+                    resultList?.forEach { it ->
+                        listData.add(
+                            ZeroShop(
+                                it.id,
+                                it.name,
+                                it.address,
+                                it.phoneNum,
+                                it.runningInfo,
+                                it.webUrl,
+                                it.latitude,
+                                it.longitude,
+                                it.imgUrl,
+                                it.logoUrl
+                            )
+                        )
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<ZeroShop>>, t: Throwable) {
+                println("response!! >> ${t.message}")
+            }
+        })
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
-        val myLocation = LatLng(37.564009984338014, 126.90923531625434)
-        val initCam: CameraPosition = CameraPosition.builder().target(myLocation).zoom(15f).build()
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initCam))
 
-        if (ActivityCompat.checkSelfPermission(
-                binding.root.context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                binding.root.context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
+        gMap = googleMap
+
+        listData.forEach {
+            val markerOptions = MarkerOptions()
+            markerOptions.position(LatLng(it.latitude.toDouble(), it.longitude.toDouble()))
+                .title(it.name)
+            gMap.addMarker(markerOptions)
         }
-        googleMap.isMyLocationEnabled = true
 
-        googleMap.addMarker(
-            MarkerOptions().position(myLocation).title("회사").snippet("돈버는 곳").icon(
-                BitmapDescriptorFactory.fromBitmap(bitmap)
-            )
-        )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10f))
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.52487, 126.92723)))
+
+
     }
 
     override fun onMyLocationClick(location: Location) {
@@ -109,5 +151,4 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             return MapViewFragment()
         }
     }
-
 }

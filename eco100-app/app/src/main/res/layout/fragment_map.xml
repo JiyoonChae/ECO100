@@ -24,7 +24,7 @@
             android:paddingTop="@dimen/padding_10dp">
 
             <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/mapBtn1"
+                android:id="@+id/mapShopBtn"
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40dp"
@@ -33,7 +33,7 @@
                 android:text="@string/map_shop" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/mapBtn2"
+                android:id="@+id/mapZeroBtn"
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40dp"
@@ -44,10 +44,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/openList"
+        style="@style/Map.ListBtnStyle"
         android:layout_width="@dimen/size_108dp"
         android:layout_height="@dimen/size_24dp"
         android:paddingHorizontal="@dimen/padding_10dp"
         android:paddingVertical="@dimen/padding_2dp"
-        style="@style/Map.ListBtnStyle"
         android:text="@string/map_open_list" />
 </FrameLayout>
