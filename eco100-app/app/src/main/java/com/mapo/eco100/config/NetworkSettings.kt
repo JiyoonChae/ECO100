@@ -8,11 +8,10 @@ import android.os.Build
 import android.widget.Toast
 import com.mapo.eco100.R
 import com.mapo.eco100.views.network.NoConnectedDialog
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object NetworkSettings {
 

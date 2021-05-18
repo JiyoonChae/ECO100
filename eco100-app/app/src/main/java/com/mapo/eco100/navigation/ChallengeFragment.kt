@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
+import com.mapo.eco100.databinding.RowChallengeBinding
 import com.mapo.eco100.entity.challenge.Challenge
 import com.mapo.eco100.entity.challenge.ChallengeList
 import com.mapo.eco100.service.BoardService
@@ -139,6 +140,15 @@ class ChallengeFragment : Fragment() {
 
         }
 
+
+    }
+    val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //resultCode가 오면 if(resultCode == ) 버튼 바꿔라~이런식으로 쓰면됨
+        binding2.rowStamp1.setImageResource(R.drawable.emoji)
+//        var bundle = Bundle()
+//        bundle.putString("key", "미션 완료!")
 
     }
 
