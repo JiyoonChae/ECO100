@@ -44,7 +44,6 @@ class EnrollActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnrollBinding
     private lateinit var myImageDir: File
 
-    private var imageUri : String? = null
     private var fileLocation = ""
 
     private lateinit var boardService : BoardService
@@ -54,6 +53,7 @@ class EnrollActivity : AppCompatActivity() {
         binding = ActivityEnrollBinding.inflate(layoutInflater)
         setContentView(binding.root)
         boardService = NetworkSettings.retrofit.build().create(BoardService::class.java)
+        binding.enrollImage.setImageResource(R.drawable.ic_community_40dp)
 
         binding.enrollImage.setOnClickListener {
             when {
@@ -88,7 +88,6 @@ class EnrollActivity : AppCompatActivity() {
             }
         }
         binding.imageDelete.setOnClickListener {
-            imageUri = null
             fileLocation = ""
             binding.enrollImage.setImageResource(R.drawable.ic_community_40dp)
         }
@@ -137,7 +136,6 @@ class EnrollActivity : AppCompatActivity() {
                 val selectedImageUri: Uri? = data?.data
                 if (selectedImageUri != null) {
                     binding.enrollImage.setImageURI(selectedImageUri)
-                    imageUri = selectedImageUri.toString()
                     if(findImageFileNameFromUri(selectedImageUri)) {
                         Log.d("PICK_FROM_GALLERY","갤러리에서 절대주소 Pick 성공")
                     } else {
