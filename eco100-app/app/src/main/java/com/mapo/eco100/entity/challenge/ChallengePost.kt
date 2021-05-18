@@ -1,5 +1,6 @@
 package com.mapo.eco100.entity.challenge
 
+import java.io.Serializable
 import java.sql.Date
 import java.util.*
 
@@ -11,4 +12,4 @@ data class ChallengePost (
     val contents : String,
     val challenge_id:Long,
     val user_id:Long
-)
+) :Serializable

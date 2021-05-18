@@ -2,8 +2,11 @@ package com.mapo.eco100.views.community
 
 
 import android.app.Activity
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteException
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.media.Image
@@ -44,6 +47,8 @@ class WriteChallenge : BaseActivity() {
     val REQ_CAMERA =101 //카메라 촬영 요청
     val REQ_STORAGE =102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
+    private var imageUri : String? = null
+    private var fileLocation = realUri.toString()
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
     val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
@@ -184,8 +189,9 @@ class WriteChallenge : BaseActivity() {
                         val bitmap = loadBitmap(uri)
                         binding.challengeWriteImage.setImageBitmap(bitmap)
 
-                        realUri =null
+                        realUri = uri
                     }
+
 
                 }
                 REQ_STORAGE -> {
@@ -193,49 +199,49 @@ class WriteChallenge : BaseActivity() {
                     //(data의 data속성으로 해당 이미지의 uri가 전달)
                     data?.data?.let { uri ->
                         binding.challengeWriteImage.setImageURI(uri)
+                       realUri = uri
                     }
+
                 }
             }
     }
 
-    private var imageUri : String? = null
-    private var fileLocation = ""
+
 
     private fun fileUploadAsync() {
         Thread {
-            val uploadFile = File(fileLocation)
+            val uploadFile = File(realUri.toString())
             var response: okhttp3.Response? = null
             try {
 
                 val fileUploadBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
-                        "image",uploadFile.name,
+                        "image", realUri.toString(),
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
                     .addFormDataPart("userId","1")
+                    .addFormDataPart("challengeId", "21")
                     //.addFormDataPart("title",binding.challengeWriteImage.text.toString())
                     .addFormDataPart("contents",binding.challengeWriteContent.text.toString())
                     .build()
 
-                val request: Request = NetworkSettings.imageRequest("/challenge/create/image",fileUploadBody)
+                val request: Request = NetworkSettings.imageRequest("/challenge/create",fileUploadBody)
 
 
-                //동기 방식 : execute()
-                val imageClient = OkHttpClient.Builder()
-                    .connectTimeout(20, TimeUnit.SECONDS)
-                    .readTimeout(20, TimeUnit.SECONDS)
-                    .writeTimeout(20, TimeUnit.SECONDS)
-                    .build()
 
                 response = NetworkSettings.imageClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val challengePost = Gson().fromJson(response.body!!.string(), ChallengePost::class.java)
-                    val intent = Intent()
-                    intent.putExtra("new_challenge", challengePost)
-                    setResult(RESULT_OK, intent)
+                    Log.d("응답 결과:","성공")
+//                    val challengePost = Gson().fromJson(response.body!!.string(), ChallengePost::class.java)
+//
+//                    val intent = Intent()
+//                    intent.putExtra("new_challenge", challengePost)
+//                    setResult(RESULT_OK, intent)
+                    setResult(RESULT_OK)
                     finish()
                 } else {
+                    Log.d("응답 결과:","실패")
                     Toast.makeText(this,"전송 실패",Toast.LENGTH_SHORT).show()
                     //전송 실패
                 }
@@ -246,6 +252,8 @@ class WriteChallenge : BaseActivity() {
             }
         }.start()
     }
+
+
 
 
 }
