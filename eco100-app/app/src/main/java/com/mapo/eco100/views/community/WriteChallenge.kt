@@ -76,7 +76,7 @@ class WriteChallenge : BaseActivity() {
         //완료 버튼 클릭 시 실행
         binding.challengeFinish.setOnClickListener {
             //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기 > 데이터전송함수만들어서 호출
-
+          //  fileUploadAsync()  **************************************여기만 해결하면될듯!!
             //돌아가서 스티커 이미지 변경시키기.
             binding2.rowStamp1.setImageResource(R.drawable.emoji)
             var bundle = Bundle()
@@ -213,16 +213,17 @@ class WriteChallenge : BaseActivity() {
         Thread {
 
             val uploadFile = File(realUri.toString())
-            Log.d("File", "이 파일(디렉토리)의 절대 경로는 ${uploadFile.absolutePath}입니다.")
+            Log.d("File", "이 파일(디렉토리)의 절대 경로는 ${uploadFile.absolutePath}입니다.")  //ok
+
             var response: okhttp3.Response? = null
             try {
-                val requestFile = RequestBody.create("application/jpg".toMediaTypeOrNull(), uploadFile)
-                val body = MultipartBody.Part.createFormData("file", uploadFile.name, requestFile)
+              //  val requestFile = RequestBody.create("application/jpg".toMediaTypeOrNull(), uploadFile) //추가한거
+              //  val body = MultipartBody.Part.createFormData("file", uploadFile.name, requestFile) //여기까지 ok
 
                 val fileUploadBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
-                        "image", realUri.toString(),
+                        "image", uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
                     .addFormDataPart("userId","1")
