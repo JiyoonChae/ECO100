@@ -6,6 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/banner_board"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/banner_top_community" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/board_write_button"
         android:layout_width="wrap_content"
@@ -48,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.Toolbar
@@ -56,8 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/browser_actions_bg_grey"
-        app:layout_constraintTop_toTopOf="parent"
-
+        app:layout_constraintTop_toBottomOf="@+id/banner_board"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
