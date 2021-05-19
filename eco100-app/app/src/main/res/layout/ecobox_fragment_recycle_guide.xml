@@ -139,7 +139,7 @@
             android:autofillHints="username"
             android:backgroundTint="@color/white"
             android:ems="8"
-            android:inputType="textPersonName"
+            android:inputType="textNoSuggestions"
             android:textColor="@color/white"
             tools:ignore="LabelFor"></EditText>
 

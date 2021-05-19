@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mapo.eco100.config.LocalDataBase.Companion.search_FAQ
 import com.mapo.eco100.databinding.EcoboxFragmentRecycleGuideBinding
 import com.mapo.eco100.entity.staticmodel.FAQ
 import com.mapo.eco100.views.ecobox.*
@@ -25,11 +25,9 @@ class EcoBoxRecycleGuideFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var faqRecyclerView: RecyclerView
     internal var textlength = 0
-
-    //필터링을 위한 변수
-    var searchItemlist= arrayListOf<String>()
+    private var faqList = mutableListOf<FAQ>()
     var faqSearchList = mutableListOf<FAQ>()
-
+    var adapter = FaqRecyclerAdapter()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -38,11 +36,12 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
         _binding = EcoboxFragmentRecycleGuideBinding.inflate(inflater, container, false)
         binding.searchIc.setColorFilter(Color.WHITE)
-        var adapter = FaqRecyclerAdapter()
+
 
         faqRecyclerView = binding.ecoboxFaqRecyclerview
         faqRecyclerView.adapter = adapter
         faqRecyclerView.layoutManager = LinearLayoutManager(context)
+
 
         binding.searchEdit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(edit: Editable?) {}
@@ -50,22 +49,24 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-                search_FAQ(binding.searchEdit.toString())
+
+                faqSearchList.clear()
+
+                var strSequence = binding.searchEdit.text.toString()
+
+                for(i in adapter.faqList.indices){
+                    if(adapter.faqList[i].question.toString().contains(strSequence)||(adapter.faqList[i].answer.contains(strSequence)))
+                        faqSearchList.add(adapter.faqList[i])
+                    Log.d("faq","${adapter.faqList[i]}")
+                }
 
 
-
-//                textlength = binding.searchEdit.text.length
-//                faqSearchList.clear()
-//                var str_sequence = binding.searchEdit.text.toString()
-//                for (i in faqList.indices) {
-//                    if (faqList[i].answer.toString().contains(str_sequence) ||
-//                            faqList[i].question.toString().contains(str_sequence))
-//                        faqSearchList.add(faqList[i])
-//                }
-//                adapter = FaqRecyclerAdapter(faqSearchList)
-//                faqRecyclerView = binding.ecoboxFaqRecyclerview
-//                faqRecyclerView.adapter = adapter
+//                adapter= FaqRecyclerAdapter()
+//                faqRecyclerView.adapter=adapter
 //                faqRecyclerView.layoutManager = LinearLayoutManager(context)
+                adapter.onDataChanged(faqSearchList)
+//                adapter.notifyDataSetChanged()
+
             }
 
         })
@@ -117,6 +118,12 @@ class EcoBoxRecycleGuideFragment : Fragment() {
         return binding.root
 
     }
+
+//    fun refreshAdapter() {
+//        // 수정된 데이터를 다시 로드
+//        adapter?.onDataChanged(faqSearchList)
+//        adapter?.notifyDataSetChanged()
+//    }
 
     companion object {
         fun newInstance(): EcoBoxRecycleGuideFragment {

@@ -19,7 +19,6 @@ class FaqRecyclerAdapter: RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderC
     private val selectedItems: SparseBooleanArray = SparseBooleanArray()
     var faqList = FAQ_list
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqViewHolderClass {
         //항목으로 사용할 view객체 생성.
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_ecobox_faq, parent, false)
@@ -68,7 +67,7 @@ class FaqRecyclerAdapter: RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderC
 
     }
     fun onDataChanged(faq:MutableList<FAQ>) {
-        faqList = faq
+        faqList.addAll(faq)
         notifyDataSetChanged()
     }
 
