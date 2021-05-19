@@ -40,6 +40,6 @@ interface BoardService {
 
     @DELETE("board/delete/{id}")
     fun delete(
-        @Path("id") id:Long
+        @Path("id") boardId:Long
     ) : Call<Void>
 }
