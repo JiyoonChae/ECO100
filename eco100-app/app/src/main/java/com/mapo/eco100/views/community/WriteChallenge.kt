@@ -9,28 +9,22 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.media.Image
 import android.net.Uri
-import android.os.AsyncTask.execute
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityWriteChallengeBinding
 import com.mapo.eco100.databinding.RowChallengeBinding
-import com.mapo.eco100.entity.board.Boards
-import com.mapo.eco100.entity.challenge.Challenge
 import com.mapo.eco100.entity.challenge.ChallengeList
-import com.mapo.eco100.entity.challenge.ChallengePost
 import com.mapo.eco100.service.ChallengeService
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -39,7 +33,6 @@ import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 
 class WriteChallenge : BaseActivity() {
     val PERM_STORAGE = 99 //외부 저장소 권한 처리
@@ -83,7 +76,7 @@ class WriteChallenge : BaseActivity() {
         //완료 버튼 클릭 시 실행
         binding.challengeFinish.setOnClickListener {
             //db로 데이터 전송하고 다시 프래그먼트 (챌린지 리스트로) 돌아가기 > 데이터전송함수만들어서 호출
-            fileUploadAsync()
+
             //돌아가서 스티커 이미지 변경시키기.
             binding2.rowStamp1.setImageResource(R.drawable.emoji)
             var bundle = Bundle()
@@ -139,9 +132,10 @@ class WriteChallenge : BaseActivity() {
         startActivityForResult(intent, REQ_CAMERA)
 
         createImageUri(newFileName(),"image/jpg")?.let { uri ->
-            realUri =uri
+            realUri =uri  //실제 이미지의 Uri 주소
             intent.putExtra(MediaStore.EXTRA_OUTPUT, realUri)
             startActivityForResult(intent, REQ_CAMERA)
+
         }
     }
 
@@ -179,16 +173,18 @@ class WriteChallenge : BaseActivity() {
         return image
     }
 
-
+    //결과 처리 메서드 : realUri에 값이 있는지 확인 후 있으면 loadBitmap메서드를 통해 화면에 세팅.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK)
+            Log.d("resultCode: ", "$resultCode")
+            Log.d("requestCode: ", "$requestCode")
             when(requestCode) {
                 REQ_CAMERA -> {
                     realUri?.let { uri ->
                         val bitmap = loadBitmap(uri)
                         binding.challengeWriteImage.setImageBitmap(bitmap)
-
+                        fileUploadAsync(uri)
                         if(findImageFileNameFromUri(uri)) {
                             Log.d("PICK_FROM_GALLERY","갤러리에서 절대주소 Pick 성공")
                         } else {
@@ -213,11 +209,15 @@ class WriteChallenge : BaseActivity() {
 
 
 
-    private fun fileUploadAsync() {
+    private fun fileUploadAsync(realUri: Uri) {
         Thread {
+
             val uploadFile = File(realUri.toString())
+            Log.d("File", "이 파일(디렉토리)의 절대 경로는 ${uploadFile.absolutePath}입니다.")
             var response: okhttp3.Response? = null
             try {
+                val requestFile = RequestBody.create("application/jpg".toMediaTypeOrNull(), uploadFile)
+                val body = MultipartBody.Part.createFormData("file", uploadFile.name, requestFile)
 
                 val fileUploadBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
