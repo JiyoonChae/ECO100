@@ -1,14 +1,11 @@
 package com.mapo.eco100.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mapo.eco100.entity.comment.Comment
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.config.NetworkSettings
-import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.service.CommentService
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -33,17 +30,17 @@ class ShowBoardViewModel : ViewModel() {
     }
 
     fun fetchLikesAndCommentsCnt(boardId: Long) {
-        loadingLiveData.value = true
-        viewModelScope.launch {
-            likesAndCommentsCntLiveData.value = try {
-                val board = NetworkSettings.retrofit.build().create(BoardService::class.java).read(boardId,1).en
-                LikesAndCommentsCnt(board.)
-            } catch (e:Exception) {
-                emptyList()
-            }
-
-            loadingLiveData.value = false
-        }
+//        loadingLiveData.value = true
+//        viewModelScope.launch {
+//            likesAndCommentsCntLiveData.value = try {
+//                val board = NetworkSettings.retrofit.build().create(BoardService::class.java).read(boardId,1).en
+//                LikesAndCommentsCnt(board.)
+//            } catch (e:Exception) {
+//                emptyList()
+//            }
+//
+//            loadingLiveData.value = false
+//        }
     }
 
     class LikesAndCommentsCnt(val likesCnt:Int, val commentsCnt:Int)
