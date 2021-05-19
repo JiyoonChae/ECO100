@@ -46,10 +46,12 @@
     <dimen name="size_106dp">106dp</dimen>
     <dimen name="size_108dp">108dp</dimen>
     <dimen name="size_110dp">110dp</dimen>
+    <dimen name="ecobox_size_126dp">126dp</dimen>
     <dimen name="size_138dp">138dp</dimen>
     <dimen name="ecobox_size_153dp">153dp</dimen>
     <dimen name="size_140dp">140dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
+    <dimen name="ecobox_size_166dp">166dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="ecobox_size_256dp">256dp</dimen>
