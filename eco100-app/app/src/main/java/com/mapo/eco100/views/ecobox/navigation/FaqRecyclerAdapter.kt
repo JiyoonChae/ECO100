@@ -1,5 +1,6 @@
 package com.mapo.eco100.views.ecobox.navigation
 
+import android.content.Context
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -10,30 +11,34 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
-import com.mapo.eco100.config.LocalDataBase.Companion.FAQ_list
 import com.mapo.eco100.entity.staticmodel.FAQ
 
-class FaqRecyclerAdapter: RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
+class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList<FAQ>)
+    : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
 
     // Item의 클릭 상태를 저장할 array 객체
     private val selectedItems: SparseBooleanArray = SparseBooleanArray()
-    var faqList = FAQ_list
+    var faqList = mutableListOf<FAQ>()
+//    var faqList = FAQ_list
 
+    // 항목 구성을 위해 사용할 ViewHolder 객체가 필요할 때 호출
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqViewHolderClass {
         //항목으로 사용할 view객체 생성.
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_ecobox_faq, parent, false)
         val holder = FaqViewHolderClass(itemView)
 
+
         return holder
     }
 
 
+    // ViewHolder를 통해 항목을 구성할 때 항목 내의 view 객체에 데이터를 셋팅
     override fun onBindViewHolder(holder: FaqViewHolderClass, position: Int) {
 
         holder.qmarkImageView.setImageResource(R.drawable.ic_ecobox_q_mark)
-        holder.faqCategoryTextView.text = faqList[position].category
-        holder.faqQuestionTextView.text = faqList[position].question
-        holder.faqAnswerTextView.text = faqList[position].answer
+        holder.faqCategoryTextView.text = faqlist[position].category
+        holder.faqQuestionTextView.text = faqlist[position].question
+        holder.faqAnswerTextView.text = faqlist[position].answer
 
 
         holder.faqArrowDownBtn.setOnClickListener {
@@ -53,7 +58,7 @@ class FaqRecyclerAdapter: RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderC
     }
 
     override fun getItemCount(): Int {
-        return faqList.size
+        return faqlist.size
     }
 
     inner class FaqViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -66,9 +71,9 @@ class FaqRecyclerAdapter: RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderC
         val faqAnswerTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
 
     }
-    fun onDataChanged(faq:MutableList<FAQ>) {
-        faqList.addAll(faq)
-        notifyDataSetChanged()
+    fun onDataChanged(faq: MutableList<FAQ>) {
+        faqList.addAll(0,faq)
+//        notifyDataSetChanged()
     }
 
 }

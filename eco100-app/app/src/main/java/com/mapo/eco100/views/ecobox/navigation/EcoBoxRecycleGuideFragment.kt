@@ -14,6 +14,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mapo.eco100.config.LocalDataBase.Companion.FAQ_list
+import com.mapo.eco100.config.LocalDataBase.Companion.search_FAQ
 import com.mapo.eco100.databinding.EcoboxFragmentRecycleGuideBinding
 import com.mapo.eco100.entity.staticmodel.FAQ
 import com.mapo.eco100.views.ecobox.*
@@ -25,9 +27,9 @@ class EcoBoxRecycleGuideFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var faqRecyclerView: RecyclerView
     internal var textlength = 0
-    private var faqList = mutableListOf<FAQ>()
+    var faqList = FAQ_list
     var faqSearchList = mutableListOf<FAQ>()
-    var adapter = FaqRecyclerAdapter()
+    var adapter = FaqRecyclerAdapter(context, faqList)
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -53,19 +55,25 @@ class EcoBoxRecycleGuideFragment : Fragment() {
                 faqSearchList.clear()
 
                 var strSequence = binding.searchEdit.text.toString()
+                var search = search_FAQ(strSequence)
 
                 for(i in adapter.faqList.indices){
-                    if(adapter.faqList[i].question.toString().contains(strSequence)||(adapter.faqList[i].answer.contains(strSequence)))
-                        faqSearchList.add(adapter.faqList[i])
+//                    if(adapter.faqList[i].question.toString().contains(strSequence)||(adapter.faqList[i].answer.contains(strSequence)))
+
+                    if (search != null) {
+                        faqSearchList.addAll(0,search)
+                    }
                     Log.d("faq","${adapter.faqList[i]}")
                 }
 
+                Log.d("search","$search")
 
-//                adapter= FaqRecyclerAdapter()
-//                faqRecyclerView.adapter=adapter
-//                faqRecyclerView.layoutManager = LinearLayoutManager(context)
-                adapter.onDataChanged(faqSearchList)
-//                adapter.notifyDataSetChanged()
+
+                adapter= FaqRecyclerAdapter(context, faqSearchList)
+                faqRecyclerView.adapter=adapter
+                faqRecyclerView.layoutManager = LinearLayoutManager(context)
+//                adapter.onDataChanged(faqSearchList)
+                adapter.notifyDataSetChanged()
 
             }
 
