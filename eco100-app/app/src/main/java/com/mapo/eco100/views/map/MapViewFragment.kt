@@ -1,13 +1,9 @@
 package com.mapo.eco100.views.map
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -32,14 +28,20 @@ import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentMapBinding
 
 class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
-    GoogleMap.OnMyLocationButtonClickListener, BottomSheetListClickListener {
+    GoogleMap.OnMyLocationButtonClickListener, ShopLocationListener {
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
     private lateinit var mMap: GoogleMap
     private lateinit var bitmapDraw: BitmapDrawable
     private lateinit var bitmap: Bitmap
-    private var selectedPosition: Int = -1
+    private val bottomSheet = BottomSheet()
+    private lateinit var mapFragment : SupportMapFragment
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapFragment.onSaveInstanceState(outState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +55,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         binding.mapShopBtn.isChecked = true
 
         // map
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // marker bitmap
@@ -64,13 +66,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
-        // open shop list
-        binding.openList.setOnClickListener {
-            val bottomSheet = BottomSheet.newInstance()
-            bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
-            bottomSheet.show(childFragmentManager, bottomSheet.tag)
-        }
-
         return binding.root
     }
 
@@ -79,7 +74,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         mMap = googleMap
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-
         if (ActivityCompat.checkSelfPermission(
                 binding.root.context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -92,6 +86,13 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
         googleMap.isMyLocationEnabled = true
 
+        // open shop list
+        binding.openList.setOnClickListener {
+            bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
+        }
+
+        // radio btn
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             mMap.clear()
             when (checkedId) {
@@ -128,13 +129,14 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
                 else -> Log.d("map", "checkedId : $checkedId")
             }
         }
+
+
     }
 
     // getZeroShopList
     private fun getZeroWasteShopList() {
-        val myLocation = LatLng(37.564009984338014, 126.90923531625434)
 
-        onClickItem(selectedPosition)
+        var myLocation = LatLng(37.564009984338014, 126.90923531625434)
 
         for (zeroShop in zeroShopList) {
             val markerOptions = MarkerOptions()
@@ -148,10 +150,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-
-        if (selectedPosition != -1) {
-            Log.d("map", "selectedPosition in getZero() >> $selectedPosition")
-        }
     }
 
     // getGarbageBagShopList
@@ -177,9 +175,14 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
     }
 
-    override fun onClickItem(position: Int) {
-        Log.d("map", "selectedPosition? = $position")
-        selectedPosition = position
+    override fun setShopName(shopName: String) {
+        Log.d("map", "$shopName 선택")
+    }
+
+    override fun setShopLocation(latitude: Double, longitude: Double) {
+        val selectedShopLocation = LatLng(latitude, longitude)
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShopLocation))
+        //this.mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
 }

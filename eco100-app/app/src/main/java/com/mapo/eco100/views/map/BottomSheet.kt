@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.config.NetworkSettings
@@ -38,16 +40,22 @@ class BottomSheet : BottomSheetDialogFragment() {
 
         shopListAdapter = MapListAdapter(this)
         shopListAdapter.listData = zeroShopList
-        shopListAdapter.notifyDataSetChanged()
+
+        shopListAdapter.setListItemClickListener(object : MapListAdapter.OnListItemClickListener {
+            override fun onClick(view: View, position: Int) {
+                val item = zeroShopList[position]
+                Log.d("map", item.name)
+                MapViewFragment().setShopName(item.name)
+                MapViewFragment().setShopLocation(
+                    item.latitude.toDouble(),
+                    item.longitude.toDouble(),
+                )
+                shopListAdapter.notifyDataSetChanged()
+                dismiss()
+            }
+        })
 
         binding.shopList.adapter = shopListAdapter
-
         return binding.root
-    }
-
-    companion object {
-        fun newInstance(): BottomSheet {
-            return BottomSheet()
-        }
     }
 }
