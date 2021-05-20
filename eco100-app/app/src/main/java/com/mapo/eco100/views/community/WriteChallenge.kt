@@ -210,84 +210,7 @@ class WriteChallenge : BaseActivity() {
     }
 
 
-    /*private fun fileUploadAsync(realUri: Uri) {
-        Thread {
 
-            val uploadFile = File(realUri.toString())
-            Log.d("File", "이 파일(디렉토리)의 절대 경로는 ${uploadFile.absolutePath}입니다.")  //ok
-            val absoluteUri = uploadFile.absolutePath
-            var response: okhttp3.Response? = null
-            try {
-               val requestFile = RequestBody.create("application/jpg".toMediaTypeOrNull(), uploadFile) //추가한거
-              //  val body = MultipartBody.Part.createFormData("file", uploadFile.name, requestFile) //여기까지 ok
-                val fileUploadBody: MultipartBody = MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(
-                        "image", uploadFile.name, requestFile)
-                    .addFormDataPart("userId","1")
-                    .addFormDataPart("challengeId", "21")
-                    //.addFormDataPart("title",binding.challengeWriteImage.text.toString())
-                    .addFormDataPart("contents",binding.challengeWriteContent.text.toString())
-                    .build()
-
-
-
-
-
-                val request: Request = NetworkSettings.imageRequest("/challenge/create",fileUploadBody)
-
-
-
-                response = NetworkSettings.imageClient.newCall(request).execute()
-                if (response.isSuccessful) {
-                    Log.d("응답 결과:","성공")
-//                    val challengePost = Gson().fromJson(response.body!!.string(), ChallengePost::class.java)
-//
-//                    val intent = Intent()
-//                    intent.putExtra("new_challenge", challengePost)
-//                    setResult(RESULT_OK, intent)
-                    setResult(RESULT_OK)
-                    finish()
-                } else {
-                    Log.d("응답 결과:","실패")
-                    Toast.makeText(this,"전송 실패",Toast.LENGTH_SHORT).show()
-                    //전송 실패
-                }
-            } catch (e:Exception) {
-                Log.e("UploadError",e.toString())
-            } finally {
-                response?.close()
-            }
-        }.start()
-    }*/
-
-    /* private var fileLocation = realUri.toString()
-     //이미지 주소를 절대경로로 바꾸기
-     private fun findImageFileNameFromUri(tempUri:Uri) : Boolean {
-         var flag = false
-         val IMAGE_DB_COLUMN = arrayOf(MediaStore.Images.ImageColumns.DATA)
-         var cursor : Cursor? = null
-         try {
-             val imagePK = ContentUris.parseId(tempUri).toString()
-             cursor = contentResolver.query(
-                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                 IMAGE_DB_COLUMN,
-                 MediaStore.Images.Media._ID + "=?", arrayOf(imagePK), null,null)
-             if(cursor!!.count > 0) {
-                 cursor.moveToFirst()
-                 fileLocation = cursor.getString(
-                     cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-                 )
-                 flag = true
-             }
-         } catch (sqle: SQLiteException) {
-             Log.d("findImage...",sqle.toString(),sqle)
-         } finally {
-             cursor?.close()
-         }
-         return flag
-     }
- */
     fun getImageFilePath(contentUri: Uri): String {
         var columnIndex = 0
         val projection = arrayOf(MediaStore.Images.Media.DATA)
@@ -338,7 +261,7 @@ class WriteChallenge : BaseActivity() {
             }
         }.start()
     }
-        val service: ChallengeService =
+        /*val service: ChallengeService =
             NetworkSettings.retrofit.build().create(ChallengeService::class.java)
 
         service.challengeUpload(1.toString(), "21", content, part).enqueue(object : Callback<ChallengePost> {
@@ -356,8 +279,8 @@ class WriteChallenge : BaseActivity() {
                     Log.d("챌린지","실패")
                 }
             }
-        })
-    }
+        })*/
+    //}
 
     fun getContent(): String {
         return binding.challengeWriteContent.text.toString()
