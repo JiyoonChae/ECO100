@@ -18,6 +18,7 @@ import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ClassCastException
 
 class BottomSheet : BottomSheetDialogFragment() {
 
@@ -25,7 +26,6 @@ class BottomSheet : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private lateinit var shopListAdapter: MapListAdapter
     private var mainActivityContext: Context? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,4 +45,9 @@ class BottomSheet : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    companion object {
+        fun newInstance(): BottomSheet {
+            return BottomSheet()
+        }
+    }
 }
