@@ -5,26 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.community.WriteChallenge">
+    tools:context=".views.community.WriteChallenge"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/icon_challenge"
-            android:layout_width="@dimen/size_48dp"
-            android:layout_height="@dimen/size_48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/icon_challenge17" />
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="챌린지 주제 : 장바구니 사용하기"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <RelativeLayout
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginLeft="@dimen/margin_36dp"
+            android:layout_marginTop="@dimen/size_18dp"
+            android:layout_marginRight="@dimen/margin_4dp"
+            android:background="@drawable/icon_ch_frame">
+
+            <ImageView
+                android:id="@+id/icon_challenge"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="14dp"
+                app:srcCompat="@drawable/icon_challenge17" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:background="@drawable/icon_ch_title_back"
+            android:text="챌린지 주제 : 장바구니 사용하기"
+            android:textSize="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_14dp"
+            />
     </LinearLayout>
 
     <TextView
@@ -32,51 +55,89 @@
         android:layout_height="wrap_content"
         android:text="*챌린지 인증방법\n
            주제에 맞는 사진을 촬영하여 1장만 첨부합니다"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="@dimen/margin_10dp"
+
         />
 
-    <ImageView
-        android:id="@+id/challenge_write_image"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        tools:srcCompat="@tools:sample/avatars" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonCamera"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="카메라" />
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/buttonGallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="갤러리" />
-    </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+                <ImageView
+                    android:id="@+id/challenge_write_image"
+                    android:layout_width="337dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center"
+                    tools:srcCompat="@drawable/img_ch_write2"
+                    android:background="@drawable/ch_write_frame"/>
 
-    <EditText
-        android:id="@+id/challenge_write_content"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:ems="10"
-        android:hint="작성하기"
-        android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/challenge_finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="완료" />
+            <LinearLayout
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/buttonCamera"
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginRight="@dimen/size_60dp"
+                    android:background="@drawable/btn_camera" />
+
+                <ImageButton
+                    android:id="@+id/buttonGallery"
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginRight="@dimen/size_60dp"
+                    android:background="@drawable/btn_galary" />
+
+                <ImageButton
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:background="@drawable/btn_trash" />
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/challenge_write_content"
+                android:layout_width="337dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ch_write_frame"
+                android:ems="10"
+                android:hint="작성하기"
+                android:inputType="textPersonName" />
+
+
+            <ImageButton
+                android:id="@+id/challenge_finish"
+                android:layout_width="337dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+
+                android:background="@drawable/challenge_write_btn" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="112dp"
+                android:background="@drawable/ch_backframe" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
 </LinearLayout>
