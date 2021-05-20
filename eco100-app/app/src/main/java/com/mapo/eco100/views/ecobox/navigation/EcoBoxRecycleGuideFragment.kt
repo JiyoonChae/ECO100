@@ -26,9 +26,9 @@ class EcoBoxRecycleGuideFragment : Fragment() {
     private var _binding: EcoboxFragmentRecycleGuideBinding? = null
     private val binding get() = _binding!!
     private lateinit var faqRecyclerView: RecyclerView
-    internal var textlength = 0
+
     var faqList = FAQ_list
-    var faqSearchList = mutableListOf<FAQ>()
+    var faqSearchList: MutableList<FAQ> = mutableListOf()
     var adapter = FaqRecyclerAdapter(context, faqList)
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -55,26 +55,14 @@ class EcoBoxRecycleGuideFragment : Fragment() {
                 faqSearchList.clear()
 
                 var strSequence = binding.searchEdit.text.toString()
-                var search = search_FAQ(strSequence)
-
-                for(i in adapter.faqList.indices){
-//                    if(adapter.faqList[i].question.toString().contains(strSequence)||(adapter.faqList[i].answer.contains(strSequence)))
-
-                    if (search != null) {
-                        faqSearchList.addAll(0,search)
-                    }
-                    Log.d("faq","${adapter.faqList[i]}")
+                var searchlist = search_FAQ(strSequence)
+                if (searchlist != null) {
+                    faqSearchList = searchlist
                 }
-
-                Log.d("search","$search")
-
-
-                adapter= FaqRecyclerAdapter(context, faqSearchList)
-                faqRecyclerView.adapter=adapter
+                adapter = FaqRecyclerAdapter(context, faqSearchList)
+                faqRecyclerView.adapter = adapter
                 faqRecyclerView.layoutManager = LinearLayoutManager(context)
-//                adapter.onDataChanged(faqSearchList)
                 adapter.notifyDataSetChanged()
-
             }
 
         })
@@ -126,12 +114,6 @@ class EcoBoxRecycleGuideFragment : Fragment() {
         return binding.root
 
     }
-
-//    fun refreshAdapter() {
-//        // 수정된 데이터를 다시 로드
-//        adapter?.onDataChanged(faqSearchList)
-//        adapter?.notifyDataSetChanged()
-//    }
 
     companion object {
         fun newInstance(): EcoBoxRecycleGuideFragment {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
+import com.mapo.eco100.config.LocalDataBase.Companion.FAQ_list
 import com.mapo.eco100.entity.staticmodel.FAQ
 
 class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList<FAQ>)
@@ -70,10 +71,6 @@ class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList
         val layoutExpand = itemView.findViewById<LinearLayout>(R.id.layout_expand)
         val faqAnswerTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
 
-    }
-    fun onDataChanged(faq: MutableList<FAQ>) {
-        faqList.addAll(0,faq)
-//        notifyDataSetChanged()
     }
 
 }
