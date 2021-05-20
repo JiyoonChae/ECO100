@@ -10,10 +10,10 @@
         android:id="@+id/content_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ecobox_size_126dp"
-        app:srcCompat="@drawable/ic_ecobox_content_banner" />
+        app:srcCompat="@drawable/ecobox_content_banner_top" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/content_recyclerview"
+        android:id="@+id/ecobox_content_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

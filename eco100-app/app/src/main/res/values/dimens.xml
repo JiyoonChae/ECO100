@@ -48,6 +48,7 @@
     <dimen name="size_110dp">110dp</dimen>
     <dimen name="ecobox_size_126dp">126dp</dimen>
     <dimen name="size_138dp">138dp</dimen>
+    <dimen name="ecobox_size_152dp">152dp</dimen>
     <dimen name="ecobox_size_153dp">153dp</dimen>
     <dimen name="size_140dp">140dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
@@ -80,6 +81,7 @@
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_10dp">10dp</dimen>
     <dimen name="padding_12dp">12dp</dimen>
+    <dimen name="ecobox_padding_14dp">14dp</dimen>
     <dimen name="ecobox_padding_15dp">15dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
@@ -98,6 +100,8 @@
     <dimen name="margin_20dp">20dp</dimen>
     <dimen name="margin_22dp">22dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="ecobox_margin_26dp">26dp</dimen>
+    <dimen name="ecobox_margin_30dp">30dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="ecobox_margin_34dp">34dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>

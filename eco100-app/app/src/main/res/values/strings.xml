@@ -41,6 +41,9 @@
     <string name="btn_styrofoam_ic_description">스티로폼 버튼 아이콘</string>
     <string name="faq_ic_description">FAQ 검색 아이콘</string>
     <string name="faq_arrow_description">FAQ 화살표 버튼 아이콘</string>
+    <string name="content_banner_description">컨텐츠 배너</string>
+    <string name="content_image_description">컨텐츠 이미지</string>
+
 
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>

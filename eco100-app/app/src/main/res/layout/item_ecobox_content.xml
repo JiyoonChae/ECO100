@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/content_cardview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
 
         <ImageView
             android:id="@+id/content_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/ecobox_size_152dp"
+            android:layout_height="@dimen/ecobox_size_152dp"
+            android:background="@drawable/square_background_border"
             android:padding="@dimen/padding_8dp"
-            app:srcCompat="@drawable/ecobox_content_activity1"
-            android:background="@drawable/square_background_border"/>
+            app:srcCompat="@drawable/ecobox_content_documentary2"
+            android:contentDescription="@string/content_banner_description" />
 
         <TextView
             android:id="@+id/content_category"
             android:layout_width="@dimen/ecobox_size_166dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/content_imageView"
             android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginBottom="@dimen/margin_4dp"
             android:fontFamily="@font/mapo_peacefull"
-            android:text="[다큐]"
-            android:textSize="@dimen/main_intro" />
+            android:text=""
+            android:textSize="@dimen/main_intro"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/content_title"
             android:layout_width="@dimen/ecobox_size_166dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/content_category"
             android:fontFamily="@font/mapo_peacefull"
-            android:text="분리수거가 당신에게 가르쳐 주지 않는 것"
+            android:text=""
             android:textSize="@dimen/popup_text"
             android:textStyle="bold" />
 
-
-    </RelativeLayout>
-
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

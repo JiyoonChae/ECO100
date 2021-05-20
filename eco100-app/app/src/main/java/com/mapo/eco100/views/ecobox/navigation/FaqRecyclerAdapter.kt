@@ -11,25 +11,22 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
-import com.mapo.eco100.config.LocalDataBase.Companion.FAQ_list
 import com.mapo.eco100.entity.staticmodel.FAQ
+
 
 class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList<FAQ>)
     : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
 
     // Item의 클릭 상태를 저장할 array 객체
     private val selectedItems: SparseBooleanArray = SparseBooleanArray()
-    var faqList = mutableListOf<FAQ>()
-//    var faqList = FAQ_list
 
     // 항목 구성을 위해 사용할 ViewHolder 객체가 필요할 때 호출
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqViewHolderClass {
         //항목으로 사용할 view객체 생성.
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_ecobox_faq, parent, false)
-        val holder = FaqViewHolderClass(itemView)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_ecobox_faq, parent, false)
 
 
-        return holder
+        return FaqViewHolderClass(itemView)
     }
 
 
@@ -64,12 +61,12 @@ class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList
 
     inner class FaqViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val qmarkImageView = itemView.findViewById<ImageView>(R.id.qmarkImageView)
-        val faqCategoryTextView = itemView.findViewById<TextView>(R.id.faqCategoryTextView)
-        val faqQuestionTextView = itemView.findViewById<TextView>(R.id.faqQuestionTextView)
-        val faqArrowDownBtn = itemView.findViewById<ImageButton>(R.id.faqArrowDownBtn)
-        val layoutExpand = itemView.findViewById<LinearLayout>(R.id.layout_expand)
-        val faqAnswerTextView = itemView.findViewById<TextView>(R.id.faqAnswerTextView)
+        val qmarkImageView: ImageView = itemView.findViewById(R.id.qmarkImageView)
+        val faqCategoryTextView: TextView = itemView.findViewById(R.id.faqCategoryTextView)
+        val faqQuestionTextView: TextView = itemView.findViewById(R.id.faqQuestionTextView)
+        val faqArrowDownBtn: ImageButton = itemView.findViewById(R.id.faqArrowDownBtn)
+        val layoutExpand: LinearLayout = itemView.findViewById(R.id.layout_expand)
+        val faqAnswerTextView: TextView = itemView.findViewById(R.id.faqAnswerTextView)
 
     }
 
