@@ -18,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mapo.eco100.R
+import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentMapBinding
 import com.mapo.eco100.entity.staticmodel.ZeroShop
@@ -32,7 +33,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     private val binding get() = _binding!!
     private lateinit var bitmapDraw: BitmapDrawable
     private lateinit var bitmap: Bitmap
-    private lateinit var listData: ArrayList<ZeroShop>
+    private lateinit var listData: MutableList<ZeroShop>
     private lateinit var gMap: GoogleMap
 
     override fun onCreateView(
@@ -43,6 +44,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         listData = ArrayList()
+
         // radioBtn
         binding.mapShopBtn.isChecked = true
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -83,39 +85,10 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
     // getZeroWasteShopList
     private fun getZeroWasteShopList() {
-        println("response!! >> getListTest()")
-        val service: MapService = NetworkSettings.retrofit.build().create(MapService::class.java)
-        service.getZeroShopList().enqueue(object : Callback<ArrayList<ZeroShop>> {
-            override fun onResponse(
-                call: Call<ArrayList<ZeroShop>>,
-                response: Response<ArrayList<ZeroShop>>
-            ) {
-                if (response.isSuccessful) {
-                    val resultList: ArrayList<ZeroShop>? = response.body()
-                    println("result >> ${resultList?.size}")
-                    resultList?.forEach { it ->
-                        listData.add(
-                            ZeroShop(
-                                it.id,
-                                it.name,
-                                it.address,
-                                it.phoneNum,
-                                it.runningInfo,
-                                it.webUrl,
-                                it.latitude,
-                                it.longitude,
-                                it.imgUrl,
-                                it.logoUrl
-                            )
-                        )
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<ZeroShop>>, t: Throwable) {
-                println("response!! >> ${t.message}")
-            }
-        })
+        listData = zeroShopList
+        listData.forEach {
+            println("listData >> $it")
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

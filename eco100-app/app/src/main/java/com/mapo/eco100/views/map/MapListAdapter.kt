@@ -14,7 +14,7 @@ import kotlin.contracts.contract
 class MapListAdapter(private val context: BottomSheet) :
     RecyclerView.Adapter<MapListAdapter.ViewHolder>() {
 
-    var listData = ArrayList<ZeroShop>()
+    var listData : MutableList<ZeroShop> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapListAdapter.ViewHolder {
         val view = LayoutInflater.from(context.activity)
             .inflate(R.layout.bottom_sheet_map_list_item, parent, false)
@@ -35,7 +35,7 @@ class MapListAdapter(private val context: BottomSheet) :
 
         fun bind(item: ZeroShop) {
             if (item.logoUrl == null) {
-                shopImg.setImageResource(R.drawable.ic_map_zero_shop)
+                shopImg.setImageResource(R.drawable.img_map_no_logo)
             } else {
                 Glide.with(context).load(item.logoUrl).into(shopImg)
             }

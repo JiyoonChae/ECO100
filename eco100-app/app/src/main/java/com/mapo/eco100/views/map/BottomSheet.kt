@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.BottomSheetMapListBinding
 import com.mapo.eco100.entity.staticmodel.ZeroShop
@@ -23,7 +24,6 @@ class BottomSheet : BottomSheetDialogFragment() {
     private var _binding: BottomSheetMapListBinding? = null
     private val binding get() = _binding!!
     private lateinit var shopListAdapter: MapListAdapter
-    private lateinit var listData: ArrayList<ZeroShop>
     private var mainActivityContext: Context? = null
 
 
@@ -37,15 +37,10 @@ class BottomSheet : BottomSheetDialogFragment() {
         _binding = BottomSheetMapListBinding.inflate(inflater, container, false)
 
         shopListAdapter = MapListAdapter(this)
+        shopListAdapter.listData = zeroShopList
+        shopListAdapter.notifyDataSetChanged()
+
         binding.shopList.adapter = shopListAdapter
-
-
-        // intent 데이터 받아와서 listData에 값 추가해줘야함
-
-        /*val result = arguments?.getSerializable("zeroShopList")
-        listData = result as ArrayList<ZeroShop>
-        shopListAdapter.listData = listData
-        shopListAdapter.notifyDataSetChanged()*/
 
         return binding.root
     }
