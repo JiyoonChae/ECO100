@@ -37,6 +37,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     private lateinit var bitmap: Bitmap
     private val bottomSheet = BottomSheet()
     private lateinit var mapFragment : SupportMapFragment
+    var testLocation = LatLng(37.54870902828827, 127.04403673987844)
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -69,10 +70,17 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         return binding.root
     }
 
+    private fun setGoogleMap(map : GoogleMap){
+        mMap = map
+        Log.d("map", "mMap >> $mMap")
+        Log.d("map", "map >> $map")
+
+    }
+
     // map
     override fun onMapReady(googleMap: GoogleMap) {
 
-        mMap = googleMap
+        setGoogleMap(googleMap)
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         if (ActivityCompat.checkSelfPermission(
                 binding.root.context,
@@ -86,13 +94,13 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
         googleMap.isMyLocationEnabled = true
 
-        // open shop list
+        // 각 항목별 가게 리스트를 보여준다.
         binding.openList.setOnClickListener {
             bottomSheet.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
 
-        // radio btn
+        // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             mMap.clear()
             when (checkedId) {
@@ -130,13 +138,10 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             }
         }
 
-
     }
 
-    // getZeroShopList
+    // 제로웨이스트 샵 리스트를 가져온다.
     private fun getZeroWasteShopList() {
-
-        var myLocation = LatLng(37.564009984338014, 126.90923531625434)
 
         for (zeroShop in zeroShopList) {
             val markerOptions = MarkerOptions()
@@ -148,11 +153,13 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             ).title(zeroShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
             mMap.addMarker(markerOptions)
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
+        Log.d("map", "getZeroshopList map >> $mMap")
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(testLocation)) // d위치 변경하기
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
-    // getGarbageBagShopList
+    // 종량제 봉투 판매업소 리스트를 가져온다.
     private fun getShopList() {
 
     }
@@ -175,14 +182,19 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
     }
 
+    // 선택된 가게의 이름을 가져온다.
     override fun setShopName(shopName: String) {
         Log.d("map", "$shopName 선택")
     }
 
+    // 선택된 가게에 대한 위경도 정보를 가져온다.
     override fun setShopLocation(latitude: Double, longitude: Double) {
-        val selectedShopLocation = LatLng(latitude, longitude)
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShopLocation))
-        //this.mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        testLocation = LatLng(latitude, longitude)
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShopLocation))
+        //getGoogleMap().animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
+    fun test(){
+        Log.d("map","test")
+    }
 }
