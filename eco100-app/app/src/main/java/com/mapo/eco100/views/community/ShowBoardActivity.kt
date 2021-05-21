@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +20,11 @@ import com.mapo.eco100.R
 import com.mapo.eco100.adapter.CommentAdapter
 import com.mapo.eco100.config.BOARD_EDIT
 import com.mapo.eco100.config.NetworkSettings
+import com.mapo.eco100.config.REQUEST_PERMISSION
 import com.mapo.eco100.databinding.ActivityShowBoardBinding
 import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.comment.CommentRequest
+import com.mapo.eco100.entity.likes.LikesRequestDto
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.service.CommentService
 import com.mapo.eco100.viewmodel.ShowBoardViewModel
@@ -45,6 +48,7 @@ class ShowBoardActivity : AppCompatActivity() {
         boardData = intent.getSerializableExtra("board_data") as BoardReadForm
         if (boardData.userId == 1L) {
             setSupportActionBar(binding.editBoardToolBar)//써줘야 onCreateOptionsMenu()가 호출된다
+            supportActionBar!!.title = null
         }
 
         boardData.apply {
@@ -59,16 +63,46 @@ class ShowBoardActivity : AppCompatActivity() {
             binding.boardWriter.text = nickname
             binding.numofComments.text = "댓글 수 : $commentsCnt"
             binding.numofLikes.text = "좋아요 수 : $likesCnt"
-            commentAdapter = CommentAdapter(comments)
-            if (!canClickLikes) {
-                binding.sendLikes.setColorFilter(
-                    Color.parseColor("#39BDC8"),
-                    PorterDuff.Mode.OVERLAY
-                )
-            }
+            commentAdapter = CommentAdapter(
+                comments,
+                onClickDeleteBtn = {comment ->
+                    AlertDialog.Builder(this@ShowBoardActivity)
+                        .setTitle("댓글을 삭제하시겠습니까?")
+                        .setPositiveButton("확인") { _, _ ->
+                            val service: CommentService =
+                                NetworkSettings.retrofit.build().create(CommentService::class.java)
+                            service.delete(comment.commentId).enqueue(object : Callback<Void> {
+                                override fun onResponse(
+                                    call: Call<Void>,
+                                    response: Response<Void>
+                                ) {
+                                    if(response.isSuccessful) {
+                                        viewModel.fetchComments(comment.boardId)
+                                        Toast.makeText(
+                                            this@ShowBoardActivity,
+                                            "댓글을 삭제하였습니다.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<Void>, t: Throwable) {
+
+                                }
+                            })
+                        }
+                        .setNegativeButton("취소") { _, _ -> }
+                        .create()
+                        .show()
+                }
+            )
         }
+        Glide.with(this@ShowBoardActivity)
+            .load(if(boardData.canClickLikes) R.drawable.icon_likes_big else R.drawable.icon_likes_pressed_big)
+            .into(binding.sendLikes)
 
         binding.backBtn.setOnClickListener {
+            setResult(RESULT_OK)
             finish()
         }
 
@@ -93,15 +127,7 @@ class ShowBoardActivity : AppCompatActivity() {
                 val dialog = NoConnectedDialog(this)
                 dialog.show()
             } else {
-                val service: CommentService =
-                    NetworkSettings.retrofit.build().create(CommentService::class.java)
-                service.write(
-                    CommentRequest(
-                        boardData.boardId,
-                        binding.commentEditText.text.toString(),
-                        1
-                    )
-                )
+                viewModel.fetchNumOfLikes(boardData.boardId)
             }
         }
 
@@ -154,19 +180,21 @@ class ShowBoardActivity : AppCompatActivity() {
                 this@ShowBoardActivity,
                 LinearLayoutManager.VERTICAL, false
             )
-            addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    LinearLayoutManager.VERTICAL
-                )
-            )
             adapter = commentAdapter
         }
 
         viewModel.apply {
             commentsLiveData.observe(this@ShowBoardActivity, {
                 commentAdapter.updateComments(it)
-//                binding.numofComments.text = "댓글 수 : ${++boardData.comments_cnt}"
+                binding.numofComments.text = "댓글 수 : ${it.size}"
+            })
+
+            numOfLikesLiveData.observe(this@ShowBoardActivity, {
+                binding.numofLikes.text = "좋아요 수 : $it"
+                boardData.canClickLikes = !boardData.canClickLikes
+                Glide.with(this@ShowBoardActivity)
+                    .load(if(boardData.canClickLikes) R.drawable.icon_likes_big else R.drawable.icon_likes_pressed_big)
+                    .into(binding.sendLikes)
             })
         }
     }

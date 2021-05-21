@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.EnrollActivity">
+    tools:context=".views.community.EnrollActivity">
 
     <EditText
         android:id="@+id/enroll_title"
@@ -15,17 +15,12 @@
         android:hint="제목"
         android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="사진등록하기" />
-
     <ImageView
         android:id="@+id/enroll_image"
         android:layout_width="match_parent"
-        android:layout_height="181dp"
-        tools:srcCompat="@drawable/addimage" />
+        android:layout_height="@dimen/size_160dp"
+        android:layout_margin="@dimen/margin_16dp"
+        android:src="@drawable/icon_add_picture"/>
 
     <Button
         android:id="@+id/image_delete"
@@ -33,17 +28,31 @@
         android:layout_height="wrap_content"
         android:text="이미지삭제" />
 
-    <EditText
-        android:id="@+id/enroll_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="내용"
-        android:inputType="textPersonName" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="등록" />
+        <EditText
+            android:background="@drawable/ic_boarderline"
+            android:id="@+id/enroll_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:ems="10"
+            android:hint="내용을 작성해 주세요"
+
+            android:gravity="top"
+            android:layout_weight="100"
+            android:layout_margin="@dimen/margin_16dp"
+            android:padding="@dimen/padding_8dp"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="등록" />
+    </LinearLayout>
+
 </LinearLayout>

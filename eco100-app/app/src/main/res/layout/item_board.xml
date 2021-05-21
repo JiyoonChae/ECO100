@@ -4,6 +4,15 @@
     android:id="@+id/item_board"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/ic_boarderline_round_shape"
+    android:layout_marginTop="@dimen/margin_4dp"
+    android:layout_marginBottom="@dimen/margin_4dp"
+    android:layout_marginStart="@dimen/margin_12dp"
+    android:layout_marginEnd="@dimen/margin_12dp"
+    android:paddingTop="@dimen/padding_16dp"
+    android:paddingLeft="@dimen/padding_20dp"
+    android:paddingRight="@dimen/padding_20dp"
+    android:paddingBottom="@dimen/margin_18dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,8 +24,6 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_22dp"
-            android:layout_marginTop="@dimen/margin_16dp"
             app:srcCompat="@drawable/icon_common_user" />
 
         <LinearLayout
@@ -72,12 +79,15 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/icon_comments" />
+            app:srcCompat="@drawable/icon_comments"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginEnd="@dimen/margin_8dp"/>
 
         <TextView
-            android:id="@+id/likes_cnt"
+            android:id="@+id/comments_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16dp"
             android:textSize="20dp"
             android:text="0" />
 
@@ -85,11 +95,12 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_22dp"
-            app:srcCompat="@drawable/icon_likes" />
+            app:srcCompat="@drawable/icon_likes"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginEnd="@dimen/margin_8dp"/>
 
         <TextView
-            android:id="@+id/comments_cnt"
+            android:id="@+id/likes_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_8dp"

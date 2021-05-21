@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -40,6 +41,7 @@ class BoardFragment : Fragment() {
     private lateinit var mainActivityContext: Context
     private lateinit var boardAdapter: BoardAdapter
     private var pageToLoad: Int = 0
+    private var searchMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,18 +65,20 @@ class BoardFragment : Fragment() {
                 } else {
                     val service: BoardService =
                         NetworkSettings.retrofit.build().create(BoardService::class.java)
-                    service.read(board_data.board_id,1).enqueue(object : Callback<BoardReadForm> {
+                    service.read(board_data.boardId,1).enqueue(object : Callback<BoardReadForm> {
                         override fun onResponse(
                             call: Call<BoardReadForm>,
                             response: Response<BoardReadForm>
                         ) {
-
-                            val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
-                            intent.putExtra("board_data", response.body()!!)
-                            startActivityForResult(intent, BOARD_CLICK)
+                            if(response.isSuccessful) {
+                                val intent = Intent(mainActivityContext, ShowBoardActivity::class.java)
+                                intent.putExtra("board_data", response.body()!!)
+                                startActivityForResult(intent, BOARD_CLICK)
+                            }
                         }
 
                         override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
+
                             Toast.makeText(mainActivityContext, "글에 문제가 있습니다.", Toast.LENGTH_SHORT)
                                 .show()
                         }
@@ -83,30 +87,50 @@ class BoardFragment : Fragment() {
             }
         )
 
+        binding.searchBtn.setOnClickListener {
+            if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                val dialog = NoConnectedDialog(mainActivityContext)
+                dialog.show()
+            } else {
+                val word = binding.searchWord.text.toString()
+                if(word != "") {
+                    searchMode = true
+                    viewModel.searchBoards(word.trim())
+                }
+            }
+        }
+
         binding.swipeRefresh.setOnRefreshListener {
             if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
                 val dialog = NoConnectedDialog(mainActivityContext)
                 dialog.show()
             } else {
                 binding.swipeRefresh.isRefreshing = true
-                NetworkSettings.retrofit.build().create(BoardService::class.java).refreshBoards(0)
-                    .enqueue(object : Callback<ArrayList<Boards>> {
-                        override fun onResponse(
-                            call: Call<ArrayList<Boards>>,
-                            response: Response<ArrayList<Boards>>
-                        ) {
-                            boardAdapter.refreshBoards(response.body()!!)
-                            (requireActivity() as MainActivity).runOnUiThread {
-                                binding.swipeRefresh.isRefreshing = false
-                                binding.sortMenuText.text = "최근 순"
+                if (searchMode) {
+                    binding.swipeRefresh.isRefreshing = false
+                    viewModel.fetchBoards()
+                } else {
+                    NetworkSettings.retrofit.build().create(BoardService::class.java)
+                        .refreshBoards(0)
+                        .enqueue(object : Callback<ArrayList<Boards>> {
+                            override fun onResponse(
+                                call: Call<ArrayList<Boards>>,
+                                response: Response<ArrayList<Boards>>
+                            ) {
+                                boardAdapter.refreshBoards(response.body()!!)
+                                (requireActivity() as MainActivity).runOnUiThread {
+                                    binding.swipeRefresh.isRefreshing = false
+                                    binding.sortMenuText.text = "최근 순"
+                                }
+                                searchModeRelease()
+                                pageToLoad = 0
                             }
-                            pageToLoad = 0
-                        }
 
-                        override fun onFailure(call: Call<ArrayList<Boards>>, t: Throwable) {
+                            override fun onFailure(call: Call<ArrayList<Boards>>, t: Throwable) {
 
-                        }
-                    })
+                            }
+                        })
+                }
             }
         }
 
@@ -114,12 +138,6 @@ class BoardFragment : Fragment() {
             layoutManager = LinearLayoutManager(
                 mainActivityContext,
                 LinearLayoutManager.VERTICAL, false
-            )
-            addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    LinearLayoutManager.VERTICAL
-                )
             )
             adapter = boardAdapter
         }
@@ -154,11 +172,14 @@ class BoardFragment : Fragment() {
         }
 
         viewModel.apply {
-            boardsLiveData.observe(viewLifecycleOwner, Observer {
+            boardsLiveData.observe(viewLifecycleOwner, {
+                if(it.isEmpty()) {
+                    Toast.makeText(mainActivityContext,"검색 결과가 없습니다.",Toast.LENGTH_SHORT).show()
+                }
                 boardAdapter.updateBoards(it)
             })
 
-            loadingLiveData.observe(viewLifecycleOwner, Observer { isLoading ->
+            loadingLiveData.observe(viewLifecycleOwner, { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             })
         }
@@ -166,13 +187,15 @@ class BoardFragment : Fragment() {
         binding.toolBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_recent -> {
-                    boardAdapter.sortByRecent()
+                    viewModel.fetchBoards()
                     binding.sortMenuText.text = "최근 순"
+                    pageToLoad = 0
                     true
                 }
                 R.id.action_likes -> {
-                    boardAdapter.sortByLikes()
+                    viewModel.fetchBoardsOrderByLikes()
                     binding.sortMenuText.text = "좋아요 순"
+                    pageToLoad = 0
                     true
                 }
                 else -> false
@@ -186,30 +209,51 @@ class BoardFragment : Fragment() {
                     (recyclerView.layoutManager as LinearLayoutManager)
                         .findLastCompletelyVisibleItemPosition()
                 val itemTotalCount = boardAdapter.itemCount - 1
-                if (lastVisibleItemPosition == itemTotalCount) {
+                if (!searchMode && (lastVisibleItemPosition == itemTotalCount)) {
                     if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
                         val dialog = NoConnectedDialog(mainActivityContext)
                         dialog.show()
                     } else {
                         viewModel.loadingLiveData.value = true
-                        NetworkSettings.retrofit.build().create(BoardService::class.java)
-                            .refreshBoards(++pageToLoad)
-                            .enqueue(object : Callback<ArrayList<Boards>> {
-                                override fun onResponse(
-                                    call: Call<ArrayList<Boards>>,
-                                    response: Response<ArrayList<Boards>>
-                                ) {
-                                    boardAdapter.addBoards(response.body()!!)
-                                    viewModel.loadingLiveData.value = false
-                                }
+                        if(binding.sortMenuText.text.toString() == "좋아요 순") {
+                            NetworkSettings.retrofit.build().create(BoardService::class.java)
+                                .addBoardsOrderByLikes(++pageToLoad)
+                                .enqueue(object : Callback<ArrayList<Boards>> {
+                                    override fun onResponse(
+                                        call: Call<ArrayList<Boards>>,
+                                        response: Response<ArrayList<Boards>>
+                                    ) {
+                                        boardAdapter.addBoards(response.body()!!)
+                                        viewModel.loadingLiveData.value = false
+                                    }
 
-                                override fun onFailure(
-                                    call: Call<ArrayList<Boards>>,
-                                    t: Throwable
-                                ) {
+                                    override fun onFailure(
+                                        call: Call<ArrayList<Boards>>,
+                                        t: Throwable
+                                    ) {
 
-                                }
-                            })
+                                    }
+                                })
+                        } else {
+                            NetworkSettings.retrofit.build().create(BoardService::class.java)
+                                .refreshBoards(++pageToLoad)
+                                .enqueue(object : Callback<ArrayList<Boards>> {
+                                    override fun onResponse(
+                                        call: Call<ArrayList<Boards>>,
+                                        response: Response<ArrayList<Boards>>
+                                    ) {
+                                        boardAdapter.addBoards(response.body()!!)
+                                        viewModel.loadingLiveData.value = false
+                                    }
+
+                                    override fun onFailure(
+                                        call: Call<ArrayList<Boards>>,
+                                        t: Throwable
+                                    ) {
+
+                                    }
+                                })
+                        }
                     }
                 }
             }
@@ -228,8 +272,17 @@ class BoardFragment : Fragment() {
                 Toast.makeText(mainActivityContext, "글 등록 성공", Toast.LENGTH_SHORT).show()
                 viewModel.fetchBoards()
                 boardAdapter.refreshBoards(viewModel.boardsLiveData.value!!)
+                searchModeRelease()
+            }
+            BOARD_CLICK -> {
+
             }
         }
+    }
+
+    fun searchModeRelease() {
+        searchMode = false
+        binding.searchWord.text.clear()
     }
 
     companion object {

@@ -17,7 +17,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import com.google.gson.Gson
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION
@@ -25,8 +26,10 @@ import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
-import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.config.NetworkSettings
+import com.mapo.eco100.entity.board.BoardModifyForm
+import com.mapo.eco100.entity.board.BoardReadForm
+import com.mapo.eco100.service.CommentService
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,12 +40,14 @@ import java.io.IOException
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.lang.Exception
-import java.util.concurrent.TimeUnit
 
 class EnrollActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEnrollBinding
     private lateinit var myImageDir: File
+    private var boardBeforeEdit: BoardReadForm? = null
+    private var isEditing = false
+    private var isImageDeleted = false
 
     private var fileLocation = ""
 
@@ -54,6 +59,20 @@ class EnrollActivity : AppCompatActivity() {
         setContentView(binding.root)
         boardService = NetworkSettings.retrofit.build().create(BoardService::class.java)
         binding.enrollImage.setImageResource(R.drawable.ic_community_40dp)
+
+        //글 수정일 경우 넘어올 데이터
+        boardBeforeEdit = intent.getSerializableExtra("board_data") as BoardReadForm?
+        boardBeforeEdit?.let {
+            isEditing = true
+            binding.enrollTitle.setText(it.title)
+            binding.enrollContent.setText(it.contents)
+            it.imageUrl?.let { originImageUrl ->
+                Glide.with(this@EnrollActivity)
+                    .load(originImageUrl.toUri())
+                    .into(binding.enrollImage)
+            }
+        }
+
 
         binding.enrollImage.setOnClickListener {
             when {
@@ -75,23 +94,63 @@ class EnrollActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.send.text = if(isEditing) "수정" else "등록"
         binding.send.setOnClickListener {
             if (!NetworkSettings.isNetworkAvailable(this)) {
                 val dialog = NoConnectedDialog(this)
                 dialog.show()
             } else {
-                if (fileLocation == "") {
-                    sendWithoutImage()
-                } else {
-                    fileUploadAsync()
+                if (isEditing) {//글 수정일 경우
+                    if (fileLocation == "") {//사진 추가를 안했을 경우
+                        val board = BoardModifyForm(1,
+                            binding.enrollTitle.text.toString(),
+                            binding.enrollContent.text.toString(),
+                            isImageDeleted
+                        )
+                        boardService.modify(board).enqueue(object : Callback<Void> {
+                            override fun onResponse(
+                                call: Call<Void>,
+                                response: Response<Void>
+                            ) {
+                                if (response.isSuccessful) {
+                                    setResult(RESULT_OK)
+                                }
+                                finish()
+                            }
+
+                            override fun onFailure(call: Call<Void>, t: Throwable) {
+                                Toast.makeText(this@EnrollActivity, "연결 실패", Toast.LENGTH_SHORT).show()
+                                Log.d("EnrollActivity", "실패 : $t")
+                            }
+                        })
+                    } else {
+                        //새로 사진 추가하여 글 수정한 경우
+                        fileUploadAsync()
+                    }
+                } else {//글 등록
+                    if (fileLocation == "") {
+                        sendWithoutImage()
+                    } else {
+                        fileUploadAsync()
+                    }
                 }
             }
         }
         binding.imageDelete.setOnClickListener {
-            fileLocation = ""
-            binding.enrollImage.setImageResource(R.drawable.ic_community_40dp)
+            val titleText = if (isEditing) "이미 등록한 사진을 삭제하시겠습니까?" else "불러온 사진을 취소하시겠습니까?"
+            AlertDialog.Builder(this@EnrollActivity)
+                .setTitle(titleText)
+                .setPositiveButton("확인") { _, _ ->
+                    if(isEditing && boardBeforeEdit!!.imageUrl != null) {
+                        isImageDeleted = true
+                    }
+                    fileLocation = ""
+                    binding.enrollImage.setImageResource(R.drawable.icon_add_picture)
+                }
+                .setNegativeButton("취소") { _, _ -> }
+                .create()
+                .show()
         }
-
     }
 
     override fun onRequestPermissionsResult(
@@ -175,8 +234,8 @@ class EnrollActivity : AppCompatActivity() {
 
     private fun sendWithoutImage() {
         val board = BoardWriteForm(1,
-                binding.enrollTitle.text.toString(),
-                binding.enrollContent.text.toString()
+            binding.enrollTitle.text.toString(),
+            binding.enrollContent.text.toString()
         )
 
 
@@ -261,13 +320,24 @@ class EnrollActivity : AppCompatActivity() {
                         "image",uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
-                        .addFormDataPart("userId","1")
-                        .addFormDataPart("title",binding.enrollTitle.text.toString())
-                        .addFormDataPart("contents",binding.enrollContent.text.toString())
-                        .build()
+                    .addFormDataPart("userId","1")
+                    .addFormDataPart("title",binding.enrollTitle.text.toString())
+                    .addFormDataPart("contents",binding.enrollContent.text.toString())
+                    .build()
 
-                response = NetworkSettings.imageClient.newCall(
-                    NetworkSettings.imageRequest("/board/create/image",fileUploadBody)).execute()
+                val additionalUrl : String = if(isEditing) "/board/update/image" else "/board/create/image"
+                response = if (isEditing) {
+                    val putImageRequest = Request.Builder()
+                        .addHeader("Authorization", "Bearer ")
+                        .url(NetworkSettings.baseUrl +additionalUrl)
+                        .put(fileUploadBody)
+                        .build()
+                    NetworkSettings.imageClient.newCall(
+                        putImageRequest).execute()
+                } else {
+                    NetworkSettings.imageClient.newCall(
+                        NetworkSettings.imageRequest(additionalUrl,fileUploadBody)).execute()
+                }
                 if (response.isSuccessful) {
 //                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
 //                    val intent = Intent()

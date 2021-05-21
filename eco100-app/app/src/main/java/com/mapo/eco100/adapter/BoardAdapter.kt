@@ -22,12 +22,12 @@ class BoardAdapter(
     }
 
     fun sortByRecent() {
-        boards.sortByDescending { it.board_id }
+        boards.sortByDescending { it.boardId }
         notifyDataSetChanged()
     }
 
     fun sortByLikes() {
-        boards.sortByDescending { it.likes_cnt }
+        boards.sortByDescending { it.likesCnt }
         notifyDataSetChanged()
     }
 
@@ -41,11 +41,11 @@ class BoardAdapter(
     override fun onBindViewHolder(holder: BoardViewHolder, position: Int) {
         val board: Boards = boards[position]
         holder.binding.apply {
-            nickname.text = board.user_nickname
+            nickname.text = board.nickname
             date.text = board.date
             titleTextView.text = board.title
-            commentsCnt.text = board.comments_cnt.toString()
-            likesCnt.text = board.likes_cnt.toString()
+            commentsCnt.text = board.commentsCnt.toString()
+            likesCnt.text = board.likesCnt.toString()
             root.setOnClickListener {
                 onClickItem(board)
             }
@@ -71,4 +71,6 @@ class BoardAdapter(
         boards.addAll(item)
         notifyDataSetChanged()
     }
+
+    //fun isEmpty() = boards.isEmpty()
 }

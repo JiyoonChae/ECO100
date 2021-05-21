@@ -22,11 +22,20 @@ interface BoardService {
         @Path("current") currentPage: Int
     ) : ArrayList<Boards>
 
+    @GET("board/likes/{current}")
+    suspend fun boardsOrderByLikes(
+        @Path("current") currentPage: Int
+    ) : ArrayList<Boards>
+
     @GET("board/{current}")
     fun refreshBoards(
         @Path("current") currentPage: Int
     ) : Call<ArrayList<Boards>>
 
+    @GET("board/likes/{current}")
+    fun addBoardsOrderByLikes(
+        @Path("current") currentPage: Int
+    ) : Call<ArrayList<Boards>>
 
     @PUT("board/update")
     fun modify(
@@ -34,12 +43,17 @@ interface BoardService {
     ) : Call<Void>
 
     @PATCH("board/likes")
-    fun increaseLikes(
+    suspend fun increaseLikes(
         @Body likesRequestDto: LikesRequestDto
-    ) : Call<Boolean>
+    ) : Int
 
     @DELETE("board/delete/{id}")
     fun delete(
         @Path("id") boardId:Long
     ) : Call<Void>
+
+    @GET("board/search/{word}")
+    suspend fun search(
+        @Path("word") word:String
+    ) : ArrayList<Boards>
 }

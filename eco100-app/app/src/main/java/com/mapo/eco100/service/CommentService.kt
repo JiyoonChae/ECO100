@@ -3,10 +3,7 @@ package com.mapo.eco100.service
 import com.mapo.eco100.entity.comment.Comment
 import com.mapo.eco100.entity.comment.CommentRequest
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface CommentService {
     @POST("board/comment/create")
@@ -18,4 +15,10 @@ interface CommentService {
     suspend fun getComments(
         @Path("boardId") boardId : Long
     ) : List<Comment>
+
+    @DELETE("board/comment/delete/{commentId}")
+    fun delete(
+        @Path("commentId") commentId: Long
+    ) : Call<Void>
+
 }
