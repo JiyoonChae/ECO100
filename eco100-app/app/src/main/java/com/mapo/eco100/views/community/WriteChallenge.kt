@@ -14,12 +14,15 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityWriteChallengeBinding
 import com.mapo.eco100.databinding.RowChallengeBinding
+import com.mapo.eco100.entity.challenge.Challenge
 import com.mapo.eco100.entity.challenge.ChallengeList
 import com.mapo.eco100.entity.challenge.ChallengePost
 import com.mapo.eco100.service.ChallengeService
@@ -42,6 +45,7 @@ class WriteChallenge : BaseActivity() {
     val REQ_STORAGE = 102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
     lateinit var filePath: String
+    private var challenge : Challenge? = null
 
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
@@ -51,6 +55,15 @@ class WriteChallenge : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        challenge = intent.getSerializableExtra("item") as Challenge
+        challenge?.let {
+            binding.textView.text = it.subject
+            it.imageUrl?.let { url_string ->
+                Glide.with(this@WriteChallenge)
+                    .load(url_string.toUri())
+                    .into(binding.iconChallenge)
+            }
+        }
 
         //외부 저장소 권한 요청
         requirePermissions(
@@ -58,33 +71,38 @@ class WriteChallenge : BaseActivity() {
             PERM_STORAGE
         )
 
-        //해당 챌린지 아이콘 이미지 불러오기......
-        val service: ChallengeService =
-            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
-            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
-                Log.d("tag", " 실패 --------------", null)
-            }
-
-            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
-                val result = response.body() as ChallengeList
-                val challenge = result?.get(0)
-                Glide.with(binding.iconChallenge).load(challenge.imageUrl)
-                    .into(binding.iconChallenge)
-            }
-        })
-
-        //클릭한 챌린지 리스트에있는 주제를 받아서 출력하기
-        val item = intent.extras?.get("item") as String
-        binding.textView.setText(item)
+//        //해당 챌린지 아이콘 이미지 불러오기......
+//        val service: ChallengeService =
+//            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+//        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
+//            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+//                Log.d("tag", " 실패 --------------", null)
+//            }
+//
+//            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
+//                val result = response.body() as ChallengeList
+//                val challenge = result?.get(0)
+//                Glide.with(binding.iconChallenge).load(challenge.imageUrl)
+//                    .into(binding.iconChallenge)
+//            }
+//        })
+//
+//        //클릭한 챌린지 리스트에있는 주제를 받아서 출력하기
+//        val item = intent.extras?.get("item") as String
+//        binding.textView.setText(item)
 
         //글쓰기 완료
         binding.challengeFinish.setOnClickListener {
             Log.d("chall", "버튼 눌림")
+            binding.challengeFinish.setImageResource(R.drawable.challenge_done_btn)
             uploadPost()
+            //binding.challengeFinish.setBackground(R.drawable.challenge_done_btn)
         }
 
     }
+
+
+
 
     //저장소 권한 요청이 승인되었을 경우
     override fun permissionGranted(requestCode: Int) {
@@ -230,7 +248,6 @@ class WriteChallenge : BaseActivity() {
             val uploadFile = File(filePath)
             var response: okhttp3.Response? = null
             try {
-
                 val fileUploadBody:RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
@@ -238,16 +255,13 @@ class WriteChallenge : BaseActivity() {
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
                     .addFormDataPart("userId","1")
-                    .addFormDataPart("challengeId","21")
+                    .addFormDataPart("challengeId",challenge!!.challengeId.toString())
                     .addFormDataPart("contents",binding.challengeWriteContent.text.toString())
                     .build()
 
                 response = NetworkSettings.imageClient.newCall(
                     NetworkSettings.imageRequest("/challenge/create",fileUploadBody)).execute()
                 if (response.isSuccessful) {
-//                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
-//                    val intent = Intent()
-//                    intent.putExtra("created_board", board)
                     setResult(RESULT_OK)
                     finish()
                 } else {
