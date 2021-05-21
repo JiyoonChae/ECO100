@@ -46,6 +46,25 @@
         <item name="tabTextAppearance">@style/Tab.TextStyle</item>
     </style>
 
+    <!-- ecobox -->
+    <!-- TabItem Text Style -->
+    <style name="EcoBoxTab.TextStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Tab Style -->
+    <style name="EcoBoxTabLayout.ItemStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorGravity">bottom</item>
+        <item name="tabIndicatorHeight">@dimen/size_2dp</item>
+        <item name="tabIndicatorColor">@color/primary_color</item>
+        <item name="tabTextAppearance">@style/EcoBoxTab.TextStyle</item>
+        <item name="tabTextColor">@color/tab_icon_color</item>
+        <item name="tabSelectedTextColor">@color/primary_color</item>
+    </style>
+
     <!-- Common Popup Style -->
     <style name="CommonPopup.TitleStyle" parent="android:TextAppearance">
         <item name="android:textColor">@color/primary_color</item>

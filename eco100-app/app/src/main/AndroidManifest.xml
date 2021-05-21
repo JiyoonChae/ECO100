@@ -21,11 +21,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
-        android:usesCleartextTraffic="true"
-        tools:ignore="UnusedAttribute">
+        android:usesCleartextTraffic="true">
+        <activity android:name=".views.ecobox.ContentDetailActivity"></activity>
+        <activity android:name=".views.ecobox.RecycleGuideStyrofoamActivity" />
+        <activity android:name=".views.ecobox.RecycleGuideCanActivity" />
+        <activity android:name=".views.ecobox.RecycleGuideVinylActivity" />
+        <activity android:name=".views.ecobox.RecycleGuidePlasticActivity" />
+        <activity android:name=".views.ecobox.RecycleGuideGlassActivity" />
+        <activity android:name=".views.ecobox.RecycleGuidePaperActivity" />
+        <activity android:name=".views.network.NoConnectedDialog" />
+        <activity android:name=".views.MainActivity" />
+
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false"/>
+            android:required="false" />
+
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -48,8 +58,7 @@
                     android:host="oauth"
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
-        </activity>
-        <!-- google map key -->
+        </activity> <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />

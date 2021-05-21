@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_18dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_marginBottom="@dimen/margin_4dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/qmarkImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/faq_ic_description"
+            app:srcCompat="@drawable/ic_ecobox_q_mark" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/faqCategoryTextView"
+                android:layout_width="@dimen/ecobox_size_256dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mapo_peacefull"
+                android:layout_marginLeft="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_4dp"
+                android:text="기타"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/faqQuestionTextView"
+                android:layout_width="@dimen/ecobox_size_256dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mapo_peacefull"
+                android:layout_marginLeft="@dimen/margin_12dp"
+                android:text="핸드타월 어떻게 배출하나요?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/popup_text" />
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/faqArrowDownBtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ecobox_margin_1dp"
+            android:contentDescription="faq_arrow_description"
+            app:srcCompat="@drawable/ic_faq_arrow_down" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="@dimen/size_280dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_70dp"
+        android:layout_marginRight="@dimen/margin_24dp"
+        android:background="@color/main_line_color" />
+
+    <LinearLayout
+        android:id="@+id/layout_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_18dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/amarkImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_ecobox_a_mark" />
+
+        <TextView
+            android:id="@+id/faqAnswerTextView"
+            android:layout_width="@dimen/ecobox_size_256dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_12dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text="물기를 닦고 난 종이로 만든 핸드 타월은 종이류 수거함으로 배출합니다. \n ※ 음식물 등 이물질이 묻어 있는 경우에는 종량제봉투로 배출합니다."
+            android:textColor="@color/black"
+            android:textSize="@dimen/popup_text"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

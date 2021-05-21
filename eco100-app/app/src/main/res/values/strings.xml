@@ -33,10 +33,22 @@
 
     <!-- ecobox -->
     <string name="ecobox_faq">FAQ</string>
+    <string name="btn_paper_ic_description">종이류,종이팩 버튼 아이콘</string>
+    <string name="btn_glass_ic_description">유리병류 버튼 아이콘</string>
+    <string name="btn_plastic_ic_description">플라스틱 버튼 아이콘</string>
+    <string name="btn_can_ic_description">금속캔,고철 버튼 아이콘</string>
+    <string name="btn_vinyl_ic_description">비닐류 버튼 아이콘</string>
+    <string name="btn_styrofoam_ic_description">스티로폼 버튼 아이콘</string>
+    <string name="faq_ic_description">FAQ 검색 아이콘</string>
+    <string name="faq_arrow_description">FAQ 화살표 버튼 아이콘</string>
+    <string name="content_banner_description">컨텐츠 배너</string>
+    <string name="content_image_description">컨텐츠 이미지</string>
+
+
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>
     <string name="ecobox_plastic">플라스틱</string>
-    <string name="ecobox_metal">금속캔,고철</string>
+    <string name="ecobox_can">금속캔,고철</string>
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
 

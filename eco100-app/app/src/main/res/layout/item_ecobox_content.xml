@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+        <ImageView
+            android:id="@+id/content_imageView"
+            android:layout_width="@dimen/ecobox_size_152dp"
+            android:layout_height="@dimen/ecobox_size_152dp"
+            android:background="@drawable/square_background_border"
+            android:padding="@dimen/padding_8dp"
+            app:srcCompat="@drawable/ecobox_content_documentary2"
+            android:contentDescription="@string/content_banner_description" />
+
+        <TextView
+            android:id="@+id/content_category"
+            android:layout_width="@dimen/ecobox_size_166dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginBottom="@dimen/margin_4dp"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text=""
+            android:textSize="@dimen/main_intro"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/content_title"
+            android:layout_width="@dimen/ecobox_size_166dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mapo_peacefull"
+            android:text=""
+            android:textSize="@dimen/popup_text"
+            android:textStyle="bold" />
+
+</LinearLayout>

@@ -24,6 +24,11 @@
     <!-- popup color -->
     <color name="popup_btn_left_color">#c4c4c4</color>
 
+    <!-- ecobox color -->
+    <color name="faq_line_color">#C4C4C4</color>
+    <color name="content_color">#8CD698</color>
+
+
     <!-- map list line color -->
     <color name="list_line_color">#e8e8e8</color>
 </resources>
