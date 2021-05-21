@@ -21,19 +21,11 @@
         android:elevation="@dimen/size_2dp"
         app:tabRippleColor="@color/primary_color_dark" />
 
-    <androidx.core.widget.NestedScrollView
+    <!-- contents -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <!-- contents -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </androidx.core.widget.NestedScrollView>
-
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

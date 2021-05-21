@@ -52,6 +52,13 @@
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
 
+    <string name="content_category">[다큐]</string>
+    <string name="content_title">분리수거가 당신에게 가르쳐 주지 않는 것</string>
+    <string name="content_detail_info_title">기본 정보</string>
+    <string name="content_detail_info">안녕하세요! 한국석유공사입니다!</string>
+    <string name="content_detail_guide">우측링크 아이콘을 누르면 해당정보사이트로 이동됩니다.</string>
+
+
     <!-- popup -->
     <string name="popup_confirm">확인</string>
     <string name="popup_cancel">취소</string>

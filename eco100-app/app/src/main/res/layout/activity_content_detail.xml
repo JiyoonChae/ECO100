@@ -8,8 +8,75 @@
     tools:context=".views.ecobox.ContentDetailActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/content_detail_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/content_category"
+        android:textColor="@color/black"
+        android:textSize="@dimen/ecobox_content_category" />
+
+    <TextView
+        android:id="@+id/content_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:layout_marginRight="@dimen/ecobox_margin_26dp"
+        android:layout_marginBottom="@dimen/margin_24dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/content_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/ecobox_content_detail_title"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/content_detail_imageView"
+        android:layout_width="@dimen/size_360dp"
+        android:layout_height="@dimen/size_360dp"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:layout_marginRight="@dimen/ecobox_margin_26dp"
+        android:background="@drawable/square_background_border"
+        android:padding="@dimen/padding_12dp"
+        android:contentDescription="@string/content_image_description"
+        app:srcCompat="@drawable/ecobox_content_documentary2" />
+
+    <TextView
+        android:id="@+id/content_detail_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/content_detail_info_title"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/ecobox_content_detail_text" />
+
+    <TextView
+        android:id="@+id/content_detail_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:layout_marginRight="@dimen/ecobox_margin_26dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/content_detail_info"
+        android:textColor="@color/black"
+        android:textSize="@dimen/ecobox_content_detail_text" />
+
+    <TextView
+        android:id="@+id/content_detail_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ecobox_margin_26dp"
+        android:layout_marginRight="@dimen/ecobox_margin_26dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/content_detail_guide"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/ecobox_content_detail_text" />
+
+
 </LinearLayout>

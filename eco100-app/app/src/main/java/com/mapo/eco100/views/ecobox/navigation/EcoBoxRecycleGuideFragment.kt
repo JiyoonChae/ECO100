@@ -28,7 +28,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
     var faqList = FAQ_list
     var faqSearchList: MutableList<FAQ> = mutableListOf()
-    var adapter = FaqRecyclerAdapter(context, faqList)
+    var adapter = FaqRecyclerAdapter(faqList)
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -59,7 +59,7 @@ class EcoBoxRecycleGuideFragment : Fragment() {
                 if (searchlist != null) {
                     faqSearchList = searchlist
                 }
-                adapter = FaqRecyclerAdapter(context, faqSearchList)
+                adapter = FaqRecyclerAdapter(faqSearchList)
                 faqRecyclerView.adapter = adapter
                 faqRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.notifyDataSetChanged()

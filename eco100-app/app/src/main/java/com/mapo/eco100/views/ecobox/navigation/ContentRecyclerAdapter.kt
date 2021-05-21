@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
+import com.mapo.eco100.views.ecobox.ContentDetailActivity
 import com.mapo.eco100.views.ecobox.RecycleGuidePaperActivity
 
 class ContentRecyclerAdapter
@@ -45,12 +48,10 @@ class ContentRecyclerAdapter
         holder.contentCategoryTextView.text = category[position]
         holder.contentTitleTextView.text = title[position]
 
-//        holder.itemView.setOnClickListener{
-//            val intent = Intent(context, ContentDetailActivity::class.java).apply {
-//                putExtra("data", item)
-//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            }.run { context.startActivity(this) }
-//        }
+        holder.itemView.setOnClickListener{
+        val intent = Intent(holder.itemView.context, ContentDetailActivity::class.java)
+        ContextCompat.startActivity(holder.itemView.context,intent,null)
+        }
 
     }
 
