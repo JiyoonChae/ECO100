@@ -32,6 +32,12 @@
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
 
+        android:usesCleartextTraffic="true">
+        <activity android:name=".views.myeco.MyCommentListActivity"></activity>
+        <activity android:name=".views.myeco.MyBadgeListActivity" />
+        <activity android:name=".views.myeco.MyChallengeListActivity" />
+        <activity android:name=".views.myeco.MyBoardListActivity" />
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
