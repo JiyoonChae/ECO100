@@ -7,14 +7,23 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.mapo.eco100.MainActivity
 
-
+import com.bumptech.glide.Glide
+import com.mapo.eco100.R
+import com.mapo.eco100.databinding.ActivitySplashBinding
 
 
 class SplashActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySplashBinding
     private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        Glide.with(this).asGif().load(R.raw.splash_eco100).into(binding.splashImg)
 
         handler.postDelayed({
 
