@@ -107,9 +107,16 @@ class WriteChallenge : BaseActivity() {
         //글쓰기 완료
         binding.challengeFinish.setOnClickListener {
             Log.d("chall", "버튼 눌림")
-            //binding.challengeFinish.setImageResource(R.drawable.challenge_done_btn)
+
             uploadPost()
-            //binding.challengeFinish.setBackground(R.drawable.challenge_done_btn)
+
+        }
+
+        //이미지 삭제
+        binding.buttonDelete.setOnClickListener {
+            realUri = null
+            filePath = ""
+            binding.challengeWriteImage.setImageResource(R.drawable.ic_community_40dp)
         }
 
     }
@@ -158,7 +165,7 @@ class WriteChallenge : BaseActivity() {
     //카메라 요청
     fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQ_CAMERA)
+       // startActivityForResult(intent, REQ_CAMERA)
 
         createImageUri(newFileName(), "image/jpg")?.let { uri ->
             realUri = uri  //실제 이미지의 Uri 주소
