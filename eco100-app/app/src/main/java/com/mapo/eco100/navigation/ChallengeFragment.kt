@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,7 +35,8 @@ class ChallengeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var  mainActivityContext: Context
-
+   // private lateinit var challenge: Challenge
+    val challengeCode = 777
 
     private var adapter :RecyclerAdatper? =null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -89,13 +91,15 @@ class ChallengeFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
-            val challenge = challengeList?.get(position)
+              val challenge = challengeList?.get(position)
+
 
 //            holder.rowImageView.setImageResource(imgRes[position])
 //            holder.rowTextView.text = data1[position]
 //            holder.rowStamp1.setImageResource(R.drawable.icon_challenge_nonsucced)
 //            holder.rowStamp2.setImageResource(R.drawable.icon_challenge_succed)
             holder.setChallenge(challenge)
+            //만약 해당 챌린지의 myParticipationCnt 가 1이면 rowstamp1이 글읽기로 그
             holder.rowStamp1.setOnClickListener {
                 Log.d("click", "clicked!!")
                 val builder = AlertDialog.Builder(mainActivityContext)
@@ -110,7 +114,7 @@ class ChallengeFragment : Fragment() {
                     //선택한 주제 전달
                     intent.putExtra("item", challenge)
 
-                    startActivity(intent)
+                    startActivityForResult(intent,challengeCode)
                 }
                 val cancel =custom_view.findViewById<Button>(R.id.challenge_popup_cancel)
                 cancel.setOnClickListener { mAlertDialog.dismiss() }
@@ -123,6 +127,7 @@ class ChallengeFragment : Fragment() {
                 intent.putExtra("item", challenge)
                 startActivity(intent)
             }
+
         }
 
         override fun getItemCount(): Int {
@@ -160,20 +165,27 @@ class ChallengeFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
             Log.d("챌린지리스트: ", "resultCode : $resultCode")
             Log.d("챌린지리스트: ", "requestCode: $requestCode")
+            when(requestCode){
+                challengeCode -> {
+                    val service: ChallengeService =
+                        NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+                    service.challengeList(1).enqueue(object : Callback<ChallengeList>{
+                        override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+                            Log.d(tag, " 실패 --------------", null)
+                        }
 
-            val service: ChallengeService =
-                NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-            service.challengeList(1).enqueue(object : Callback<ChallengeList>{
-                override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
-                    Log.d(tag, " 실패 --------------", null)
+                        override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
+                            adapter?.challengeList = response.body() as ChallengeList
+                            adapter?.notifyDataSetChanged()
+                            Log.d("챌린지리스트: ", "새로고침완료")
+                        }
+                    })
+                    binding2.rowStamp1.setImageResource(R.drawable.icon_challenge_succed)
                 }
+            }
 
-                override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
-                    adapter?.challengeList = response.body() as ChallengeList
-                    adapter?.notifyDataSetChanged()
-                    Log.d("챌린지리스트: ", "새로고침완료")
-                }
-            })
+
+
         }else {
             Log.d("result: ", "실패??")
         }
