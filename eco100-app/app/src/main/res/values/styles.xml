@@ -119,7 +119,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
-        <item name="android:windowBackground">@drawable/img_test_splash_bg</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="LBSMapTheme" parent="@style/Theme.AppCompat.Light">
