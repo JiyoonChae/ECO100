@@ -13,6 +13,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -45,8 +47,8 @@ class WriteChallenge : BaseActivity() {
     val REQ_STORAGE = 102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
     lateinit var filePath: String
-    private var challenge : Challenge? = null
-
+    private var challenge: Challenge? = null
+    private val maxLimit = 200//글자 제한 설정
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
     val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
@@ -71,37 +73,46 @@ class WriteChallenge : BaseActivity() {
             PERM_STORAGE
         )
 
-//        //해당 챌린지 아이콘 이미지 불러오기......
-//        val service: ChallengeService =
-//            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-//        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
-//            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
-//                Log.d("tag", " 실패 --------------", null)
-//            }
-//
-//            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
-//                val result = response.body() as ChallengeList
-//                val challenge = result?.get(0)
-//                Glide.with(binding.iconChallenge).load(challenge.imageUrl)
-//                    .into(binding.iconChallenge)
-//            }
-//        })
-//
-//        //클릭한 챌린지 리스트에있는 주제를 받아서 출력하기
-//        val item = intent.extras?.get("item") as String
-//        binding.textView.setText(item)
+        //글자 제한 설정
+        val editText = binding.challengeWriteContent
+        val textCount = binding.textCount
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (editText.isFocusable && s.toString() != "") {
+                    val string: String = s.toString()
+                    val len = string.length
+                    if (len > maxLimit) {
+                        editText.setText(string.substring(0, maxLimit))
+                        editText.setSelection(maxLimit)
+                    } else {
+                        textCount.text = "($len/$maxLimit)"
+                    }
+                } else {
+                    textCount.text = "( 0 / $maxLimit )"
+
+                }
+
+
+            }
+        })
 
         //글쓰기 완료
         binding.challengeFinish.setOnClickListener {
             Log.d("chall", "버튼 눌림")
-            binding.challengeFinish.setImageResource(R.drawable.challenge_done_btn)
+            //binding.challengeFinish.setImageResource(R.drawable.challenge_done_btn)
             uploadPost()
             //binding.challengeFinish.setBackground(R.drawable.challenge_done_btn)
         }
 
     }
-
-
 
 
     //저장소 권한 요청이 승인되었을 경우
@@ -228,7 +239,6 @@ class WriteChallenge : BaseActivity() {
     }
 
 
-
     fun getImageFilePath(contentUri: Uri): String {
         var columnIndex = 0
         val projection = arrayOf(MediaStore.Images.Media.DATA)
@@ -248,52 +258,53 @@ class WriteChallenge : BaseActivity() {
             val uploadFile = File(filePath)
             var response: okhttp3.Response? = null
             try {
-                val fileUploadBody:RequestBody = MultipartBody.Builder()
+                val fileUploadBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
-                        "image",uploadFile.name,
+                        "image", uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
-                    .addFormDataPart("userId","1")
-                    .addFormDataPart("challengeId",challenge!!.challengeId.toString())
-                    .addFormDataPart("contents",binding.challengeWriteContent.text.toString())
+                    .addFormDataPart("userId", "1")
+                    .addFormDataPart("challengeId", challenge!!.challengeId.toString())
+                    .addFormDataPart("contents", binding.challengeWriteContent.text.toString())
                     .build()
 
                 response = NetworkSettings.imageClient.newCall(
-                    NetworkSettings.imageRequest("/challenge/create",fileUploadBody)).execute()
+                    NetworkSettings.imageRequest("/challenge/create", fileUploadBody)
+                ).execute()
                 if (response.isSuccessful) {
                     setResult(RESULT_OK)
                     finish()
                 } else {
-                    Toast.makeText(this,"전송 실패",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "전송 실패", Toast.LENGTH_SHORT).show()
                     //전송 실패
                 }
-            } catch (e:Exception) {
-                Log.e("UploadError",e.toString())
+            } catch (e: Exception) {
+                Log.e("UploadError", e.toString())
             } finally {
                 response?.close()
             }
         }.start()
     }
-        /*val service: ChallengeService =
-            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+    /*val service: ChallengeService =
+        NetworkSettings.retrofit.build().create(ChallengeService::class.java)
 
-        service.challengeUpload(1.toString(), "21", content, part).enqueue(object : Callback<ChallengePost> {
+    service.challengeUpload(1.toString(), "21", content, part).enqueue(object : Callback<ChallengePost> {
 
-            override fun onFailure(call: Call<ChallengePost>, t: Throwable) {
-                Log.d("챌린지", "챌린지 등록 실패")
+        override fun onFailure(call: Call<ChallengePost>, t: Throwable) {
+            Log.d("챌린지", "챌린지 등록 실패")
+        }
+
+        override fun onResponse(call: Call<ChallengePost>, response: Response<ChallengePost>) {
+            if (response.isSuccessful) {
+                val challengNew = response.body()
+                Log.d("챌린지", challengNew!!.challengePostId.toString())
+                finish()
+            }else{
+                Log.d("챌린지","실패")
             }
-
-            override fun onResponse(call: Call<ChallengePost>, response: Response<ChallengePost>) {
-                if (response.isSuccessful) {
-                    val challengNew = response.body()
-                    Log.d("챌린지", challengNew!!.challengePostId.toString())
-                    finish()
-                }else{
-                    Log.d("챌린지","실패")
-                }
-            }
-        })*/
+        }
+    })*/
     //}
 
     fun getContent(): String {

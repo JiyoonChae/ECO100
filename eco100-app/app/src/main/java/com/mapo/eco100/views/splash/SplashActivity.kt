@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.mapo.eco100.MainActivity
-
 import com.bumptech.glide.Glide
+import com.mapo.eco100.MainActivity
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ActivitySplashBinding
 
@@ -26,12 +25,9 @@ class SplashActivity : AppCompatActivity() {
         Glide.with(this).asGif().load(R.raw.splash_eco100).into(binding.splashImg)
 
         handler.postDelayed({
-
-        }, 2000L)
-
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 1500L)
     }
-
 }
