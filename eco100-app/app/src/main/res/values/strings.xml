@@ -6,6 +6,7 @@
     <string name="app_community">Community</string>
     <string name="app_myeco">MyEco</string>
     <string name="app_search">Search</string>
+    <string name="baseUrl">http://rpinas.iptime.org:10122</string>
 
     <!-- kr -->
     <string name="app_name_kr">에코100</string>
