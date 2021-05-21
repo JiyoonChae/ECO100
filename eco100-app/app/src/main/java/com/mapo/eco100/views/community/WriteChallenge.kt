@@ -280,6 +280,7 @@ class WriteChallenge : BaseActivity() {
                     NetworkSettings.imageRequest("/challenge/create", fileUploadBody)
                 ).execute()
                 if (response.isSuccessful) {
+                    Log.d("서버 등록: ","성공")
                     setResult(RESULT_OK)
                     finish()
                 } else {

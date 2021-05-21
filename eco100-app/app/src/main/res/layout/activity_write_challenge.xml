@@ -57,6 +57,9 @@
 
         />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -129,7 +132,7 @@
             <EditText
                 android:id="@+id/challenge_write_content"
                 android:layout_width="337dp"
-                android:layout_height="120dp"
+                android:layout_height="150dp"
                 android:ems="10"
                 android:hint="@string/write_challenge_hint"
                 android:inputType="textMultiLine"
@@ -150,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="(0 / 200)"
+                android:textSize="@dimen/size_14dp"
                 android:gravity="right"/>
         </LinearLayout>
 
@@ -158,7 +162,7 @@
             android:layout_width="337dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/size_54dp"
+            android:layout_marginTop="@dimen/size_12dp"
             android:layout_weight="1"
             android:paddingTop="2dp">
 
@@ -180,8 +184,11 @@
 
         </FrameLayout>
 
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="112dp"
+            android:background="@drawable/ch_backframe" />
     </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

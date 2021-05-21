@@ -35,11 +35,6 @@ class ChallengeFragment : Fragment() {
 
     private lateinit var  mainActivityContext: Context
 
-    val imgRes = intArrayOf(R.drawable.icon_challenge17, R.drawable.icon_challenge19, R.drawable.icon_challenge22,
-        R.drawable.icon_challenge23,R.drawable.icon_challenge8, R.drawable.icon_challenge30)
-
-    val data1 = arrayOf("대중 교통 이용하기","플로깅 실천하기 (내가 직접 주운 쓰레기 사진 인증)", "비닐 포장, 상품 포장 하지 않기", "책 구매 대신 도서관에서 대출하기",
-        "다회 용기를 이용하여 음식 및 식자재 구매하기", "종이영수증 대신 전자영수증 사용하기")
 
     private var adapter :RecyclerAdatper? =null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -111,6 +106,7 @@ class ChallengeFragment : Fragment() {
                 ok.setOnClickListener {
                     //글쓰기 화면 띄우기
                     val intent = Intent(activity, WriteChallenge::class.java)
+                    mAlertDialog.dismiss()
                     //선택한 주제 전달
                     intent.putExtra("item", challenge)
 
@@ -162,8 +158,8 @@ class ChallengeFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
-            Log.d("resultCode: ", "$resultCode")
-            Log.d("requestCode: ", "$requestCode")
+            Log.d("챌린지리스트: ", "resultCode : $resultCode")
+            Log.d("챌린지리스트: ", "requestCode: $requestCode")
 
             val service: ChallengeService =
                 NetworkSettings.retrofit.build().create(ChallengeService::class.java)
@@ -175,6 +171,7 @@ class ChallengeFragment : Fragment() {
                 override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
                     adapter?.challengeList = response.body() as ChallengeList
                     adapter?.notifyDataSetChanged()
+                    Log.d("챌린지리스트: ", "새로고침완료")
                 }
             })
         }else {
