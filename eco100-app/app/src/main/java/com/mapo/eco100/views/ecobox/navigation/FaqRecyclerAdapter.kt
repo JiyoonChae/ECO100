@@ -1,6 +1,5 @@
 package com.mapo.eco100.views.ecobox.navigation
 
-import android.content.Context
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import com.mapo.eco100.R
 import com.mapo.eco100.entity.staticmodel.FAQ
 
 
-class FaqRecyclerAdapter(private val context: Context?, val faqlist: MutableList<FAQ>)
+class FaqRecyclerAdapter(val faqlist: MutableList<FAQ>)
     : RecyclerView.Adapter<FaqRecyclerAdapter.FaqViewHolderClass>() {
 
     // Item의 클릭 상태를 저장할 array 객체

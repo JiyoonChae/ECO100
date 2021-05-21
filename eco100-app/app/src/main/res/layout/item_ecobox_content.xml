@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/ecobox_margin_30dp"
+    android:layout_marginLeft="@dimen/margin_24dp"
     android:orientation="vertical"
     >
 
@@ -23,8 +25,9 @@
             android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginBottom="@dimen/margin_4dp"
             android:fontFamily="@font/mapo_peacefull"
-            android:text=""
-            android:textSize="@dimen/main_intro"
+            android:text="@string/content_category"
+            android:textSize="@dimen/ecobox_content_category"
+            android:textColor="@color/black"
             android:textStyle="bold"
             />
 
@@ -33,8 +36,9 @@
             android:layout_width="@dimen/ecobox_size_166dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mapo_peacefull"
-            android:text=""
-            android:textSize="@dimen/popup_text"
+            android:text="@string/content_title"
+            android:textSize="@dimen/ecobox_content_title"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
 </LinearLayout>
