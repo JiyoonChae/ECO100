@@ -1,10 +1,12 @@
 package com.mapo.eco100.config
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
+import com.mapo.eco100.R
 import com.mapo.eco100.views.network.NoConnectedDialog
 import okhttp3.*
 import retrofit2.Retrofit

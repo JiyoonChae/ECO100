@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_board"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,25 +16,14 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_22dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            app:srcCompat="@drawable/icon_common_user" />
+            app:srcCompat="@drawable/ic_baseline_sentiment_very_satisfied_24" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
         <TextView
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="10dp"
             android:text="닉네임" />
 
         <TextView
@@ -41,27 +31,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:gravity="end"
+            android:layout_marginTop="10dp"
             android:text="날짜" />
-
-            </LinearLayout>
-
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_marginBottom="@dimen/size_10dp"
-            android:text="제목"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
-        </LinearLayout>
 
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/margin_4dp"
+        android:layout_marginBottom="@dimen/size_10dp"
+        android:text="제목"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:gravity="end"
@@ -72,7 +56,7 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/icon_comments" />
+            app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <TextView
             android:id="@+id/likes_cnt"
@@ -85,14 +69,14 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_22dp"
-            app:srcCompat="@drawable/icon_likes" />
+            android:layout_marginLeft="@dimen/margin_8dp"
+            app:srcCompat="@drawable/ic_baseline_comment_24" />
 
         <TextView
             android:id="@+id/comments_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_8dp"
+            android:layout_marginRight="@dimen/size_10dp"
             android:textSize="20dp"
             android:text="0" />
     </LinearLayout>

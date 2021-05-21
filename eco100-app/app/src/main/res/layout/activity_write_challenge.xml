@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.community.WriteChallenge">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginLeft="@dimen/margin_36dp"
+            android:layout_marginTop="@dimen/size_18dp"
+            android:layout_marginRight="@dimen/margin_4dp"
+            android:background="@drawable/icon_ch_frame">
+
+            <ImageView
+                android:id="@+id/icon_challenge"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="14dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/size_14dp"
+            android:background="@drawable/icon_ch_title_back"
+            android:gravity="center"
+            android:text="챌린지 주제 : 장바구니 사용하기"
+            android:textSize="@dimen/size_16dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:text="*챌린지 인증방법\n
+           주제에 맞는 사진을 촬영하여 1장만 첨부합니다"
+
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/challenge_write_image"
+            android:layout_width="337dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ch_write_frame"
+            tools:srcCompat="@drawable/img_ch_write2" />
+
+
+        <LinearLayout
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/buttonCamera"
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginRight="@dimen/size_60dp"
+                android:background="@drawable/btn_camera" />
+
+            <ImageButton
+                android:id="@+id/buttonGallery"
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginRight="@dimen/size_60dp"
+                android:background="@drawable/btn_galary" />
+
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:background="@drawable/btn_trash" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!--
+            inputType = textMultiLine
+            이걸 설정하면 글자 입력할 때 화면을 벗어나면
+             자동으로 줄바꿈 된다.
+
+             gravity = top
+             이걸 설정하면 기본으로 커서가 최상단 왼쪽으로 위치하여
+             텍스트를 최상단 왼쪽에서 입력할 수 있다.
+             -->
+
+
+            <EditText
+                android:id="@+id/challenge_write_content"
+                android:layout_width="337dp"
+                android:layout_height="150dp"
+                android:ems="10"
+                android:hint="@string/write_challenge_hint"
+                android:inputType="textMultiLine"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/ch_write_frame"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textCount"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="(0 / 200)"
+                android:textSize="@dimen/size_14dp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="337dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:layout_weight="1"
+            android:paddingTop="2dp">
+
+            <ImageView
+                android:layout_width="@dimen/size_38dp"
+                android:layout_height="@dimen/size_38dp"
+                android:layout_gravity="top|right"
+                android:layout_marginEnd="@dimen/margin_38dp"
+                android:contentDescription="@string/string_value"
+                android:src="@drawable/img_popup_btn_ecoduck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/challengeFinish"
+                style="@style/CommonPopup.BtnRightTextStyle"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:text="@string/popup_write"
+                />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="112dp"
+            android:background="@drawable/ch_backframe" />
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

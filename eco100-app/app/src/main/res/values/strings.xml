@@ -64,6 +64,7 @@
     <string name="popup_confirm">확인</string>
     <string name="popup_cancel">취소</string>
     <string name="popup_delete">삭제</string>
+    <string name="popup_write">등록하기</string>
 
     <!-- signup -->
     <string name="popup_join_welcome_title">환영합니다. 가입되셨습니다 :)</string>
@@ -85,7 +86,8 @@
 
     <!-- challenge -->
     <string name="popup_challenge_register_title">챌린지를 등록하시겠습니까?</string>
-    <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는삭제 또는 재등록만 가능합니다.</string>
+    <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는 수정만 가능합니다.</string>
+    <string name="write_challenge_hint">챌린지 소감을 작성해주세요(최대 200자)</string>
 
     <!-- map -->
     <string name="map_shop">종량제판매처</string>

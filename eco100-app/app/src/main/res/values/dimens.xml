@@ -117,8 +117,8 @@
     <dimen name="ecobox_margin_112dp">112dp</dimen>
     <dimen name="margin_148dp">148dp</dimen>
 
-
-
+    <!--challenge size -->
+    <dimen name="challenge_126dp">126dp</dimen>
 
 
 

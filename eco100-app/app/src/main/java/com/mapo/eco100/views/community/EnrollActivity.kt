@@ -25,7 +25,7 @@ import com.mapo.eco100.databinding.ActivityEnrollBinding
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
-import com.mapo.eco100.views.MainActivity
+import com.mapo.eco100.MainActivity
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
