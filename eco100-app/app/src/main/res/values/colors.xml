@@ -27,6 +27,9 @@
     <!-- ecobox color -->
     <color name="faq_line_color">#C4C4C4</color>
     <color name="content_color">#8CD698</color>
+    <color name="content_activity_color">#FFA100</color>
+    <color name="content_toon_color">#50B848</color>
+    <color name="content_zeroshop_color">#EB7CA9</color>
 
 
     <!-- map list line color -->
