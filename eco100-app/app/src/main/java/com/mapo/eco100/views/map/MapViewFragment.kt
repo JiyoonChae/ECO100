@@ -36,9 +36,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     private lateinit var bitmapDraw: BitmapDrawable
     private lateinit var bitmap: Bitmap
     private val bottomSheet = BottomSheet()
-    private lateinit var mapFragment : SupportMapFragment
-    var testLocation = LatLng(37.54870902828827, 127.04403673987844)
-
+    private lateinit var mapFragment: SupportMapFragment
+    private var selectedShop: LatLng? = null
+    private var selectedShopName: String? = null
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapFragment.onSaveInstanceState(outState)
@@ -50,6 +50,19 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         savedInstanceState: Bundle?
     ): View? {
 
+        selectedShopName = arguments?.getString("name")
+        var resultLat = arguments?.getDouble("lat")
+        var resultLong = arguments?.getDouble("long")
+
+        if (arguments != null) {
+            selectedShop = arguments?.let {
+                LatLng(resultLat!!, resultLong!!)
+            }
+
+            Log.d("map", "selectedShop: $selectedShop")
+        }
+
+        Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
         // radioBtn
@@ -70,17 +83,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         return binding.root
     }
 
-    private fun setGoogleMap(map : GoogleMap){
-        mMap = map
-        Log.d("map", "mMap >> $mMap")
-        Log.d("map", "map >> $map")
-
-    }
 
     // map
     override fun onMapReady(googleMap: GoogleMap) {
 
-        setGoogleMap(googleMap)
+        mMap = googleMap
+
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         if (ActivityCompat.checkSelfPermission(
                 binding.root.context,
@@ -93,6 +101,16 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             return
         }
         googleMap.isMyLocationEnabled = true
+
+        // argument
+        selectedShop?.let {
+            Log.d("map", "In selectedShop: $it")
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            val markerOptions = MarkerOptions()
+            markerOptions.position(it).title(selectedShopName).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            mMap.addMarker(markerOptions)
+        }
 
         // 각 항목별 가게 리스트를 보여준다.
         binding.openList.setOnClickListener {
@@ -155,7 +173,14 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
         Log.d("map", "getZeroshopList map >> $mMap")
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(testLocation)) // d위치 변경하기
+        mMap.moveCamera(
+            CameraUpdateFactory.newLatLng(
+                LatLng(
+                    zeroShopList[0].latitude.toDouble(),
+                    zeroShopList[0].longitude.toDouble()
+                )
+            )
+        )
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
@@ -189,12 +214,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
     // 선택된 가게에 대한 위경도 정보를 가져온다.
     override fun setShopLocation(latitude: Double, longitude: Double) {
-        testLocation = LatLng(latitude, longitude)
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShopLocation))
+
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShopLocation))
         //getGoogleMap().animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
-    fun test(){
-        Log.d("map","test")
-    }
 }

@@ -10,8 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.BottomSheetMapListBinding
@@ -50,6 +52,20 @@ class BottomSheet : BottomSheetDialogFragment() {
                     item.latitude.toDouble(),
                     item.longitude.toDouble(),
                 )
+                val bundle = Bundle()
+                bundle.putString("name", item.name)
+                bundle.putDouble("lat", item.latitude.toDouble())
+                bundle.putDouble("long", item.longitude.toDouble())
+                Log.d("map", "bundle : ${bundle.getDouble("lat")}")
+                Log.d("map", "parent : $parentFragment")
+                Log.d("map", "req : ${requireParentFragment()}")
+
+                val mapViewFragment = MapViewFragment()
+                mapViewFragment.arguments = bundle
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.map, mapViewFragment)
+                    .commit()
                 shopListAdapter.notifyDataSetChanged()
                 dismiss()
             }
