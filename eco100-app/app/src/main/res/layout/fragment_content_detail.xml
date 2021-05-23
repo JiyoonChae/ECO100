@@ -19,7 +19,7 @@
                 android:layout_marginStart="@dimen/ecobox_margin_26dp"
                 android:layout_marginTop="@dimen/margin_20dp"
                 android:fontFamily="@font/mapo_peacefull"
-                android:text="@string/content_category"
+                android:text="category"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ecobox_content_category" />
 
@@ -32,7 +32,7 @@
                 android:layout_marginRight="@dimen/ecobox_margin_26dp"
                 android:layout_marginBottom="@dimen/margin_24dp"
                 android:fontFamily="@font/mapo_peacefull"
-                android:text="@string/content_title"
+                android:text="title"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ecobox_content_detail_title"
                 android:textStyle="bold" />
@@ -68,7 +68,7 @@
                 android:layout_marginRight="@dimen/ecobox_margin_26dp"
                 android:layout_marginBottom="@dimen/margin_8dp"
                 android:fontFamily="@font/mapo_peacefull"
-                android:text="@string/content_detail_info"
+                android:text="detail_info"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ecobox_content_detail_text" />
 

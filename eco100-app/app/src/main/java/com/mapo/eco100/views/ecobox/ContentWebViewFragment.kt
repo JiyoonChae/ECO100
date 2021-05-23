@@ -29,12 +29,14 @@ class ContentWebViewFragment : Fragment() {
 
         _binding = FragmentContentWebViewBinding.inflate(inflater, container, false)
 
+        val url = arguments?.getString("webUrl")
+
         // 웹 뷰 기본 설정
         binding.contentWebView.apply {
             settings.javaScriptEnabled = true // 웹페이지 자바스클비트 허용 여부
             webViewClient = WebViewClient() // 클릭시 새창 안뜨게
         }
-        .loadUrl("http://www.google.com") // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        .loadUrl("$url") // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         initWebView()
 
