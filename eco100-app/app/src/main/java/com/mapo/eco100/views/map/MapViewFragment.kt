@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mapo.eco100.R
+import com.mapo.eco100.config.LocalDataBase.Companion.garbageBagShopInfos
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentMapBinding
 
@@ -186,7 +187,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
     // 종량제 봉투 판매업소 리스트를 가져온다.
     private fun getShopList() {
-
+        garbageBagShopInfos.forEach {
+            Log.d("map", "ShopList >> $it")
+        }
     }
 
     override fun onMyLocationClick(location: Location) {
