@@ -11,6 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/bottom_sheet_map_list_item" />
-
+        tools:listitem="@layout/bottom_sheet_shop_list_item" />
 </LinearLayout>
