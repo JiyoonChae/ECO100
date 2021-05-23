@@ -145,8 +145,22 @@ class ChallengeFragment : Fragment() {
             }
 
             holder.rowStamp2.setOnClickListener {
-                Log.d("click", "clicked!!")
-                showDialog(challenge)
+                //Log.d("click", "clicked!!")
+                when(challenge!!.myParticipationCnt) {
+                    0 -> {
+                        showDialog(challenge)
+                    }
+                    1 -> {
+                        //글썼던 걸로 이동
+
+                    }
+                    2 -> {
+                        //글썼던 걸로 이동
+                    }
+                    else -> {
+
+                    }
+                }
             }
 
         }
