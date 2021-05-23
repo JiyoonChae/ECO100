@@ -69,6 +69,8 @@
     <string name="popup_challenge_register_title">챌린지를 등록하시겠습니까?</string>
     <string name="popup_challenge_register_text">챌리지를 등록하시겠습니까?\n등록된 챌린지는 수정만 가능합니다.</string>
     <string name="write_challenge_hint">챌린지 소감을 작성해주세요(최대 200자)</string>
+    <string name="popup_challenge_warning_title">사진 업로드</string>
+    <string name="popup_challenge_warning_text">챌린지에 맞는 사진을 등록해주세요</string>
 
     <!-- map -->
     <string name="map_shop">종량제판매처</string>

@@ -73,7 +73,7 @@
             android:layout_height="220dp"
             android:layout_gravity="center"
             android:background="@drawable/ch_write_frame"
-            tools:srcCompat="@drawable/img_ch_write2" />
+             />
 
 
         <LinearLayout
