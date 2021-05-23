@@ -23,6 +23,9 @@
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
