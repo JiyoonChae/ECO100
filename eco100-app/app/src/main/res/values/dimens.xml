@@ -102,7 +102,7 @@
 
     <!--challenge size -->
     <dimen name="challenge_126dp">126dp</dimen>
-
+    <dimen name="challenge_337dp">337dp</dimen>
 
 
 </resources>
