@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
 import com.mapo.eco100.databinding.FragmentHomeBinding
@@ -51,11 +52,11 @@ class HomeViewFragment : Fragment() {
         // adapter
         val pagerAdapter = HomeFragmentStateAdapter(this)
         pagerAdapter.run {
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_eco))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_chall))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_news))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_voluntee))
-            appendFragment(FragmentForViewPager.newInstance(R.drawable.img_home_mid_comm))
+            appendFragment(FragmentForViewPager.newInstance(0, R.drawable.img_home_mid_eco))
+            appendFragment(FragmentForViewPager.newInstance(1, R.drawable.img_home_mid_chall))
+            appendFragment(FragmentForViewPager.newInstance(2, R.drawable.img_home_mid_news))
+            appendFragment(FragmentForViewPager.newInstance(3, R.drawable.img_home_mid_voluntee))
+            appendFragment(FragmentForViewPager.newInstance(4, R.drawable.img_home_mid_comm))
             binding.pager.adapter = pagerAdapter
         }
 
@@ -109,6 +110,7 @@ class HomeViewFragment : Fragment() {
             replaceMapFragment()
         }
 
+        Glide.with(this).load(R.drawable.img_home_go_map).into(binding.mapImg)
         return view
     }
 
