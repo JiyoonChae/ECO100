@@ -33,7 +33,18 @@ class MyChallengeListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         //서버연결
+        val service: ChallengeService =
+            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
+            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+                Log.d(tag, " 실패 --------------", null)
+            }
 
+            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
+                adapter!!.challengeList = response.body() as ChallengeList
+                adapter!!.notifyDataSetChanged()
+            }
+        })
     }
 
 
@@ -53,10 +64,11 @@ class RecyclerAdapter() : RecyclerView.Adapter<ViewHolderClass>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
+        val challengePost = challegePostList?.get(position)
 
     }
 }
 
-class ViewHolderClass(val itemView: RowMypageBinding) : RecyclerView.ViewHolder(binding.root) {
+class ViewHolderClass(val itemView: RowMypageBinding) : RecyclerView.ViewHolder(itemView.root) {
 
 }

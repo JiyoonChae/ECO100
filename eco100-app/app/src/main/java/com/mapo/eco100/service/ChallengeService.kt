@@ -5,6 +5,7 @@ import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.challenge.ChallengeList
 import com.mapo.eco100.entity.challenge.ChallengePost
+import com.mapo.eco100.entity.challenge.ChallengePostList
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -24,4 +25,6 @@ interface ChallengeService {
         @Part image: MultipartBody.Part
     ): Call<ChallengePost>
 
+    @GET("challenge/post/{userId}")
+    fun challengePostList( @Path("userId") id: Long) : Call<ChallengePostList>
 }
