@@ -53,22 +53,10 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         savedInstanceState: Bundle?
     ): View? {
 
-        // check args
-        selectedShopName = arguments?.getString("name")
-        val resultLat = arguments?.getDouble("lat")
-        val resultLong = arguments?.getDouble("long")
-        Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
-
-        if (arguments != null) {
-            selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
-            Log.d("map", "selectedShop: $selectedShop")
-        }
-
         _binding = FragmentMapBinding.inflate(inflater, container, false)
-
         bitmapDraw = ResourcesCompat.getDrawable(
             resources,
-            R.drawable.img_map_zeroshop,
+            R.drawable.img_map_select_garbage,
             null
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
@@ -79,6 +67,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+
             mMap.clear()
             clusterManager.clearItems()
 
@@ -148,6 +137,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
         getSelectedShoInfo()
 
+
     }
 
     // 사용자 현재 위치 제공여부를 확인한다.
@@ -173,15 +163,37 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
     // 가게 목록 중 선택된 샵 정보를 제공한다.
     private fun getSelectedShoInfo() {
-        selectedShop?.let {
-            Log.d("map", "In selectedShop: $it")
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            val markerOptions = MarkerOptions()
-            markerOptions.position(it).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
+
+        // check args
+        selectedShopName = arguments?.getString("name")
+        val resultLat = arguments?.getDouble("lat")
+        val resultLong = arguments?.getDouble("long")
+        Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
+
+        if (arguments != null) {
+            selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
+            Log.d("map", "selectedShop: $selectedShop")
         }
+
+        selectedShop?.let {
+            for (zeroShop in zeroShopList) {
+                Log.d("map", "url : ${zeroShop.logoUrl}")
+                clusterManager.addItem(
+                    MyItem(
+                        LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
+                        zeroShop.name,
+                        zeroShop.address,
+                        BitmapDescriptorFactory.fromBitmap(bitmap)
+                    )
+                )
+
+            }
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShop))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            clusterManager.cluster()
+        }
+
+        selectedShop = null
     }
 
     // 제로웨이스트 샵 리스트를 지도에 뿌려준다.
@@ -196,6 +208,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
         for (zeroShop in zeroShopList) {
+            Log.d("map", "url : ${zeroShop.logoUrl}")
             clusterManager.addItem(
                 MyItem(
                     LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
