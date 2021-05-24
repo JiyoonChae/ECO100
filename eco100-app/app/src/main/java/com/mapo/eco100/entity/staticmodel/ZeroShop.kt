@@ -10,5 +10,6 @@ data class ZeroShop(
     val latitude: Float,
     val longitude: Float,
     val imgUrl: String?,
-    val logoUrl: String?
+    val logoUrl: String?,
+    val detailInfo : String?
 )

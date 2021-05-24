@@ -2,10 +2,12 @@ package com.mapo.eco100.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
+import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.ActivityMainBinding
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.contents, newInstance()).commit()
+
 
         binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
