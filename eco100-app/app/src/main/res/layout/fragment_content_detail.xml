@@ -21,7 +21,8 @@
                 android:fontFamily="@font/mapo_peacefull"
                 android:text="category"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ecobox_content_category" />
+                android:textSize="@dimen/ecobox_content_category"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/content_detail_title"

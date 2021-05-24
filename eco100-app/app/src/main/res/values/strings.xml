@@ -45,6 +45,7 @@
     <string name="content_image_description">컨텐츠 이미지</string>
     <string name="content_floatingBtn_description">컨텐츠 링크 버튼 아이콘</string>
     <string name="zeroshop_floatingBtn_description">제로샵 링크 버튼 아이콘</string>
+    <string name="zeroshop_banner_description">제로샵 배너</string>
 
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>

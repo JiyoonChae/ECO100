@@ -1,26 +1,19 @@
 package com.mapo.eco100.views.ecobox
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentContentDetailBinding
-import com.mapo.eco100.views.ecobox.navigation.ContentRecyclerAdapter
 
 
 class ContentDetailFragment : Fragment() {
 
     private var _binding: FragmentContentDetailBinding? = null
     private val binding get() = _binding!!
-    var adapter = ContentRecyclerAdapter()
-
-    private  var category: String = ""
-    private var title: String = ""
-    private var imgRes: Int = 0
 
 
     override fun onCreateView(
@@ -37,6 +30,12 @@ class ContentDetailFragment : Fragment() {
             binding.contentDetailImageView.setImageResource(it.getInt("imgRes"))
             binding.contentDetailInfo.text = it.getString("detail")
 
+        }
+        var categorySt = binding.contentDetailCategory.text.toString()
+        when (categorySt) {
+            "[다큐]" -> binding.contentDetailCategory.setTextColor(ContextCompat.getColor(container!!.context,R.color.primary_color))
+            "[환경툰]" -> binding.contentDetailCategory.setTextColor(ContextCompat.getColor(container!!.context,R.color.content_toon_color))
+            "[대외활동]" -> binding.contentDetailCategory.setTextColor(ContextCompat.getColor(container!!.context,R.color.content_activity_color))
         }
 
         binding.contentFloatingActionButton.setOnClickListener {

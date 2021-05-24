@@ -1,25 +1,18 @@
 package com.mapo.eco100.views.ecobox
 
-import android.location.Address
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.webkit.WebViewClient
-import com.mapo.eco100.R
-import com.mapo.eco100.databinding.EcoboxFragmentContentsBinding
-
+import androidx.fragment.app.Fragment
 import com.mapo.eco100.databinding.FragmentContentWebViewBinding
 
 class ContentWebViewFragment : Fragment() {
 
     private var _binding: FragmentContentWebViewBinding? = null
     private val binding get() = _binding!!
-//    private var url: String? = ""
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +26,11 @@ class ContentWebViewFragment : Fragment() {
 
         // 웹 뷰 기본 설정
         binding.contentWebView.apply {
-            settings.javaScriptEnabled = true // 웹페이지 자바스클비트 허용 여부
-            webViewClient = WebViewClient() // 클릭시 새창 안뜨게
+            settings.javaScriptEnabled = true // 웹페이지 자바스크립트 허용 여부
+            settings.setSupportZoom(true)   // 화면 줌 허용 여부
+            settings.builtInZoomControls = true // 화면 확대 축소 허용 여부
+            webViewClient = WebViewClient() // 새창 띄우기 허용 여부
+
         }
         .loadUrl("$url") // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
