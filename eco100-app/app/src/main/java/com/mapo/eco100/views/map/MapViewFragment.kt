@@ -41,10 +41,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     private lateinit var mapFragment: SupportMapFragment
     private var selectedShop: LatLng? = null
     private var selectedShopName: String? = null
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapFragment.onSaveInstanceState(outState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,8 +50,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         // check args
         selectedShopName = arguments?.getString("name")
-        var resultLat = arguments?.getDouble("lat")
-        var resultLong = arguments?.getDouble("long")
+        val resultLat = arguments?.getDouble("lat")
+        val resultLong = arguments?.getDouble("long")
         Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
 
         if (arguments != null) {
@@ -75,23 +71,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         // map
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        return binding.root
-    }
-
-
-    // 맵 실행
-    override fun onMapReady(googleMap: GoogleMap) {
-
-        // init & seMapType
-        mMap = googleMap
-        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-
-        // 현재 위치 정보 제공 동의 확인
-        checkPermission()
-
-        // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
-        getSelectedShoInfo()
 
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -136,6 +115,26 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             }
         }
 
+        return binding.root
+    }
+
+
+    // 맵 실행
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        // init & seMapType
+        mMap = googleMap
+        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+        // 초기 설정
+        initLocation()
+
+        // 현재 위치 정보 제공 동의 확인
+        checkPermission()
+
+        // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
+        getSelectedShoInfo()
+
     }
 
     // 사용자 현재 위치 제공여부를 확인한다.
@@ -151,6 +150,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             return
         }
         mMap.isMyLocationEnabled = true
+    }
+
+    private fun initLocation() {
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.566168, 126.901609)))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
     // 가게 목록 중 선택된 샵 정보를 제공한다.
@@ -172,7 +177,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         // marker bitmap
         bitmapDraw = ResourcesCompat.getDrawable(
             resources,
-            R.drawable.img_map_zeroshop,
+            R.drawable.img_map_select_zero,
             null
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
@@ -194,11 +199,11 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
     // 종량제 봉투 판매업소 리스트를 지도에 뿌려준다.
     private fun getShopList() {
-/*
+
         // marker bitmap
         bitmapDraw = ResourcesCompat.getDrawable(
             resources,
-            R.drawable.img_map_shop,
+            R.drawable.img_map_select_garbage,
             null
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
@@ -216,7 +221,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
                 LatLng(garbageBagShopInfos[0].latitude, garbageBagShopInfos[0].longitude)
             )
         )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))*/
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+
     }
 
     override fun onMyLocationClick(location: Location) {
