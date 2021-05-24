@@ -65,6 +65,13 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
+        bitmapDraw = ResourcesCompat.getDrawable(
+            resources,
+            R.drawable.img_map_zeroshop,
+            null
+        ) as BitmapDrawable
+        bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
+
         // map
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -84,7 +91,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         checkPermission()
 
         // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
-        //getSelectedShoInfo()
+        getSelectedShoInfo()
 
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
