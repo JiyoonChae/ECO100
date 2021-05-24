@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
-import com.mapo.eco100.views.MainActivity
+import com.mapo.eco100.MainActivity
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.map.MapViewFragment
