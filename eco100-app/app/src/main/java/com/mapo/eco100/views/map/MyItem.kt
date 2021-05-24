@@ -6,7 +6,7 @@ import com.google.maps.android.clustering.ClusterItem
 
 class MyItem(
     private val position: LatLng,
-    private val title: String,
+    private val title: String?,
     private val snippet: String,
     private val icon: BitmapDescriptor
 ) :
@@ -14,7 +14,7 @@ class MyItem(
 
     override fun getSnippet(): String = snippet
 
-    override fun getTitle(): String = title
+    override fun getTitle(): String? = title
 
     override fun getPosition(): LatLng = position
 

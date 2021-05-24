@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
@@ -54,6 +55,23 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     ): View? {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+
+        // check args
+        selectedShopName = arguments?.getString("name")
+        val resultLat = arguments?.getDouble("lat")
+        val resultLong = arguments?.getDouble("long")
+        Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
+
+        if (arguments != null) {
+            selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
+            Log.d("map", "selectedShop: $selectedShop")
+            binding.radioGroup.visibility = View.GONE
+        }
+
+
+        binding.radioGroup.visibility = View.VISIBLE
+
+        // 비트맵
         bitmapDraw = ResourcesCompat.getDrawable(
             resources,
             R.drawable.img_map_select_garbage,
@@ -61,11 +79,11 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
-        // map
+        // 맵
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
+// 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
             mMap.clear()
@@ -109,6 +127,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
                 else -> Log.d("map", "checkedId : $checkedId, 잘못된 접근")
             }
+
         }
 
         return binding.root
@@ -135,7 +154,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         checkPermission()
 
         // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
-        getSelectedShoInfo()
+        //getSelectedShoInfo()
+
+        arguments?.clear()
 
 
     }
@@ -156,44 +177,29 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     }
 
     private fun initLocation() {
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.566168, 126.901609)))
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-    }
-
-    // 가게 목록 중 선택된 샵 정보를 제공한다.
-    private fun getSelectedShoInfo() {
-
-        // check args
-        selectedShopName = arguments?.getString("name")
-        val resultLat = arguments?.getDouble("lat")
-        val resultLong = arguments?.getDouble("long")
-        Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
+        //getShopList()
 
         if (arguments != null) {
-            selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
-            Log.d("map", "selectedShop: $selectedShop")
+            getSelectedShoInfo()
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.566168, 126.901609)))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
         }
+    }
+
+    /** ecobox -> map  **/
+    // 선택된 제로샵 위치를 보여준다.
+    private fun getSelectedShoInfo() {
 
         selectedShop?.let {
-            for (zeroShop in zeroShopList) {
-                Log.d("map", "url : ${zeroShop.logoUrl}")
-                clusterManager.addItem(
-                    MyItem(
-                        LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
-                        zeroShop.name,
-                        zeroShop.address,
-                        BitmapDescriptorFactory.fromBitmap(bitmap)
-                    )
-                )
-
-            }
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShop))
+            Log.d("map", "In selectedShop: $it")
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            clusterManager.cluster()
+            val markerOptions = MarkerOptions()
+            markerOptions.position(it).title(selectedShopName)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            mMap.addMarker(markerOptions)
         }
-
-        selectedShop = null
     }
 
     // 제로웨이스트 샵 리스트를 지도에 뿌려준다.
@@ -224,7 +230,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
                 LatLng(zeroShopList[0].latitude.toDouble(), zeroShopList[0].longitude.toDouble())
             )
         )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(18f))
         clusterManager.cluster()
 
     }
@@ -240,7 +246,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
-        for (garbageShop in garbageBagShopInfos) {
+        /*for (garbageShop in garbageBagShopInfos) {
             clusterManager.addItem(
                 MyItem(
                     LatLng(garbageShop.latitude, garbageShop.longitude),
@@ -249,15 +255,15 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
                     BitmapDescriptorFactory.fromBitmap(bitmap)
                 )
             )
-        }
+        }*/
 
         mMap.moveCamera(
             CameraUpdateFactory.newLatLng(
                 LatLng(garbageBagShopInfos[0].latitude, garbageBagShopInfos[0].longitude)
             )
         )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-        clusterManager.cluster()
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(12f))
+        //clusterManager.cluster()
     }
 
     override fun onMyLocationClick(location: Location) {
