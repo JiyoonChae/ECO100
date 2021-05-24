@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.search
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -72,6 +73,7 @@ class SearchActivity : AppCompatActivity() {
                         .toString()
                     binding.searchInfo.text = resultText.substring(1, resultText.length - 1)
                     binding.searchResultBg.visibility = View.VISIBLE
+                    binding.searchInfo.setBackgroundResource(R.drawable.search_input_background)
 
                 } else {
                     binding.searchImg.visibility = View.VISIBLE
@@ -79,6 +81,7 @@ class SearchActivity : AppCompatActivity() {
                     binding.searchTitle.text = "검색되는 정보가 없습니다 :)"
                     binding.searchResultBg.visibility = View.GONE
                     binding.searchInfo.text = ""
+                    binding.searchInfo.setBackgroundColor(Color.TRANSPARENT)
                 }
             }
         }
