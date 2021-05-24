@@ -75,6 +75,7 @@ dependencies {
     // google map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.maps.android:maps-utils-ktx:2.4.0'
 
     // read .xls files
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'

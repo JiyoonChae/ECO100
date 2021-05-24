@@ -72,6 +72,7 @@ class AppInit : Application() {
                     val location: String = row.getCell(5).toString()
                     val latitude: Float = location.split(", ")[0].toFloat()
                     val longitude: Float = location.split(", ")[1].toFloat()
+                    val detailInfo: String = row.getCell(6).toString()
 
                     val baseUrl = "http://rpinas.iptime.org:10122" + "/image/"
 
@@ -98,7 +99,8 @@ class AppInit : Application() {
                             latitude,
                             longitude,
                             imgUrl,
-                            logoUrl
+                            logoUrl,
+                            detailInfo
                         )
                     )
                 }
