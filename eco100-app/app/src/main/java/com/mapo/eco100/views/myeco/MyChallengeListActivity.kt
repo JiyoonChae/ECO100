@@ -15,22 +15,22 @@ import com.mapo.eco100.databinding.RowMypageBinding
 import com.mapo.eco100.entitiy.challenge.ChallengePostList
 
 class MyChallengeListActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var mainActivityContext:Context
+    //private lateinit var recyclerView: RecyclerView
+    //private lateinit var mainActivityContext:Context
     private val binding by lazy { ActivityMyChallengeListBinding.inflate(layoutInflater) }
-    private var adapter: RecyclerAdapter? = null
+    //private var adapter: RecyclerAdapter? = null
 
-    val data1 = arrayOf("대중 교통 이용하기","플로깅 실천하기 (내가 직접 주운 쓰레기 사진 인증)", "비닐 포장, 상품 포장 하지 않기", "책 구매 대신 도서관에서 대출하기",
-        "다회 용기를 이용하여 음식 및 식자재 구매하기", "종이영수증 대신 전자영수증 사용하기")
+    /*val data1 = arrayOf("대중 교통 이용하기","플로깅 실천하기 (내가 직접 주운 쓰레기 사진 인증)", "비닐 포장, 상품 포장 하지 않기", "책 구매 대신 도서관에서 대출하기",
+        "다회 용기를 이용하여 음식 및 식자재 구매하기", "종이영수증 대신 전자영수증 사용하기")*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        adapter = RecyclerAdapter()
+        /*adapter = RecyclerAdapter()
         recyclerView = binding.myChallengeRecycler
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(context)*/
 
         //서버연결
 
@@ -39,7 +39,7 @@ class MyChallengeListActivity : AppCompatActivity() {
 
 }
 
-class RecyclerAdapter() : RecyclerView.Adapter<ViewHolderClass>() {
+/*class RecyclerAdapter() : RecyclerView.Adapter<ViewHolderClass>() {
     var challegePostList: ChallengePostList? = null  //내가쓴 챌린지 목록 받을 변수
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
@@ -57,6 +57,4 @@ class RecyclerAdapter() : RecyclerView.Adapter<ViewHolderClass>() {
     }
 }
 
-class ViewHolderClass(val itemView: RowMypageBinding) : RecyclerView.ViewHolder(binding.root) {
-
-}
+class ViewHolderClass(val itemView: RowMypageBinding) : RecyclerView.ViewHolder(binding.root) {}*/
