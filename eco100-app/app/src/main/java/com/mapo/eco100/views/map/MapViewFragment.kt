@@ -23,6 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.Cluster
+import com.google.maps.android.clustering.ClusterManager
 import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.garbageBagShopInfos
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
@@ -41,6 +43,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     private lateinit var mapFragment: SupportMapFragment
     private var selectedShop: LatLng? = null
     private var selectedShopName: String? = null
+
+    private lateinit var clusterManager: ClusterManager<MyItem>
+    private lateinit var clusterRender: ClusterRenderer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -122,9 +127,16 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     // 맵 실행
     override fun onMapReady(googleMap: GoogleMap) {
 
+
+        clusterManager = ClusterManager(binding.root.context, mMap)
+        clusterRender = ClusterRenderer(binding.root.context, mMap, clusterManager)
+        mMap.setOnCameraIdleListener(clusterManager)
+        mMap.setOnMarkerClickListener(clusterManager)
+
         // init & seMapType
         mMap = googleMap
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
 
         // 초기 설정
         initLocation()
@@ -134,6 +146,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
         getSelectedShoInfo()
+
+        clusterManager.cluster()
 
     }
 
@@ -209,13 +223,25 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
 
-        for (garbageShop in garbageBagShopInfos) {
+        /*for (garbageShop in garbageBagShopInfos) {
             val markerOptions = MarkerOptions()
             markerOptions.position(
                 LatLng(garbageShop.latitude, garbageShop.longitude)
             ).title(garbageShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
             mMap.addMarker(markerOptions)
+        }*/
+
+        for (garbageShop in garbageBagShopInfos) {
+            clusterManager.addItem(
+                MyItem(
+                    LatLng(garbageShop.latitude, garbageShop.longitude),
+                    garbageShop.name,
+                    "",
+                    BitmapDescriptorFactory.fromBitmap(bitmap)
+                )
+            )
         }
+
         mMap.moveCamera(
             CameraUpdateFactory.newLatLng(
                 LatLng(garbageBagShopInfos[0].latitude, garbageBagShopInfos[0].longitude)
