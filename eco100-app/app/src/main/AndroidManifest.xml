@@ -3,17 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mapo.eco100">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera2" />
 
     <application
-        android:name=".config.KaKaoInit"
+        android:name=".config.AppInit"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,30 +27,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
         android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".views.myeco.MyCommentListActivity"></activity>
-        <activity android:name=".views.myeco.MyBadgeListActivity" />
-        <activity android:name=".views.myeco.MyChallengeListActivity" />
-        <activity android:name=".views.myeco.MyBoardListActivity" />
+        tools:ignore="UnusedAttribute">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true" />
+
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".views.myeco.MyEco100Activity"
+            android:label="@string/title_activity_my_eco100">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false"/>
+            android:required="false" />
+
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".views.community.EnrollActivity"/>
-        <activity android:name=".views.community.ShowBoardActivity"/>
-        <activity android:name=".views.community.WriteChallenge"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".views.community.EnrollActivity" />
+        <activity android:name=".views.community.ShowBoardActivity" />
+        <activity android:name=".views.community.WriteChallenge" />
         <activity android:name=".views.search.SearchActivity" />
+        <activity android:name=".views.myeco.MyBoardListActivity" />
+        <activity android:name=".views.myeco.MyChallengeListActivity" />
+        <activity android:name=".views.myeco.MyCommentListActivity" />
+        <activity android:name=".views.myeco.MyBadgeListActivity" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -57,8 +83,7 @@
                     android:host="oauth"
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
-        </activity>
-        <!-- google map key -->
+        </activity> <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />

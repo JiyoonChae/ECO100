@@ -4,12 +4,14 @@ import java.io.File
 import java.io.Serializable
 import java.sql.Date
 import java.util.*
+import javax.security.auth.Subject
 
 
 data class ChallengePost (
-    val challengeId: Int,
     val challengePostId :Int,
-    val image: String,
+    val imageUrl: String,
     val contents : String,
+    val subject: String,
+    val date: String
 
 ) :Serializable
