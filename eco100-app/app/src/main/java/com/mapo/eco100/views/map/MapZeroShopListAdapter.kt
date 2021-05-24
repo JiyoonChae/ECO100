@@ -10,24 +10,27 @@ import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.entity.staticmodel.ZeroShop
 
-class MapListAdapter(private val context: BottomSheet) :
-    RecyclerView.Adapter<MapListAdapter.ViewHolder>() {
+class MapZeroShopListAdapter(private val context: BottomSheetZeroShop) :
+    RecyclerView.Adapter<MapZeroShopListAdapter.ViewHolder>() {
 
-    var listData: MutableList<ZeroShop> = ArrayList()
+    var shopListData: MutableList<ZeroShop> = ArrayList()
     private lateinit var listener: OnListItemClickListener
 
     fun setListItemClickListener(listener: OnListItemClickListener) {
         this.listener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapListAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MapZeroShopListAdapter.ViewHolder {
         val view = LayoutInflater.from(context.activity)
-            .inflate(R.layout.bottom_sheet_map_list_item, parent, false)
+            .inflate(R.layout.bottom_shee_zero_shop_list_item, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MapListAdapter.ViewHolder, position: Int) {
-        val item = listData[position]
+    override fun onBindViewHolder(holder: MapZeroShopListAdapter.ViewHolder, position: Int) {
+        val item = shopListData[position]
         holder.itemView.setOnClickListener {
             listener.onClick(it, position)
         }
@@ -37,7 +40,7 @@ class MapListAdapter(private val context: BottomSheet) :
 
     }
 
-    override fun getItemCount(): Int = listData.size
+    override fun getItemCount(): Int = shopListData.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

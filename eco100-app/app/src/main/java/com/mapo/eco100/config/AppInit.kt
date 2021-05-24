@@ -1,6 +1,8 @@
 package com.mapo.eco100.config
 
 import android.app.Application
+import android.location.Address
+import android.location.Geocoder
 import android.util.Log
 import com.kakao.sdk.common.KakaoSdk
 import com.mapo.eco100.R
@@ -103,6 +105,8 @@ class AppInit : Application() {
                     )
                 }
 
+                val geoCoder = Geocoder(this)
+
                 val trashBag_sheet = workbook.getSheetAt(3)
                 rows = trashBag_sheet.physicalNumberOfRows
                 for (rowIndex in 1 until rows) {
@@ -111,19 +115,21 @@ class AppInit : Application() {
                     val address1 = row.getCell(0)?.toString()
                     val address2 = row.getCell(1)?.toString()
                     val name = row.getCell(2).toString()
-                    val locationX = row.getCell(3)?.toString()?.toFloat()
-                    val locationY = row.getCell(4)?.toString()?.toFloat()
-                    locationX?.let {
+                    address1?.let {
+                        var addressList: List<Address>? = null
+                        addressList = geoCoder.getFromLocationName(address1, 10)
+                        val address = addressList[0]
                         LocalDataBase.garbageBagShopInfos.add(
                             GarbageBagShopInfo(
                                 id,
                                 address1,
                                 address2,
                                 name,
-                                locationX,
-                                locationY!!
-                            )
+                                address.latitude,
+                                address.longitude
+                                )
                         )
+
                     }
                 }
             } catch (e: FileNotFoundException) {

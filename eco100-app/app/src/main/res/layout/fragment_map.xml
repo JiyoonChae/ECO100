@@ -29,7 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40dp"
                 android:button="@drawable/ic_map_garbage_shop"
-                android:checked="true"
                 android:text="@string/map_shop" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
