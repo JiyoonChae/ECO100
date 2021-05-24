@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/ecobox_margin_30dp"
-    android:layout_marginLeft="@dimen/margin_24dp"
+    android:layout_marginStart="@dimen/margin_24dp"
     android:orientation="vertical"
     >
 
@@ -13,7 +13,7 @@
             android:id="@+id/content_imageView"
             android:layout_width="@dimen/ecobox_size_152dp"
             android:layout_height="@dimen/ecobox_size_152dp"
-            android:background="@drawable/square_background_border"
+            android:background="@drawable/square_background_border_content"
             android:contentDescription="@string/content_banner_description"
             android:padding="@dimen/padding_8dp"
             app:srcCompat="@drawable/ecobox_content_documentary2" />
