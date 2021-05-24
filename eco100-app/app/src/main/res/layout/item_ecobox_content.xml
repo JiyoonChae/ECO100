@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/ecobox_margin_30dp"
     android:layout_marginStart="@dimen/margin_24dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
         <ImageView

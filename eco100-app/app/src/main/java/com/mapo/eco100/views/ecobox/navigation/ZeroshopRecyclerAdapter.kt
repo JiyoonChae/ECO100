@@ -10,9 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
-import com.mapo.eco100.entity.staticmodel.Contents
 import com.mapo.eco100.entity.staticmodel.ZeroShop
 import com.mapo.eco100.views.ecobox.ContentDetailActivity
+import com.mapo.eco100.views.ecobox.ZeroshopDetailActivity
 
 class ZeroshopRecyclerAdapter
     : RecyclerView.Adapter<ZeroshopRecyclerAdapter.ZeroshopViewHolderClass>() {
@@ -43,25 +43,32 @@ class ZeroshopRecyclerAdapter
     inner class ZeroshopViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // 항목 View 내부의 View 객체의 주소값 담기
 
-        val zeroshopImageView: ImageView = itemView.findViewById(R.id.zeroshop_imageView)
+        val zeroshopLogoImageView: ImageView = itemView.findViewById(R.id.zeroshop_logo_imageView)
         val zeroshopNameTextView: TextView = itemView.findViewById(R.id.zeroshop_name)
         val zeroshopInfoTextView: TextView = itemView.findViewById(R.id.zeroshop_info)
 
         fun onBind(data : ZeroShop) {
+            if (data.logoUrl == null) {
+                zeroshopLogoImageView.setImageResource(R.drawable.ecobox_zeroshop_no_img)
+            } else {
+                Glide.with(zeroshopLogoImageView).load(data.logoUrl).override(166).into(zeroshopLogoImageView)
+            }
 
             zeroshopNameTextView.text = data.name
-            zeroshopInfoTextView.text = data.name
+            zeroshopInfoTextView.text = data.detailInfo
+
 
 
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, ContentDetailActivity::class.java)
+
+                val intent = Intent(itemView.context, ZeroshopDetailActivity::class.java)
                 intent.apply {
-                    this.putExtra("category",data.category) // 데이터 넣기
-                    this.putExtra("title",data.title)
-                    this.putExtra("imgRes",data.imgRes)
-                    this.putExtra("detail",data.detail)
-                    this.putExtra("webUrl",data.webUrl)
+                    this.putExtra("name",data.name) // 데이터 넣기
+                    this.putExtra("detailInfo",data.detailInfo)
+//                    this.putExtra("imgRes",data.imgUrl)
+//                    this.putExtra("detail",data.detail)
+//                    this.putExtra("webUrl",data.webUrl)
                 }
                 ContextCompat.startActivity(itemView.context, intent, null)
             }

@@ -38,6 +38,7 @@ class ContentDetailActivity : AppCompatActivity() {
 
     }
 
+
     fun replaceFragment(fragment: Fragment) {
         val webUrl = intent.getStringExtra("webUrl")
 
