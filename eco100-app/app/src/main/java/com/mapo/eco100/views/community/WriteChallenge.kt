@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.mapo.eco100.views.community
 
 
@@ -184,7 +186,6 @@ class WriteChallenge : BaseActivity() {
             realUri = uri  //실제 이미지의 Uri 주소
             intent.putExtra(MediaStore.EXTRA_OUTPUT, realUri)
             startActivityForResult(intent, REQ_CAMERA)
-
         }
     }
 

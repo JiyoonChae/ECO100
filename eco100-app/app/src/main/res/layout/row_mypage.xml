@@ -41,7 +41,7 @@
             android:id="@+id/my_contents"
             android:layout_width="@dimen/challenge_337dp"
             android:layout_height="@dimen/size_100dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="tets" />
 
