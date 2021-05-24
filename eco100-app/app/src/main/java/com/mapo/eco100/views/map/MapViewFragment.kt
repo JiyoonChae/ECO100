@@ -80,6 +80,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             mMap.clear()
+            clusterManager.clearItems()
+
             when (checkedId) {
 
                 // 종량제판매처 버튼 클릭시
@@ -127,16 +129,15 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
     // 맵 실행
     override fun onMapReady(googleMap: GoogleMap) {
 
-
-        clusterManager = ClusterManager(binding.root.context, mMap)
-        clusterRender = ClusterRenderer(binding.root.context, mMap, clusterManager)
-        mMap.setOnCameraIdleListener(clusterManager)
-        mMap.setOnMarkerClickListener(clusterManager)
-
         // init & seMapType
         mMap = googleMap
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
+        clusterManager = ClusterManager(binding.root.context, mMap)
+        clusterRender = ClusterRenderer(binding.root.context, mMap, clusterManager)
+
+        mMap.setOnCameraIdleListener(clusterManager)
+        mMap.setOnMarkerClickListener(clusterManager)
 
         // 초기 설정
         initLocation()
@@ -146,8 +147,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
         // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
         getSelectedShoInfo()
-
-        clusterManager.cluster()
 
     }
 
@@ -197,11 +196,15 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
         for (zeroShop in zeroShopList) {
-            val markerOptions = MarkerOptions()
-            markerOptions.position(
-                LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble())
-            ).title(zeroShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
+            clusterManager.addItem(
+                MyItem(
+                    LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
+                    zeroShop.name,
+                    zeroShop.address,
+                    BitmapDescriptorFactory.fromBitmap(bitmap)
+                )
+            )
+
         }
         mMap.moveCamera(
             CameraUpdateFactory.newLatLng(
@@ -209,6 +212,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             )
         )
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        clusterManager.cluster()
+
     }
 
     // 종량제 봉투 판매업소 리스트를 지도에 뿌려준다.
@@ -222,21 +227,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         ) as BitmapDrawable
         bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
 
-
-        /*for (garbageShop in garbageBagShopInfos) {
-            val markerOptions = MarkerOptions()
-            markerOptions.position(
-                LatLng(garbageShop.latitude, garbageShop.longitude)
-            ).title(garbageShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
-        }*/
-
         for (garbageShop in garbageBagShopInfos) {
             clusterManager.addItem(
                 MyItem(
                     LatLng(garbageShop.latitude, garbageShop.longitude),
                     garbageShop.name,
-                    "",
+                    garbageShop.address1.toString(),
                     BitmapDescriptorFactory.fromBitmap(bitmap)
                 )
             )
@@ -248,7 +244,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             )
         )
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-
+        clusterManager.cluster()
     }
 
     override fun onMyLocationClick(location: Location) {
