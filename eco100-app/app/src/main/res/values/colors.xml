@@ -29,7 +29,8 @@
     <color name="content_color">#8CD698</color>
     <color name="content_activity_color">#FFA100</color>
     <color name="content_toon_color">#50B848</color>
-    <color name="content_zeroshop_color">#EB7CA9</color>
+    <color name="zeroshop_point_color">#EB7CA9</color>
+    <color name="zeroshop_color">#FAE3D9</color>
 
 
     <!-- map list line color -->
