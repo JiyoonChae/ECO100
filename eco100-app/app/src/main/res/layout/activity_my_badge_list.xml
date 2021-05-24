@@ -7,115 +7,317 @@
     android:orientation="vertical"
     tools:context=".views.myeco.MyBadgeListActivity">
 
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="384dp"
+        android:layout_height="@dimen/size_60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_12dp"
+        android:layout_marginBottom="@dimen/size_28dp"
+        app:srcCompat="@drawable/my_eco_badge"
+        />
+
+    <LinearLayout
+        android:layout_width="356dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/my_badge_frame"
+        android:layout_marginBottom="@dimen/size_28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_40dp"
+                    app:srcCompat="@drawable/btn1" />
+
+                <TextView
+                    android:id="@+id/my_badge_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최초 가입" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginTop="@dimen/margin_40dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    app:srcCompat="@drawable/btn2" />
+
+                <TextView
+                    android:id="@+id/my_badge_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최초 글쓰기" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/size_48dp"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginTop="@dimen/margin_40dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    app:srcCompat="@drawable/btn3" />
+
+                <TextView
+                    android:id="@+id/my_badge_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최초 댓글" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_community_40dp" />
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                app:srcCompat="@drawable/btn4" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
+            <TextView
+                android:id="@+id/my_badge_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글 10회 작성" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn5" />
+
+            <TextView
+                android:id="@+id/my_badge_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="댓글 10회 작성" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn6" />
+
+            <TextView
+                android:id="@+id/my_badge_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요 10회" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton4"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                app:srcCompat="@drawable/btn7" />
 
-        <ImageButton
-            android:id="@+id/imageButton6"
+            <TextView
+                android:id="@+id/my_badge_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.1" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn8" />
+
+            <TextView
+                android:id="@+id/my_badge_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn9" />
+
+            <TextView
+                android:id="@+id/my_badge_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.3" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton7"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imageButton8"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                app:srcCompat="@drawable/btn10" />
 
-        <ImageButton
-            android:id="@+id/imageButton9"
+            <TextView
+                android:id="@+id/my_badge_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.4" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn11" />
+
+            <TextView
+                android:id="@+id/my_badge_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/size_48dp"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:srcCompat="@drawable/btn12" />
+
+            <TextView
+                android:id="@+id/my_badge_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="챌린이 LV.6" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageButton10"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton11"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton12"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_ecobox_40dp" />
     </LinearLayout>
 </LinearLayout>
