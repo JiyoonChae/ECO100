@@ -151,7 +151,7 @@ class ChallengeFragment : Fragment() {
                         showDialog(challenge)
                     }
                     1 -> {
-                        //글썼던 걸로 이동
+                        showDialog(challenge)
 
                     }
                     2 -> {

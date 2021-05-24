@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/primary_on_color"
+    android:background="@color/white"
     tools:context=".views.myeco.MyChallengeListActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="액티비티" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="@dimen/challenge_337dp"
+        android:layout_height="@dimen/size_60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        app:srcCompat="@drawable/my_challenge_list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_challenge_recycler"

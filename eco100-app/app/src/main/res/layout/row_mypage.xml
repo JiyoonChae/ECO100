@@ -3,50 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/common_popup_background">
-        <TextView
-            android:id="@+id/challenge_date"
-            android:layout_width="@dimen/size_140dp"
-            android:layout_height="@dimen/size_24dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="31dp"
-            android:text="2021.05.21"
-            android:textSize="@dimen/size_20dp" />
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/my_challenge_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/challenge_date"
+                android:layout_width="@dimen/size_140dp"
+                android:layout_height="@dimen/size_24dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="31dp"
+                android:fontFamily="@font/mapo_peacefull"
+                android:text="2021.05.21"
+                android:textSize="@dimen/size_20dp" />
 
 
-        <TextView
-            android:id="@+id/challenge_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_18dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="17dp"
-            android:text="text" />
+            <TextView
+                android:id="@+id/challenge_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_18dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/mapo_peacefull"
+                android:text="text"
+                android:textColor="@color/primary_color" />
 
+            <ImageView
+                android:id="@+id/my_challenge_img"
+                android:layout_width="@dimen/challenge_337dp"
+                android:layout_height="180dp"
+
+                android:layout_gravity="center"
+                android:layout_marginTop="31dp"
+                app:srcCompat="@mipmap/ic_launcher" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="48dp"
+                android:background="@color/main_line_color"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"/>
+            <TextView
+                android:id="@+id/my_contents"
+                android:layout_width="@dimen/challenge_337dp"
+                android:layout_height="@dimen/size_100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/mapo_peacefull"
+                android:text="tets"
+                android:textAlignment="center" />
+
+        </LinearLayout>
         <ImageView
-            android:id="@+id/my_challenge_img"
-            android:layout_width="@dimen/challenge_337dp"
-            android:layout_height="180dp"
+            android:layout_width="@dimen/size_38dp"
+            android:layout_height="@dimen/size_38dp"
+            android:src="@drawable/icon_my_eco"
+            android:layout_gravity="right"
+            android:layout_marginEnd="@dimen/size_30dp"/>
+    </FrameLayout>
 
-            android:layout_gravity="center"
-            android:layout_marginTop="31dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/my_contents"
-            android:layout_width="@dimen/challenge_337dp"
-            android:layout_height="@dimen/size_100dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:text="tets" />
-
-</LinearLayout>
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_20dp" />
