@@ -14,7 +14,6 @@ import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
 import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.myeco.MyEcoViewFragment
-import com.mapo.eco100.views.network.NoConnectedDialog
 
 
 class MainActivity : AppCompatActivity(), TabItemSelector {

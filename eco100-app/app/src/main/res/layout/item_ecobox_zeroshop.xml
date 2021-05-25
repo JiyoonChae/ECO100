@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/ecobox_margin_30dp"
+    android:layout_marginStart="@dimen/margin_24dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/zeroshop_logo_imageView"
+        android:layout_width="@dimen/ecobox_size_152dp"
+        android:layout_height="@dimen/ecobox_size_152dp"
+        android:background="@drawable/square_background_border_zeroshop"
+        android:contentDescription="@string/content_banner_description"
+        android:padding="@dimen/padding_8dp"
+        app:srcCompat="@drawable/ecobox_content_activity2" />
+
+    <TextView
+        android:id="@+id/zeroshop_name"
+        android:layout_width="@dimen/ecobox_size_166dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_4dp"
+        android:bufferType="spannable"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text=""
+        android:textColor="@color/zeroshop_point_color"
+        android:textSize="@dimen/ecobox_content_category"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/zeroshop_info"
+        android:layout_width="@dimen/ecobox_size_166dp"
+        android:layout_height="@dimen/ecobox_size_34dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/ecobox_content_title"
+        android:textStyle="bold" />
+
+</LinearLayout>
