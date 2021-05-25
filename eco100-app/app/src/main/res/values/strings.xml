@@ -96,6 +96,7 @@
     <string name="write_challenge_hint">챌린지 소감을 작성해주세요(최대 200자)</string>
     <string name="popup_challenge_warning_title">사진 업로드</string>
     <string name="popup_challenge_warning_text">챌린지에 맞는 사진을 등록해주세요</string>
+    <string name="popup_write">도전하기</string>
 
     <!-- map -->
     <string name="map_shop">종량제판매처</string>
@@ -125,6 +126,7 @@
     </string>
     <string name="mypage_eco100_info2"> ECO100팀은 2021년도 서울형뉴딜일자리청년사업단 프로젝트로 만들어진 1명의 디자이너와 4명의 개발자로 구성된 팀입니다. </string>
     <string name="mypage_eco100_info3"> 마스코트인 에코덕은 마포구의 상징인 청둥오리에서 영감을 받아, 환경을 수호하는 캐릭터로 재탄생되었습니다.</string>
+
     <!-- popup loading -->
     <string name="popup_loading_title">조금만 기다려 주세요:)</string>
     <string name="popup_loading_text">환경을 지키는 에코덕이 포다닥 날아\n정보를 물어오는중~ 조금만 기다려주세요:D</string>
