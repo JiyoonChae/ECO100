@@ -1,138 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.ecobox.ZeroshopDetailActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/zeroshop_detail_name"
+        <FrameLayout
+            android:id="@+id/zeroshop_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ecobox_margin_26dp"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text=""
-            android:textColor="@color/point_color"
-            android:textSize="@dimen/ecobox_content_category"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent">
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/zeroshop_detail_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ecobox_margin_26dp"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginRight="@dimen/ecobox_margin_26dp"
-            android:layout_marginBottom="@dimen/margin_24dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/ecobox_content_detail_title"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/zeroshop_detail_imageView"
-            android:layout_width="@dimen/size_360dp"
-            android:layout_height="@dimen/size_360dp"
-            android:layout_marginLeft="@dimen/ecobox_margin_26dp"
-            android:layout_marginRight="@dimen/ecobox_margin_26dp"
-            android:background="@drawable/square_background_border_zeroshop"
-            android:contentDescription="@string/content_image_description"
-            android:padding="@dimen/padding_12dp"
-            app:srcCompat="@drawable/ecobox_content_documentary2" />
-
-        <TextView
-            android:id="@+id/zeroshop_detail_info_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ecobox_margin_26dp"
-            android:layout_marginTop="@dimen/margin_12dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/content_detail_info_title"
-            android:textColor="@color/primary_color"
-            android:textSize="@dimen/ecobox_content_detail_text" />
-
-
-        <TextView
-            android:id="@+id/content_detail_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ecobox_margin_26dp"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginRight="@dimen/ecobox_margin_26dp"
-            android:layout_marginBottom="@dimen/margin_8dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/ecobox_content_detail_text" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/zeroshop_info_contents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_zeroshop_phonenum"
-                android:contentDescription="TODO" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <TextView
-            android:id="@+id/content_detail_site_guide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ecobox_margin_26dp"
-            android:layout_marginRight="@dimen/ecobox_margin_26dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/zeroshop_detail_site_guide"
-            android:textColor="@color/primary_color"
-            android:textSize="@dimen/ecobox_content_detail_text" />
-
-        <TextView
-            android:id="@+id/content_detail_map_guide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ecobox_margin_26dp"
-            android:layout_marginRight="@dimen/ecobox_margin_26dp"
-            android:fontFamily="@font/mapo_peacefull"
-            android:text="@string/zeroshop_detail_map_guide"
-            android:textColor="@color/primary_color"
-            android:textSize="@dimen/ecobox_content_detail_text" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/content_floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginTop="@dimen/margin_24dp"
-            android:layout_marginEnd="@dimen/margin_32dp"
-            android:layout_marginBottom="@dimen/margin_20dp"
-            android:backgroundTint="@color/primary_color"
-            android:clickable="true"
-            android:contentDescription="@string/content_floatingBtn_description"
-            android:focusable="true"
-            app:borderWidth="0dp"
-            app:elevation="@dimen/size_10dp"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/ecobox_content_link_btn"
-            app:tint="@android:color/white" />
-
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

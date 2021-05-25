@@ -58,17 +58,18 @@ class ZeroshopRecyclerAdapter
             zeroshopInfoTextView.text = data.detailInfo
 
 
-
-
             itemView.setOnClickListener {
 
                 val intent = Intent(itemView.context, ZeroshopDetailActivity::class.java)
                 intent.apply {
                     this.putExtra("name",data.name) // 데이터 넣기
                     this.putExtra("detailInfo",data.detailInfo)
-//                    this.putExtra("imgRes",data.imgUrl)
-//                    this.putExtra("detail",data.detail)
-//                    this.putExtra("webUrl",data.webUrl)
+                    this.putExtra("imgRes",data.imgUrl)
+                    this.putExtra("phoneNum",data.phoneNum)
+                    this.putExtra("adress",data.address)
+                    this.putExtra("runInfo",data.runningInfo)
+                    this.putExtra("webUrl",data.webUrl)
+
                 }
                 ContextCompat.startActivity(itemView.context, intent, null)
             }
