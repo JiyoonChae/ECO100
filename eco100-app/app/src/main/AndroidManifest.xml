@@ -29,7 +29,7 @@
         <activity android:name=".views.ecobox.RecycleGuideVinylActivity" />
         <activity android:name=".views.ecobox.RecycleGuidePlasticActivity" />
         <activity android:name=".views.ecobox.RecycleGuideGlassActivity" />
-        <activity android:name=".views.ecobox.RecycleGuidePaperActivity" />
+        <activity android:name=".views.ecobox.RecycleGuideActivity" />
         <activity android:name=".views.network.NoConnectedDialog" />
         <activity android:name=".views.MainActivity" />
 
