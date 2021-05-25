@@ -34,9 +34,6 @@
         <activity android:name=".views.ecobox.RecycleGuidePlasticActivity" />
         <activity android:name=".views.ecobox.RecycleGuideGlassActivity" />
         <activity android:name=".views.ecobox.RecycleGuidePaperActivity" />
-        <activity android:name=".views.network.NoConnectedDialog" />
-        <activity android:name=".views.MainActivity" />
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -55,13 +52,6 @@
         <activity android:name=".views.myeco.MyChallengeListActivity" />
         <activity android:name=".views.myeco.MyBoardListActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".views.ecobox.ContentDetailActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideStyrofoamActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideCanActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideVinylActivity" />
-        <activity android:name=".views.ecobox.RecycleGuidePlasticActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideGlassActivity" />
-        <activity android:name=".views.ecobox.RecycleGuidePaperActivity" />
         <activity android:name=".views.search.SearchActivity" />
         <activity android:name=".views.community.EnrollActivity" />
         <activity android:name=".views.community.ShowBoardActivity" />
