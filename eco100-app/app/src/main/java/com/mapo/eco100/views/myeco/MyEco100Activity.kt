@@ -9,7 +9,10 @@ class MyEco100Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_eco100)
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

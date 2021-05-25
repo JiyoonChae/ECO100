@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,14 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
-import com.mapo.eco100.MainActivity
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
-import com.mapo.eco100.views.map.MapViewFragment
+import com.mapo.eco100.views.myeco.MyEco100Activity
 
 class FragmentForViewPager : Fragment() {
 
@@ -44,6 +43,8 @@ class FragmentForViewPager : Fragment() {
         imageIV.setOnClickListener {
             when (index) {
                 0 -> {
+                    val intent = Intent(requireActivity(), MyEco100Activity::class.java)
+                    startActivity(intent)
                     Log.d("home", "이동 index : 0")
                 }
                 1 -> {
