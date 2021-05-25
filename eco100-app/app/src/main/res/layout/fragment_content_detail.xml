@@ -46,7 +46,7 @@
                 android:layout_marginRight="@dimen/ecobox_margin_26dp"
                 android:background="@drawable/square_background_border_content"
                 android:contentDescription="@string/content_image_description"
-                android:padding="@dimen/padding_12dp"
+                android:padding="@dimen/padding_10dp"
                 app:srcCompat="@drawable/ecobox_content_documentary2" />
 
             <TextView
