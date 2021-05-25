@@ -118,7 +118,7 @@ class AppInit : Application() {
                     val address2 = row.getCell(1)?.toString()
                     val name = row.getCell(2)?.toString()
                     address1?.let {
-                        var addressList: List<Address>? = null
+                        var addressList: MutableList<Address>? = null
                         addressList = geoCoder.getFromLocationName(address1, 10)
                         val address = addressList[0]
                         LocalDataBase.garbageBagShopInfos.add(
