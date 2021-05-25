@@ -47,6 +47,13 @@ class MyChallengeListActivity : AppCompatActivity() {
            }
 
            override fun onResponse(call: Call<ChallengePostList>,response: Response<ChallengePostList>) {
+               if(response.body().isNullOrEmpty()){
+                   Log.d("마이", "데이터없음 까지옴")
+                   val view  =layoutInflater.inflate(R.layout.mypage_no_data, null)
+                   val title = view.findViewById<ImageView>(R.id.nodata_title)
+                   title.setImageResource(R.drawable.my_challenge_list)
+                   setContentView(view)
+               }
                adapter!!.challegePostList = response.body() as ChallengePostList
                adapter!!.notifyDataSetChanged()
 
@@ -60,11 +67,12 @@ class MyChallengeListActivity : AppCompatActivity() {
         var challegePostList: ChallengePostList? = null  //내가쓴 챌린지 목록 받을 변수
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
-            val itemView  =layoutInflater.inflate(R.layout.row_mypage, null)
 
-           // val itemView = RowMypageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            val holder = ViewHolderClass(itemView)
+                val itemView  =layoutInflater.inflate(R.layout.row_mypage, null)
+                val holder = ViewHolderClass(itemView)
+
             return holder
+
         }
 
         override fun getItemCount(): Int {
