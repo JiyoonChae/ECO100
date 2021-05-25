@@ -6,6 +6,8 @@ import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.likes.LikesRequestDto
 import com.mapo.eco100.entity.myeco.MyBoardList
+import com.mapo.eco100.entity.myeco.MyComment
+import com.mapo.eco100.entity.myeco.MyCommentList
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -44,4 +46,9 @@ interface BoardService {
     fun readAll(
         @Path("userId")id : Long
     ):Call<MyBoardList>
+
+    @GET("board/comment/all/{userId}")
+    fun commentAll(
+        @Path("userId")id: Long
+    ):Call<MyCommentList>
 }
