@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.BottomSheetZeroShopListBinding
+import com.mapo.eco100.views.ecobox.ZeroshopDetailActivity
 
 
 class BottomSheetZeroShop : BottomSheetDialogFragment() {
@@ -42,19 +43,7 @@ class BottomSheetZeroShop : BottomSheetDialogFragment() {
             override fun onClick(view: View, position: Int) {
                 val item = zeroShopList[position]
 
-                /*val bundle = Bundle()
-                bundle.putString("name", item.name)
-                bundle.putDouble("lat", item.latitude.toDouble())
-                bundle.putDouble("long", item.longitude.toDouble())
-
-                val mapViewFragment = MapViewFragment()
-                mapViewFragment.arguments = bundle
-
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.map, mapViewFragment)
-                    .commit()*/
-
-                /*val intent = Intent(binding.root.context, ZeroshopDetailActivity::class.java)
+                val intent = Intent(binding.root.context, ZeroshopDetailActivity::class.java)
                 intent.apply {
                     this.putExtra("name", item.name)
                     this.putExtra("detailInfo", item.detailInfo)
@@ -64,7 +53,7 @@ class BottomSheetZeroShop : BottomSheetDialogFragment() {
                     this.putExtra("runInfo", item.runningInfo)
                 }
 
-                ContextCompat.startActivity(requireContext(), intent, null)*/
+                ContextCompat.startActivity(requireContext(), intent, null)
                 shopListAdapter.notifyDataSetChanged()
                 dismiss()
             }
