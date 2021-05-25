@@ -5,6 +5,7 @@ import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.likes.LikesRequestDto
+import com.mapo.eco100.entity.myeco.MyBoardList
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -38,4 +39,9 @@ interface BoardService {
     fun delete(
         @Path("id") id:Long
     ) : Call<Void>
+
+    @GET("board/read/{userId}")
+    fun readAll(
+        @Path("userId")id : Long
+    ):Call<MyBoardList>
 }
