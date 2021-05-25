@@ -9,7 +9,9 @@
         android:id="@+id/splashImg"
         android:layout_width="166dp"
         android:layout_height="174dp"
+        android:contentDescription="@string/string_value"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="290dp" />
 
     <TextView
