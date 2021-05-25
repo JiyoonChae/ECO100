@@ -1,10 +1,12 @@
 package com.mapo.eco100.views.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,35 +18,62 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.Cluster
+import com.google.maps.android.clustering.ClusterManager
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.garbageBagShopInfos
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentMapBinding
 
-class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
+class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
+    GoogleMap.OnMyLocationClickListener,
     GoogleMap.OnMyLocationButtonClickListener {
 
+    // 뷰 바인딩
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
+
+    // 맵 설젇
     private lateinit var mMap: GoogleMap
-    private lateinit var bitmapDraw: BitmapDrawable
-    private lateinit var bitmap: Bitmap
+    private lateinit var mapFragment: SupportMapFragment
+
+    // 바텀시트(목록 열기) 창 설정
     private val bottomSheetShop = BottomSheetShop()
     private val bottomSheetZeroShop = BottomSheetZeroShop()
-    private lateinit var mapFragment: SupportMapFragment
+
+    // 현재 위치 설정
+    private var mFusedLocationClient: FusedLocationProviderClient? = null
+    private var locationRequest: LocationRequest? = null
+    private var myLocationCallBack: MyLocationCallBack? = null
+
+    // 데이터 클러스터링 설정
+    private lateinit var clusterManager: ClusterManager<MyItem>
+    private lateinit var clusterRender: ClusterRenderer
+
+    // 지도 아이콘 설정
+    private lateinit var bitmapDraw: BitmapDrawable
+    private lateinit var bitmap: Bitmap
+
+    // 선택된 샵 정보 설정
     private var selectedShop: LatLng? = null
     private var selectedShopName: String? = null
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapFragment.onSaveInstanceState(outState)
-    }
+
+    // 내 위치 저장
+    private lateinit var myLocation : LatLng
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,10 +81,15 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         savedInstanceState: Bundle?
     ): View? {
 
-        // check args
+        _binding = FragmentMapBinding.inflate(inflater, container, false)
+
+        // 목록열기 버튼 숨기기
+        binding.openList.visibility = View.GONE
+
+        // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
-        var resultLat = arguments?.getDouble("lat")
-        var resultLong = arguments?.getDouble("long")
+        val resultLat = arguments?.getDouble("lat")
+        val resultLong = arguments?.getDouble("long")
         Log.d("map", "resultLat : $resultLat , resultLong : $resultLong")
 
         if (arguments != null) {
@@ -63,39 +97,41 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
             Log.d("map", "selectedShop: $selectedShop")
         }
 
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
+        // 맵 위치 권한 설정을 확인한다.
+        if (Build.VERSION.SDK_INT >= 23) {
+            TedPermission.with(binding.root.context)
+                .setPermissionListener(this)
+                .setRationaleMessage("위치 정보 제공이 필요한 서비스입니다..")
+                .setDeniedMessage("[설정] -> [권한]에서 권한 변경이 가능합니다.")
+                .setDeniedCloseButtonText("닫기")
+                .setGotoSettingButtonText("설정")
+                .setRationaleTitle("ECO100")
+                .setPermissions(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .check()
+        }
 
+        // 비트맵 생성
         bitmapDraw = ResourcesCompat.getDrawable(
             resources,
-            R.drawable.img_map_zeroshop,
+            R.drawable.ic_map_ecoduck,
             null
         ) as BitmapDrawable
-        bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
+        bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 96, 146, false)
 
-        // map
+        // 맵
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        return binding.root
-    }
-
-
-    // 맵 실행
-    override fun onMapReady(googleMap: GoogleMap) {
-
-        // init & seMapType
-        mMap = googleMap
-        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-
-        // 현재 위치 정보 제공 동의 확인
-        checkPermission()
-
-        // 선택된 가게가 있다면 해당 가게로 지도를 이동시킨다.
-        getSelectedShoInfo()
-
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+
             mMap.clear()
+            clusterManager.clearItems()
+            binding.openList.visibility = View.VISIBLE
+
             when (checkedId) {
 
                 // 종량제판매처 버튼 클릭시
@@ -112,7 +148,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
                         bottomSheetShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
                         bottomSheetShop.show(childFragmentManager, bottomSheetShop.tag)
                     }
-                    getShopList()
+                    getGarbageShopList()
                 }
 
                 // 제로웨잇샵 버튼 클릭시
@@ -134,89 +170,145 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
 
                 else -> Log.d("map", "checkedId : $checkedId, 잘못된 접근")
             }
+
         }
 
+        binding.goMyLocation.setOnClickListener {
+            setMyLocation()
+        }
+        return binding.root
     }
 
-    // 사용자 현재 위치 제공여부를 확인한다.
-    private fun checkPermission() {
-        if (ActivityCompat.checkSelfPermission(
-                binding.root.context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                binding.root.context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
+    // 위치 권한이 제공됐는지 확인한다.
+    private fun checkPermissions(): Boolean {
+        val fineLocalPermission = ContextCompat.checkSelfPermission(
+            binding.root.context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        val coarseLocationPermission = ContextCompat.checkSelfPermission(
+            binding.root.context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (fineLocalPermission == PackageManager.PERMISSION_GRANTED && coarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient?.requestLocationUpdates(locationRequest, myLocationCallBack, null)
+            return true
         }
-        mMap.isMyLocationEnabled = true
+
+        return false
     }
 
-    // 가게 목록 중 선택된 샵 정보를 제공한다.
-    private fun getSelectedShoInfo() {
-        selectedShop?.let {
-            Log.d("map", "In selectedShop: $it")
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            val markerOptions = MarkerOptions()
-            markerOptions.position(it).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
+    // 초기 위치를 설정한다.
+    @SuppressLint("VisibleForTests")
+    private fun initLocation() {
+
+        if (!checkPermissions()) {
+            val latLng = LatLng(37.566168, 126.901609)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        } else {
+            mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
+            myLocationCallBack = MyLocationCallBack()
+            locationRequest = LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                //.setInterval(10000).setFastestInterval(5000)
         }
+    }
+
+    private fun addLocationListener() {
+        checkPermissions()
+    }
+
+    // 종량제 샵 리스트를 지도에 뿌려준다.
+    private fun getGarbageShopList(){
+
+        // 종량제샵 마커 이미지 설정
+        val bitmapDrawGarbageShop = ResourcesCompat.getDrawable(
+            resources,
+            R.drawable.img_map_select_garbage,
+            null
+        ) as BitmapDrawable
+        val bitmapGarbageShop = Bitmap.createScaledBitmap(bitmapDrawGarbageShop.bitmap, 60, 86, false)
+
+        // 종량제 샵 리스트에서 데이터를 가져온다.
+        for (garbageShop in garbageBagShopInfos) {
+            clusterManager.addItem(
+                MyItem(
+                    LatLng(garbageShop.latitude, garbageShop.longitude),
+                    garbageShop.name,
+                    garbageShop.address1.toString(),
+                    BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop)
+                )
+            )
+        }
+
+       setMyLocation()
+        clusterManager.cluster()
+
     }
 
     // 제로웨이스트 샵 리스트를 지도에 뿌려준다.
     private fun getZeroWasteShopList() {
 
-        // marker bitmap
-        bitmapDraw = ResourcesCompat.getDrawable(
+        // 제로샵 마커 이미지 설정
+        val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
             resources,
-            R.drawable.img_map_zeroshop,
+            R.drawable.img_map_select_zero,
             null
         ) as BitmapDrawable
-        bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
+        val bitmapZeroShop = Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
 
+        // 제로샵 리스트에서 데이터를 가져온다.
         for (zeroShop in zeroShopList) {
-            val markerOptions = MarkerOptions()
-            markerOptions.position(
-                LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble())
-            ).title(zeroShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
-        }
-        mMap.moveCamera(
-            CameraUpdateFactory.newLatLng(
-                LatLng(zeroShopList[0].latitude.toDouble(), zeroShopList[0].longitude.toDouble())
+            clusterManager.addItem(
+                MyItem(
+                    LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
+                    zeroShop.name,
+                    zeroShop.address,
+                    BitmapDescriptorFactory.fromBitmap(bitmapZeroShop)
+                )
             )
-        )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        }
+        setMyLocation()
+        clusterManager.cluster()
+
     }
 
-    // 종량제 봉투 판매업소 리스트를 지도에 뿌려준다.
-    private fun getShopList() {
-/*
-        // marker bitmap
-        bitmapDraw = ResourcesCompat.getDrawable(
-            resources,
-            R.drawable.img_map_shop,
-            null
-        ) as BitmapDrawable
-        bitmap = Bitmap.createScaledBitmap(bitmapDraw.bitmap, 54, 72, false)
+    // 내 위치 설정을 맵에 추가한다.
+    private fun setMyLocation() {
 
-
-        for (garbageShop in garbageBagShopInfos) {
-            val markerOptions = MarkerOptions()
-            markerOptions.position(
-                LatLng(garbageShop.latitude, garbageShop.longitude)
-            ).title(garbageShop.name).icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
-        }
+        mMap.addMarker(MarkerOptions().position(myLocation).title("나 여기!")
+            .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+        )?.showInfoWindow()
         mMap.moveCamera(
             CameraUpdateFactory.newLatLng(
-                LatLng(garbageBagShopInfos[0].latitude, garbageBagShopInfos[0].longitude)
+                myLocation
             )
         )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))*/
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14f))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        addLocationListener()
+    }
+
+    // 맵 실행
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        // init & seMapType
+        mMap = googleMap
+        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+        // 초기 위치 설정
+        initLocation()
+
+        // 클러스터 설정
+        clusterManager = ClusterManager(binding.root.context, mMap)
+        clusterRender = ClusterRenderer(binding.root.context, mMap, clusterManager)
+
+        // 리스너 추가
+        mMap.setOnCameraIdleListener(clusterManager)
+        mMap.setOnMarkerClickListener(clusterManager)
+
     }
 
     override fun onMyLocationClick(location: Location) {
@@ -237,4 +329,35 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationCl
         }
     }
 
+
+    /** PERMISSION CHECK **/
+    override fun onPermissionGranted() {
+        Toast.makeText(binding.root.context, "위치 정보 제공이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+        Toast.makeText(binding.root.context, "위치 정보 제공이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    // 내 위치 정보 업데이트
+    inner class MyLocationCallBack : LocationCallback() {
+
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+
+            val location = locationResult.lastLocation
+            location.run {
+                mMap.clear()
+                val latLng = LatLng(latitude, longitude)
+                myLocation = latLng
+
+                val me = mMap.addMarker(
+                    MarkerOptions().position(latLng).title("나 여기!")
+                        .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                )
+                me?.showInfoWindow()
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            }
+        }
+    }
 }

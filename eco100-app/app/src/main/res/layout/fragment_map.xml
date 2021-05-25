@@ -41,6 +41,16 @@
         </RadioGroup>
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/goMyLocation"
+        android:layout_width="@dimen/size_50dp"
+        android:layout_height="@dimen/size_50dp"
+        android:background="@drawable/img_map_my_location"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/margin_24dp"
+        android:layout_marginBottom="@dimen/margin_24dp"
+        />
+
     <LinearLayout
         android:id="@+id/openList"
         style="@style/Map.ListBtnStyle"

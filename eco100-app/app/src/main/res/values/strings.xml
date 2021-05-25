@@ -91,7 +91,7 @@
 
     <!-- map -->
     <string name="map_shop">종량제판매처</string>
-    <string name="map_zero_shop">제로웨이잇샵</string>
+    <string name="map_zero_shop">제로웨이스트샵</string>
     <string name="map_open_list">목록열기</string>
     <string name="map_close_list">지도보기</string>
     <string name="map_user_location">나 여기!</string>
