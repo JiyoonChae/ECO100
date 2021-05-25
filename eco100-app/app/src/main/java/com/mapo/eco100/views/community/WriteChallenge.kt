@@ -1,14 +1,19 @@
+@file:Suppress("DEPRECATION")
+
 package com.mapo.eco100.views.community
 
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.ImageDecoder
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +22,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
@@ -46,9 +53,10 @@ class WriteChallenge : BaseActivity() {
     val REQ_CAMERA = 101 //카메라 촬영 요청
     val REQ_STORAGE = 102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
-    lateinit var filePath: String
+    var filePath: String =""
     private var challenge: Challenge? = null
     private val maxLimit = 200//글자 제한 설정
+    private lateinit var dialog: Dialog
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
     val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
@@ -107,16 +115,23 @@ class WriteChallenge : BaseActivity() {
         //글쓰기 완료
         binding.challengeFinish.setOnClickListener {
             Log.d("chall", "버튼 눌림")
-
-            uploadPost()
-
+            if (filePath == "") {
+                // dialog
+                dialog = Dialog(binding.root.context)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.popup_warning_challenge)
+                showDialog()
+            } else {
+                uploadPost()
+            }
         }
 
         //이미지 삭제
         binding.buttonDelete.setOnClickListener {
             realUri = null
             filePath = ""
-            binding.challengeWriteImage.setImageResource(R.drawable.ic_community_40dp)
+            binding.challengeWriteImage.setImageResource(R.drawable.img_ch_write2)
+
         }
 
     }
@@ -165,13 +180,12 @@ class WriteChallenge : BaseActivity() {
     //카메라 요청
     fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-       // startActivityForResult(intent, REQ_CAMERA)
+        // startActivityForResult(intent, REQ_CAMERA)
 
         createImageUri(newFileName(), "image/jpg")?.let { uri ->
             realUri = uri  //실제 이미지의 Uri 주소
             intent.putExtra(MediaStore.EXTRA_OUTPUT, realUri)
             startActivityForResult(intent, REQ_CAMERA)
-
         }
     }
 
@@ -212,6 +226,17 @@ class WriteChallenge : BaseActivity() {
     //결과 처리 메서드 : realUri에 값이 있는지 확인 후 있으면 loadBitmap메서드를 통해 화면에 세팅.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != Activity.RESULT_OK || resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this, "사진을 가져오지 않았습니다.", Toast.LENGTH_SHORT).show()
+            // dialog
+            dialog = Dialog(binding.root.context)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.popup_warning_challenge)
+            showDialog()
+            return
+        }
+
         if (resultCode == Activity.RESULT_OK)
             Log.d("resultCode: ", "$resultCode")
         Log.d("requestCode: ", "$requestCode")
@@ -257,42 +282,50 @@ class WriteChallenge : BaseActivity() {
     }
 
     fun uploadPost() {
-//        val file = File(filePath)
-//        val fileRequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-//        val part = MultipartBody.Part.createFormData("image", file.name, fileRequestBody)
-//        val content = MultipartBody.Part.createFormData("contents", getContent())
-        Thread {
-            val uploadFile = File(filePath)
-            var response: okhttp3.Response? = null
-            try {
-                val fileUploadBody: RequestBody = MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(
-                        "image", uploadFile.name,
-                        RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
-                    )
-                    .addFormDataPart("userId", "1")
-                    .addFormDataPart("challengeId", challenge!!.challengeId.toString())
-                    .addFormDataPart("contents", binding.challengeWriteContent.text.toString())
-                    .build()
+        if (filePath == ""){
+            // dialog
+            dialog = Dialog(binding.root.context)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.popup_warning_challenge)
+            showDialog()
+            return
+        }
+            Thread {
+                val uploadFile = File(filePath)
+                var response: okhttp3.Response? = null
+                try {
+                    val fileUploadBody: RequestBody = MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart(
+                            "image", uploadFile.name,
+                            RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
+                        )
+                        .addFormDataPart("userId", "1")
+                        .addFormDataPart("challengeId", challenge!!.challengeId.toString())
+                        .addFormDataPart("contents", binding.challengeWriteContent.text.toString())
+                        .build()
 
-                response = NetworkSettings.imageClient.newCall(
-                    NetworkSettings.imageRequest("/challenge/create", fileUploadBody)
-                ).execute()
-                if (response.isSuccessful) {
-                    Log.d("서버 등록: ","성공")
-                    setResult(RESULT_OK)
-                    finish()
-                } else {
-                    Toast.makeText(this, "전송 실패", Toast.LENGTH_SHORT).show()
-                    //전송 실패
+                    response = NetworkSettings.imageClient.newCall(
+                        NetworkSettings.imageRequest("/challenge/create", fileUploadBody)
+                    ).execute()
+                    if (response.isSuccessful) {
+                        Log.d("서버 등록: ", "성공")
+                        setResult(RESULT_OK)
+                        finish()
+                    } else {
+                        Log.d("서버 등록: ", "실패")
+                        Toast.makeText(this, "전송 실패", Toast.LENGTH_SHORT).show()
+                        //전송 실패
+                    }
+
+                } catch (e: Exception) {
+                    Log.e("서버 등록: ", e.toString())
+                } finally {
+                    response?.close()
                 }
-            } catch (e: Exception) {
-                Log.e("UploadError", e.toString())
-            } finally {
-                response?.close()
-            }
-        }.start()
+
+            }.start()
+
     }
     /*val service: ChallengeService =
         NetworkSettings.retrofit.build().create(ChallengeService::class.java)
@@ -315,7 +348,19 @@ class WriteChallenge : BaseActivity() {
     })*/
     //}
 
-    fun getContent(): String {
-        return binding.challengeWriteContent.text.toString()
+
+    //dialog
+    private fun showDialog() {
+        dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+         val okBtn: AppCompatButton = dialog.findViewById(R.id.challenge_popup_ok)
+         okBtn.setOnClickListener {
+             dialog.dismiss()
+         }
+        val cxlBtn: AppCompatButton = dialog.findViewById(R.id.challenge_popup_cancel)
+        cxlBtn.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }

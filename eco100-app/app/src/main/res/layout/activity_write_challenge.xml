@@ -45,16 +45,18 @@
             android:background="@drawable/icon_ch_title_back"
             android:gravity="center"
             android:text="챌린지 주제 : 장바구니 사용하기"
-            android:textSize="@dimen/size_16dp" />
+            android:textSize="@dimen/size_16dp"
+            android:fontFamily="@font/mapo_peacefull"/>
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/challenge_337dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="@dimen/margin_10dp"
         android:text="*챌린지 인증방법\n
            주제에 맞는 사진을 촬영하여 1장만 첨부합니다"
-
+        android:fontFamily="@font/mapo_peacefull"
         />
 
     <ScrollView
@@ -69,15 +71,15 @@
 
         <ImageView
             android:id="@+id/challenge_write_image"
-            android:layout_width="337dp"
+            android:layout_width="@dimen/challenge_337dp"
             android:layout_height="220dp"
             android:layout_gravity="center"
-            android:background="@drawable/ch_write_frame"
-            tools:srcCompat="@drawable/img_ch_write2" />
+            android:background="@drawable/ch_img_frame"
+             />
 
 
         <LinearLayout
-            android:layout_width="337dp"
+            android:layout_width="@dimen/challenge_337dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_12dp"
@@ -131,14 +133,15 @@
 
             <EditText
                 android:id="@+id/challenge_write_content"
-                android:layout_width="337dp"
+                android:layout_width="@dimen/challenge_337dp"
                 android:layout_height="150dp"
                 android:ems="10"
                 android:hint="@string/write_challenge_hint"
                 android:inputType="textMultiLine"
+                android:fontFamily="@font/mapo_peacefull"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:background="@drawable/ch_write_frame"/>
+                android:background="@drawable/ch_img_frame"/>
         </LinearLayout>
 
         <LinearLayout
@@ -149,7 +152,7 @@
 
             <TextView
                 android:id="@+id/textCount"
-                android:layout_width="337dp"
+                android:layout_width="@dimen/challenge_337dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="(0 / 200)"
@@ -159,7 +162,7 @@
 
 
         <FrameLayout
-            android:layout_width="337dp"
+            android:layout_width="@dimen/challenge_337dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/size_12dp"
@@ -177,7 +180,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/challengeFinish"
                 style="@style/CommonPopup.BtnRightTextStyle"
-                android:layout_width="337dp"
+                android:layout_width="@dimen/challenge_337dp"
                 android:layout_height="wrap_content"
                 android:text="@string/popup_write"
                 />
@@ -187,7 +190,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="112dp"
-            android:background="@drawable/ch_backframe" />
+            android:background="@drawable/ch_back_frame" />
     </LinearLayout>
     </ScrollView>
 
