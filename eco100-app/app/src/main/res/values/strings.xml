@@ -134,7 +134,5 @@
 
     <!-- kakao app key -->
     <string name="kakao_app_key">kakao27c8e2d5025be3e8979d18947a200d88</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -64,7 +64,7 @@ class ZeroshopRecyclerAdapter
                 intent.apply {
                     this.putExtra("name",data.name) // 데이터 넣기
                     this.putExtra("detailInfo",data.detailInfo)
-                    this.putExtra("imgRes",data.imgUrl)
+                    this.putExtra("imgUrl",data.imgUrl)
                     this.putExtra("phoneNum",data.phoneNum)
                     this.putExtra("adress",data.address)
                     this.putExtra("runInfo",data.runningInfo)
