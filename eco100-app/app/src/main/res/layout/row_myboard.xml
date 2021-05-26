@@ -9,6 +9,7 @@
     android:paddingVertical="10dp"
     >
 <LinearLayout
+    android:id="@+id/my_board_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">

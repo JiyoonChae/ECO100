@@ -42,13 +42,17 @@ interface BoardService {
         @Path("id") id:Long
     ) : Call<Void>
 
+    //내가 쓴 글 조회
     @GET("board/read/{userId}")
     fun readAll(
         @Path("userId")id : Long
     ):Call<MyBoardList>
 
+    //내가 쓴 댓글 조회
     @GET("board/comment/all/{userId}")
     fun commentAll(
         @Path("userId")id: Long
     ):Call<MyCommentList>
+
+
 }

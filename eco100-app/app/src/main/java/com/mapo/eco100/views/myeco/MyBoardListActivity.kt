@@ -81,10 +81,18 @@ class MyBoardListActivity : AppCompatActivity() {
             holder.nickname.text = myBoard?.nickname
             holder.date.text = myBoard?.date
             holder.mytitle.text = myBoard?.title
+
+            holder.item.setOnClickListener {
+                val service: BoardService =
+                    NetworkSettings.retrofit.build().create(BoardService::class.java)
+
+            }
+
         }
     }
 
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val item = itemView.findViewById<View>(R.id.my_board_item)
         val nickname = itemView.findViewById<TextView>(R.id.my_board_nickname)
         val date = itemView.findViewById<TextView>(R.id.my_board_date)
         val mytitle = itemView.findViewById<TextView>(R.id.my_board_title)
