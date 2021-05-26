@@ -4,7 +4,7 @@ import java.io.Serializable
 
 
 data class MyBoard(
-    val boardId: Int,
+    val boardId: Long,
     val nickname: String,
     val title: String,
     val date: String

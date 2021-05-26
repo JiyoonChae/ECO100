@@ -1,5 +1,6 @@
 package com.mapo.eco100.views.myeco
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityMyBoardListBinding
+import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.challenge.ChallengePostList
 import com.mapo.eco100.entity.myeco.MyBoardList
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.service.ChallengeService
+import com.mapo.eco100.views.community.ShowBoardActivity
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class MyBoardListActivity : AppCompatActivity() {
@@ -83,9 +87,21 @@ class MyBoardListActivity : AppCompatActivity() {
             holder.mytitle.text = myBoard?.title
 
             holder.item.setOnClickListener {
-                val service: BoardService =
-                    NetworkSettings.retrofit.build().create(BoardService::class.java)
+               val boardId = myBoard!!.boardId
 
+               val service: BoardService =
+                    NetworkSettings.retrofit.build().create(BoardService::class.java)
+                service.readOne(boardId,1).enqueue(object : Callback<BoardReadForm>{
+                    override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
+                        Log.d("내글확인", " 실패 --------------", null)
+                    }
+
+                    override fun onResponse(call: Call<BoardReadForm>,response: Response<BoardReadForm>
+                    ) {
+                        val intent = Intent(this@MyBoardListActivity, ShowBoardActivity::class.java)
+                        startActivity(intent)
+                    }
+                })
             }
 
         }

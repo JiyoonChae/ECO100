@@ -54,5 +54,10 @@ interface BoardService {
         @Path("userId")id: Long
     ):Call<MyCommentList>
 
-
+    //글 1개 읽기
+    @GET("board/read/{boardId}/{userId}")
+    fun readOne(
+        @Path("boardId")id: Long,
+        @Path("userId")userId: Long
+    ):Call<BoardReadForm>
 }
