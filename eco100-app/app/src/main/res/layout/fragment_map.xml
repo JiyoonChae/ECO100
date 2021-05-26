@@ -12,6 +12,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -28,7 +29,6 @@
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40dp"
-                android:checked="true"
                 android:button="@drawable/ic_map_zero_shop"
                 android:text="@string/map_zero_shop" />
 

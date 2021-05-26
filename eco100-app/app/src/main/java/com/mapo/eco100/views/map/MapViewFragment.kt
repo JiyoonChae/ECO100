@@ -14,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
@@ -29,9 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.gun0912.tedpermission.PermissionListener
@@ -93,8 +90,8 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         if (arguments != null) {
             selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
             Log.d("map", "selectedShop: $selectedShop")
-
         }
+
 
         // 맵 위치 권한 설정을 확인한다.
         if (Build.VERSION.SDK_INT >= 23) {
@@ -124,12 +121,13 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        binding.mapZeroBtn.isChecked = true
+
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
             mMap.clear()
             clusterManager.clearItems()
-            binding.openList.visibility = View.VISIBLE
 
             when (checkedId) {
 
@@ -172,10 +170,12 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
         }
 
+        // 현재 내 위치로 이동
         binding.goMyLocation.setOnClickListener {
             setMyLocation()
         }
 
+        // 목록열기 터치시
         binding.openList.setOnClickListener {
             bottomSheetZeroShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
             bottomSheetZeroShop.show(childFragmentManager, bottomSheetZeroShop.tag)
@@ -208,16 +208,23 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
     private fun initLocation() {
 
         if (!checkPermissions()) {
-            val latLng = LatLng(37.566168, 126.901609)
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            if (arguments != null) {
+                getSelectedShoInfo()
+            } else {
+                val latLng = LatLng(37.566168, 126.901609)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            }
         } else {
-            mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
-            myLocationCallBack = MyLocationCallBack()
-            locationRequest =
-                LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            //.setInterval(10000).setFastestInterval(5000)
+            if (arguments != null) {
+                getSelectedShoInfo()
+            } else {
+                mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
+                myLocationCallBack = MyLocationCallBack()
+                locationRequest =
+                    LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                //.setInterval(10000).setFastestInterval(5000)
+            }
         }
-
     }
 
     private fun addLocationListener() {
@@ -285,44 +292,44 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
     // 내 위치 설정을 맵에 추가한다.
     private fun setMyLocation() {
 
-        mMap.addMarker(
-            MarkerOptions().position(myLocation).title("나 여기!")
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-        )?.showInfoWindow()
-        mMap.moveCamera(
-            CameraUpdateFactory.newLatLng(
-                myLocation
+        if (checkPermissions()) {
+            mMap.addMarker(
+                MarkerOptions().position(myLocation).title("나 여기!")
+                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            )?.showInfoWindow()
+            mMap.moveCamera(
+                CameraUpdateFactory.newLatLng(
+                    myLocation
+                )
             )
-        )
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14f))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14f))
+        } else {
+            val latLng = LatLng(37.566168, 126.901609)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        }
     }
 
     // 선택된 제로샵 위치를 보여준다.
     private fun getSelectedShoInfo() {
-
         selectedShop?.let {
-            binding.radioGroup.visibility = View.GONE
             Log.d("map", "In selectedShop: $it")
+            val bitmapDrawSelectedShop = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.img_map_selected_shop,
+                null
+            ) as BitmapDrawable
+            val bitmapSelectedShop = Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
             val markerOptions = MarkerOptions()
             markerOptions.position(it).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
+            mMap.addMarker(markerOptions)?.showInfoWindow()
         }
     }
 
     // 맵 처음 진입시 리스트 설정
     private fun setInitList() {
-
-        /*if (arguments != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShop))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            val markerOptions = MarkerOptions()
-            markerOptions.position(selectedShop).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMap.addMarker(markerOptions)
-        } else {*/
 
         // 제로샵 마커 이미지 설정
         val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
@@ -371,7 +378,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         mMap.setOnCameraIdleListener(clusterManager)
         mMap.setOnMarkerClickListener(clusterManager)
 
-        setInitList()
+        if (arguments == null) {
+            setInitList()
+        }
     }
 
     override fun onMyLocationClick(location: Location) {
