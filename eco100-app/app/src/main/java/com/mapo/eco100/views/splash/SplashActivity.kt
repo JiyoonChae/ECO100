@@ -14,10 +14,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.mapo.eco100.MainActivity
 import com.mapo.eco100.R
 import com.mapo.eco100.common.BaseActivity
 import com.mapo.eco100.databinding.ActivitySplashBinding
-import com.mapo.eco100.views.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
