@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ecobox_tab">
+        <item>분리요령</item>
+        <item>콘텐츠</item>
+        <item>제로샵 소개</item>
+    </string-array>
+</resources>

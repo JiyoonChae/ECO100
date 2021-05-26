@@ -5,9 +5,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <!-- line -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_ecobox" />
+        android:layout_height="@dimen/size_8dp"
+        android:background="@color/secondary_on_color" />
+
+    <!-- top -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        style="@style/EcoBoxTabLayout.ItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="@dimen/size_2dp"
+        app:tabRippleColor="@color/primary_color_dark" />
+
+    <!-- contents -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
