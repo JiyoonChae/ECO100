@@ -24,13 +24,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".views.ecobox.ZeroshopDetailActivity"></activity>
         <activity android:name=".views.ecobox.ContentDetailActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideStyrofoamActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideCanActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideVinylActivity" />
-        <activity android:name=".views.ecobox.RecycleGuidePlasticActivity" />
-        <activity android:name=".views.ecobox.RecycleGuideGlassActivity" />
         <activity android:name=".views.ecobox.RecycleGuideActivity" />
-        <activity android:name=".views.network.NoConnectedDialog" />
         <activity android:name=".views.MainActivity" />
 
         <uses-library
