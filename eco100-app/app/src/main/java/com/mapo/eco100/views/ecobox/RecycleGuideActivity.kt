@@ -1,27 +1,24 @@
 package com.mapo.eco100.views.ecobox
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
-import com.mapo.eco100.databinding.ActivityContentDetailBinding
-import com.mapo.eco100.databinding.ActivityRecycleGuidePaperBinding
+import com.mapo.eco100.databinding.ActivityRecycleGuideBinding
 
 class RecycleGuideActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRecycleGuidePaperBinding
+    private lateinit var binding: ActivityRecycleGuideBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRecycleGuidePaperBinding.inflate(layoutInflater)
+        binding = ActivityRecycleGuideBinding.inflate(layoutInflater)
 
         val number = intent.getIntExtra("number",0)
 
         changeGuide(number)
         setContentView(binding.root)
-
 
     }
 
