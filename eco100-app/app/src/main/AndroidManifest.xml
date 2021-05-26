@@ -4,11 +4,13 @@
     package="com.mapo.eco100">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".config.AppInit"
@@ -21,16 +23,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".views.ecobox.ZeroshopDetailActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:ignore="UnusedAttribute">
+        <activity android:name=".views.ecobox.ZeroshopDetailActivity" />
         <activity android:name=".views.ecobox.ContentDetailActivity" />
         <activity android:name=".views.ecobox.RecycleGuideActivity" />
         <activity android:name=".views.MainActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-
+            android:required="false"/>
         <activity
             android:name=".views.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -40,8 +42,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.MainActivity" />
+
+        <activity android:name=".views.community.EnrollActivity" />
+        <activity android:name=".views.community.ShowBoardActivity" />
+        <activity android:name=".views.community.WriteChallenge" />
         <activity android:name=".views.search.SearchActivity" />
+        <activity android:name=".views.myeco.MyBoardListActivity" />
+        <activity android:name=".views.myeco.MyChallengeListActivity" />
+        <activity android:name=".views.myeco.MyCommentListActivity" />
+        <activity android:name=".views.myeco.MyBadgeListActivity" />
+        <activity android:name=".views.myeco.MyEco100Activity"/>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -53,7 +63,8 @@
                     android:host="oauth"
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
-        </activity> <!-- google map key -->
+        </activity>
+        <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
