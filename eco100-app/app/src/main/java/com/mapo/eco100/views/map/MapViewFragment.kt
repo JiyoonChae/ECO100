@@ -2,6 +2,7 @@ package com.mapo.eco100.views.map
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -32,6 +33,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.mapo.eco100.R
@@ -62,7 +64,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
     // 데이터 클러스터링 설정
     private lateinit var clusterManager: ClusterManager<MyItem>
-    private lateinit var clusterRender: ClusterRenderer
 
     // 지도 아이콘 설정
     private lateinit var bitmapDraw: BitmapDrawable
@@ -73,7 +74,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
     private var selectedShopName: String? = null
 
     // 내 위치 저장
-    private lateinit var myLocation : LatLng
+    private lateinit var myLocation: LatLng
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -209,7 +210,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
             mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
             myLocationCallBack = MyLocationCallBack()
             locationRequest = LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                //.setInterval(10000).setFastestInterval(5000)
+            //.setInterval(10000).setFastestInterval(5000)
         }
     }
 
@@ -218,7 +219,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
     }
 
     // 종량제 샵 리스트를 지도에 뿌려준다.
-    private fun getGarbageShopList(){
+    private fun getGarbageShopList() {
 
         // 종량제샵 마커 이미지 설정
         val bitmapDrawGarbageShop = ResourcesCompat.getDrawable(
@@ -226,12 +227,14 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
             R.drawable.img_map_select_garbage,
             null
         ) as BitmapDrawable
-        val bitmapGarbageShop = Bitmap.createScaledBitmap(bitmapDrawGarbageShop.bitmap, 60, 86, false)
+        val bitmapGarbageShop =
+            Bitmap.createScaledBitmap(bitmapDrawGarbageShop.bitmap, 60, 86, false)
 
         // 종량제 샵 리스트에서 데이터를 가져온다.
         for (garbageShop in garbageBagShopInfos) {
             clusterManager.addItem(
                 MyItem(
+                    1,
                     LatLng(garbageShop.latitude, garbageShop.longitude),
                     garbageShop.name,
                     garbageShop.address1.toString(),
@@ -240,7 +243,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
             )
         }
 
-       setMyLocation()
+        setMyLocation()
         clusterManager.cluster()
 
     }
@@ -260,6 +263,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         for (zeroShop in zeroShopList) {
             clusterManager.addItem(
                 MyItem(
+                    2,
                     LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
                     zeroShop.name,
                     zeroShop.address,
@@ -275,8 +279,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
     // 내 위치 설정을 맵에 추가한다.
     private fun setMyLocation() {
 
-        mMap.addMarker(MarkerOptions().position(myLocation).title("나 여기!")
-            .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+        mMap.addMarker(
+            MarkerOptions().position(myLocation).title("나 여기!")
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
         )?.showInfoWindow()
         mMap.moveCamera(
             CameraUpdateFactory.newLatLng(
@@ -303,11 +308,12 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
         // 클러스터 설정
         clusterManager = ClusterManager(binding.root.context, mMap)
-        clusterRender = ClusterRenderer(binding.root.context, mMap, clusterManager)
+        clusterManager.renderer = MarkerRender(binding.root.context, mMap, clusterManager)
 
         // 리스너 추가
         mMap.setOnCameraIdleListener(clusterManager)
         mMap.setOnMarkerClickListener(clusterManager)
+
 
     }
 
@@ -360,4 +366,49 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
             }
         }
     }
+
+    // 마커 클러스터링 전 랜더링
+    inner class MarkerRender(
+        context: Context?,
+        map: GoogleMap?, clusterManager: ClusterManager<MyItem>?
+    ) : DefaultClusterRenderer<MyItem>(context, map, clusterManager) {
+
+        override fun onBeforeClusterItemRendered(item: MyItem, markerOptions: MarkerOptions) {
+            super.onBeforeClusterItemRendered(item, markerOptions)
+            when (item.getCategory()) {
+                1 -> {
+                    val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.img_map_select_garbage,
+                        null
+                    ) as BitmapDrawable
+                    val bitmapZeroShop =
+                        Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
+                    markerOptions.icon(
+                        BitmapDescriptorFactory.fromBitmap(bitmapZeroShop)
+                    )
+                }
+                2 -> {
+                    val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.img_map_select_zero,
+                        null
+                    ) as BitmapDrawable
+                    val bitmapZeroShop =
+                        Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
+                    markerOptions.icon(
+                        BitmapDescriptorFactory.fromBitmap(bitmapZeroShop)
+                    )
+                }
+                else -> {
+                    return
+                }
+            }
+        }
+
+        override fun setOnClusterItemClickListener(listener: ClusterManager.OnClusterItemClickListener<MyItem>?) {
+            super.setOnClusterItemClickListener(listener)
+        }
+    }
+
 }
