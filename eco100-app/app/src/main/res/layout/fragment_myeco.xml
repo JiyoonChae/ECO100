@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/frame_my_eco"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
 
     <ImageView
         android:id="@+id/icon_profile"

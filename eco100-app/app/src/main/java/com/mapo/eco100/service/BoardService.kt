@@ -5,6 +5,8 @@ import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.likes.LikesRequestDto
+import com.mapo.eco100.entity.myeco.MyBoardList
+import com.mapo.eco100.entity.myeco.MyCommentList
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -40,9 +42,9 @@ interface BoardService {
     ) : Call<Void>
 
     @PATCH("board/likes")
-    fun increaseLikes(
+    suspend fun increaseLikes(
         @Body likesRequestDto: LikesRequestDto
-    ) : Call<Boolean>
+    ) : Int
 
     @DELETE("board/delete/{id}")
     fun delete(
@@ -78,4 +80,9 @@ interface BoardService {
         @Path("userId")id: Long
     ):Call<ArrayList<Boolean>>
 
+    @GET("board/read/{boardId}/{userId}")
+    fun read(
+        @Path("boardId") boardId: Long,
+        @Path("userId") userId: Long
+    ) : Call<BoardReadForm>
 }
