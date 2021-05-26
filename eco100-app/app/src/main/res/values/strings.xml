@@ -39,6 +39,12 @@
     <string name="ecobox_metal">금속캔,고철</string>
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
+    <string name="ecobox_guide_paper_description">종이 가이드 이미지</string>
+    <string name="ecobox_guide_glass_description">유리병 가이드 이미지</string>
+    <string name="ecobox_guide_plastic_description">플라스틱 가이드 이미지</string>
+    <string name="ecobox_guide_can_description">캔고철 가이드 이미지</string>
+    <string name="ecobox_guide_vinyl_description">비닐가이드 이미지</string>
+    <string name="ecobox_guide_styrofoam_description">스티로폼 가이드 이미지</string>
 
     <!-- popup -->
     <string name="popup_confirm">확인</string>
