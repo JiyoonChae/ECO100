@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.entity.staticmodel.ZeroShop
-import com.mapo.eco100.views.ecobox.ContentDetailActivity
 import com.mapo.eco100.views.ecobox.ZeroshopDetailActivity
 
 class ZeroshopRecyclerAdapter

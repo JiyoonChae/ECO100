@@ -65,6 +65,7 @@
         <item name="tabSelectedTextColor">@color/primary_color</item>
     </style>
 
+
     <!-- Common Popup Style -->
     <style name="CommonPopup.TitleStyle" parent="android:TextAppearance">
         <item name="android:textColor">@color/primary_color</item>

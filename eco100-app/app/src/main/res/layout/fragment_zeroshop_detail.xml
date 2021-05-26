@@ -107,6 +107,7 @@
                 android:layout_marginBottom="@dimen/margin_8dp"
                 android:drawablePadding="@dimen/padding_20dp"
                 android:fontFamily="@font/mapo_peacefull"
+                android:linksClickable="true"
                 android:text=""
                 android:textColor="@color/point_color"
                 android:textSize="@dimen/ecobox_content_detail_text"

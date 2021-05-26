@@ -49,6 +49,8 @@
     <string name="zeroshop_num_description">제로샵 전화번호 아이콘</string>
     <string name="zeroshop_adress_description">제로샵 주소 아이콘</string>
     <string name="zeroshop_runtime_description">제로샵 운영시간 아이콘</string>
+
+
     <string name="zeroshop_website_description">제로샵 웹사이트 아이콘</string>
 
     <string name="ecobox_paper">종이류,종이팩</string>

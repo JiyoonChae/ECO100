@@ -18,8 +18,9 @@
         <ImageView
             android:id="@+id/guide_imageView"
             android:layout_width="match_parent"
-            android:layout_height="736dp"
-            app:srcCompat="@drawable/recycle_guide_paper" />
+            android:layout_height="@dimen/ecobox_size_736dp"
+            app:srcCompat="@drawable/recycle_guide_paper"
+            android:contentDescription="@string/ecobox_guide_paper_description" />
 
     </LinearLayout>
 
