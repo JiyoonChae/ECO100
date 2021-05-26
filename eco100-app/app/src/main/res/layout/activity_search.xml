@@ -1,19 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.search.SearchActivity">
+    android:orientation="vertical"
+    >
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_8dp"
+        android:background="@color/secondary_on_color"
+        android:layout_alignParentTop="true"
+        />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/textSearch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/search_kr"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginStart="@dimen/margin_34dp"
+        android:layout_marginTop="@dimen/margin_22dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/search_title"
+        android:layout_below="@+id/view"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/search_title"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/searchInputBg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_52dp"
+        android:layout_marginHorizontal="@dimen/margin_20dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:background="@drawable/search_input_background"
+        android:layout_below="@+id/textSearch"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <AutoCompleteTextView
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:completionThreshold="1"
+            android:fontFamily="@font/mapo_peacefull"
+            android:hint="@string/search_input_hint"
+            android:imeOptions="actionDone"
+            android:paddingVertical="@dimen/padding_15dp"
+            android:singleLine="true"
+            android:textSize="@dimen/search_input_hint" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search"
+            android:layout_width="@dimen/size_24dp"
+            android:layout_height="@dimen/size_24dp"
+            android:layout_marginEnd="@dimen/margin_20dp"
+            android:background="@drawable/ic_serach_bar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/division"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_below="@+id/searchInputBg"
+        android:background="@color/primary_color_dark"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_50dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/search_sub_title"
+        android:layout_below="@+id/division"
+        android:textAlignment="center"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/search_sub_title"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/searchImg"
+        android:layout_width="@dimen/size_160dp"
+        android:layout_height="@dimen/size_160dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/searchTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_62dp"
+        android:contentDescription="@string/string_value"
+        android:src="@drawable/img_search" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_180dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_58dp"
+        android:layout_below="@+id/searchImg"
+        android:layout_marginHorizontal="@dimen/margin_24dp"
+        >
+
+        <ImageView
+            android:id="@+id/searchResultBg"
+            android:layout_width="@dimen/size_72dp"
+            android:layout_height="@dimen/size_72dp"
+            android:layout_gravity="top"
+            android:layout_marginStart="@dimen/size_64dp"
+            android:visibility="gone"
+            android:src="@drawable/img_search_eco"
+            android:contentDescription="@string/string_value" />
+
+        <TextView
+            android:id="@+id/searchInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/mapo_peacefull"
+            android:textSize="@dimen/search_text"
+            android:padding="@dimen/padding_20dp"
+            android:text="@string/search_text"
+            android:textAlignment="center" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_62dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:text="@string/search_info"
+        android:layout_alignParentBottom="true"
+        android:textAlignment="center"
+        android:layout_marginHorizontal="@dimen/margin_40dp"
+        android:layout_marginBottom="@dimen/size_30dp"
+        android:textColor="@color/main_line_color"
+        android:textSize="@dimen/search_info" />
+</RelativeLayout>
