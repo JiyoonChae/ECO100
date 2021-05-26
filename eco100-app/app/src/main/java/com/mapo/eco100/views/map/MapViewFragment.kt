@@ -38,9 +38,7 @@ import com.mapo.eco100.config.LocalDataBase.Companion.garbageBagShopInfos
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentMapBinding
 
-class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
-    GoogleMap.OnMyLocationClickListener,
-    GoogleMap.OnMyLocationButtonClickListener {
+class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
     // 뷰 바인딩
     private var _binding: FragmentMapBinding? = null
@@ -381,18 +379,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         if (arguments == null) {
             setInitList()
         }
-    }
-
-    override fun onMyLocationClick(location: Location) {
-        Toast.makeText(context, "Current location:\n$location", Toast.LENGTH_LONG)
-            .show()
-    }
-
-    override fun onMyLocationButtonClick(): Boolean {
-        Toast.makeText(context, "MyLocation button clicked", Toast.LENGTH_SHORT)
-            .show()
-
-        return false
     }
 
     companion object {
