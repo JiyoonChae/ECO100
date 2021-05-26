@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -29,6 +30,7 @@ import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardReadForm
+import com.mapo.eco100.entity.error.ErrorResponse
 import com.mapo.eco100.service.CommentService
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
@@ -58,18 +60,18 @@ class EnrollActivity : AppCompatActivity() {
         binding = ActivityEnrollBinding.inflate(layoutInflater)
         setContentView(binding.root)
         boardService = NetworkSettings.retrofit.build().create(BoardService::class.java)
-        binding.enrollImage.setImageResource(R.drawable.ic_community_40dp)
 
         //글 수정일 경우 넘어올 데이터
         boardBeforeEdit = intent.getSerializableExtra("board_data") as BoardReadForm?
         boardBeforeEdit?.let {
             isEditing = true
             binding.enrollTitle.setText(it.title)
-            binding.enrollContent.setText(it.contents)
+            binding.enrollContents.setText(it.contents)
             it.imageUrl?.let { originImageUrl ->
                 Glide.with(this@EnrollActivity)
                     .load(originImageUrl.toUri())
                     .into(binding.enrollImage)
+                binding.enrollImageText.visibility = View.GONE
             }
         }
 
@@ -104,7 +106,7 @@ class EnrollActivity : AppCompatActivity() {
                     if (fileLocation == "") {//사진 추가를 안했을 경우
                         val board = BoardModifyForm(1,
                             binding.enrollTitle.text.toString(),
-                            binding.enrollContent.text.toString(),
+                            binding.enrollContents.text.toString(),
                             isImageDeleted
                         )
                         boardService.modify(board).enqueue(object : Callback<Void> {
@@ -113,13 +115,15 @@ class EnrollActivity : AppCompatActivity() {
                                 response: Response<Void>
                             ) {
                                 if (response.isSuccessful) {
+                                    Toast.makeText(this@EnrollActivity,"글 수정 성공",Toast.LENGTH_SHORT).show()
                                     setResult(RESULT_OK)
+                                    finish()
+                                } else {
+                                    Toast.makeText(this@EnrollActivity,response.body().toString(),Toast.LENGTH_SHORT).show()
                                 }
-                                finish()
                             }
 
                             override fun onFailure(call: Call<Void>, t: Throwable) {
-                                Toast.makeText(this@EnrollActivity, "연결 실패", Toast.LENGTH_SHORT).show()
                                 Log.d("EnrollActivity", "실패 : $t")
                             }
                         })
@@ -146,6 +150,7 @@ class EnrollActivity : AppCompatActivity() {
                     }
                     fileLocation = ""
                     binding.enrollImage.setImageResource(R.drawable.icon_add_picture)
+                    binding.enrollImageText.visibility = View.VISIBLE
                 }
                 .setNegativeButton("취소") { _, _ -> }
                 .create()
@@ -209,6 +214,7 @@ class EnrollActivity : AppCompatActivity() {
                         Log.e("PICK_FROM_GALLERY", "갤러리에서 Uri값이 없어 실제 파일로 저장 실패")
                     }
                 }
+                binding.enrollImageText.visibility = View.GONE
             }
             else -> {
 
@@ -235,7 +241,7 @@ class EnrollActivity : AppCompatActivity() {
     private fun sendWithoutImage() {
         val board = BoardWriteForm(1,
             binding.enrollTitle.text.toString(),
-            binding.enrollContent.text.toString()
+            binding.enrollContents.text.toString()
         )
 
 
@@ -245,9 +251,12 @@ class EnrollActivity : AppCompatActivity() {
                 response: Response<Boards>
             ) {
                 if (response.isSuccessful) {
+                    Toast.makeText(this@EnrollActivity,"글 등록 성공",Toast.LENGTH_SHORT).show()
                     setResult(RESULT_OK)
+                    finish()
+                } else {
+                    Toast.makeText(this@EnrollActivity,response.errorBody().toString(),Toast.LENGTH_SHORT).show()
                 }
-                finish()
             }
 
             override fun onFailure(call: Call<Boards>, t: Throwable) {
@@ -309,6 +318,8 @@ class EnrollActivity : AppCompatActivity() {
     }
 
     private fun fileUploadAsync() {
+        binding.enrollProgressBar.visibility = View.VISIBLE
+
         Thread {
             val uploadFile = File(fileLocation)
             var response: okhttp3.Response? = null
@@ -322,7 +333,7 @@ class EnrollActivity : AppCompatActivity() {
                     )
                     .addFormDataPart("userId","1")
                     .addFormDataPart("title",binding.enrollTitle.text.toString())
-                    .addFormDataPart("contents",binding.enrollContent.text.toString())
+                    .addFormDataPart("contents",binding.enrollContents.text.toString())
                     .build()
 
                 val additionalUrl : String = if(isEditing) "/board/update/image" else "/board/create/image"
@@ -342,6 +353,9 @@ class EnrollActivity : AppCompatActivity() {
 //                    val board = Gson().fromJson(response.body!!.string(), Boards::class.java)
 //                    val intent = Intent()
 //                    intent.putExtra("created_board", board)
+                    runOnUiThread {
+                        binding.enrollProgressBar.visibility = View.GONE
+                    }
                     setResult(RESULT_OK)
                     finish()
                 } else {

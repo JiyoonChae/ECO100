@@ -94,16 +94,23 @@
             android:id="@+id/search_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="30"
             android:ems="10"
             android:inputType="textPersonName"
+            android:backgroundTint="@color/white"
             android:hint="검색어 입력"
+            android:textColorHint="@color/white"
+            android:layout_marginStart="@dimen/margin_34dp"
             />
 
         <ImageView
             android:id="@+id/search_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_baseline_send_24" />
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginBottom="@dimen/margin_12dp"
+            android:layout_marginEnd="@dimen/margin_34dp"
+            app:srcCompat="@drawable/search_28px" />
 
 
     </LinearLayout>

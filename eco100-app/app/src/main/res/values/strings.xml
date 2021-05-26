@@ -109,4 +109,8 @@
     <!-- kakao app key -->
     <string name="kakao_app_key">kakao27c8e2d5025be3e8979d18947a200d88</string>
 
+    <!-- enrollpage description -->
+    <string name="enroll_page_text">안녕하세요. 에코백입니다\n\n지속가능한 환경실천을 위하여
+        자신만의 유용한 정보들을 공유하는 소통하는 장이 되었으면 합니다.</string>
+
 </resources>

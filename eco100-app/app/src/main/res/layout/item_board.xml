@@ -12,7 +12,6 @@
     android:paddingTop="@dimen/padding_16dp"
     android:paddingLeft="@dimen/padding_20dp"
     android:paddingRight="@dimen/padding_20dp"
-    android:paddingBottom="@dimen/margin_18dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -39,17 +38,18 @@
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="닉네임" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:gravity="end"
+            android:layout_marginStart="@dimen/margin_4dp"
+            android:textSize="14sp"
+
             android:text="날짜" />
 
             </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginLeft="@dimen/margin_4dp"
+            android:layout_marginLeft="@dimen/margin_16dp"
             android:layout_marginBottom="@dimen/size_10dp"
             android:text="제목"
             android:textSize="18dp"
@@ -73,7 +73,8 @@
     <LinearLayout
         android:gravity="end"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin_18dp">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -87,8 +88,10 @@
             android:id="@+id/comments_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginEnd="@dimen/margin_16dp"
-            android:textSize="20dp"
+            android:textSize="14sp"
+            android:textColor="#A3A3A3"
             android:text="0" />
 
         <ImageView
@@ -103,8 +106,10 @@
             android:id="@+id/likes_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginRight="@dimen/margin_8dp"
-            android:textSize="20dp"
+            android:textSize="14sp"
+            android:textColor="#A3A3A3"
             android:text="0" />
     </LinearLayout>
 

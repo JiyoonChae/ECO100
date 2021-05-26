@@ -45,6 +45,11 @@ class ShowBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityShowBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Glide.with(this@ShowBoardActivity)
+            .load(R.drawable.icon_send_btn)
+            .into(binding.sendComment)
+
         boardData = intent.getSerializableExtra("board_data") as BoardReadForm
         if (boardData.userId == 1L) {
             setSupportActionBar(binding.editBoardToolBar)//써줘야 onCreateOptionsMenu()가 호출된다
@@ -60,9 +65,10 @@ class ShowBoardActivity : AppCompatActivity() {
                     .override(1440, 1440)
                     .into(binding.imageView2)
             }
+            binding.date.text = date
             binding.boardWriter.text = nickname
-            binding.numofComments.text = "댓글 수 : $commentsCnt"
-            binding.numofLikes.text = "좋아요 수 : $likesCnt"
+            binding.numofComments.text = commentsCnt.toString()
+            binding.numofLikes.text = likesCnt.toString()
             commentAdapter = CommentAdapter(
                 comments,
                 onClickDeleteBtn = {comment ->
@@ -98,13 +104,8 @@ class ShowBoardActivity : AppCompatActivity() {
             )
         }
         Glide.with(this@ShowBoardActivity)
-            .load(if(boardData.canClickLikes) R.drawable.icon_likes_big else R.drawable.icon_likes_pressed_big)
+            .load(if(boardData.canClickLikes) R.drawable.icon_likes else R.drawable.icon_likes_pressed)
             .into(binding.sendLikes)
-
-        binding.backBtn.setOnClickListener {
-            setResult(RESULT_OK)
-            finish()
-        }
 
         binding.editBoardToolBar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -180,20 +181,23 @@ class ShowBoardActivity : AppCompatActivity() {
                 this@ShowBoardActivity,
                 LinearLayoutManager.VERTICAL, false
             )
+            addItemDecoration(
+                DividerItemDecoration(context,
+                    LinearLayoutManager.VERTICAL))
             adapter = commentAdapter
         }
 
         viewModel.apply {
             commentsLiveData.observe(this@ShowBoardActivity, {
                 commentAdapter.updateComments(it)
-                binding.numofComments.text = "댓글 수 : ${it.size}"
+                binding.numofComments.text = "${it.size}"
             })
 
             numOfLikesLiveData.observe(this@ShowBoardActivity, {
-                binding.numofLikes.text = "좋아요 수 : $it"
+                binding.numofLikes.text = "$it"
                 boardData.canClickLikes = !boardData.canClickLikes
                 Glide.with(this@ShowBoardActivity)
-                    .load(if(boardData.canClickLikes) R.drawable.icon_likes_big else R.drawable.icon_likes_pressed_big)
+                    .load(if(boardData.canClickLikes) R.drawable.icon_likes else R.drawable.icon_likes_pressed)
                     .into(binding.sendLikes)
             })
         }
