@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
+import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentZeroshopDetailBinding
+import com.mapo.eco100.views.map.MapViewFragment
 
 
 class ZeroshopDetailFragment : Fragment() {
@@ -51,13 +54,30 @@ class ZeroshopDetailFragment : Fragment() {
             binding.adressTextView.text = it.getString("adress")
             binding.runinfoTextView.text = it.getString("runInfo")
 
+            val lat = it.getDouble("lat")
+            val long = it.getDouble("long")
+
+            Log.d("ecobox", "data >> $lat , $long" )
 
             var spanWebUrl = SpannableString(binding.websiteTextView.text)
             spanWebUrl.setSpan(UnderlineSpan(), 0, spanWebUrl.length, 0)
             binding.websiteTextView.text = spanWebUrl
 
             binding.zeroshopFloatingActionButton.setOnClickListener {
-                (activity as ZeroshopDetailActivity).replaceFragment(ContentWebViewFragment.newInstance())
+
+                val bundle = Bundle()
+                bundle.putString("name", binding.zeroshopDetailName.text.toString() )
+                bundle.putDouble("lat", lat)
+                bundle.putDouble("long", long)
+
+                Log.d("ecobox", "data >> $lat , $long")
+
+                val mapViewFragment = MapViewFragment()
+                mapViewFragment.arguments = bundle
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.map, mapViewFragment)
+                    .commit()
             }
 
             binding.websiteTextView.setOnClickListener {

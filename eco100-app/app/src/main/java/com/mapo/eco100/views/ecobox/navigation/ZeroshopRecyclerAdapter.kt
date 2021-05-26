@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.ecobox.navigation
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,8 +69,14 @@ class ZeroshopRecyclerAdapter
                     this.putExtra("adress",data.address)
                     this.putExtra("runInfo",data.runningInfo)
                     this.putExtra("webUrl",data.webUrl)
+                    this.putExtra("lat",data.latitude.toDouble())
+                    this.putExtra("long",data.longitude.toDouble())
+
+                    Log.d("ecobox", "data >> ${data.latitude} , ${data.longitude}")
 
                 }
+
+
                 ContextCompat.startActivity(itemView.context, intent, null)
             }
 

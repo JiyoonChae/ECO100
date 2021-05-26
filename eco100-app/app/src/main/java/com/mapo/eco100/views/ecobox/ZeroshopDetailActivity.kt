@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.ecobox
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -24,7 +25,10 @@ class ZeroshopDetailActivity : AppCompatActivity() {
         val adress = intent.getStringExtra("adress")
         val runInfo = intent.getStringExtra("runInfo")
         val imgUrl = intent.getStringExtra("imgUrl")
+        val lat = intent.getDoubleExtra("lat", 0.0)
+        val long = intent.getDoubleExtra("long", 0.0)
 
+        Log.d("ecobox", "data >> $lat , $long")
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.zeroshop_container, ZeroshopDetailFragment.newInstance()
@@ -37,6 +41,8 @@ class ZeroshopDetailActivity : AppCompatActivity() {
                         putString("webUrl", webUrl)
                         putString("adress", adress)
                         putString("runInfo", runInfo)
+                        putDouble("lat",lat)
+                        putDouble("long",long)
                     }
                 }
             ).commit()
