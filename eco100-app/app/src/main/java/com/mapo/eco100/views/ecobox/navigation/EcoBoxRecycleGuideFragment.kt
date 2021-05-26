@@ -70,14 +70,17 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
         binding.btnPaper.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuidePaperActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",1)
                 startActivity(intent)
+
             }
         }
 
         binding.btnGlass.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuideGlassActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",2)
                 startActivity(intent)
 
             }
@@ -85,28 +88,32 @@ class EcoBoxRecycleGuideFragment : Fragment() {
 
         binding.btnPlastic.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuidePlasticActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",3)
                 startActivity(intent)
             }
         }
 
         binding.btnCan.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuideCanActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",4)
                 startActivity(intent)
             }
         }
 
         binding.btnVinyl.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuideVinylActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",5)
                 startActivity(intent)
             }
         }
 
         binding.btnStyrofoam.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, RecycleGuideStyrofoamActivity::class.java)
+                val intent = Intent(context, RecycleGuideActivity::class.java)
+                intent.putExtra("number",6)
                 startActivity(intent)
             }
         }

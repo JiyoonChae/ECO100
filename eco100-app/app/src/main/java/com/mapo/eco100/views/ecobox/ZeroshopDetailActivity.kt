@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.replace
-import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ActivityZeroshopDetailBinding
 
@@ -25,6 +23,7 @@ class ZeroshopDetailActivity : AppCompatActivity() {
         val webUrl = intent.getStringExtra("webUrl")
         val adress = intent.getStringExtra("adress")
         val runInfo = intent.getStringExtra("runInfo")
+        val imgUrl = intent.getStringExtra("imgUrl")
 
 
         supportFragmentManager.beginTransaction()
@@ -33,6 +32,7 @@ class ZeroshopDetailActivity : AppCompatActivity() {
                     arguments = Bundle().apply {
                         putString("name", name)
                         putString("detailInfo", detailInfo)
+                        putString("imgUrl",imgUrl)
                         putString("phoneNum", phoneNum)
                         putString("webUrl", webUrl)
                         putString("adress", adress)

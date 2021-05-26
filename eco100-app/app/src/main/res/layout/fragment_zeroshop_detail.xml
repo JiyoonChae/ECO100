@@ -49,6 +49,17 @@
                 app:srcCompat="@drawable/ecobox_content_documentary2" />
 
             <TextView
+                android:id="@+id/zeroshop_detail_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ecobox_margin_26dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:fontFamily="@font/mapo_peacefull"
+                android:text="@string/content_detail_info_title"
+                android:textColor="@color/primary_color"
+                android:textSize="@dimen/ecobox_content_detail_text" />
+
+            <TextView
                 android:id="@+id/phoneNum_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,17 +72,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/ecobox_content_detail_text"
                 app:drawableLeftCompat="@drawable/ic_zeroshop_phonenum" />
-
-            <TextView
-                android:id="@+id/zeroshop_detail_info_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ecobox_margin_26dp"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:fontFamily="@font/mapo_peacefull"
-                android:text="@string/content_detail_info_title"
-                android:textColor="@color/primary_color"
-                android:textSize="@dimen/ecobox_content_detail_text" />
 
             <TextView
                 android:id="@+id/adress_textView"
@@ -107,6 +107,7 @@
                 android:layout_marginBottom="@dimen/margin_8dp"
                 android:drawablePadding="@dimen/padding_20dp"
                 android:fontFamily="@font/mapo_peacefull"
+                android:linksClickable="true"
                 android:text=""
                 android:textColor="@color/point_color"
                 android:textSize="@dimen/ecobox_content_detail_text"
@@ -129,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/ecobox_margin_26dp"
                 android:layout_marginBottom="@dimen/margin_8dp"
+                android:bufferType="spannable"
                 android:fontFamily="@font/mapo_peacefull"
                 android:text="@string/zeroshop_detail_map_guide"
                 android:textColor="@color/primary_color"
