@@ -98,7 +98,9 @@ class MyBoardListActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<BoardReadForm>,response: Response<BoardReadForm>
                     ) {
+                        val data = response.body()
                         val intent = Intent(this@MyBoardListActivity, ShowBoardActivity::class.java)
+                        intent.putExtra("board_data", data)
                         startActivity(intent)
                     }
                 })

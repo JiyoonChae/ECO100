@@ -85,7 +85,9 @@ class MyCommentListActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<BoardReadForm>, response: Response<BoardReadForm>
                     ) {
+                        val data = response.body()
                         val intent = Intent(this@MyCommentListActivity, ShowBoardActivity::class.java)
+                        intent.putExtra("board_data", data)
                         startActivity(intent)
                     }
                 })

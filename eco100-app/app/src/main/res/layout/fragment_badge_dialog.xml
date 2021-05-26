@@ -25,7 +25,7 @@
         android:layout_width="350dp"
         android:layout_height="@dimen/size_60dp"
         android:layout_gravity="center"
-        android:text="에코백 참여해주셔서 감사합니다\n 다양한 활동을 함께해요"
+        android:text="에코백 가입을 환영합니다!\n 다양한 활동을 함께해요"
         android:gravity="center"
         android:background="@drawable/badge_text_frame"
         android:layout_marginBottom="@dimen/margin_20dp"/>

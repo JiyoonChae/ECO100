@@ -131,7 +131,7 @@ class WriteChallenge : BaseActivity() {
             realUri = null
             filePath = ""
             val delimg= binding.challengeWriteImage
-            Glide.with(delimg).load(R.drawable.img_ch_write2).fitCenter().into(delimg)
+            Glide.with(delimg).load(R.drawable.img_ch_write2).centerInside().into(delimg)
 
         }
 
