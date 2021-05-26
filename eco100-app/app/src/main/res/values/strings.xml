@@ -122,6 +122,8 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- enrollpage description -->
     <string name="enroll_page_text">안녕하세요. 에코백입니다\n\n지속가능한 환경실천을 위하여

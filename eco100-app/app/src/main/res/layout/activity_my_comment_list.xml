@@ -5,7 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/primary_color_dark"
     tools:context=".views.myeco.MyCommentListActivity">
 
+    <ImageView
+        android:id="@+id/my_comment_title"
+        android:layout_width="@dimen/challenge_337dp"
+        android:layout_height="@dimen/size_60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        app:srcCompat="@drawable/my_comment_title" />
+
+    <TextView
+        android:layout_width="@dimen/challenge_337dp"
+        android:layout_height="@dimen/size_20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_10dp"
+        android:text="*댓글 항목 클릭 시 작성하신 게시물로 이동합니다"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_comment_recycler"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:listitem="@layout/row_myboard"/>
 </LinearLayout>

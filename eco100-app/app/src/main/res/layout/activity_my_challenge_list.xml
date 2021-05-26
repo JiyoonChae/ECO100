@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/my_challenge_title"
         android:layout_width="@dimen/challenge_337dp"
         android:layout_height="@dimen/size_60dp"
         android:layout_gravity="center"
