@@ -84,8 +84,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
-        binding.mapZeroBtn.isChecked = true
-
         // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
         val resultLat = arguments?.getDouble("lat")
@@ -95,6 +93,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         if (arguments != null) {
             selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
             Log.d("map", "selectedShop: $selectedShop")
+
         }
 
         // 맵 위치 권한 설정을 확인한다.
@@ -176,6 +175,12 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         binding.goMyLocation.setOnClickListener {
             setMyLocation()
         }
+
+        binding.openList.setOnClickListener {
+            bottomSheetZeroShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
+            bottomSheetZeroShop.show(childFragmentManager, bottomSheetZeroShop.tag)
+        }
+
         return binding.root
     }
 
@@ -208,9 +213,11 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         } else {
             mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
             myLocationCallBack = MyLocationCallBack()
-            locationRequest = LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            locationRequest =
+                LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             //.setInterval(10000).setFastestInterval(5000)
         }
+
     }
 
     private fun addLocationListener() {
@@ -290,7 +297,33 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14f))
     }
 
+    // 선택된 제로샵 위치를 보여준다.
+    private fun getSelectedShoInfo() {
+
+        selectedShop?.let {
+            binding.radioGroup.visibility = View.GONE
+            Log.d("map", "In selectedShop: $it")
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            val markerOptions = MarkerOptions()
+            markerOptions.position(it).title(selectedShopName)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            mMap.addMarker(markerOptions)
+        }
+    }
+
+    // 맵 처음 진입시 리스트 설정
     private fun setInitList() {
+
+        /*if (arguments != null) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedShop))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            val markerOptions = MarkerOptions()
+            markerOptions.position(selectedShop).title(selectedShopName)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            mMap.addMarker(markerOptions)
+        } else {*/
+
         // 제로샵 마커 이미지 설정
         val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
             resources,
@@ -312,6 +345,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
             )
         }
         clusterManager.cluster()
+
     }
 
     override fun onResume() {

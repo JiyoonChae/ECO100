@@ -28,6 +28,7 @@
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40dp"
+                android:checked="true"
                 android:button="@drawable/ic_map_zero_shop"
                 android:text="@string/map_zero_shop" />
 
@@ -66,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_4dp"
             android:src="@drawable/ic_map_list"
-            app:tint="@color/primary_color" />
+            app:tint="@color/point_color" />
 
         <TextView
             android:id="@+id/openListText"
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/mapo_peacefull"
             android:text="@string/map_open_list"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/point_color"
             android:textSize="16sp"
             android:textStyle="bold" />
 
