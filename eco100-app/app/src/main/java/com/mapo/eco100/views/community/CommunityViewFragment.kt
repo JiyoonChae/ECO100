@@ -2,22 +2,16 @@ package com.mapo.eco100.views.community
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.util.Utility
-import com.kakao.sdk.user.UserApiClient
-import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentCommunityBinding
-import com.mapo.eco100.navigation.BoardFragment
-import com.mapo.eco100.navigation.ChallengeFragment
+import com.mapo.eco100.views.community.navigation.BoardFragment
+import com.mapo.eco100.views.community.navigation.ChallengeFragment
 
 class CommunityViewFragment : Fragment() {
 
