@@ -84,8 +84,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
-        // 목록열기 버튼 숨기기
-        binding.openList.visibility = View.GONE
+        binding.mapZeroBtn.isChecked = true
 
         // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
@@ -135,23 +134,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
 
             when (checkedId) {
 
-                // 종량제판매처 버튼 클릭시
-                R.id.mapShopBtn -> {
-
-                    binding.openListIcon.setColorFilter(
-                        ContextCompat.getColor(binding.root.context, R.color.primary_color)
-                    )
-                    binding.openListText.setTextColor(
-                        (ContextCompat.getColor(binding.root.context, R.color.primary_color))
-                    )
-                    // 각 항목별 가게 리스트를 보여준다.
-                    binding.openList.setOnClickListener {
-                        bottomSheetShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
-                        bottomSheetShop.show(childFragmentManager, bottomSheetShop.tag)
-                    }
-                    getGarbageShopList()
-                }
-
                 // 제로웨잇샵 버튼 클릭시
                 R.id.mapZeroBtn -> {
 
@@ -167,6 +149,23 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
                         bottomSheetZeroShop.show(childFragmentManager, bottomSheetZeroShop.tag)
                     }
                     getZeroWasteShopList()
+                }
+
+                // 종량제판매처 버튼 클릭시
+                R.id.mapShopBtn -> {
+
+                    binding.openListIcon.setColorFilter(
+                        ContextCompat.getColor(binding.root.context, R.color.primary_color)
+                    )
+                    binding.openListText.setTextColor(
+                        (ContextCompat.getColor(binding.root.context, R.color.primary_color))
+                    )
+                    // 각 항목별 가게 리스트를 보여준다.
+                    binding.openList.setOnClickListener {
+                        bottomSheetShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
+                        bottomSheetShop.show(childFragmentManager, bottomSheetShop.tag)
+                    }
+                    getGarbageShopList()
                 }
 
                 else -> Log.d("map", "checkedId : $checkedId, 잘못된 접근")
@@ -291,6 +290,30 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14f))
     }
 
+    private fun setInitList() {
+        // 제로샵 마커 이미지 설정
+        val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
+            resources,
+            R.drawable.img_map_select_zero,
+            null
+        ) as BitmapDrawable
+        val bitmapZeroShop = Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
+
+        // 제로샵 리스트에서 데이터를 가져온다.
+        for (zeroShop in zeroShopList) {
+            clusterManager.addItem(
+                MyItem(
+                    2,
+                    LatLng(zeroShop.latitude.toDouble(), zeroShop.longitude.toDouble()),
+                    zeroShop.name,
+                    zeroShop.address,
+                    BitmapDescriptorFactory.fromBitmap(bitmapZeroShop)
+                )
+            )
+        }
+        clusterManager.cluster()
+    }
+
     override fun onResume() {
         super.onResume()
         addLocationListener()
@@ -314,7 +337,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback,
         mMap.setOnCameraIdleListener(clusterManager)
         mMap.setOnMarkerClickListener(clusterManager)
 
-
+        setInitList()
     }
 
     override fun onMyLocationClick(location: Location) {

@@ -24,6 +24,14 @@
             android:paddingTop="@dimen/padding_10dp">
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/mapZeroBtn"
+                style="@style/Map.RadioBtnStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40dp"
+                android:button="@drawable/ic_map_zero_shop"
+                android:text="@string/map_zero_shop" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/mapShopBtn"
                 style="@style/Map.RadioBtnStyle"
                 android:layout_width="wrap_content"
@@ -31,13 +39,6 @@
                 android:button="@drawable/ic_map_garbage_shop"
                 android:text="@string/map_shop" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/mapZeroBtn"
-                style="@style/Map.RadioBtnStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_40dp"
-                android:button="@drawable/ic_map_zero_shop"
-                android:text="@string/map_zero_shop" />
         </RadioGroup>
     </LinearLayout>
 
@@ -45,27 +46,26 @@
         android:id="@+id/goMyLocation"
         android:layout_width="@dimen/size_50dp"
         android:layout_height="@dimen/size_50dp"
-        android:background="@drawable/img_map_my_location"
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/margin_24dp"
         android:layout_marginBottom="@dimen/margin_24dp"
-        />
+        android:background="@drawable/img_map_my_location" />
 
     <LinearLayout
         android:id="@+id/openList"
         style="@style/Map.ListBtnStyle"
         android:layout_width="@dimen/size_108dp"
         android:layout_height="@dimen/size_24dp"
+        android:orientation="horizontal"
         android:paddingHorizontal="@dimen/padding_10dp"
-        android:paddingVertical="@dimen/padding_2dp"
-        android:orientation="horizontal">
+        android:paddingVertical="@dimen/padding_2dp">
 
         <ImageView
             android:id="@+id/openListIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_map_list"
             android:layout_marginEnd="@dimen/margin_4dp"
+            android:src="@drawable/ic_map_list"
             app:tint="@color/primary_color" />
 
         <TextView
