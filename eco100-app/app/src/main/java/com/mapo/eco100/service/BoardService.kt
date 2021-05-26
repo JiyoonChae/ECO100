@@ -60,4 +60,5 @@ interface BoardService {
         @Path("boardId")id: Long,
         @Path("userId")userId: Long
     ):Call<BoardReadForm>
+
 }

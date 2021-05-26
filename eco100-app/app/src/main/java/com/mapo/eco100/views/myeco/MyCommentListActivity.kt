@@ -1,5 +1,6 @@
 package com.mapo.eco100.views.myeco
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityMyCommentListBinding
+import com.mapo.eco100.entity.board.BoardReadForm
 import com.mapo.eco100.entity.myeco.MyComment
 import com.mapo.eco100.entity.myeco.MyCommentList
 import com.mapo.eco100.service.BoardService
+import com.mapo.eco100.views.community.ShowBoardActivity
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class MyCommentListActivity : AppCompatActivity() {
@@ -68,10 +72,29 @@ class MyCommentListActivity : AppCompatActivity() {
             holder.nickname.text = myComment?.writer
             holder.date.text = myComment?.date
             holder.mytitle.text = myComment?.contents
+
+            holder.item.setOnClickListener {
+                val boardId = myComment!!.boardId
+
+                val service: BoardService =
+                    NetworkSettings.retrofit.build().create(BoardService::class.java)
+                service.readOne(boardId,1).enqueue(object : Callback<BoardReadForm> {
+                    override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
+                        Log.d("내글확인", " 실패 --------------", null)
+                    }
+
+                    override fun onResponse(call: Call<BoardReadForm>, response: Response<BoardReadForm>
+                    ) {
+                        val intent = Intent(this@MyCommentListActivity, ShowBoardActivity::class.java)
+                        startActivity(intent)
+                    }
+                })
+            }
         }
     }
 
     class ViewHolderClass(itemView: View):RecyclerView.ViewHolder(itemView){
+        val item = itemView.findViewById<View>(R.id.my_board_item)
         val nickname = itemView.findViewById<TextView>(R.id.my_board_nickname)
         val date = itemView.findViewById<TextView>(R.id.my_board_date)
         val mytitle = itemView.findViewById<TextView>(R.id.my_board_title)
