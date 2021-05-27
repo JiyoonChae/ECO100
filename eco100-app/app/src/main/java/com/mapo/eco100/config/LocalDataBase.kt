@@ -3,6 +3,7 @@ package com.mapo.eco100.config
 import android.os.Build
 import android.text.Editable
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import com.mapo.eco100.entity.staticmodel.FAQ
 import com.mapo.eco100.entity.staticmodel.FAQ_JEJU
 import com.mapo.eco100.entity.staticmodel.GarbageBagShopInfo
@@ -11,7 +12,7 @@ import java.util.stream.Collectors
 
 class LocalDataBase {
     companion object {
-        var isLoading = false
+        val appInitLoading = MutableLiveData<Boolean>()
         val garbageBagShopInfos: MutableList<GarbageBagShopInfo> = mutableListOf()
         val FAQ_JEJU_list: MutableList<FAQ_JEJU> = mutableListOf()
         val FAQ_list: MutableList<FAQ> = mutableListOf()
