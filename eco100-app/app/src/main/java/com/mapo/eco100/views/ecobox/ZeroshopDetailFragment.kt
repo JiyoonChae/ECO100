@@ -1,5 +1,6 @@
 package com.mapo.eco100.views.ecobox
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -12,10 +13,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.FragmentZeroshopDetailBinding
+import com.mapo.eco100.views.MainActivity
 import com.mapo.eco100.views.map.MapViewFragment
 
 
@@ -57,14 +61,21 @@ class ZeroshopDetailFragment : Fragment() {
             val lat = it.getDouble("lat")
             val long = it.getDouble("long")
 
-            Log.d("ecobox", "data >> $lat , $long" )
 
             var spanWebUrl = SpannableString(binding.websiteTextView.text)
             spanWebUrl.setSpan(UnderlineSpan(), 0, spanWebUrl.length, 0)
             binding.websiteTextView.text = spanWebUrl
 
             binding.zeroshopFloatingActionButton.setOnClickListener {
-                (activity as ZeroshopDetailActivity).replaceFragment(MapViewFragment.newInstance())
+                val intent = Intent(binding.root.context, MainActivity::class.java)
+                intent.apply {
+                    putExtra("name",binding.zeroshopDetailName.text.toString()) // 데이터 넣기
+                    putExtra("lat",lat)
+                    putExtra("long",long)
+                    putExtra("tab",3)
+                }
+                startActivity(intent)
+
             }
 
             binding.websiteTextView.setOnClickListener {

@@ -48,6 +48,7 @@ class ZeroshopDetailActivity : AppCompatActivity() {
     }
 
     fun replaceFragment(fragment: Fragment) {
+        val webUrl = intent.getStringExtra("webUrl")
         val name = intent.getStringExtra("name")
         val lat = intent.getDoubleExtra("lat",0.0)
         val long = intent.getDoubleExtra("long",0.0)
@@ -57,6 +58,7 @@ class ZeroshopDetailActivity : AppCompatActivity() {
                 R.id.zeroshop_container, fragment
                 .apply {
                     arguments = Bundle().apply {
+                        putString("webUrl", webUrl)
                         putString("name",name)
                         putDouble("lat",lat)
                         putDouble("long",long)

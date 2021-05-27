@@ -3,6 +3,8 @@ package com.mapo.eco100.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.mapo.eco100.R
@@ -19,6 +21,7 @@ import com.mapo.eco100.views.myeco.MyEcoViewFragment
 class MainActivity : AppCompatActivity(), TabItemSelector {
 
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +61,29 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+
+        val tabIndex = intent.getIntExtra("tab",-1)
+        val name = intent.getStringExtra("name")
+        val lat = intent.getDoubleExtra("lat",0.0)
+        val long = intent.getDoubleExtra("long",0.0)
+
+        if(tabIndex == 3){
+
+            var fragment = MapViewFragment()
+            var bundle = Bundle()
+            bundle.apply {
+                putString("name",name)
+                putDouble("lat",lat)
+                putDouble("long",long)
+            }
+            fragment.arguments=bundle
+            binding.tab.getTabAt(tabIndex)?.select()
+        }
+
     }
 
     override fun selectItem(position: Int) {
         binding.tab.selectTab(binding.tab.getTabAt(position))
     }
+
 }
