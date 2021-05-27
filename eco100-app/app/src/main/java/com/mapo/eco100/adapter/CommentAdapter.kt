@@ -1,5 +1,6 @@
 package com.mapo.eco100.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ItemCommentBinding
 import com.mapo.eco100.entity.comment.Comment
 
-class CommentAdapter(comments:List<Comment>,val onClickDeleteBtn : (comment:Comment) -> Unit) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
+class CommentAdapter(comments:List<Comment>,val onClickDeleteBtn : (comment:Comment) -> Unit, val context:Context) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
     private var comments: List<Comment>
 
@@ -39,7 +40,9 @@ class CommentAdapter(comments:List<Comment>,val onClickDeleteBtn : (comment:Comm
             deleteBtn.setOnClickListener {
                 onClickDeleteBtn(comment)
             }
-            if(comment.writer != "KSG") {
+            if(comment.writer != context.getSharedPreferences("login",Context.MODE_PRIVATE)
+                    .getString("nickname","")
+            ) {
                 deleteBtn.visibility = View.GONE
             }
         }

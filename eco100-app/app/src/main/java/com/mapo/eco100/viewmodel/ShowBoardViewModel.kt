@@ -1,5 +1,6 @@
 package com.mapo.eco100.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,11 @@ class ShowBoardViewModel : ViewModel() {
     val numOfLikesLiveData = MutableLiveData<Int>()
     val commentsLiveData = MutableLiveData<List<Comment>>()
     val loadingLiveData = MutableLiveData<Boolean>()
+    var context : Context? = null
+
+    fun set(context: Context) {
+        this.context = context
+    }
 
     fun fetchComments(boardId:Long) {
         loadingLiveData.value = true
@@ -35,7 +41,7 @@ class ShowBoardViewModel : ViewModel() {
         viewModelScope.launch {
             numOfLikesLiveData.value = try {
                 NetworkSettings.retrofit.build().create(BoardService::class.java).increaseLikes(
-                    LikesRequestDto(1,boardId)
+                    LikesRequestDto(context!!.getSharedPreferences("login",Context.MODE_PRIVATE).getLong("userId",-1),boardId)
                 )
             } catch (e:Exception) {
                 Log.e("fetchNumOfLikes()","error: $e")

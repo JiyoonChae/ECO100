@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.myeco
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -39,7 +40,8 @@ class MyBadgeListActivity : AppCompatActivity() {
 
         val service: BoardService =
             NetworkSettings.retrofit.build().create(BoardService::class.java)
-        service.getMyBadge(1).enqueue(object : Callback<ArrayList<Boolean>> {
+        service.getMyBadge(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+            .enqueue(object : Callback<ArrayList<Boolean>> {
             override fun onFailure(call: Call<ArrayList<Boolean>>, t: Throwable) {
                 Log.d("서버 연결", " 실패 --------------", null)
             }

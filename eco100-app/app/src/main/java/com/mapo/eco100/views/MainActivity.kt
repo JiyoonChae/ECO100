@@ -2,16 +2,16 @@ package com.mapo.eco100.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
-import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
 import com.mapo.eco100.databinding.ActivityMainBinding
 import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.home.HomeViewFragment.Companion.newInstance
+import com.mapo.eco100.views.login.NoLoginDialog
 import com.mapo.eco100.views.map.MapViewFragment
 import com.mapo.eco100.views.myeco.MyEcoViewFragment
 
@@ -42,12 +42,20 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
+                        if(!KakaoLoginUtils(this@MainActivity).isLogin()) {
+                            val dialog = NoLoginDialog(this@MainActivity)
+                            dialog.show()
+                        }
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
                         ft.replace(R.id.contents, MapViewFragment.newInstance())
                     }
                     4 -> {
+                        if(!KakaoLoginUtils(this@MainActivity).isLogin()) {
+                            val dialog = NoLoginDialog(this@MainActivity)
+                            dialog.show()
+                        }
                         ft.replace(R.id.contents, MyEcoViewFragment.newInstance())
                     }
                     else -> throw IllegalStateException("Unexpected value: " + tab.position)
