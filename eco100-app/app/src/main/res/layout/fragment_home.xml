@@ -210,6 +210,7 @@
                 android:background="@color/primary_color" />
 
             <FrameLayout
+                android:id="@+id/goMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_16dp">
@@ -220,7 +221,6 @@
                     android:layout_height="372dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/goMap"
                     android:layout_width="@dimen/size_48dp"
                     android:layout_height="@dimen/size_48dp"
                     android:layout_gravity="bottom|left"

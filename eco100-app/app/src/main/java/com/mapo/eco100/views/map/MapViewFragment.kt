@@ -214,8 +214,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             if (arguments != null) {
                 getSelectedShoInfo()
             } else {
-                binding.view.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
-                binding.view.requestLayout()
                 mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
                 myLocationCallBack = MyLocationCallBack()
                 locationRequest =

@@ -75,7 +75,7 @@ class ZeroshopDetailFragment : Fragment() {
                     putExtra("tab",3)
                 }
                 startActivity(intent)
-
+                requireActivity().finish()
             }
 
             binding.websiteTextView.setOnClickListener {

@@ -43,7 +43,7 @@ class BottomSheetShop : BottomSheetDialogFragment() {
                 bundle.putDouble("lat", item.latitude)
                 bundle.putDouble("long", item.longitude)
 
-                val mapViewFragment = MapViewFragment()
+                val mapViewFragment = MapViewFragment.newInstance()
                 mapViewFragment.arguments = bundle
 
                 parentFragmentManager.beginTransaction()

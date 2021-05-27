@@ -20,6 +20,7 @@
         android:layout_height="@dimen/size_20dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/margin_16dp"
+        android:fontFamily="@font/mapo_peacefull"
         android:textAlignment="center"
         android:textSize="@dimen/size_10dp"
         android:text="*댓글 항목 클릭 시 작성하신 게시물로 이동합니다"

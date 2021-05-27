@@ -56,7 +56,7 @@ class HomeViewFragment : Fragment() {
             appendFragment(FragmentForViewPager.newInstance(1, R.drawable.img_home_mid_chall))
             appendFragment(FragmentForViewPager.newInstance(2, R.drawable.img_home_mid_news))
             appendFragment(FragmentForViewPager.newInstance(3, R.drawable.img_home_mid_voluntee))
-            appendFragment(FragmentForViewPager.newInstance(4, R.drawable.img_home_mid_comm))
+            appendFragment(FragmentForViewPager.newInstance(4, R.drawable.img_home_mid_commu))
             binding.pager.adapter = pagerAdapter
         }
 
