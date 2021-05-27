@@ -24,8 +24,10 @@
         android:layout_marginBottom="54dp"
         android:gravity="center"
         android:text="팡팡이"
+        android:textStyle="bold"
+        android:fontFamily="@font/mapo_peacefull"
         android:textColor="#39BDC8"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:id="@+id/my_board_list_frame"
@@ -36,8 +38,8 @@
 
         <ImageView
             android:id="@+id/icon_my_board_list"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/icon_my_eco1"
@@ -50,12 +52,13 @@
             android:layout_marginRight="36dp"
             android:text="내가 쓴 글 조회하기"
             android:textColor="#8CD698"
+            android:textStyle="bold"
+            android:fontFamily="@font/mapo_peacefull"
             android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="6dp"
-            android:layout_height="12dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/vector9" />
     </LinearLayout>
 
@@ -73,8 +76,8 @@
 
         <ImageView
             android:id="@+id/icon_my_comment_list"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/icon_my_eco2"
@@ -86,12 +89,14 @@
             android:layout_height="24dp"
             android:layout_marginRight="36dp"
             android:text="나의 댓글 조회하기"
+            android:textStyle="bold"
+            android:fontFamily="@font/mapo_peacefull"
             android:textColor="#8CD698"
             android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="6dp"
-            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/vector9" />
     </LinearLayout>
 
@@ -109,8 +114,8 @@
 
         <ImageView
             android:id="@+id/icon_my_badge_list"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/icon_my_eco3"
@@ -122,12 +127,14 @@
             android:layout_height="24dp"
             android:layout_marginRight="36dp"
             android:text="나의 뱃지 조회하기"
+            android:textStyle="bold"
+            android:fontFamily="@font/mapo_peacefull"
             android:textColor="#8CD698"
             android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="6dp"
-            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/vector9" />
     </LinearLayout>
 
@@ -145,8 +152,8 @@
 
         <ImageView
             android:id="@+id/icon_my_challenge_list"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/icon_my_eco4"
@@ -158,12 +165,14 @@
             android:layout_height="24dp"
             android:layout_marginRight="36dp"
             android:text="나의 챌린지 조회하기"
+            android:textStyle="bold"
+            android:fontFamily="@font/mapo_peacefull"
             android:textColor="#8CD698"
             android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="6dp"
-            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/vector9" />
     </LinearLayout>
     <LinearLayout
@@ -180,8 +189,8 @@
 
         <ImageView
             android:id="@+id/icon_eco100"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/icon_my_eco5"
@@ -193,12 +202,14 @@
             android:layout_height="24dp"
             android:layout_marginRight="36dp"
             android:text="에코백 소개"
+            android:textStyle="bold"
+            android:fontFamily="@font/mapo_peacefull"
             android:textColor="#8CD698"
             android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="6dp"
-            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/vector9" />
     </LinearLayout>
 </LinearLayout>

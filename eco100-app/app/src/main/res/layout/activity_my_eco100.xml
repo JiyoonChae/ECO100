@@ -113,7 +113,6 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="112dp"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/ch_back_frame" />
         </LinearLayout>
 
