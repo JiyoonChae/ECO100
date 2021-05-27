@@ -64,20 +64,7 @@ class ZeroshopDetailFragment : Fragment() {
             binding.websiteTextView.text = spanWebUrl
 
             binding.zeroshopFloatingActionButton.setOnClickListener {
-
-                val bundle = Bundle()
-                bundle.putString("name", binding.zeroshopDetailName.text.toString() )
-                bundle.putDouble("lat", lat)
-                bundle.putDouble("long", long)
-
-                Log.d("ecobox", "data >> $lat , $long")
-
-                val mapViewFragment = MapViewFragment()
-                mapViewFragment.arguments = bundle
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.map, mapViewFragment)
-                    .commit()
+                (activity as ZeroshopDetailActivity).replaceFragment(MapViewFragment.newInstance())
             }
 
             binding.websiteTextView.setOnClickListener {
