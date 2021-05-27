@@ -48,7 +48,6 @@ class ContentRecyclerAdapter
         val contentTitleTextView: TextView = itemView.findViewById(R.id.content_title)
 
         fun onBind(data : Contents) {
-            contentImageView.setImageResource(data.imgRes)
             contentCategoryTextView.text = data.category
             contentTitleTextView.text = data.title
             Glide.with(contentImageView).load(data.imgRes).override(1024).into(contentImageView)
