@@ -21,7 +21,7 @@ import com.mapo.eco100.views.myeco.MyEcoViewFragment
 class MainActivity : AppCompatActivity(), TabItemSelector {
 
     private lateinit var binding: ActivityMainBinding
-
+    private var name : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
         supportFragmentManager.beginTransaction()
             .replace(R.id.contents, newInstance()).commit()
 
+        val tabIndex = intent.getIntExtra("tab", -1)
+        name = intent.getStringExtra("name")
+        val lat = intent.getDoubleExtra("lat", 0.0)
+        val long = intent.getDoubleExtra("long", 0.0)
 
         binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -48,7 +52,9 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
-                        ft.replace(R.id.contents, MapViewFragment.newInstance())
+                        if(name == null) {
+                            ft.replace(R.id.contents, MapViewFragment.newInstance())
+                        }
                     }
                     4 -> {
                         ft.replace(R.id.contents, MyEcoViewFragment.newInstance())
@@ -62,22 +68,22 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
-        val tabIndex = intent.getIntExtra("tab",-1)
-        val name = intent.getStringExtra("name")
-        val lat = intent.getDoubleExtra("lat",0.0)
-        val long = intent.getDoubleExtra("long",0.0)
 
-        if(tabIndex == 3){
 
-            var fragment = MapViewFragment()
+        if (tabIndex == 3) {
+
+            val map = MapViewFragment.newInstance()
+
             var bundle = Bundle()
             bundle.apply {
-                putString("name",name)
-                putDouble("lat",lat)
-                putDouble("long",long)
+                putString("name", name)
+                putDouble("lat", lat)
+                putDouble("long", long)
             }
-            fragment.arguments=bundle
-            binding.tab.getTabAt(tabIndex)?.select()
+            map.arguments = bundle
+            supportFragmentManager.beginTransaction().replace(R.id.contents, map).commit()
+            binding.tab.selectTab(binding.tab.getTabAt(tabIndex))
+            name = null
         }
 
     }
