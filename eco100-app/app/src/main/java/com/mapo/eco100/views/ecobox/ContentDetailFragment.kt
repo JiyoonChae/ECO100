@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.FragmentContentDetailBinding
 
@@ -23,11 +24,12 @@ class ContentDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentContentDetailBinding.inflate(inflater, container, false)
 
+        val imgRes = arguments?.getInt("imgRes")
 
         arguments?.let {
             binding.contentDetailCategory.text = it.getString("category")
             binding.contentDetailTitle.text = it.getString("title")
-            binding.contentDetailImageView.setImageResource(it.getInt("imgRes"))
+            Glide.with(this).load(imgRes).into(binding.contentDetailImageView)
             binding.contentDetailInfo.text = it.getString("detail")
 
         }
