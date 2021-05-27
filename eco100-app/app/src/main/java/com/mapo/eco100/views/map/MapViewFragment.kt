@@ -126,8 +126,10 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
-            mMap.clear()
+
             clusterManager.clearItems()
+            clusterManager.markerCollection.clear()
+            mMap.clear()
 
             when (checkedId) {
 
@@ -214,7 +216,10 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             if (arguments != null) {
                 getSelectedShoInfo()
             } else {
-                binding.view.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+                binding.view.layoutParams = FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
                 mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
                 myLocationCallBack = MyLocationCallBack()
                 locationRequest =
@@ -239,9 +244,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             ) as BitmapDrawable
             val bitmapSelectedShop =
                 Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
-           // mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            val latLng = LatLng(37.566168, 126.901609)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
             val markerOptions = MarkerOptions()
             markerOptions.position(it).title(selectedShopName)
@@ -263,7 +266,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             Bitmap.createScaledBitmap(bitmapDrawGarbageShop.bitmap, 60, 86, false)
 
         // 종량제 샵 리스트에서 데이터를 가져온다.
-        /*for (garbageShop in garbageBagShopInfos) {
+        for (garbageShop in garbageBagShopInfos) {
             clusterManager.addItem(
                 MyItem(
                     1,
@@ -273,14 +276,14 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                     BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop)
                 )
             )
-        }*/
+        }
         val latLng = LatLng(37.566168, 126.901609)
         mMap.addMarker(
             MarkerOptions().position(latLng).title("나 여기!")
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop))
         )
 
-        if(arguments == null) {
+        if (arguments == null) {
             setMyLocation()
             clusterManager.cluster()
         }
@@ -311,7 +314,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             )
         }
 
-        if(arguments == null) {
+        if (arguments == null) {
             setMyLocation()
             clusterManager.cluster()
         }

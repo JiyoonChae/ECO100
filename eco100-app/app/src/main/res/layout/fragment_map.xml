@@ -51,8 +51,8 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/goMyLocation"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/margin_24dp"
         android:layout_marginBottom="@dimen/margin_24dp"

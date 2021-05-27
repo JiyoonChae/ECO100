@@ -28,6 +28,8 @@ class ZeroshopDetailActivity : AppCompatActivity() {
         val lat = intent.getDoubleExtra("lat", 0.0)
         val long = intent.getDoubleExtra("long", 0.0)
 
+        Log.d("map", "lat : $lat , long: $long")
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.zeroshop_container, ZeroshopDetailFragment.newInstance()
                 .apply {

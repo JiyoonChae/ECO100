@@ -3,6 +3,7 @@ package com.mapo.eco100.views.map
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +52,11 @@ class BottomSheetZeroShop : BottomSheetDialogFragment() {
                     this.putExtra("webUrl", item.webUrl)
                     this.putExtra("adress", item.address)
                     this.putExtra("runInfo", item.runningInfo)
-                    this.putExtra("imgUrl",item.imgUrl)
+                    this.putExtra("imgUrl", item.imgUrl)
+                    this.putExtra("lat", item.latitude.toDouble())
+                    this.putExtra("long", item.longitude.toDouble())
+
+                    Log.d("map", "2lat : ${item.latitude}, long : ${item.longitude}")
                 }
 
                 ContextCompat.startActivity(requireContext(), intent, null)
