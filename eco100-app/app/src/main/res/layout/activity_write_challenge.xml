@@ -70,12 +70,13 @@
 
 
         <ImageView
-            android:id="@+id/challenge_write_image"
+            android:id="@+id/challengeWriteImage"
             android:layout_width="@dimen/challenge_337dp"
             android:layout_height="220dp"
             android:layout_gravity="center"
             android:background="@drawable/ch_img_frame"
             />
+
 
         <LinearLayout
             android:layout_width="@dimen/challenge_337dp"

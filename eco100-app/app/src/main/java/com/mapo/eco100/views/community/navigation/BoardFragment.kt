@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.views.community.EnrollActivity
 import com.mapo.eco100.R
 import com.mapo.eco100.config.BOARD_CLICK
@@ -59,10 +60,14 @@ class BoardFragment : Fragment() {
                 if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
                     val dialog = NoConnectedDialog(mainActivityContext)
                     dialog.show()
+                } else if (!KakaoLoginUtils(mainActivityContext).isLogin()) {
+                    KakaoLoginUtils(mainActivityContext).login()
                 } else {
                     val service: BoardService =
                         NetworkSettings.retrofit.build().create(BoardService::class.java)
-                    service.read(board_data.boardId,1).enqueue(object : Callback<BoardReadForm> {
+                    val userId = mainActivityContext.getSharedPreferences("login",Context.MODE_PRIVATE)
+                        .getLong("userId",-1)
+                    service.read(board_data.boardId,userId).enqueue(object : Callback<BoardReadForm> {
                         override fun onResponse(
                             call: Call<BoardReadForm>,
                             response: Response<BoardReadForm>
@@ -104,8 +109,10 @@ class BoardFragment : Fragment() {
             } else {
                 binding.swipeRefresh.isRefreshing = true
                 if (searchMode) {
-                    binding.swipeRefresh.isRefreshing = false
+                    binding.searchWord.setText("")
                     viewModel.fetchBoards()
+                    binding.swipeRefresh.isRefreshing = false
+                    searchMode = false
                 } else {
                     NetworkSettings.retrofit.build().create(BoardService::class.java)
                         .refreshBoards(0)

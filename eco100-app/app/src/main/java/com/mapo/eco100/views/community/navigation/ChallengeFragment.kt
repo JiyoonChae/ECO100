@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentChallengeBinding
@@ -26,6 +27,7 @@ import com.mapo.eco100.entity.challenge.Challenge
 import com.mapo.eco100.entity.challenge.ChallengeList
 import com.mapo.eco100.service.ChallengeService
 import com.mapo.eco100.views.community.WriteChallenge
+import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,22 +55,31 @@ class ChallengeFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+            val dialog = NoConnectedDialog(mainActivityContext)
+            dialog.show()
+        } else if (!KakaoLoginUtils(mainActivityContext).isLogin()) {
+            KakaoLoginUtils(mainActivityContext).login()
+        } else {
+            val userId = mainActivityContext.getSharedPreferences("login", Context.MODE_PRIVATE)
+                .getLong("userId", -1)
+            val service: ChallengeService =
+                NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+            service.challengeList(userId).enqueue(object : Callback<ChallengeList> {
+                override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+                    Log.d(tag, " 실패 --------------", null)
+                }
 
-        val service: ChallengeService =
-            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-        service.challengeList(1).enqueue(object : Callback<ChallengeList> {
-            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
-                Log.d(tag, " 실패 --------------", null)
-            }
-
-            override fun onResponse(call: Call<ChallengeList>, response: Response<ChallengeList>) {
-                adapter!!.challengeList = response.body() as ChallengeList
-                adapter!!.notifyDataSetChanged()
-            }
-        })
-
+                override fun onResponse(
+                    call: Call<ChallengeList>,
+                    response: Response<ChallengeList>
+                ) {
+                    adapter!!.challengeList = response.body() as ChallengeList
+                    adapter!!.notifyDataSetChanged()
+                }
+            })
+        }
         return view
-
     }
 
     companion object {
@@ -176,15 +187,8 @@ class ChallengeFragment : Fragment() {
             val rowStamp1 = itemView.findViewById<ImageView>(R.id.rowStamp1)
             val rowStamp2 = itemView.findViewById<ImageView>(R.id.rowStamp2)
             val participants = itemView.findViewById<TextView>(R.id.participants)
-
-
         }
-
-
-
-
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -193,34 +197,40 @@ class ChallengeFragment : Fragment() {
             Log.d("챌린지리스트: ", "requestCode: $requestCode")
             when (requestCode) {
                 challengeCode -> {
-                    val service: ChallengeService =
-                        NetworkSettings.retrofit.build().create(ChallengeService::class.java)
-                    service.challengeList(1).enqueue(object : Callback<ChallengeList> {
-                        override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
-                            Log.d(tag, " 실패 --------------", null)
-                        }
-
-                        override fun onResponse(
-                            call: Call<ChallengeList>,
-                            response: Response<ChallengeList>
-                        ) {
-                            if(response.isSuccessful) {
-                                adapter?.challengeList = response.body() as ChallengeList
-                                adapter?.notifyDataSetChanged()
-                                Log.d("챌린지리스트: ", "새로고침완료")
+                    if (!NetworkSettings.isNetworkAvailable(mainActivityContext)) {
+                        val dialog = NoConnectedDialog(mainActivityContext)
+                        dialog.show()
+                    } else if (!KakaoLoginUtils(mainActivityContext).isLogin()) {
+                        KakaoLoginUtils(mainActivityContext).login()
+                    } else {
+                        val userId =
+                            mainActivityContext.getSharedPreferences("login", Context.MODE_PRIVATE)
+                                .getLong("userId", -1)
+                        val service: ChallengeService =
+                            NetworkSettings.retrofit.build().create(ChallengeService::class.java)
+                        service.challengeList(userId).enqueue(object : Callback<ChallengeList> {
+                            override fun onFailure(call: Call<ChallengeList>, t: Throwable) {
+                                Log.d(tag, " 실패 --------------", null)
                             }
-                        }
-                    })
+
+                            override fun onResponse(
+                                call: Call<ChallengeList>,
+                                response: Response<ChallengeList>
+                            ) {
+                                if (response.isSuccessful) {
+                                    adapter?.challengeList = response.body() as ChallengeList
+                                    adapter?.notifyDataSetChanged()
+                                    Log.d("챌린지리스트: ", "새로고침완료")
+                                }
+                            }
+                        })
+                    }
                 }
             }
-
-
+            //resultCode가 오면 if(resultCode == ) 버튼 바꿔라~이런식으로 쓰면됨
         } else {
             Log.d("result: ", "실패??")
         }
-        //resultCode가 오면 if(resultCode == ) 버튼 바꿔라~이런식으로 쓰면됨
-
-
     }
 
     //dialog
@@ -248,7 +258,6 @@ class ChallengeFragment : Fragment() {
             dialog.dismiss()
         }
     }
-
-
 }
+
 

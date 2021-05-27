@@ -1,5 +1,6 @@
 package com.mapo.eco100.views.myeco
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +11,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityMyBoardListBinding
 import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.entity.challenge.ChallengePostList
 import com.mapo.eco100.entity.myeco.MyBoardList
 import com.mapo.eco100.service.BoardService
-import com.mapo.eco100.service.ChallengeService
 import com.mapo.eco100.views.community.ShowBoardActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,29 +40,33 @@ class MyBoardListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        if (!KakaoLoginUtils(this).isLogin()) {
+            KakaoLoginUtils(this).login()
+        }
 
         //서버연결
         val service: BoardService =
             NetworkSettings.retrofit.build().create(BoardService::class.java)
 
-        service.readAll(1).enqueue(object : retrofit2.Callback<MyBoardList> {
-            override fun onFailure(call: Call<MyBoardList>, t: Throwable) {
-                Log.d("서버연결", " 실패 --------------", null)
-            }
-
-            override fun onResponse(call: Call<MyBoardList>, response: Response<MyBoardList>) {
-                if(response.body().isNullOrEmpty()){
-                    Log.d("마이", "데이터없음 까지옴")
-                    val view  =layoutInflater.inflate(R.layout.mypage_no_data, null)
-                    val title = view.findViewById<ImageView>(R.id.nodata_title)
-                    title.setImageResource(R.drawable.my_board_title)
-                    setContentView(view)
+        service.readAll(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId", -1))
+            .enqueue(object : retrofit2.Callback<MyBoardList> {
+                override fun onFailure(call: Call<MyBoardList>, t: Throwable) {
+                    Log.d("서버연결", " 실패 --------------", null)
                 }
 
-                adapter!!.myBoardList = response.body() as MyBoardList
-                adapter!!.notifyDataSetChanged()
-            }
-        })
+                override fun onResponse(call: Call<MyBoardList>, response: Response<MyBoardList>) {
+                    if (response.body().isNullOrEmpty()) {
+                        Log.d("마이", "데이터없음 까지옴")
+                        val view = layoutInflater.inflate(R.layout.mypage_no_data, null)
+                        val title = view.findViewById<ImageView>(R.id.nodata_title)
+                        title.setImageResource(R.drawable.my_board_title)
+                        setContentView(view)
+                    }
+
+                    adapter!!.myBoardList = response.body() as MyBoardList
+                    adapter!!.notifyDataSetChanged()
+                }
+            })
     }
 
 
@@ -87,23 +91,31 @@ class MyBoardListActivity : AppCompatActivity() {
             holder.mytitle.text = myBoard?.title
 
             holder.item.setOnClickListener {
-               val boardId = myBoard!!.boardId
-
-               val service: BoardService =
+                if (!KakaoLoginUtils(this@MyBoardListActivity).isLogin()) {
+                    KakaoLoginUtils(this@MyBoardListActivity).login()
+                }
+                val boardId = myBoard!!.boardId
+                val service: BoardService =
                     NetworkSettings.retrofit.build().create(BoardService::class.java)
-                service.readOne(boardId,1).enqueue(object : Callback<BoardReadForm>{
-                    override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
-                        Log.d("내글확인", " 실패 --------------", null)
-                    }
+                service.readOne(
+                    boardId,
+                    getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId", -1)
+                )
+                    .enqueue(object : Callback<BoardReadForm> {
+                        override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
+                            Log.d("내글확인", " 실패 --------------", null)
+                        }
 
-                    override fun onResponse(call: Call<BoardReadForm>,response: Response<BoardReadForm>
-                    ) {
-                        val data = response.body()
-                        val intent = Intent(this@MyBoardListActivity, ShowBoardActivity::class.java)
-                        intent.putExtra("board_data", data)
-                        startActivity(intent)
-                    }
-                })
+                        override fun onResponse(
+                            call: Call<BoardReadForm>, response: Response<BoardReadForm>
+                        ) {
+                            val data = response.body()
+                            val intent =
+                                Intent(this@MyBoardListActivity, ShowBoardActivity::class.java)
+                            intent.putExtra("board_data", data)
+                            startActivity(intent)
+                        }
+                    })
             }
 
         }

@@ -2,6 +2,7 @@ package com.mapo.eco100.views.community
 
 import android.app.Activity
 import android.content.ContentUris
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.config.PICK_PHOTO
 import com.mapo.eco100.config.REQUEST_PERMISSION
@@ -30,8 +32,6 @@ import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.entity.error.ErrorResponse
-import com.mapo.eco100.service.CommentService
 import com.mapo.eco100.views.network.NoConnectedDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -101,10 +101,14 @@ class EnrollActivity : AppCompatActivity() {
             if (!NetworkSettings.isNetworkAvailable(this)) {
                 val dialog = NoConnectedDialog(this)
                 dialog.show()
+            } else if (!KakaoLoginUtils(this).isLogin()) {
+                KakaoLoginUtils(this).login()
             } else {
+                val userId = this.getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1)
+                Log.d("userId",userId.toString())
                 if (isEditing) {//글 수정일 경우
                     if (fileLocation == "") {//사진 추가를 안했을 경우
-                        val board = BoardModifyForm(1,
+                        val board = BoardModifyForm(userId,
                             binding.enrollTitle.text.toString(),
                             binding.enrollContents.text.toString(),
                             isImageDeleted
@@ -129,13 +133,13 @@ class EnrollActivity : AppCompatActivity() {
                         })
                     } else {
                         //새로 사진 추가하여 글 수정한 경우
-                        fileUploadAsync()
+                        fileUploadAsync(userId)
                     }
                 } else {//글 등록
                     if (fileLocation == "") {
-                        sendWithoutImage()
+                        sendWithoutImage(userId)
                     } else {
-                        fileUploadAsync()
+                        fileUploadAsync(userId)
                     }
                 }
             }
@@ -238,12 +242,11 @@ class EnrollActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun sendWithoutImage() {
-        val board = BoardWriteForm(1,
+    private fun sendWithoutImage(userId:Long) {
+        val board = BoardWriteForm(userId,
             binding.enrollTitle.text.toString(),
             binding.enrollContents.text.toString()
         )
-
 
         boardService.write(board).enqueue(object : Callback<Boards> {
             override fun onResponse(
@@ -317,7 +320,7 @@ class EnrollActivity : AppCompatActivity() {
         return flag
     }
 
-    private fun fileUploadAsync() {
+    private fun fileUploadAsync(userId: Long) {
         binding.enrollProgressBar.visibility = View.VISIBLE
 
         Thread {
@@ -331,7 +334,7 @@ class EnrollActivity : AppCompatActivity() {
                         "image",uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
-                    .addFormDataPart("userId","1")
+                    .addFormDataPart("userId",userId.toString())
                     .addFormDataPart("title",binding.enrollTitle.text.toString())
                     .addFormDataPart("contents",binding.enrollContents.text.toString())
                     .build()

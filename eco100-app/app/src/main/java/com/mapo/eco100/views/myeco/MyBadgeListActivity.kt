@@ -1,6 +1,7 @@
 package com.mapo.eco100.views.myeco
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -40,7 +41,8 @@ class MyBadgeListActivity : AppCompatActivity() {
 
         val service: BoardService =
             NetworkSettings.retrofit.build().create(BoardService::class.java)
-        service.getMyBadge(1).enqueue(object : Callback<ArrayList<Boolean>> {
+        service.getMyBadge(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+            .enqueue(object : Callback<ArrayList<Boolean>> {
             override fun onFailure(call: Call<ArrayList<Boolean>>, t: Throwable) {
                 Log.d("서버 연결", " 실패 --------------", null)
             }
@@ -70,6 +72,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn0" -> {
                             binding.btn1.setImageResource(R.drawable.btn1)
                             binding.myBadge1.setTextColor(R.color.black)
+
 
                             binding.btn1.setOnClickListener {
                                 bundle.putString("num", "1")
@@ -130,6 +133,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                             if (badgeCheck) {
                                 binding.btn4.setImageResource(R.drawable.badge4)
                                 binding.myBadge4.setTextColor(R.color.black)
+
 
                                 binding.btn4.setOnClickListener {
                                     bundle.putString("num", "4")

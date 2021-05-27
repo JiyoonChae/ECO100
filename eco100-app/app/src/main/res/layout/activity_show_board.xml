@@ -211,13 +211,14 @@
 
         <EditText
             android:id="@+id/comment_edit_text"
-            android:layout_width="326dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_32dp"
+            android:layout_marginLeft="@dimen/margin_12dp"
             android:backgroundTint="@color/primary_color"
             android:ems="10"
             android:hint="댓글을 입력해보세요."
             android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/send_comment" />
 
@@ -225,7 +226,7 @@
             android:id="@+id/send_comment"
             android:layout_width="@dimen/size_36dp"
             android:layout_height="@dimen/size_36dp"
-            android:layout_marginLeft="@dimen/margin_8dp"
+            android:layout_marginLeft="@dimen/margin_12dp"
             android:layout_marginEnd="@dimen/margin_12dp"
             app:layout_constraintBottom_toBottomOf="@id/ll2"
             app:layout_constraintEnd_toEndOf="@id/ll2"
