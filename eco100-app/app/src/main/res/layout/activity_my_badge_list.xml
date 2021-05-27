@@ -51,7 +51,8 @@
                     android:id="@+id/my_badge_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="최초 가입" />
+                    android:text="최초 가입"
+                     />
             </LinearLayout>
 
             <LinearLayout

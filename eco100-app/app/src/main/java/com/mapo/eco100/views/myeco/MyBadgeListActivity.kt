@@ -69,6 +69,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn0" -> {
                             binding.btn1.setImageResource(R.drawable.btn1)
 
+
                             binding.btn1.setOnClickListener {
                                 bundle.putString("num", "1")
                                 bundle.putString("check", check)
@@ -125,6 +126,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn3" -> {
                             if (badgeCheck) {
                                 binding.btn4.setImageResource(R.drawable.badge4)
+
 
                                 binding.btn4.setOnClickListener {
                                     bundle.putString("num", "4")
