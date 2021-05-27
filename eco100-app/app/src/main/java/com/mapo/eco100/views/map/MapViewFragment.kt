@@ -13,12 +13,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -37,10 +38,7 @@ import com.gun0912.tedpermission.TedPermission
 import com.mapo.eco100.R
 import com.mapo.eco100.config.LocalDataBase.Companion.garbageBagShopInfos
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
-import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.FragmentMapBinding
-import com.mapo.eco100.views.network.NoConnectedDialog
-import java.util.*
 
 class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
@@ -75,9 +73,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     // 내 위치 저장
     private lateinit var myLocation: LatLng
 
-    // 데이터 로딩중인지 체크
-    private val isLoading = MutableLiveData<Boolean>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -85,7 +80,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     ): View? {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
-        isLoading.value = false
+
         // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
         val resultLat = arguments?.getDouble("lat")
@@ -94,7 +89,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
         if (arguments != null) {
             selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
-            Log.d("map", "selectedShop: $selectedShop")
+            Log.d("map", "selectedShop: $selectedShopName")
         }
 
 
@@ -135,9 +130,10 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             clusterManager.clearItems()
 
             when (checkedId) {
+
                 // 제로웨잇샵 버튼 클릭시
                 R.id.mapZeroBtn -> {
-                    isLoading.value = true
+
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.point_color)
                     )
@@ -146,10 +142,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                     )
                     // 각 항목별 가게 리스트를 보여준다.
                     binding.openList.setOnClickListener {
-                        bottomSheetZeroShop.setStyle(
-                            STYLE_NORMAL,
-                            R.style.Map_BottomSheetDialog
-                        )
+                        bottomSheetZeroShop.setStyle(STYLE_NORMAL, R.style.Map_BottomSheetDialog)
                         bottomSheetZeroShop.show(childFragmentManager, bottomSheetZeroShop.tag)
                     }
                     getZeroWasteShopList()
@@ -157,7 +150,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
                 // 종량제판매처 버튼 클릭시
                 R.id.mapShopBtn -> {
-                    isLoading.value = true
+
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.primary_color)
                     )
@@ -215,12 +208,8 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     private fun initLocation() {
 
         if (!checkPermissions()) {
-            if (arguments != null) {
-                getSelectedShoInfo()
-            } else {
-                val latLng = LatLng(37.566168, 126.901609)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            }
+            val latLng = LatLng(37.566168, 126.901609)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         } else {
             if (arguments != null) {
                 getSelectedShoInfo()
@@ -238,6 +227,26 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         checkPermissions()
     }
 
+    // 선택된 샵 리스트 정보 가져온다.
+    private fun getSelectedShoInfo() {
+        selectedShop?.let {
+            Log.d("map", "In selectedShop: $it")
+            val bitmapDrawSelectedShop = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.img_map_selected_shop,
+                null
+            ) as BitmapDrawable
+            val bitmapSelectedShop =
+                Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            val markerOptions = MarkerOptions()
+            markerOptions.position(it).title(selectedShopName)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
+            mMap.addMarker(markerOptions)?.showInfoWindow()
+        }
+    }
+
     // 종량제 샵 리스트를 지도에 뿌려준다.
     private fun getGarbageShopList() {
 
@@ -251,7 +260,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             Bitmap.createScaledBitmap(bitmapDrawGarbageShop.bitmap, 60, 86, false)
 
         // 종량제 샵 리스트에서 데이터를 가져온다.
-        for (garbageShop in garbageBagShopInfos) {
+        /*for (garbageShop in garbageBagShopInfos) {
             clusterManager.addItem(
                 MyItem(
                     1,
@@ -261,10 +270,16 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                     BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop)
                 )
             )
-        }
+        }*/
+        val latLng = LatLng(37.566168, 126.901609)
+        mMap.addMarker(
+            MarkerOptions().position(latLng).title("나 여기!")
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop))
+        )
+
         setMyLocation()
         clusterManager.cluster()
-        isLoading.value = false
+
     }
 
     // 제로웨이스트 샵 리스트를 지도에 뿌려준다.
@@ -277,7 +292,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             null
         ) as BitmapDrawable
         val bitmapZeroShop = Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
-
 
         // 제로샵 리스트에서 데이터를 가져온다.
         for (zeroShop in zeroShopList) {
@@ -293,7 +307,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         }
         setMyLocation()
         clusterManager.cluster()
-        isLoading.value = false
 
     }
 
@@ -317,29 +330,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         }
     }
 
-    // 선택된 제로샵 위치를 보여준다.
-    private fun getSelectedShoInfo() {
-        selectedShop?.let {
-            Log.d("map", "In selectedShop: $it")
-            val bitmapDrawSelectedShop = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.img_map_selected_shop,
-                null
-            ) as BitmapDrawable
-            val bitmapSelectedShop =
-                Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            val markerOptions = MarkerOptions()
-            markerOptions.position(it).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
-            mMap.addMarker(markerOptions)?.showInfoWindow()
-        }
-    }
-
     // 맵 처음 진입시 리스트 설정
     private fun setInitList() {
-        isLoading.value = true
+
         // 제로샵 마커 이미지 설정
         val bitmapDrawZeroShop = ResourcesCompat.getDrawable(
             resources,
@@ -347,7 +340,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             null
         ) as BitmapDrawable
         val bitmapZeroShop = Bitmap.createScaledBitmap(bitmapDrawZeroShop.bitmap, 60, 86, false)
-
 
         // 제로샵 리스트에서 데이터를 가져온다.
         for (zeroShop in zeroShopList) {
@@ -361,9 +353,8 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 )
             )
         }
-
         clusterManager.cluster()
-        isLoading.value = false
+
     }
 
     override fun onResume() {
@@ -403,11 +394,11 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
     /** PERMISSION CHECK **/
     override fun onPermissionGranted() {
-        //Toast.makeText(binding.root.context, "위치 정보 제공이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(binding.root.context, "위치 정보 제공이 완료되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-        //Toast.makeText(binding.root.context, "위치 정보 제공이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(binding.root.context, "위치 정보 제공이 거부되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     // 내 위치 정보 업데이트
@@ -476,26 +467,4 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        if (!NetworkSettings.isNetworkAvailable(requireContext())) {
-            val dialog = NoConnectedDialog(requireContext())
-            dialog.show()
-            return
-        }
-
-        isLoading.observe(viewLifecycleOwner, {
-            Log.d("isLoading",it.toString())
-            when (it) {
-                true -> {
-                    binding.mapZeroBtn.isClickable = false
-                    binding.mapShopBtn.isClickable = false
-                }
-                false -> {
-                    binding.mapZeroBtn.isClickable = true
-                    binding.mapShopBtn.isClickable = true
-                }
-            }
-        })
-    }
 }

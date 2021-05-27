@@ -19,6 +19,7 @@ import com.mapo.eco100.views.community.CommunityViewFragment
 import com.mapo.eco100.views.ecobox.ContentDetailActivity
 import com.mapo.eco100.views.ecobox.EcoBoxViewFragment
 import com.mapo.eco100.views.map.MapViewFragment
+import com.mapo.eco100.views.myeco.MyEco100Activity
 
 class FragmentForViewPager : Fragment() {
 
@@ -47,8 +48,8 @@ class FragmentForViewPager : Fragment() {
         imageIV.setOnClickListener {
             when (index) {
                 0 -> {
-                    /*val intent = Intent(requireActivity(), MyEco100Activity::class.java)
-                    startActivity(intent)*/
+                    val intent = Intent(requireActivity(), MyEco100Activity::class.java)
+                    startActivity(intent)
                 }
                 1 -> {
                     requireActivity().supportFragmentManager.beginTransaction()

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/frame_my_eco"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,10 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="54dp"
+            android:fontFamily="@font/mapo_peacefull"
             android:gravity="center"
-            android:text="닉네임"
+            android:text="팡팡이"
             android:textColor="#39BDC8"
-            android:textSize="18dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/my_board_list_frame"
@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/icon_my_board_list"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="36dp"
                 app:srcCompat="@drawable/icon_my_eco1"
@@ -53,14 +53,15 @@
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="36dp"
+                android:fontFamily="@font/mapo_peacefull"
                 android:text="내가 쓴 글 조회하기"
                 android:textColor="#8CD698"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="30dp"
+                android:layout_width="12dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/vector9" />
         </LinearLayout>
 
@@ -78,8 +79,8 @@
 
             <ImageView
                 android:id="@+id/icon_my_comment_list"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="36dp"
                 app:srcCompat="@drawable/icon_my_eco2"
@@ -90,13 +91,15 @@
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="36dp"
+                android:fontFamily="@font/mapo_peacefull"
                 android:text="나의 댓글 조회하기"
                 android:textColor="#8CD698"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
+                android:layout_width="12dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/vector9" />
         </LinearLayout>
 
@@ -114,8 +117,8 @@
 
             <ImageView
                 android:id="@+id/icon_my_badge_list"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="36dp"
                 app:srcCompat="@drawable/icon_my_eco3"
@@ -126,13 +129,15 @@
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="36dp"
+                android:fontFamily="@font/mapo_peacefull"
                 android:text="나의 뱃지 조회하기"
                 android:textColor="#8CD698"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
+                android:layout_width="12dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/vector9" />
         </LinearLayout>
 
@@ -150,8 +155,8 @@
 
             <ImageView
                 android:id="@+id/icon_my_challenge_list"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="36dp"
                 app:srcCompat="@drawable/icon_my_eco4"
@@ -162,13 +167,15 @@
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="36dp"
+                android:fontFamily="@font/mapo_peacefull"
                 android:text="나의 챌린지 조회하기"
                 android:textColor="#8CD698"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
+                android:layout_width="12dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/vector9" />
         </LinearLayout>
 
@@ -186,8 +193,8 @@
 
             <ImageView
                 android:id="@+id/icon_eco100"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="36dp"
                 app:srcCompat="@drawable/icon_my_eco5"
@@ -198,38 +205,44 @@
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="36dp"
+                android:fontFamily="@font/mapo_peacefull"
                 android:text="에코백 소개"
                 android:textColor="#8CD698"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
+                android:layout_width="12dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/vector9" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/margin_8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"/>
+                android:text="로그아웃" />
+
             <Space
                 android:layout_width="@dimen/margin_40dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
             <TextView
                 android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회원탈퇴"/>
+                android:text="회원탈퇴" />
         </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_30dp"/>
+            android:layout_height="@dimen/size_30dp" />
     </LinearLayout>
 </ScrollView>

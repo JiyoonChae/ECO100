@@ -25,6 +25,7 @@
         android:layout_width="350dp"
         android:layout_height="@dimen/size_60dp"
         android:layout_gravity="center"
+        android:fontFamily="@font/mapo_peacefull"
         android:text="에코백 가입을 환영합니다!\n 다양한 활동을 함께해요"
         android:gravity="center"
         android:background="@drawable/badge_text_frame"
