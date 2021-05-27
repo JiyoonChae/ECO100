@@ -6,6 +6,7 @@ package com.mapo.eco100.views.community
 import android.app.Activity
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -296,6 +297,7 @@ class WriteChallenge : BaseActivity() {
     }
 
     fun uploadPost() {
+        val userId = this.getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1)
         if (filePath == "") {
             // dialog
             dialog = Dialog(binding.root.context)
@@ -314,7 +316,7 @@ class WriteChallenge : BaseActivity() {
                         "image", uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
-                    .addFormDataPart("userId", "1")
+                    .addFormDataPart("userId", userId.toString())
                     .addFormDataPart("challengeId", challenge!!.challengeId.toString())
                     .addFormDataPart("contents", binding.challengeWriteContent.text.toString())
                     .build()

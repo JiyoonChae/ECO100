@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
+import com.kakao.sdk.common.util.Utility
 import com.mapo.eco100.R
 import com.mapo.eco100.common.TabItemSelector
 import com.mapo.eco100.config.LocalDataBase.Companion.zeroShopList
@@ -49,6 +50,8 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                         ft.replace(R.id.contents, EcoBoxViewFragment.newInstance())
                     }
                     2 -> {
+                        var keyHash = Utility.getKeyHash(this@MainActivity)
+                        Log.d("keyHash", keyHash)
                         if(!KakaoLoginUtils(this@MainActivity).isLogin()) {
                             val dialog = NoLoginDialog(this@MainActivity)
                             dialog.show()
