@@ -52,19 +52,19 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                     2 -> {
                         var keyHash = Utility.getKeyHash(this@MainActivity)
                         Log.d("keyHash", keyHash)
-                        if(!KakaoLoginUtils(this@MainActivity).isLogin()) {
+                        if (!KakaoLoginUtils(this@MainActivity).isLogin()) {
                             val dialog = NoLoginDialog(this@MainActivity)
                             dialog.show()
                         }
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
                     }
                     3 -> {
-                        if(name == null) {
+                        if (name == null) {
                             ft.replace(R.id.contents, MapViewFragment.newInstance())
                         }
                     }
                     4 -> {
-                        if(!KakaoLoginUtils(this@MainActivity).isLogin()) {
+                        if (!KakaoLoginUtils(this@MainActivity).isLogin()) {
                             val dialog = NoLoginDialog(this@MainActivity)
                             dialog.show()
                         }

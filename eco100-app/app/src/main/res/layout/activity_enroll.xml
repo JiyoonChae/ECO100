@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,42 +8,57 @@
     tools:context=".views.community.EnrollActivity">
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/margin_38dp"
-        android:layout_marginRight="@dimen/margin_38dp"
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:textColor="@color/primary_color"
+            style="@style/CommonPopup.TitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="제목 :"
-            style="@style/CommonPopup.TitleStyle"/>
+            android:textColor="@color/primary_color" />
 
         <EditText
             android:id="@+id/enroll_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color"
             android:ems="10"
             android:inputType="textPersonName" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        android:text="@string/enroll_page_text"
+        android:textColor="#a3a3a3"/>
 
     <FrameLayout
         android:id="@+id/layout_frame"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180dp"
         android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="@dimen/margin_38dp"
-        android:layout_marginTop="@dimen/margin_12dp"
         android:background="@drawable/enroll_contents_background_white"
-        app:layout_constraintTop_toBottomOf="@id/layout_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guide"
         tools:layout_editor_absoluteY="181dp">
 
         <ImageView
@@ -52,8 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon_add_picture"
-            />
+            android:src="@drawable/icon_add_picture" />
 
         <TextView
             android:id="@+id/enroll_image_text"
@@ -77,34 +90,32 @@
     </FrameLayout>
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/margin_38dp"
-        android:layout_marginRight="@dimen/margin_38dp"
         android:id="@+id/layout_contents"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_200dp"
+        android:layout_marginLeft="@dimen/margin_38dp"
         android:layout_marginTop="@dimen/margin_24dp"
+        android:layout_marginRight="@dimen/margin_38dp"
         android:background="@drawable/enroll_contents_background"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_frame"
-        >
+        app:layout_constraintTop_toBottomOf="@id/layout_frame">
 
         <EditText
-            style="@style/CommonPopup.TextStyle"
             android:id="@+id/enroll_contents"
+            style="@style/CommonPopup.TextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_16dp"
             android:background="@null"
             android:ems="10"
             android:gravity="top"
-            android:hint="@string/enroll_page_text"
+            android:hint="내용을 입력해주세요(200자 이내)"
             android:inputType="textMultiLine"
             android:padding="@dimen/padding_8dp" />
 
     </LinearLayout>
-
 
 
     <ProgressBar
@@ -122,35 +133,36 @@
         android:layout_width="match_parent"
         android:layout_height="156dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/layout_contents">
 
         <ImageView
-            android:layout_gravity="bottom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/enroll_bottom_frame"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/send"
-            style="@style/Enroll.BtnStyle"
-            android:layout_marginBottom="80dp"
-            android:layout_width="338dp"
-            android:layout_height="@dimen/size_40dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:text="@string/popup_confirm" />
+            android:layout_gravity="bottom"
+            android:src="@drawable/enroll_bottom_frame"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="@dimen/size_38dp"
             android:layout_height="@dimen/size_40dp"
             android:layout_gravity="top|right"
-            android:layout_marginEnd="@dimen/margin_36dp"
             android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="52dp"
             android:src="@drawable/img_popup_btn_ecoduck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send"
+            style="@style/Enroll.BtnStyle"
+            android:layout_width="338dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:text="@string/popup_confirm" />
 
 
     </FrameLayout>
