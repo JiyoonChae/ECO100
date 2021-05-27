@@ -214,6 +214,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             if (arguments != null) {
                 getSelectedShoInfo()
             } else {
+                binding.view.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
                 mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
                 myLocationCallBack = MyLocationCallBack()
                 locationRequest =
@@ -238,7 +239,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             ) as BitmapDrawable
             val bitmapSelectedShop =
                 Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+           // mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            val latLng = LatLng(37.566168, 126.901609)
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
             val markerOptions = MarkerOptions()
             markerOptions.position(it).title(selectedShopName)
@@ -277,8 +280,10 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop))
         )
 
-        setMyLocation()
-        clusterManager.cluster()
+        if(arguments == null) {
+            setMyLocation()
+            clusterManager.cluster()
+        }
 
     }
 
@@ -305,8 +310,11 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 )
             )
         }
-        setMyLocation()
-        clusterManager.cluster()
+
+        if(arguments == null) {
+            setMyLocation()
+            clusterManager.cluster()
+        }
 
     }
 
@@ -386,6 +394,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     }
 
     companion object {
+
         fun newInstance(): MapViewFragment {
             return MapViewFragment()
         }

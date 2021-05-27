@@ -46,8 +46,8 @@ class BottomSheetShop : BottomSheetDialogFragment() {
                 val mapViewFragment = MapViewFragment.newInstance()
                 mapViewFragment.arguments = bundle
 
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.map, mapViewFragment)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contents, mapViewFragment)
                     .commit()
                 shopListAdapter.notifyDataSetChanged()
                 dismiss()
