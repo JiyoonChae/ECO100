@@ -5,11 +5,8 @@ package com.mapo.eco100.views.community
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
-import android.database.Cursor
-import android.database.sqlite.SQLiteException
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ImageDecoder
@@ -21,7 +18,6 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -30,22 +26,14 @@ import com.bumptech.glide.Glide
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityWriteChallengeBinding
-import com.mapo.eco100.databinding.RowChallengeBinding
 import com.mapo.eco100.entity.challenge.Challenge
-import com.mapo.eco100.entity.challenge.ChallengeList
-import com.mapo.eco100.entity.challenge.ChallengePost
-import com.mapo.eco100.service.ChallengeService
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
+import kotlin.jvm.Throws
 
 class WriteChallenge : BaseActivity() {
     val PERM_STORAGE = 99 //외부 저장소 권한 처리
@@ -53,13 +41,12 @@ class WriteChallenge : BaseActivity() {
     val REQ_CAMERA = 101 //카메라 촬영 요청
     val REQ_STORAGE = 102 //갤러리 요청
     var realUri: Uri? = null //이미지 uri가져오기
-    var filePath: String =""
+    var filePath: String = ""
     private var challenge: Challenge? = null
     private val maxLimit = 200//글자 제한 설정
     private lateinit var dialog: Dialog
 
     val binding by lazy { ActivityWriteChallengeBinding.inflate(layoutInflater) }
-    val binding2 by lazy { RowChallengeBinding.inflate(layoutInflater) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +56,7 @@ class WriteChallenge : BaseActivity() {
         challenge?.let {
             binding.textView.text = it.subject
             it.imageUrl?.let { url_string ->
-                Glide.with(this@WriteChallenge)
+                Glide.with(this)
                     .load(url_string.toUri())
                     .into(binding.iconChallenge)
             }
@@ -105,10 +92,7 @@ class WriteChallenge : BaseActivity() {
                     }
                 } else {
                     textCount.text = "( 0 / $maxLimit )"
-
                 }
-
-
             }
         })
 
@@ -130,13 +114,13 @@ class WriteChallenge : BaseActivity() {
         binding.buttonDelete.setOnClickListener {
             realUri = null
             filePath = ""
-            val delimg= binding.challengeWriteImage
-            Glide.with(delimg).load(R.drawable.img_ch_write2).centerInside().into(delimg)
+            val delimg = binding.challengeWriteImage
+            Glide.with(delimg).load(R.drawable.img_ch_write2).override(500,500)
+                .into(delimg)
 
         }
 
     }
-
 
     //저장소 권한 요청이 승인되었을 경우
     override fun permissionGranted(requestCode: Int) {
@@ -208,21 +192,28 @@ class WriteChallenge : BaseActivity() {
 
 
     //Uri를 사용해서 저장된 이미지 호출
+    @Throws(IOException::class)
     fun loadBitmap(photoUri: Uri): Bitmap? {
         var image: Bitmap? = null
         try {
             image = if (Build.VERSION.SDK_INT > 27) {
-                val source: ImageDecoder.Source =
-                    ImageDecoder.createSource(this.contentResolver, photoUri)
-                ImageDecoder.decodeBitmap(source)
+                val source = ImageDecoder.createSource(this.contentResolver, photoUri)
+                val listener =
+                    ImageDecoder.OnHeaderDecodedListener {
+                            decoder, info, source ->
+                        decoder.setTargetSampleSize(4)
+                        decoder.allocator = ImageDecoder.ALLOCATOR_HARDWARE
+                        decoder.allocator = ImageDecoder.ALLOCATOR_SOFTWARE
+                    }
+                ImageDecoder.decodeBitmap(source, listener)
             } else {
                 MediaStore.Images.Media.getBitmap(this.contentResolver, photoUri)
             }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        } catch (e: IOException) {e.printStackTrace() }
+        //return Bitmap.createScaledBitmap(image as Bitmap, 1200,800,false)
         return image
     }
+
 
     //결과 처리 메서드 : realUri에 값이 있는지 확인 후 있으면 loadBitmap메서드를 통해 화면에 세팅.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -243,12 +234,33 @@ class WriteChallenge : BaseActivity() {
             Log.d("requestCode: ", "$requestCode")
             when (requestCode) {
                 REQ_CAMERA -> {
-                    /* val uri: Uri = data!!.data!!
-                     Log.d("절대", "path :"+ uri)*/
 
                     realUri?.let { uri ->
                         val bitmap = loadBitmap(uri) //uri를 사용해서 미디어스토어에 저장된 이미지를 읽어옴>bitmap으로 변환
-                        binding.challengeWriteImage.setImageBitmap(bitmap)
+                       // binding.challengeWriteImage.setImageBitmap(bitmap)
+                       Glide.with(binding.challengeWriteImage).load(bitmap).into(binding.challengeWriteImage)
+                        //Glide.with(binding.challengeWritImage).load(bitmap).apply(
+                            //RequestOptions().override(1300,800)).into(binding.challengeWritImage)
+                       /* Glide.with(this).load(bitmap).listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                return true
+                            }
+                        }).into(binding.challengeWriteImage)*/
                         filePath = getImageFilePath(uri)
                         Log.d("절대주소", "path :" + filePath)
                         realUri = null
@@ -258,7 +270,8 @@ class WriteChallenge : BaseActivity() {
                     //갤러리에서 가져온 이미지데이터를 IMAGEPREVIEW에 할당
                     //(data의 data속성으로 해당 이미지의 uri가 전달)
                     data?.data?.let { uri ->
-                        binding.challengeWriteImage.setImageURI(uri)
+                        Glide.with(binding.challengeWriteImage).load(uri).fitCenter().into(binding.challengeWriteImage)
+                        //binding.challengeWritImage.setImageURI(uri)
                         realUri = uri
                         filePath = getImageFilePath(uri)
                         Log.d("절대주소", "path :" + filePath)
@@ -298,14 +311,14 @@ class WriteChallenge : BaseActivity() {
                 val fileUploadBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
-                        "image",uploadFile.name,
+                        "image", uploadFile.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), uploadFile)
                     )
                     .addFormDataPart("userId", "1")
                     .addFormDataPart("challengeId", challenge!!.challengeId.toString())
                     .addFormDataPart("contents", binding.challengeWriteContent.text.toString())
                     .build()
-
+                Log.d("서버 등록: ", "여기까지옴")
                 response = NetworkSettings.imageClient.newCall(
                     NetworkSettings.imageRequest("/challenge/create", fileUploadBody)
                 ).execute()
@@ -316,7 +329,7 @@ class WriteChallenge : BaseActivity() {
                 } else {
                     Log.d("서버 등록: ", "실패")
                     Log.d("서버 등록: ", response.code.toString())
-                   // Toast.makeText(this, "전송 실패", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(this, "전송 실패", Toast.LENGTH_SHORT).show()
                     //전송 실패
                 }
 
