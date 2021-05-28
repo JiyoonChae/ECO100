@@ -28,6 +28,6 @@
             android:text="지구를 위한 작은 실천\n함께 해요:)"
             android:textAlignment="center"
             android:textColor="@color/primary_color"
-            android:textSize="30sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 </RelativeLayout>

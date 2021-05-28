@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/size_330dp"
-    android:layout_height="202dp"
+    android:layout_height="@dimen/size_200dp"
     android:background="@drawable/common_popup_background"
     android:orientation="vertical">
 
     <TextView
         style="@style/CommonPopup.TitleStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_52dp"
-        android:layout_marginStart="@dimen/margin_24dp"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:layout_marginEnd="@dimen/margin_24dp"
-        android:gravity="start|center_vertical"
-        android:text="로그인이 필요한 서비스입니다 :)"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_24dp"
+        android:layout_marginVertical="@dimen/margin_24dp"
+        android:text="로그인이 필요한 서비스입니다 :)" />
+
 
     <TextView
         style="@style/CommonPopup.TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_60dp"
-        android:layout_marginStart="@dimen/margin_24dp"
-        android:layout_marginEnd="@dimen/margin_24dp"
-        android:gravity="start|center_vertical"
-        android:text="커뮤니티, 챌린지 활동을 참여하려면 [카카오]를\n통한 로그인이 필요합니다. 로그인하시겠습니까?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <LinearLayout
-        android:layout_width="@dimen/size_330dp"
-        android:layout_height="@dimen/size_82dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_24dp"
+        android:text="커뮤니티, 챌린지 활동을 참여하려면 [카카오]를 통한 로그인이 필요합니다.로그인하시겠습니까?" />
 
 
-    <ImageView
-        android:id="@+id/login_btn"
-        android:layout_width="@dimen/size_330dp"
-        android:layout_height="@dimen/size_45dp"
-        android:src="@drawable/popup_kakao_login"
-        android:layout_gravity="center_horizontal|center_vertical"
-        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginHorizontal="@dimen/margin_24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/kakao_login_large_wide" />
 
-    </LinearLayout>
 
 </LinearLayout>
+
