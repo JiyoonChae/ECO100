@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -73,6 +75,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     // 내 위치 저장
     private lateinit var myLocation: LatLng
 
+    // 로딩되었는지
+    private val isLoading = MutableLiveData<Boolean>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,6 +85,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     ): View? {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+        isLoading.value = false
 
         // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
@@ -135,7 +141,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
                 // 제로웨잇샵 버튼 클릭시
                 R.id.mapZeroBtn -> {
-
+                    isLoading.value = true
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.point_color)
                     )
@@ -152,7 +158,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
                 // 종량제판매처 버튼 클릭시
                 R.id.mapShopBtn -> {
-
+                    isLoading.value = true
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.primary_color)
                     )
@@ -479,4 +485,32 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        isLoading.observe(viewLifecycleOwner, {
+            if (it) {
+                binding.mapShopBtn.isClickable = false
+                binding.mapZeroBtn.isClickable = false
+                Thread {
+                    SystemClock.sleep(1000)
+                    if(binding.mapShopBtn.isChecked) {
+                        binding.mapZeroBtn.isClickable = true
+                    } else {
+                        binding.mapShopBtn.isClickable = true
+                    }
+                }.start()
+            }
+        })
+
+        binding.mapShopBtn.isClickable = false
+        binding.mapZeroBtn.isClickable = false
+        Thread {
+            SystemClock.sleep(3000)
+            if(binding.mapShopBtn.isChecked) {
+                binding.mapZeroBtn.isClickable = true
+            } else {
+                binding.mapShopBtn.isClickable = true
+            }
+        }.start()
+    }
 }
