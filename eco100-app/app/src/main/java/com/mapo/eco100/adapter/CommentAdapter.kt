@@ -40,8 +40,8 @@ class CommentAdapter(comments:List<Comment>,val onClickDeleteBtn : (comment:Comm
             deleteBtn.setOnClickListener {
                 onClickDeleteBtn(comment)
             }
-            if(comment.writer != context.getSharedPreferences("login",Context.MODE_PRIVATE)
-                    .getString("nickname","")
+            if(comment.userId != context.getSharedPreferences("login",Context.MODE_PRIVATE)
+                    .getLong("userId",-1)
             ) {
                 deleteBtn.visibility = View.GONE
             }
