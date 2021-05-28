@@ -206,40 +206,42 @@
 
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/ll2"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:paddingBottom="@dimen/margin_20dp"
+        android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center|left"
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/comment_edit_text"
-            android:layout_width="0dp"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_12dp"
             android:backgroundTint="@color/primary_color"
             android:ems="10"
             android:hint="댓글을 입력해보세요."
             android:fontFamily="@font/mapo_peacefull"
-            android:inputType="textPersonName"
             android:textSize="14sp"
+            android:inputType="textPersonName"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/send_comment"
             app:layout_constraintStart_toStartOf="parent" />
 
+
         <ImageView
             android:id="@+id/send_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_12dp"
-            android:layout_marginEnd="@dimen/margin_12dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             app:layout_constraintBottom_toBottomOf="@id/ll2"
             app:layout_constraintEnd_toEndOf="@id/ll2"
             android:src="@drawable/ic_board_send" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
