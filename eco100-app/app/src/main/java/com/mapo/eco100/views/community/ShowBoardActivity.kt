@@ -102,7 +102,7 @@ class ShowBoardActivity : AppCompatActivity() {
             )
         }
         Glide.with(this@ShowBoardActivity)
-            .load(if(boardData.canClickLikes) R.drawable.icon_likes else R.drawable.icon_likes_pressed)
+            .load(if(boardData.canClickLikes) R.drawable.img_board_like_false else R.drawable.img_board_like_true)
             .into(binding.sendLikes)
 
         binding.editBoardToolBar.setOnMenuItemClickListener {

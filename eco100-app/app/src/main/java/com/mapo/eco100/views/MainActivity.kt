@@ -1,5 +1,7 @@
 package com.mapo.eco100.views
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                         Log.d("keyHash", keyHash)
                         if (!KakaoLoginUtils(this@MainActivity).isLogin()) {
                             val dialog = NoLoginDialog(this@MainActivity)
+                            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                             dialog.show()
                         }
                         ft.replace(R.id.contents, CommunityViewFragment.newInstance())
@@ -91,6 +94,8 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
                 putDouble("lat", lat)
                 putDouble("long", long)
             }
+
+            Log.d("main","name : $name")
             map.arguments = bundle
             supportFragmentManager.beginTransaction().replace(R.id.contents, map).commit()
             binding.tab.selectTab(binding.tab.getTabAt(tabIndex))
