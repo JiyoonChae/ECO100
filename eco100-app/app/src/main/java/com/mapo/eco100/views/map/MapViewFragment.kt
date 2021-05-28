@@ -180,6 +180,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
         // 현재 내 위치로 이동
         binding.goMyLocation.setOnClickListener {
+
             setMyLocation()
         }
 
@@ -251,7 +252,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
             val bitmapSelectedShop =
                 Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(7f))
             val markerOptions = MarkerOptions()
             markerOptions.position(it).title(selectedShopName)
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
@@ -439,6 +440,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
             }
         }
+
     }
 
     // 마커 클러스터링 전 랜더링
@@ -493,7 +495,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 binding.mapZeroBtn.isClickable = false
                 Thread {
                     SystemClock.sleep(1000)
-                    if(binding.mapShopBtn.isChecked) {
+                    if (binding.mapShopBtn.isChecked) {
                         binding.mapZeroBtn.isClickable = true
                     } else {
                         binding.mapShopBtn.isClickable = true
@@ -506,7 +508,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         binding.mapZeroBtn.isClickable = false
         Thread {
             SystemClock.sleep(3000)
-            if(binding.mapShopBtn.isChecked) {
+            if (binding.mapShopBtn.isChecked) {
                 binding.mapZeroBtn.isClickable = true
             } else {
                 binding.mapShopBtn.isClickable = true
