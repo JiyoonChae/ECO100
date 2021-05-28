@@ -19,6 +19,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -61,6 +62,7 @@ class WriteChallenge : BaseActivity() {
                     .load(url_string.toUri())
                     .into(binding.iconChallenge)
             }
+//            binding.challengeImageText.visibility = View.GONE
         }
 
         //외부 저장소 권한 요청
@@ -115,10 +117,11 @@ class WriteChallenge : BaseActivity() {
         binding.buttonDelete.setOnClickListener {
             realUri = null
             filePath = ""
-            val delimg = binding.challengeWriteImage
-            Glide.with(delimg).load(R.drawable.img_ch_write2).override(500,500)
-                .into(delimg)
-
+//            val delimg = binding.challengeWriteImage
+//            Glide.with(delimg).load(R.drawable.img_ch_write2)
+//                .into(delimg)
+            binding.challengeWriteImage.setImageResource(R.drawable.icon_add_picture)
+            binding.challengeImageText.visibility = View.VISIBLE
         }
 
     }
@@ -265,6 +268,7 @@ class WriteChallenge : BaseActivity() {
                         filePath = getImageFilePath(uri)
                         Log.d("절대주소", "path :" + filePath)
                         realUri = null
+                        binding.challengeImageText.visibility = View.GONE
                     }
                 }
                 REQ_STORAGE -> {
@@ -275,6 +279,7 @@ class WriteChallenge : BaseActivity() {
                         //binding.challengeWritImage.setImageURI(uri)
                         realUri = uri
                         filePath = getImageFilePath(uri)
+                        binding.challengeImageText.visibility = View.GONE
                         Log.d("절대주소", "path :" + filePath)
                     }
 

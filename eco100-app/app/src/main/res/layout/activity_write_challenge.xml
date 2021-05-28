@@ -68,15 +68,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/layout_frame"
+            android:layout_width="@dimen/challenge_337dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/enroll_contents_background_white"
+            >
 
         <ImageView
             android:id="@+id/challengeWriteImage"
-            android:layout_width="@dimen/challenge_337dp"
-            android:layout_height="220dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/ch_img_frame"
-            />
+            android:src="@drawable/icon_add_picture" />
 
+        <TextView
+            android:id="@+id/challengeImageText"
+            style="@style/CommonPopup.TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/margin_32dp"
+            android:text="이미지업로드 / 1장"
+            android:textSize="14sp" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="@dimen/challenge_337dp"
