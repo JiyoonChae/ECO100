@@ -14,9 +14,9 @@
 <img src="https://user-images.githubusercontent.com/38373150/120601251-ac471980-c484-11eb-8792-c257c3a2f72f.png"/>
 <hr/>
 <h3>개발환경</h3>
-IDE : Android Studio / VSCode / InteliJ
+IDE : Android Studio
 <br/>
-Front - Language : Kotlin
-<br/>
-Back - Language : Java
+Language : Kotlin
+
+
 
