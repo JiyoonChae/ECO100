@@ -143,7 +143,7 @@ class AppInit : Application() {
             } catch (e: FileNotFoundException) {
                 Log.e("AppInit", "데이터를 불러올 파일이 존재하지 않습니다.")
             }
-            LocalDataBase.appInitLoading.value = false
+            LocalDataBase.appInitLoading.postValue(false)
         }.start()
     }
 
