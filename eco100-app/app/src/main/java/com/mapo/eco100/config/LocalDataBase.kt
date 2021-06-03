@@ -1,6 +1,7 @@
 package com.mapo.eco100.config
 
 import android.os.Build
+import android.text.Editable
 import androidx.annotation.RequiresApi
 import com.mapo.eco100.entity.staticmodel.FAQ
 import com.mapo.eco100.entity.staticmodel.FAQ_JEJU
@@ -17,7 +18,7 @@ class LocalDataBase {
         val zeroShopList: MutableList<ZeroShop> = mutableListOf()
 
         @RequiresApi(Build.VERSION_CODES.N)
-        fun search_FAQ_JEJU(word:String) : MutableList<FAQ_JEJU>? {
+        fun search_FAQ_JEJU(word:Editable) : MutableList<FAQ_JEJU>? {
             return FAQ_JEJU_list.stream().filter { faq ->
                 faq.name.contains(word)
             }.collect(Collectors.toList())
