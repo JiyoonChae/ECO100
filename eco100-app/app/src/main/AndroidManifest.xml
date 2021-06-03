@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.camera2" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".config.AppInit"
@@ -23,8 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECO100"
+
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -64,8 +66,7 @@
                     android:host="oauth"
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
-        </activity>
-        <!-- google map key -->
+        </activity> <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
