@@ -34,10 +34,30 @@
 
     <!-- ecobox -->
     <string name="ecobox_faq">FAQ</string>
+    <string name="btn_paper_ic_description">종이류,종이팩 버튼 아이콘</string>
+    <string name="btn_glass_ic_description">유리병류 버튼 아이콘</string>
+    <string name="btn_plastic_ic_description">플라스틱 버튼 아이콘</string>
+    <string name="btn_can_ic_description">금속캔,고철 버튼 아이콘</string>
+    <string name="btn_vinyl_ic_description">비닐류 버튼 아이콘</string>
+    <string name="btn_styrofoam_ic_description">스티로폼 버튼 아이콘</string>
+    <string name="faq_ic_description">FAQ 검색 아이콘</string>
+    <string name="faq_arrow_description">FAQ 화살표 버튼 아이콘</string>
+    <string name="content_banner_description">컨텐츠 배너</string>
+    <string name="content_image_description">컨텐츠 이미지</string>
+    <string name="content_floatingBtn_description">컨텐츠 링크 버튼 아이콘</string>
+    <string name="zeroshop_floatingBtn_description">제로샵 링크 버튼 아이콘</string>
+    <string name="zeroshop_banner_description">제로샵 배너</string>
+    <string name="zeroshop_num_description">제로샵 전화번호 아이콘</string>
+    <string name="zeroshop_adress_description">제로샵 주소 아이콘</string>
+    <string name="zeroshop_runtime_description">제로샵 운영시간 아이콘</string>
+
+
+    <string name="zeroshop_website_description">제로샵 웹사이트 아이콘</string>
+
     <string name="ecobox_paper">종이류,종이팩</string>
     <string name="ecobox_glass">유리병류</string>
     <string name="ecobox_plastic">플라스틱</string>
-    <string name="ecobox_metal">금속캔,고철</string>
+    <string name="ecobox_can">금속캔,고철</string>
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
     <string name="ecobox_guide_paper_description">종이 가이드 이미지</string>
@@ -46,6 +66,15 @@
     <string name="ecobox_guide_can_description">캔고철 가이드 이미지</string>
     <string name="ecobox_guide_vinyl_description">비닐가이드 이미지</string>
     <string name="ecobox_guide_styrofoam_description">스티로폼 가이드 이미지</string>
+
+    <string name="content_category">[다큐]</string>
+    <string name="content_title">분리수거가 당신에게 가르쳐 주지 않는 것</string>
+    <string name="content_detail_info_title">기본 정보</string>
+    <string name="content_detail_info">- 안녕하세요! 한국석유공사입니다!\n2021년 환경과 사회를 생각하는 한국석유공사 기업광고 포스터 공모전이 개최됩니다.\n대한민국 대표 에너지 공기업 한국석유공사의 이미지를 만들어줄 기가막힌 포스터를 애타게 기다리고 있습니다. \n여러분들의 참신한 표현력과 놀라운 금손 능력 맘껏 뽐내주세요! \n여러분의 많은 관심과 사랑 원해요!</string>
+    <string name="content_detail_guide">우측링크 아이콘을 누르면 해당정보사이트로 이동됩니다.</string>
+    <string name="zeroshop_detail_site_guide">• 집모양 옆 링크 터치시 해당정보사이트로 이동됩니다.</string>
+    <string name="zeroshop_detail_map_guide">• 우측하단 링크 아이콘을 누르면 [맵]탭-제로샵페이지로 이동됩니다.</string>
+
 
     <!-- popup -->
     <string name="popup_confirm">확인</string>
