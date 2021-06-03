@@ -215,6 +215,17 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
+
+    <!-- App Bottom -->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/my_badge_dialog_background</item>
+    </style>
+
+
     <!-- bottom sheet style -->
     <style name="Map.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Map.BottomSheetStyle</item>
@@ -277,6 +288,7 @@
         <item name="android:textSize">@dimen/size_14dp</item>
         <item name="android:splitMotionEvents">false</item>
     </style>
+
 
     <style name="Enroll.BtnStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:fontFamily">@font/mapo_peacefull</item>
