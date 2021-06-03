@@ -5,6 +5,10 @@ import com.mapo.eco100.entity.board.BoardModifyForm
 import com.mapo.eco100.entity.board.BoardWriteForm
 import com.mapo.eco100.entity.board.Boards
 import com.mapo.eco100.entity.likes.LikesRequestDto
+import com.mapo.eco100.entity.myeco.MyBadge
+import com.mapo.eco100.entity.myeco.MyBoardList
+import com.mapo.eco100.entity.myeco.MyComment
+import com.mapo.eco100.entity.myeco.MyCommentList
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -38,4 +42,29 @@ interface BoardService {
     fun delete(
         @Path("id") id:Long
     ) : Call<Void>
+
+    //내가 쓴 글 조회
+    @GET("board/read/{userId}")
+    fun readAll(
+        @Path("userId")id : Long
+    ):Call<MyBoardList>
+
+    //내가 쓴 댓글 조회
+    @GET("board/comment/all/{userId}")
+    fun commentAll(
+        @Path("userId")id: Long
+    ):Call<MyCommentList>
+
+    //글 1개 읽기
+    @GET("board/read/{boardId}/{userId}")
+    fun readOne(
+        @Path("boardId")id: Long,
+        @Path("userId")userId: Long
+    ):Call<BoardReadForm>
+
+    @GET("user/badgelist/{userId}")
+    fun getMyBadge(
+        @Path("userId")id: Long
+    ):Call<ArrayList<Boolean>>
+
 }
