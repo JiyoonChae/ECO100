@@ -64,3 +64,4 @@ class MainActivity : AppCompatActivity(), TabItemSelector {
         binding.tab.selectTab(binding.tab.getTabAt(position))
     }
 }
+

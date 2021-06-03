@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+
+        <ImageView
+            android:id="@+id/rowImageView"
+            android:layout_width="@dimen/size_48dp"
+            android:layout_height="@dimen/size_48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/rowTextView"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_toStartOf="@+id/rowStamp1"
+            android:layout_toEndOf="@+id/rowImageView"
+            android:text="TextView"
+            android:textColor="#CC000000"
+            android:textSize="@dimen/text_normal"
+            android:fontFamily="@font/mapo_peacefull"/>
+
+        <ImageView
+            android:id="@+id/rowStamp1"
+            android:layout_width="@dimen/size_48dp"
+            android:layout_height="@dimen/size_48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/rowStamp2"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <ImageView
+            android:id="@+id/rowStamp2"
+            android:layout_width="@dimen/size_48dp"
+            android:layout_height="@dimen/size_48dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="18dp"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/participants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="84dp"
+            android:layout_marginBottom="6dp"
+            android:text="n"
+            android:textColor="#39BDC8" />
+
+        <TextView
+            android:id="@+id/participantView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_toEndOf="@+id/participants"
+            android:text="명 참여중" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/row_challenge_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_marginLeft="78dp"
+        android:background="#1F000000"
+        android:orientation="horizontal" />
+</LinearLayout>
