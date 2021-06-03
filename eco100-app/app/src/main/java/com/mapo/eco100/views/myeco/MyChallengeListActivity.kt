@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityMyChallengeListBinding
 import com.mapo.eco100.entity.challenge.ChallengePostList
 import com.mapo.eco100.service.ChallengeService
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Response
 
@@ -37,11 +37,17 @@ class MyChallengeListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        if (!KakaoLoginUtils(this).isLogin()) {
+            KakaoLoginUtils(this).login()
+        }
+
+
         //서버연결
         val service: ChallengeService =
             NetworkSettings.retrofit.build().create(ChallengeService::class.java)
 
-       service.challengePostList(1).enqueue(object : retrofit2.Callback<ChallengePostList>{
+       service.challengePostList(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+           .enqueue(object : retrofit2.Callback<ChallengePostList>{
            override fun onFailure(call: Call<ChallengePostList>, t: Throwable) {
                Log.d("서버연결", " 실패 --------------", null)
            }

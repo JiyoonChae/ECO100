@@ -1,20 +1,20 @@
 package com.mapo.eco100.views.myeco
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mapo.eco100.views.login.KakaoLoginUtils
 import com.mapo.eco100.R
 import com.mapo.eco100.config.NetworkSettings
 import com.mapo.eco100.databinding.ActivityMyCommentListBinding
 import com.mapo.eco100.entity.board.BoardReadForm
-import com.mapo.eco100.entity.myeco.MyComment
 import com.mapo.eco100.entity.myeco.MyCommentList
 import com.mapo.eco100.service.BoardService
 import com.mapo.eco100.views.community.ShowBoardActivity
@@ -37,10 +37,16 @@ class MyCommentListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        if (!KakaoLoginUtils(this).isLogin()) {
+            KakaoLoginUtils(this).login()
+        }
+        getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1)
+
         val service: BoardService =
             NetworkSettings.retrofit.build().create(BoardService::class.java)
 
-        service.commentAll(1).enqueue(object : retrofit2.Callback<MyCommentList>{
+        service.commentAll(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+            .enqueue(object : retrofit2.Callback<MyCommentList>{
             override fun onFailure(call: Call<MyCommentList>, t: Throwable) {
                 Log.d("서버연결", " 실패 --------------", null)
             }
@@ -76,9 +82,14 @@ class MyCommentListActivity : AppCompatActivity() {
             holder.item.setOnClickListener {
                 val boardId = myComment!!.boardId
 
+                if (!KakaoLoginUtils(this@MyCommentListActivity).isLogin()) {
+                    KakaoLoginUtils(this@MyCommentListActivity).login()
+                }
+
                 val service: BoardService =
                     NetworkSettings.retrofit.build().create(BoardService::class.java)
-                service.readOne(boardId,1).enqueue(object : Callback<BoardReadForm> {
+                service.readOne(boardId,getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+                    .enqueue(object : Callback<BoardReadForm> {
                     override fun onFailure(call: Call<BoardReadForm>, t: Throwable) {
                         Log.d("내글확인", " 실패 --------------", null)
                     }

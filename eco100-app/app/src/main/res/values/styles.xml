@@ -19,9 +19,7 @@
 
         <!-- StatusBar -->
         <item name="android:windowLightStatusBar">true</item>
-
-        <!-- My badge dialog -->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Main Title Style-->
@@ -31,12 +29,14 @@
         <item name="android:textColor">@color/primary_color</item>
         <item name="fontFamily">@font/main_title_font</item>
         <item name="android:includeFontPadding">true</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- TabItem Text Style -->
     <style name="Tab.TextStyle" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Tab Style -->
@@ -47,6 +47,7 @@
         <item name="tabIndicatorColor">@color/primary_color</item>
         <item name="tabIconTint">@color/tab_icon_color_selector</item>
         <item name="tabTextAppearance">@style/Tab.TextStyle</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- ecobox -->
@@ -55,6 +56,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/mapo_peacefull</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Tab Style -->
@@ -66,6 +68,7 @@
         <item name="tabTextAppearance">@style/EcoBoxTab.TextStyle</item>
         <item name="tabTextColor">@color/tab_icon_color</item>
         <item name="tabSelectedTextColor">@color/primary_color</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
 
@@ -75,6 +78,7 @@
         <item name="android:textSize">@dimen/popup_title</item>
         <item name="android:fontFamily">@font/mapo_peacefull</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Home Dialog -->
@@ -86,6 +90,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_color</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="HomeDialog.TitleStyleLeft" parent="android:TextAppearance">
@@ -96,6 +101,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_color</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="HomeDialog.TextStyleRight" parent="android:TextAppearance">
@@ -105,6 +111,7 @@
         <item name="android:layout_marginLeft">2dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="HomeDialog.TextStyleLeft" parent="android:TextAppearance">
@@ -114,6 +121,7 @@
         <item name="android:layout_marginRight">2dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- home recycle guide text -->
@@ -121,10 +129,12 @@
         <item name="android:textColor">@color/primary_color</item>
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
     <style name="CommonPopup.TextStyle" parent="android:TextAppearance">
         <item name="android:textColor">#80151920</item>
         <item name="android:textSize">@dimen/popup_text</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Common Popup Left Btn Style -->
@@ -136,6 +146,7 @@
         <item name="android:layout_marginEnd">@dimen/margin_8dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/popup_text</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Common Popup Right Btn Style -->
@@ -147,6 +158,7 @@
         <item name="android:layout_gravity">bottom</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/popup_text</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!--Internet Connect Dialog Button Style -->
@@ -158,6 +170,7 @@
         <item name="android:layout_gravity">bottom</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/popup_text</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- Map Radio Button Style -->
@@ -173,12 +186,14 @@
         <item name="android:shadowDy">@integer/google_play_services_version</item>
         <item name="android:shadowRadius">@integer/google_play_services_version</item>
         <item name="android:paddingRight">10dp</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="Map.ListBtnStyle" parent="Widget.AppCompat.Button">
         <item name="android:layout_gravity">bottom|center</item>
         <item name="android:layout_margin">@dimen/margin_16dp</item>
         <item name="android:background">@drawable/map_list_btn_background</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- splash theme -->
@@ -190,12 +205,14 @@
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="LBSMapTheme" parent="@style/Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
 
@@ -212,10 +229,12 @@
     <!-- bottom sheet style -->
     <style name="Map.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Map.BottomSheetStyle</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="Map.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_background</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!-- bottom sheet list Text -->
@@ -225,6 +244,7 @@
         <item name="android:textColor">@color/point_color</item>
         <item name="android:textSize">@dimen/map_list_title</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="Map.BottomSheetListTitle" parent="android:TextAppearance">
@@ -233,6 +253,7 @@
         <item name="android:textColor">@color/primary_color</item>
         <item name="android:textSize">@dimen/map_list_title</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="Map.BottomSheetListText" parent="android:TextAppearance">
@@ -240,6 +261,49 @@
         <item name="android:fontFamily">@font/mapo_peacefull</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/map_list_text</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/my_badge_dialog_background</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+
+    <style name="Enroll.TitleStyle" parent="android:TextAppearance">
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textSize">@dimen/size_24dp</item>
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="Enroll.TextStyle" parent="android:TextAppearance">
+        <item name="android:textColor">#80151920</item>
+        <item name="android:textSize">@dimen/size_14dp</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+
+    <style name="Enroll.BtnStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:fontFamily">@font/mapo_peacefull</item>
+        <item name="android:background">@drawable/popup_btn_right</item>
+        <item name="android:textColor">@color/popup_btn_right_text_color</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/popup_text</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="Board.SendCommentBtnStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/send_comment_btn</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
 </resources>

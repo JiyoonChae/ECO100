@@ -1,8 +1,12 @@
 package com.mapo.eco100.config
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Application
+import android.content.pm.ActivityInfo
 import android.location.Address
 import android.location.Geocoder
+import android.os.Bundle
 import android.util.Log
 import com.kakao.sdk.common.KakaoSdk
 import com.mapo.eco100.R
@@ -28,11 +32,14 @@ class AppInit : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        //카카오 초기화
         KakaoSdk.init(this, getString(R.string.kakao_app_key).substring(5))
+        // 모든 액티비티를 수직 화면으로 셋팅
+        setAllActivitySettings()
 
+        LocalDataBase.appInitLoading.value = true
         Thread {
-            LocalDataBase.isLoading = true
+
             try {
                 val inputStream = assets.open("Database.xls")
                 val workbook = HSSFWorkbook(POIFSFileSystem(inputStream))
@@ -118,16 +125,15 @@ class AppInit : Application() {
                     val address2 = row.getCell(1)?.toString()
                     val name = row.getCell(2)?.toString()
                     address1?.let {
-                        var addressList: MutableList<Address>? = null
-                        addressList = geoCoder.getFromLocationName(address1, 10)
-                        val address = addressList[0]
+                        val addressList: List<Address>? = geoCoder.getFromLocationName(address1, 1)
+                        val address = addressList?.get(0)
                         LocalDataBase.garbageBagShopInfos.add(
                             GarbageBagShopInfo(
                                 id,
                                 address1,
                                 address2,
                                 name,
-                                address.latitude,
+                                address!!.latitude,
                                 address.longitude
                                 )
                         )
@@ -137,7 +143,24 @@ class AppInit : Application() {
             } catch (e: FileNotFoundException) {
                 Log.e("AppInit", "데이터를 불러올 파일이 존재하지 않습니다.")
             }
-            LocalDataBase.isLoading = false
+            LocalDataBase.appInitLoading.value = false
         }.start()
+    }
+
+    private fun setAllActivitySettings() {
+
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            @SuppressLint("SourceLockedOrientationActivity")
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+
+                activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) {}
+            override fun onActivityPaused(activity: Activity) {}
+            override fun onActivityStopped(activity: Activity) {}
+            override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
+            override fun onActivityDestroyed(activity: Activity) {}
+        })
     }
 }

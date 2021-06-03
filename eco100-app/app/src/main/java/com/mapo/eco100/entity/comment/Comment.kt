@@ -3,7 +3,10 @@ package com.mapo.eco100.entity.comment
 import java.io.Serializable
 
 data class Comment (
-    val user_nickname : String,
-    var contents : String,
-    var date : String
+    val commentId: Long,
+    val boardId: Long,
+    val userId : Long,
+    val writer : String,
+    val contents : String,
+    val date : String
 ) : Serializable

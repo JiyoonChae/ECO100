@@ -27,6 +27,7 @@ class ContentWebViewFragment : Fragment() {
         // 웹 뷰 기본 설정
         binding.contentWebView.apply {
             settings.javaScriptEnabled = true // 웹페이지 자바스크립트 허용 여부
+            settings.javaScriptCanOpenWindowsAutomatically = true
             settings.setSupportZoom(true)   // 화면 줌 허용 여부
             settings.builtInZoomControls = true // 화면 확대 축소 허용 여부
             webViewClient = WebViewClient() // 새창 띄우기 허용 여부

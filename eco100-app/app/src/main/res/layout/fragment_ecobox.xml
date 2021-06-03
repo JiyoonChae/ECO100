@@ -16,7 +16,7 @@
         android:id="@+id/tab"
         style="@style/EcoBoxTabLayout.ItemStyle"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="@dimen/size_35dp"
         android:layout_alignParentBottom="true"
         android:elevation="@dimen/size_2dp"
         app:tabRippleColor="@color/primary_color_dark" />

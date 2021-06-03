@@ -1,5 +1,6 @@
 package com.mapo.eco100.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,10 +27,40 @@ class BoardViewModel : ViewModel() {
         loadingLiveData.value = true
 
         viewModelScope.launch {
-            val boards: ArrayList<Boards>? = try {
+            val boards: ArrayList<Boards> = try {
                 service.boards(0)
             } catch (e: Exception) {
-                null
+                arrayListOf()
+            }
+            boardsLiveData.value = boards
+
+            loadingLiveData.value = false
+        }
+    }
+
+    fun searchBoards(word:String) {
+        loadingLiveData.value = true
+
+        viewModelScope.launch {
+            val boards: ArrayList<Boards> = try {
+                service.search(word)
+            } catch (e: Exception) {
+                arrayListOf()
+            }
+            boardsLiveData.value = boards
+
+            loadingLiveData.value = false
+        }
+    }
+
+    fun fetchBoardsOrderByLikes() {
+        loadingLiveData.value = true
+
+        viewModelScope.launch {
+            val boards: ArrayList<Boards> = try {
+                service.boardsOrderByLikes(0)
+            } catch (e: Exception) {
+                arrayListOf()
             }
             boardsLiveData.value = boards
 

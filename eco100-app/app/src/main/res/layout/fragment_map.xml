@@ -4,17 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <fragment
-        android:id="@+id/map"
-        class="com.google.android.gms.maps.SupportMapFragment"
+    <LinearLayout
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        >
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical">
 
         <RadioGroup
@@ -45,8 +51,8 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/goMyLocation"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/margin_24dp"
         android:layout_marginBottom="@dimen/margin_24dp"
@@ -80,4 +86,6 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+
 </FrameLayout>

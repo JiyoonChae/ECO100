@@ -1,49 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.EnrollActivity">
+    android:paddingTop="@dimen/margin_20dp"
+    tools:context=".views.community.EnrollActivity">
 
-    <EditText
-        android:id="@+id/enroll_title"
+    <LinearLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="제목"
-        android:inputType="textPersonName" />
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CommonPopup.TitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목 :"
+            android:textColor="@color/primary_color" />
+
+        <EditText
+            android:id="@+id/enroll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/guide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="사진등록하기" />
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:fontFamily="@font/mapo_peacefull"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        android:text="@string/enroll_page_text"
+        android:textColor="#a3a3a3"/>
 
-    <ImageView
-        android:id="@+id/enroll_image"
+    <FrameLayout
+        android:id="@+id/layout_frame"
         android:layout_width="match_parent"
-        android:layout_height="181dp"
-        tools:srcCompat="@drawable/addimage" />
+        android:layout_height="@dimen/size_180dp"
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:background="@drawable/enroll_contents_background_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guide"
+        tools:layout_editor_absoluteY="181dp">
 
-    <Button
-        android:id="@+id/image_delete"
+        <ImageView
+            android:id="@+id/enroll_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_add_picture" />
+
+        <TextView
+            android:id="@+id/enroll_image_text"
+            style="@style/CommonPopup.TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/margin_32dp"
+            android:text="이미지업로드 / 1장"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/size_30dp"
+            android:layout_marginEnd="@dimen/margin_22dp"
+            android:src="@drawable/ic_baseline_close_24" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_contents"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/size_200dp"
+        android:layout_marginLeft="@dimen/margin_38dp"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:layout_marginRight="@dimen/margin_38dp"
+        android:background="@drawable/enroll_contents_background"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_frame">
+
+        <EditText
+            android:id="@+id/enroll_contents"
+            style="@style/CommonPopup.TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_16dp"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="내용을 입력해주세요(200자 이내)"
+            android:inputType="textMultiLine"
+            android:padding="@dimen/padding_8dp" />
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/enroll_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이미지삭제" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/enroll_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="내용"
-        android:inputType="textPersonName" />
+        android:layout_height="156dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_contents">
 
-    <Button
-        android:id="@+id/send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="등록" />
-</LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="@drawable/enroll_bottom_frame"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/size_38dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="top|right"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="52dp"
+            android:src="@drawable/img_popup_btn_ecoduck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send"
+            style="@style/Enroll.BtnStyle"
+            android:layout_width="338dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:text="@string/popup_confirm" />
+
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

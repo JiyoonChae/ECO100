@@ -1,6 +1,8 @@
 package com.mapo.eco100.views.myeco
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -39,7 +41,8 @@ class MyBadgeListActivity : AppCompatActivity() {
 
         val service: BoardService =
             NetworkSettings.retrofit.build().create(BoardService::class.java)
-        service.getMyBadge(1).enqueue(object : Callback<ArrayList<Boolean>> {
+        service.getMyBadge(getSharedPreferences("login", Context.MODE_PRIVATE).getLong("userId",-1))
+            .enqueue(object : Callback<ArrayList<Boolean>> {
             override fun onFailure(call: Call<ArrayList<Boolean>>, t: Throwable) {
                 Log.d("서버 연결", " 실패 --------------", null)
             }
@@ -68,6 +71,8 @@ class MyBadgeListActivity : AppCompatActivity() {
                     when (name) {
                         "btn0" -> {
                             binding.btn1.setImageResource(R.drawable.btn1)
+                            binding.myBadge1.setTextColor(R.color.black)
+
 
                             binding.btn1.setOnClickListener {
                                 bundle.putString("num", "1")
@@ -80,6 +85,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn1" -> {
                             if (badgeCheck) {
                                 binding.btn2.setImageResource(R.drawable.badge2)
+                                binding.myBadge2.setTextColor(R.color.black)
 
                                 binding.btn2.setOnClickListener {
                                     bundle.putString("num", "2")
@@ -105,6 +111,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn2" -> {
                             if (badgeCheck) {
                                 binding.btn3.setImageResource(R.drawable.badge3)
+                                binding.myBadge3.setTextColor(R.color.black)
 
                                 binding.btn3.setOnClickListener {
                                     bundle.putString("num", "3")
@@ -125,6 +132,8 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn3" -> {
                             if (badgeCheck) {
                                 binding.btn4.setImageResource(R.drawable.badge4)
+                                binding.myBadge4.setTextColor(R.color.black)
+
 
                                 binding.btn4.setOnClickListener {
                                     bundle.putString("num", "4")
@@ -148,6 +157,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn4" -> {
                             if (badgeCheck) {
                                 binding.btn5.setImageResource(R.drawable.badge5)
+                                binding.myBadge5.setTextColor(R.color.black)
 
                                 binding.btn5.setOnClickListener {
                                     bundle.putString("num", "5")
@@ -168,6 +178,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn5" -> {
                             if (badgeCheck) {
                                 binding.btn6.setImageResource(R.drawable.badge6)
+                                binding.myBadge6.setTextColor(R.color.black)
 
                                 binding.btn6.setOnClickListener {
                                     bundle.putString("num", "6")
@@ -189,6 +200,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn6" -> {
                             if (badgeCheck) {
                                 binding.btn7.setImageResource(R.drawable.badge7)
+                                binding.myBadge7.setTextColor(R.color.black)
 
                                 binding.btn7.setOnClickListener {
                                     bundle.putString("num", "7")
@@ -210,6 +222,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn7" -> {
                             if (badgeCheck) {
                                 binding.btn8.setImageResource(R.drawable.badge8)
+                                binding.myBadge8.setTextColor(R.color.black)
 
                                 binding.btn8.setOnClickListener {
                                     bundle.putString("num", "8")
@@ -231,6 +244,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn8" -> {
                             if (badgeCheck) {
                                 binding.btn9.setImageResource(R.drawable.badge9)
+                                binding.myBadge9.setTextColor(R.color.black)
 
                                 binding.btn9.setOnClickListener {
                                     bundle.putString("num", "9")
@@ -252,6 +266,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn9" -> {
                             if (badgeCheck) {
                                 binding.btn10.setImageResource(R.drawable.badge10)
+                                binding.myBadge10.setTextColor(R.color.black)
 
                                 binding.btn10.setOnClickListener {
                                     bundle.putString("num", "10")
@@ -273,6 +288,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn10" -> {
                             if (badgeCheck) {
                                 binding.btn11.setImageResource(R.drawable.badge11)
+                                binding.myBadge11.setTextColor(R.color.black)
 
                                 binding.btn11.setOnClickListener {
                                     bundle.putString("num", "11")
@@ -294,6 +310,7 @@ class MyBadgeListActivity : AppCompatActivity() {
                         "btn11" -> {
                             if (badgeCheck) {
                                 binding.btn12.setImageResource(R.drawable.badge12)
+                                binding.myBadge12.setTextColor(R.color.black)
 
                                 binding.btn12.setOnClickListener {
                                     bundle.putString("num", "12")

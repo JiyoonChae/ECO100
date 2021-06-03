@@ -9,15 +9,19 @@ import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -71,6 +75,9 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     // 내 위치 저장
     private lateinit var myLocation: LatLng
 
+    // 로딩되었는지
+    private val isLoading = MutableLiveData<Boolean>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,6 +85,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     ): View? {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+        isLoading.value = false
 
         // 선택된 샵 정보가 있는지 확인한다.
         selectedShopName = arguments?.getString("name")
@@ -87,7 +95,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
         if (arguments != null) {
             selectedShop = arguments?.let { LatLng(resultLat!!, resultLong!!) }
-            Log.d("map", "selectedShop: $selectedShop")
+            Log.d("map", "selectedShop: $selectedShopName")
         }
 
 
@@ -124,14 +132,16 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         // 라디오 버튼이 눌렸을 때 해당 리스트의 데이터를 가져온다.
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
-            mMap.clear()
+
             clusterManager.clearItems()
+            clusterManager.markerCollection.clear()
+            mMap.clear()
 
             when (checkedId) {
 
                 // 제로웨잇샵 버튼 클릭시
                 R.id.mapZeroBtn -> {
-
+                    isLoading.value = true
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.point_color)
                     )
@@ -148,7 +158,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
                 // 종량제판매처 버튼 클릭시
                 R.id.mapShopBtn -> {
-
+                    isLoading.value = true
                     binding.openListIcon.setColorFilter(
                         ContextCompat.getColor(binding.root.context, R.color.primary_color)
                     )
@@ -170,6 +180,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
         // 현재 내 위치로 이동
         binding.goMyLocation.setOnClickListener {
+
             setMyLocation()
         }
 
@@ -206,16 +217,16 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     private fun initLocation() {
 
         if (!checkPermissions()) {
-            if (arguments != null) {
-                getSelectedShoInfo()
-            } else {
-                val latLng = LatLng(37.566168, 126.901609)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            }
+            val latLng = LatLng(37.566168, 126.901609)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         } else {
             if (arguments != null) {
                 getSelectedShoInfo()
             } else {
+                binding.view.layoutParams = FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
                 mFusedLocationClient = FusedLocationProviderClient(binding.root.context)
                 myLocationCallBack = MyLocationCallBack()
                 locationRequest =
@@ -227,6 +238,26 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
 
     private fun addLocationListener() {
         checkPermissions()
+    }
+
+    // 선택된 샵 리스트 정보 가져온다.
+    private fun getSelectedShoInfo() {
+        selectedShop?.let {
+            Log.d("map", "In selectedShop: $it")
+            val bitmapDrawSelectedShop = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.img_map_selected_shop,
+                null
+            ) as BitmapDrawable
+            val bitmapSelectedShop =
+                Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(7f))
+            val markerOptions = MarkerOptions()
+            markerOptions.position(it).title(selectedShopName)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
+            mMap.addMarker(markerOptions)?.showInfoWindow()
+        }
     }
 
     // 종량제 샵 리스트를 지도에 뿌려준다.
@@ -253,9 +284,16 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 )
             )
         }
+        val latLng = LatLng(37.566168, 126.901609)
+        mMap.addMarker(
+            MarkerOptions().position(latLng).title("나 여기!")
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmapGarbageShop))
+        )
 
-        setMyLocation()
-        clusterManager.cluster()
+        if (arguments == null) {
+            setMyLocation()
+            clusterManager.cluster()
+        }
 
     }
 
@@ -282,8 +320,11 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 )
             )
         }
-        setMyLocation()
-        clusterManager.cluster()
+
+        if (arguments == null) {
+            setMyLocation()
+            clusterManager.cluster()
+        }
 
     }
 
@@ -304,25 +345,6 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         } else {
             val latLng = LatLng(37.566168, 126.901609)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        }
-    }
-
-    // 선택된 제로샵 위치를 보여준다.
-    private fun getSelectedShoInfo() {
-        selectedShop?.let {
-            Log.d("map", "In selectedShop: $it")
-            val bitmapDrawSelectedShop = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.img_map_selected_shop,
-                null
-            ) as BitmapDrawable
-            val bitmapSelectedShop = Bitmap.createScaledBitmap(bitmapDrawSelectedShop.bitmap, 60, 86, false)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            val markerOptions = MarkerOptions()
-            markerOptions.position(it).title(selectedShopName)
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmapSelectedShop))
-            mMap.addMarker(markerOptions)?.showInfoWindow()
         }
     }
 
@@ -382,6 +404,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
     }
 
     companion object {
+
         fun newInstance(): MapViewFragment {
             return MapViewFragment()
         }
@@ -417,6 +440,7 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
             }
         }
+
     }
 
     // 마커 클러스터링 전 랜더링
@@ -463,4 +487,32 @@ class MapViewFragment : Fragment(), PermissionListener, OnMapReadyCallback {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        isLoading.observe(viewLifecycleOwner, {
+            if (it) {
+                binding.mapShopBtn.isClickable = false
+                binding.mapZeroBtn.isClickable = false
+                Thread {
+                    SystemClock.sleep(1000)
+                    if (binding.mapShopBtn.isChecked) {
+                        binding.mapZeroBtn.isClickable = true
+                    } else {
+                        binding.mapShopBtn.isClickable = true
+                    }
+                }.start()
+            }
+        })
+
+        binding.mapShopBtn.isClickable = false
+        binding.mapZeroBtn.isClickable = false
+        Thread {
+            SystemClock.sleep(3000)
+            if (binding.mapShopBtn.isChecked) {
+                binding.mapZeroBtn.isClickable = true
+            } else {
+                binding.mapShopBtn.isClickable = true
+            }
+        }.start()
+    }
 }

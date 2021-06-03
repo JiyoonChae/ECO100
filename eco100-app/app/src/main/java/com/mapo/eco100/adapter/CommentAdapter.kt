@@ -1,25 +1,26 @@
 package com.mapo.eco100.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mapo.eco100.R
 import com.mapo.eco100.databinding.ItemCommentBinding
 import com.mapo.eco100.entity.comment.Comment
 
-class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
+class CommentAdapter(comments:List<Comment>,val onClickDeleteBtn : (comment:Comment) -> Unit, val context:Context) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
-    private var comments: ArrayList<Comment> = ArrayList()
+    private var comments: List<Comment>
+
+    init {
+        this.comments = comments
+    }
 
     class CommentViewHolder(val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun updateComments(items: ArrayList<Comment>) {
+    fun updateComments(items: List<Comment>) {
         comments = items
-        notifyDataSetChanged()
-    }
-
-    fun addComent(item: Comment) {
-        comments.add(0, item)
         notifyDataSetChanged()
     }
 
@@ -33,9 +34,17 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val comment: Comment = comments[position]
         holder.binding.apply {
-            commentNickname.text = comment.user_nickname
+            commentNickname.text = comment.writer
             commentDate.text = comment.date
             commentContents.text = comment.contents
+            deleteBtn.setOnClickListener {
+                onClickDeleteBtn(comment)
+            }
+            if(comment.userId != context.getSharedPreferences("login",Context.MODE_PRIVATE)
+                    .getLong("userId",-1)
+            ) {
+                deleteBtn.visibility = View.GONE
+            }
         }
     }
 

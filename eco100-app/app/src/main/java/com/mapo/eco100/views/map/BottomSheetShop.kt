@@ -43,11 +43,11 @@ class BottomSheetShop : BottomSheetDialogFragment() {
                 bundle.putDouble("lat", item.latitude)
                 bundle.putDouble("long", item.longitude)
 
-                val mapViewFragment = MapViewFragment()
+                val mapViewFragment = MapViewFragment.newInstance()
                 mapViewFragment.arguments = bundle
 
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.map, mapViewFragment)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contents, mapViewFragment)
                     .commit()
                 shopListAdapter.notifyDataSetChanged()
                 dismiss()
