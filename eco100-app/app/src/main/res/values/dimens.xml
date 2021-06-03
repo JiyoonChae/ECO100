@@ -114,9 +114,9 @@
     <dimen name="margin_110dp">110dp</dimen>
     <dimen name="margin_148dp">148dp</dimen>
 
-
-
-
+    <!--challenge size -->
+    <dimen name="challenge_126dp">126dp</dimen>
+    <dimen name="challenge_337dp">337dp</dimen>
 
 
 </resources>
