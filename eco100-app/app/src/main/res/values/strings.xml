@@ -21,7 +21,7 @@
     <string name="recycle_guide01">비운다</string>
     <string name="recycle_guide02">헹군다</string>
     <string name="recycle_guide03">분리한다</string>
-    <string name="recycle_guide04">섞지 않는다</string>
+    <string name="recycle_guide04">섞지않는다</string>
     <string name="map_zero_text">제로웨이스트샵을 찾아서 :D</string>
 
     <!-- home dialog -->
@@ -40,6 +40,12 @@
     <string name="ecobox_metal">금속캔,고철</string>
     <string name="ecobox_vinyl">비닐류</string>
     <string name="ecobox_styrofoam">스티로폼</string>
+    <string name="ecobox_guide_paper_description">종이 가이드 이미지</string>
+    <string name="ecobox_guide_glass_description">유리병 가이드 이미지</string>
+    <string name="ecobox_guide_plastic_description">플라스틱 가이드 이미지</string>
+    <string name="ecobox_guide_can_description">캔고철 가이드 이미지</string>
+    <string name="ecobox_guide_vinyl_description">비닐가이드 이미지</string>
+    <string name="ecobox_guide_styrofoam_description">스티로폼 가이드 이미지</string>
 
     <!-- popup -->
     <string name="popup_confirm">확인</string>
@@ -74,7 +80,7 @@
 
     <!-- map -->
     <string name="map_shop">종량제판매처</string>
-    <string name="map_zero_shop">제로웨이잇샵</string>
+    <string name="map_zero_shop">제로웨이스트샵</string>
     <string name="map_open_list">목록열기</string>
     <string name="map_close_list">지도보기</string>
     <string name="map_user_location">나 여기!</string>
