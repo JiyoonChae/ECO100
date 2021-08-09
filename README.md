@@ -1,8 +1,11 @@
-<h1>ECO100</h1>
+<h1>ECO100 (Android App)</h1>
 
 
 <img src="https://user-images.githubusercontent.com/38373150/120598850-b9163e00-c481-11eb-95e6-f5c39c8e9ddc.png" width="80" height="80"/>
-<h3>소개</h3>
+
+프로젝트 기간 : 2021. 04.1-05.30
+
+<h3>프로젝트 소개</h3>
 공공 데이터를 활용한 분리배출 정보 제공 및 사용자 교류를 통한 지속적인 환경 보호를 위한 팁을 공유하는 앱 서비스.
 <br/>
 <h3> 주요 기능</h3>
