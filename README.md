@@ -19,7 +19,7 @@
 3. 제로웨이스트샵 정보 및 위치 제공  
 
 <br/>
-ECO100 PDF FILE(6조_ECO100_발표자료.pdf)
+[ECO100 PDF FILE](https://github.com/JiyoonChae/ECO100/blob/master/6%EC%A1%B0_ECO100_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)
 <img src="https://user-images.githubusercontent.com/38373150/120601251-ac471980-c484-11eb-8792-c257c3a2f72f.png"/>
 <hr/>
 <h3>개발환경</h3>
